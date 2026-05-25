@@ -1,0 +1,31 @@
+/* Display — DM Serif Display (emotional, editorial) */
+/* Used for: Hero headline, section titles, pull quotes */
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap');
+
+/* Body — Plus Jakarta Sans (clean, modern, African-friendly) */
+/* Used for: Body copy, nav, buttons, labels, metadata */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --font-display: 'DM Serif Display', Georgia, serif;
+  --font-body:    'Plus Jakarta Sans', system-ui, sans-serif;
+
+  /* Type scale */
+  --text-xs:   0.75rem;    /* 12px — labels, badges */
+  --text-sm:   0.875rem;   /* 14px — metadata, captions */
+  --text-base: 1rem;       /* 16px — body */
+  --text-lg:   1.125rem;   /* 18px — lead text */
+  --text-xl:   1.25rem;    /* 20px — card titles */
+  --text-2xl:  1.5rem;     /* 24px — section subtitles */
+  --text-3xl:  1.875rem;   /* 30px — section titles */
+  --text-4xl:  2.25rem;    /* 36px — page titles */
+  --text-5xl:  3rem;       /* 48px — hero */
+  --text-6xl:  3.75rem;    /* 60px — hero large */
+  --text-7xl:  4.5rem;     /* 72px — hero desktop */
+
+  /* Leading */
+  --leading-tight:  1.2;
+  --leading-snug:   1.35;
+  --leading-normal: 1.6;
+  --leading-relaxed: 1.75;
+}

@@ -1,0 +1,36 @@
+:root {
+ /* ===== VOIMA DESIGN TOKENS ===== */
+
+/* Primary — Brand Red-Orange */
+--color-primary-50:  #FFF4EE;
+--color-primary-100: #FFE0CC;
+--color-primary-200: #FFC09A;
+--color-primary-400: #F47B3A;   /* Buttons, CTAs */
+--color-primary-500: #E8621E;   /* Primary actions */
+--color-primary-600: #C4481A;   /* Hover states */
+--color-primary-900: #3D1206;
+
+/* Neutral — Warm Stone (not cold gray) */
+--color-neutral-50:  #FAFAF8;   /* Page background */
+--color-neutral-100: #F2F1EE;   /* Card surfaces */
+--color-neutral-200: #E4E2DC;   /* Borders, dividers */
+--color-neutral-400: #9B9891;
+--color-neutral-600: #5C5A55;   /* Secondary text */
+--color-neutral-800: #2C2B28;   /* Body text */
+--color-neutral-900: #1A1916;   /* Headings */
+
+/* Accent — Warm Teal (health, hope) */
+--color-teal-400:    #1D9E75;
+--color-teal-100:    #E1F5EE;
+
+/* Semantic */
+--color-surface:     #FFFFFF;
+--color-bg:          var(--color-neutral-50);
+--color-text:        var(--color-neutral-900);
+--color-text-muted:  var(--color-neutral-600);
+--color-border:      var(--color-neutral-200);
+
+/* Brand gradient */
+--gradient-brand:    linear-gradient(135deg, #E8621E 0%, #F47B3A 50%, #FAA65A 100%);
+--gradient-hero:     linear-gradient(180deg, rgba(26,25,22,0.72) 0%, rgba(26,25,22,0.20) 100%);
+}
