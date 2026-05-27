@@ -6,7 +6,8 @@ import { Menu, X, ArrowRight } from "lucide-react";
 const NAV_LINKS = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
-  { label: "Programs", href: "/programs" },
+  { label: "Journey", href: "/journey" },
+  { label: "Events", href: "/events" },
   { label: "News", href: "/news" },
   { label: "Contact", href: "/contact" },
 ];
@@ -62,8 +63,8 @@ export default function Navbar() {
                 rounded-b-[28px]
               `
               : `
-                bg-transparent
-                rounded-b-[48px]
+                bg-white
+                rounded-b-[8px]
               `
           }
         `}
@@ -74,8 +75,8 @@ export default function Navbar() {
             px-20 transition-all duration-500
             ${
               scrolled
-                ? "h-[80px]"
-                : "h-[90px]"
+                ? "h-[60px]"
+                : "h-[80px]"
             }
           `}
         >
@@ -83,7 +84,7 @@ export default function Navbar() {
           <Link
             to="/"
             className={`
-              text-2xl font-bold tracking-tight font-display
+              text-4xl font-bold tracking-tight font-display
               transition-colors duration-300
               ${
                 scrolled

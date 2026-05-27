@@ -41,7 +41,7 @@ export default {
 
       //  TYPOGRAPHY 
       fontFamily: {
-        display: ['DM Serif Display', 'Georgia', 'serif'],
+        display: ['Lobster', 'Georgia', 'serif'],
         body:    ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
         sans:    ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
       },

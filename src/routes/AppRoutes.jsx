@@ -4,7 +4,7 @@ import PageLoader from '../components/ui/PageLoader'
 
 const Home        = lazy(() => import('../pages/Home'))
 const About       = lazy(() => import('../pages/About'))
-const Programs    = lazy(() => import('../pages/Programs'))
+const Journey    = lazy(() => import('../pages/Journey'))
 const News        = lazy(() => import('../pages/News'))
 const GetInvolved = lazy(() => import('../pages/GetInvolved'))
 const Contact     = lazy(() => import('../pages/Contact'))
@@ -16,7 +16,7 @@ export default function AppRoutes() {
       <Routes>
         <Route path="/"             element={<Home />} />
         <Route path="/about"        element={<About />} />
-        <Route path="/programs"     element={<Programs />} />
+        <Route path="/journey"     element={<Journey />} />
         <Route path="/news"         element={<News />} />
         <Route path="/get-involved" element={<GetInvolved />} />
         <Route path="/contact"      element={<Contact />} />

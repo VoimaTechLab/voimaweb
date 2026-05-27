@@ -1,193 +1,340 @@
 import { motion } from "framer-motion";
-import { fadeUp, stagger } from "../../../motion/variants";
-import { ArrowRight, ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
+import {ArrowRight,ChevronLeft,ChevronRight,} from "lucide-react";
+
+import { Swiper, SwiperSlide } from "swiper/react";
+import {Autoplay,Pagination,EffectFade,Navigation,} from "swiper/modules";
+
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/effect-fade";
+import "swiper/css/navigation";
+
+import HeroImage from "@/assets/content/app/hero-app.jpg";
+import StoryImage from "@/assets/content/journey/story.jpg";
+import InnovationImage from "@/assets/content/app/innovation.jpg";
+
+const slides = [
+  {
+    eyebrow: "Building Healthier Lives Using AI",
+
+    title: (
+      <>
+        Fighting Sickle Cell Together{" "}
+        <span className="text-[var(--color-primary-400)]">
+          Through Preventive Care.
+        </span>
+      </>
+    ),
+
+    description:
+      "Voima is building proactive and personalized support systems for people living with sickle cell disease and chronic conditions.",
+
+    image: HeroImage,
+
+    primaryBtn: "Explore Events",
+    primaryLink: "/events",
+
+    secondaryBtn: "Our Story",
+    secondaryLink: "/journey",
+  },
+
+  {
+    eyebrow: "A Mission Rooted In Real Stories",
+
+    title: (
+      <>
+        Technology Inspired By{" "}
+        <span className="text-[var(--color-primary-400)]">
+          Human Experiences.
+        </span>
+      </>
+    ),
+
+    description:
+      "Voima was founded after witnessing firsthand the devastating impact of sickle cell disease on families, patients, and communities.",
+
+    image: StoryImage,
+
+    primaryBtn: "Read Our Journey",
+    primaryLink: "/journey",
+
+    secondaryBtn: "About Voima",
+    secondaryLink: "/about",
+  },
+
+  {
+    eyebrow: "Healthcare Innovation",
+
+    title: (
+      <>
+        The Future Of{" "}
+        <span className="text-[var(--color-primary-400)]">
+          AI-Powered Care.
+        </span>
+      </>
+    ),
+
+    description:
+      "We are creating intelligent healthcare tools that help patients better understand their health and anticipate crises earlier.",
+
+    image: InnovationImage,
+
+    primaryBtn: "Explore The App",
+    primaryLink: "/app",
+
+    secondaryBtn: "Contact Us",
+    secondaryLink: "/contact",
+  },
+];
 
 export default function Hero() {
   return (
-    <section
-      className="
-        relative flex min-h-screen items-center
-        overflow-hidden bg-[#ffffff]
-      "
-    >
+    <section className="relative overflow-hidden">
 
-      {/* Background Glow
-      <div
-        className="
-          absolute left-[-10%] top-[-10%]
-          h-[320px] w-[320px]
-          rounded-full bg-[#800020]/20 blur-3xl
-        "
-      />*/}
-
-      <div
-        className="
-          absolute bottom-[-20%] right-[-10%]
-          h-[420px] w-[420px]
-          rounded-full bg-white/10 blur-3xl
-        "
-      />
-
-      {/* Grid Overlay */}
-      <div
-        className="absolute inset-0 opacity-[0.04]"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(232, 76, 76, 0.25) 1px, transparent 1px), linear-gradient(90deg, rgba(232, 76, 76, 0.25) 1px, transparent 1px)",
-          backgroundSize: "60px 60px",
+      <Swiper
+        modules={[
+          Autoplay,
+          Pagination,
+          EffectFade,
+          Navigation,
+        ]}
+        effect="fade"
+        loop
+        speed={1200}
+        autoplay={{
+          delay: 3500,
+          disableOnInteraction: false,
         }}
-      />
-
-      {/* Decorative Ring */}
-      <div
-        className="
-          absolute right-[-10%] top-[12%]
-          h-[600px] w-[600px]
-          rounded-full border border-primary-600
-        "
-      />
-
-      <div
-        className="
-          absolute right-[0%] top-[20%]
-          h-[420px] w-[420px]
-          rounded-full border border-primary-600
-        "
-      />
-
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pt-36 pb-24">
-        <motion.div
-          variants={stagger}
-          initial="hidden"
-          animate="visible"
-          className="max-w-4xl"
-        >
-          {/* Eyebrow */}
-          <motion.div variants={fadeUp}>
-            <span
-              className="
-                inline-flex items-center gap-3
-                rounded-full border border-white/10
-                bg-[#800000] px-5 py-2
-                text-sm font-bold tracking-wide
-                text-white backdrop-blur-md
-              "
-            >
-              <span className="h-2 w-2 rounded-full bg-[#F47B3A]" />
-
-              Building Healthier Lives Using AI
-            </span>
-          </motion.div>
-
-          {/* Heading */}
-          <motion.h1
-            variants={fadeUp}
-            className="
-              mt-8 text-5xl font-bold leading-[1.05]
-              tracking-tight text-primary-800
-              md:text-7xl
-            "
-          >
-            Fighting Sickle Cell Together{" "}
-            <span className="text-[#F47B3A]">
-              HealthTech & Proactive.
-            </span>
-          </motion.h1>
-
-          {/* Description */}
-          <motion.p
-            variants={fadeUp}
-            className="
-              mt-8 max-w-2xl
-              text-lg leading-9 text-neutral-800
-              md:text-xl
-            "
-          >
-            Voima is a mission-driven healthtech startup building proactive, personalized support for 
-            people living with chronic conditions, starting with sickle cell disease and the communities too often left behind.
-             The name “Voima,” from the Finnish word for “strength,” 
-            reflects our belief that patients and caregivers deserve scalable, culturally responsive,
-             and human-centered solutions that empower them to better understand and manage their health.
-          </motion.p>
-
-          {/* CTA */}
-          <motion.div
-            variants={fadeUp}
-            className="mt-12 flex flex-wrap gap-5"
-          >
-            <Link
-              to="/programs"
-              className="
-                inline-flex items-center gap-2
-                rounded-full bg-[#800020]
-                px-8 py-4 text-sm font-semibold
-                text-white transition-all duration-300
-                hover:scale-[1.03]
-                hover:bg-[#F47B3A]
-              "
-            >
-              Explore Programs
-              <ArrowRight size={18} />
-            </Link>
-
-            <Link
-              to="/about"
-              className="
-                inline-flex items-center gap-2
-                rounded-full border border-white/15
-                bg-[#F47B3A] px-8 py-4
-                text-sm font-semibold text-white
-                backdrop-blur-md transition-all duration-300
-                hover:bg-primary-600
-              "
-            >
-              Our Story
-            </Link>
-          </motion.div>
-
-          {/* Bottom Trust Text */}
-          <motion.div
-            variants={fadeUp}
-            className="
-              mt-14 flex flex-wrap items-center
-              gap-6 text-sm text-white/40
-            "
-          >
-            <span>Based in Accra, Ghana</span>
-
-            <span className="h-1 w-1 rounded-full bg-white/30" />
-
-            <span>Healthtech</span>
-
-            <span className="h-1 w-1 rounded-full bg-white/30" />
-
-            <span>Community Innovation</span>
-          </motion.div>
-        </motion.div>
-      </div>
-
-      {/* Scroll Indicator 
-      <motion.div
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{
-          delay: 1.4,
-          duration: 0.6,
+        pagination={{
+          clickable: true,
         }}
-        className="
-          absolute bottom-8 left-1/2
-          flex -translate-x-1/2
-          flex-col items-center gap-2
-          text-white/40
-        "
+        navigation={{
+          nextEl: ".hero-next",
+          prevEl: ".hero-prev",
+        }}
+        className="min-h-screen"
       >
-        <span className="text-[11px] uppercase tracking-[0.25em]">
-          Scroll
-        </span> 
 
-        <ChevronDown size={18} />
-      </motion.div>*/}
+        {slides.map((slide, index) => (
+          <SwiperSlide key={index}>
+
+            <div className="relative flex min-h-screen items-center overflow-hidden">
+
+              {/* Background Image */}
+              <img
+                src={slide.image}
+                alt=""
+                className="
+                  absolute inset-0
+                  h-full w-full
+                  object-cover
+                  scale-105
+                "
+              />
+
+              {/* Brand Overlay */}
+              <div
+                className="
+                  absolute inset-0
+                  bg-gradient-to-r
+                  from-[#140506]/90
+                  via-[#140506]/70
+                  to-[#140506]/30
+                "
+              />
+
+              {/* Soft Red Blend */}
+              <div
+                className="
+                  absolute inset-0
+                  bg-[radial-gradient(circle_at_top_left,_rgba(188,29,38,0.35),_transparent_45%)]
+                "
+              />
+
+              {/* Grid Texture */}
+              <div
+                className="absolute inset-0 opacity-[0.04]"
+                style={{
+                  backgroundImage:
+                    "linear-gradient(rgba(255,255,255,0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.15) 1px, transparent 1px)",
+                  backgroundSize: "60px 60px",
+                }}
+              />
+
+              {/* Content */}
+              <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pt-32 pb-24 md:px-10">
+
+                <motion.div
+                  initial={{ opacity: 0, y: 40 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8 }}
+                  className="max-w-3xl"
+                >
+
+                  {/* Eyebrow */}
+                  <div
+                    className="
+                      inline-flex items-center gap-3
+                      rounded-full
+                      border border-white/10
+                      bg-white/10
+                      px-5 py-2.5
+                      text-sm font-semibold
+                      tracking-wide
+                      text-white
+                      backdrop-blur-md
+                    "
+                  >
+                    <span className="h-2 w-2 rounded-full bg-[#BC1D26]" />
+
+                    {slide.eyebrow}
+                  </div>
+
+                  {/* Heading */}
+                  <h1
+                    className="
+                      mt-8
+                      font-heading
+                      text-4xl
+                      font-extrabold
+                      leading-[0.95]
+                      tracking-[-0.03em]
+                      text-white
+                      sm:text-5xl
+                      md:text-6xl
+                      lg:text-7xl
+                    "
+                  >
+                    {slide.title}
+                  </h1>
+
+                  {/* Description */}
+                  <p
+                    className="
+                      mt-7
+                      max-w-2xl
+                      text-base
+                      leading-8
+                      text-white/90
+                      md:text-lg
+                    "
+                  >
+                    {slide.description}
+                  </p>
+
+
+                  {/* Buttons */}
+                  <div
+                      className="
+                        mt-10
+                        flex flex-col
+                        gap-4
+                        sm:flex-row
+                        sm:items-center
+                      "
+                    >
+
+                    <Link
+                      to={slide.primaryLink}
+                      className="
+                          inline-flex
+                          w-full sm:w-auto
+                          items-center
+                          justify-center
+                          gap-2
+                          rounded-full
+                          bg-[#BC1D26]
+                          px-6 sm:px-7
+                          py-3.5 sm:py-4
+                          text-sm font-semibold
+                          text-white
+                          shadow-lg shadow-[#BC1D26]/30
+                          transition-all duration-300
+                          hover:scale-[1.03]
+                          hover:bg-[#A11922]
+                        "
+                    >
+                      {slide.primaryBtn}
+
+                      <ArrowRight size={18} />
+                    </Link>
+
+                    <Link
+                      to={slide.secondaryLink}
+                      className="
+                        inline-flex
+                        w-full sm:w-auto
+                        items-center
+                        justify-center
+                        gap-2
+                        rounded-full
+                        border border-white/15
+                        bg-white/10
+                        px-6 sm:px-7
+                        py-3.5 sm:py-4
+                        text-sm font-semibold
+                        text-white
+                        backdrop-blur-md
+                        transition-all duration-300
+                        hover:bg-white/20
+                      "
+                    >
+                      {slide.secondaryBtn}
+                    </Link>
+
+
+                  </div>
+
+                </motion.div>
+
+              </div>
+
+            </div>
+
+          </SwiperSlide>
+        ))}
+
+        {/* Navigation Buttons 
+        <button
+          className="
+            hero-prev
+            absolute left-4 top-1/2 z-20
+            hidden h-12 w-12 -translate-y-1/2
+            items-center justify-center
+            rounded-full
+            border border-white/15
+            bg-black/30
+            text-white
+            backdrop-blur-md
+            transition-all duration-300
+            hover:bg-[#BC1D26]
+            md:flex
+          "
+        >
+          <ChevronLeft size={22} />
+        </button>
+
+        <button
+          className="
+            hero-next
+            absolute right-4 top-1/2 z-20
+            hidden h-12 w-12 -translate-y-1/2
+            items-center justify-center
+            rounded-full
+            border border-white/15
+            bg-black/30
+            text-white
+            backdrop-blur-md
+            transition-all duration-300
+            hover:bg-[#BC1D26]
+            md:flex
+          "
+        >
+          <ChevronRight size={22} />
+        </button>*/}
+
+      </Swiper>
     </section>
   );
 }
