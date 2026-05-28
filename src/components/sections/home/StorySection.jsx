@@ -1,6 +1,9 @@
 // src/components/sections/home/StorySection.jsx
 
-import Story from "../../../assets/ourStory.jpg"
+import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
+
+import Story from "../../../assets/ourStory.jpg";
 
 export default function StorySection() {
   return (
@@ -9,7 +12,7 @@ export default function StorySection() {
         className="
           mx-auto grid
           max-w-7xl
-          items-center gap-20
+          items-center gap-16
           lg:grid-cols-2
         "
       >
@@ -17,7 +20,7 @@ export default function StorySection() {
         {/* Left Image */}
         <div className="relative">
 
-          {/* Glow */}
+          {/* Glow 
           <div
             className="
               absolute -left-10 -top-10
@@ -26,21 +29,21 @@ export default function StorySection() {
               bg-[#F47B3A]/10
               blur-3xl
             "
-          />
+          />*/}
 
           <div
             className="
               relative overflow-hidden
-              rounded-[40px]
+              rounded-[36px]
               border border-black/5
               shadow-[0_20px_60px_rgba(0,0,0,0.08)]
             "
           >
             <img
-              src= { Story }
+              src={Story}
               alt="Voima Initiative community story"
               className="
-                h-[650px] w-full
+                h-[520px] w-full
                 object-cover
               "
             />
@@ -49,12 +52,12 @@ export default function StorySection() {
           {/* Floating Card */}
           <div
             className="
-              absolute bottom-8 left-8
+              absolute bottom-6 left-6
               max-w-xs
-              rounded-[28px]
+              rounded-[24px]
               border border-white/10
               bg-white/90
-              p-6
+              p-5
               backdrop-blur-xl
               shadow-xl
             "
@@ -67,9 +70,10 @@ export default function StorySection() {
             >
               “Technology alone cannot solve healthcare
               inequality, but human-centered innovation
-              can change how people experience care.”
+              can transform how people experience care.”
             </p>
           </div>
+
         </div>
 
         {/* Right Content */}
@@ -79,7 +83,7 @@ export default function StorySection() {
             className="
               text-sm font-semibold uppercase
               tracking-[0.2em]
-              text-[#F47B3A]
+              text-[#BC1D26]/70
             "
           >
             Our Story
@@ -90,7 +94,7 @@ export default function StorySection() {
               mt-6
               text-4xl font-bold
               leading-tight
-              text-[#800000]
+              text-[#BC1D26]
               md:text-5xl
             "
           >
@@ -101,62 +105,43 @@ export default function StorySection() {
 
           <div
             className="
-              mt-10 space-y-7
+              mt-8
               text-lg leading-9
               text-black/70
             "
           >
-
             <p>
+              Born from loss and fueled by purpose,
               Voima was founded in 2023 by Emmanuel
-              and a group of young leaders who had
-              personally witnessed the devastating
-              impact of sickle cell disease on their
-              families, friends, and communities.
+              and young leaders to build AI-powered
+              healthcare solutions that help people
+              anticipate crises, understand their
+              health, and reclaim their lives —
+              because no one should face chronic
+              illness alone.
             </p>
-
-            <p>
-              For Emmanuel, the mission was deeply
-              personal. His best friend, Elijah,
-              lived with sickle cell disease and
-              spent more time in hospitals than in
-              classrooms. Elijah passed away before
-              their final Junior High examinations,
-              leaving behind a painful reminder of
-              how overwhelming chronic illness can
-              become without proper support systems.
-            </p>
-
-            <p>
-              Those experiences exposed a larger
-              problem: many people living with
-              chronic conditions are forced to
-              navigate complex healthcare challenges
-              alone, without proactive, personalized,
-              or accessible support.
-            </p>
-
-            <p>
-              In Ghana, the team saw how shortages
-              in blood supply, limited crisis
-              prevention tools, gaps in awareness,
-              and stigma continued to worsen outcomes
-              for patients and families.
-            </p>
-
-            <p>
-              From these experiences, Voima was born
-              at the intersection of technology,
-              advocacy, and human-centered care.
-              Today, the organization is building
-              AI-powered tools and support systems
-              designed to help individuals better
-              understand their health, anticipate
-              crises earlier, and live healthier,
-              fuller lives.
-            </p>
-
           </div>
+
+          {/* CTA Button */}
+          <Link
+            to="/journey"
+            className="
+              mt-10 inline-flex
+              items-center gap-2
+              rounded-full
+              bg-[#BC1D26]
+              px-7 py-4
+              text-sm font-semibold
+              text-white
+              shadow-lg shadow-[#BC1D26]/20
+              transition-all duration-300
+              hover:scale-[1.03]
+              hover:bg-[#A11922]
+            "
+          >
+            Read Our Journey
+            <ArrowRight size={18} />
+          </Link>
 
         </div>
 

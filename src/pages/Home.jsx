@@ -23,10 +23,10 @@ export default function Home() {
       <MissionSection />
       <StorySection />
       <AppShowcaseSection />
-      <ProgramsPreview />
+      {/*<ProgramsPreview />*/}
       <SDGSection />
-      <EventsPreview />
-      <NewsPreview />
+      {/*<EventsPreview />*/}
+      {/*<NewsPreview />*/}
       <CTASection />
     </motion.main>
   );

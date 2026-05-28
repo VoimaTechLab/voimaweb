@@ -60,7 +60,7 @@ export default function Navbar() {
                 backdrop-blur-2xl
                 shadow-[0_8px_30px_rgba(0,0,0,0.06)]
                 border-b border-black/5
-                rounded-b-[28px]
+                rounded-b-[18px]
               `
               : `
                 bg-white
@@ -84,12 +84,12 @@ export default function Navbar() {
           <Link
             to="/"
             className={`
-              text-4xl font-bold tracking-tight font-display
+              text-3xl font-bold tracking-tight font-display
               transition-colors duration-300
               ${
                 scrolled
-                  ? "text-primary-800"
-                  : "text-primary-700"
+                  ? "text-[#A11922]"
+                  : "text-[#BC1D26]"
               }
             `}
           >
@@ -125,11 +125,11 @@ export default function Navbar() {
             to="/get-involved"
             className="
               ml-8 hidden items-center gap-2
-              rounded-full bg-[#800000]
+              rounded-full bg-[#BC1D26]
               px-5 py-3 text-sm font-semibold
               text-white transition-all duration-300
               hover:scale-[1.03]
-              hover:bg-[#F47B3A]
+              hover:bg-[#BC1D26]/90
               md:flex
             "
           >
@@ -189,7 +189,7 @@ export default function Navbar() {
               "
             >
               <div className="mb-12 flex items-center justify-between">
-                <h2 className="text-2xl font-bold text-black">
+                <h2 className="text-2xl font-bold text-[#BC1D26] font-display">
                   Voima
                 </h2>
 
@@ -214,7 +214,7 @@ export default function Navbar() {
                         text-base font-medium transition-all duration-300
                         ${
                           isActive
-                            ? "bg-[#FF457A]/10 text-[#FF457A]"
+                            ? "bg-[#BC1D26]/10 text-[#BC1D26]"
                             : "text-black/70 hover:bg-black/5"
                         }
                       `
@@ -230,10 +230,10 @@ export default function Navbar() {
                 onClick={() => setMenuOpen(false)}
                 className="
                   mt-auto flex items-center justify-center gap-2
-                  rounded-2xl bg-[#FF457A]
+                  rounded-2xl bg-[#BC1D26]
                   px-5 py-4 text-sm font-semibold
                   text-white transition-all duration-300
-                  hover:bg-[#ff2f68]
+                  hover:bg-[#BC1D26]/90
                 "
               >
                 Get Involved

@@ -178,11 +178,11 @@ export default function Hero() {
                       inline-flex items-center gap-3
                       rounded-full
                       border border-white/10
-                      bg-white/10
+                      bg-white
                       px-5 py-2.5
                       text-sm font-semibold
                       tracking-wide
-                      text-white
+                      text-[#BC1D26]
                       backdrop-blur-md
                     "
                   >
@@ -270,14 +270,14 @@ export default function Hero() {
                         gap-2
                         rounded-full
                         border border-white/15
-                        bg-white/10
+                        bg-white
                         px-6 sm:px-7
                         py-3.5 sm:py-4
                         text-sm font-semibold
-                        text-white
+                        text-[#BC1D26]
                         backdrop-blur-md
                         transition-all duration-300
-                        hover:bg-white/20
+                        hover:bg-white/90
                       "
                     >
                       {slide.secondaryBtn}

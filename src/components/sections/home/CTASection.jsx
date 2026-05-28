@@ -23,12 +23,12 @@ export default function CTASection() {
           absolute left-[-10%] top-[-20%]
           h-[350px] w-[350px]
           rounded-full
-          bg-[#F47B3A]/10
+          bg-[#fff]/10
           blur-3xl
         "
       />*/}
 
-      <div className="relative mx-auto max-w-6xl">
+      <div className="relative mx-auto max-w-6xl mt-1">
 
         <div
           className="
@@ -60,8 +60,8 @@ export default function CTASection() {
               mx-auto flex h-20 w-20
               items-center justify-center
               rounded-3xl
-              bg-[#F47B3A]/10
-              text-[#F47B3A]
+              bg-[#fff]/10
+              text-[#fff]
             "
           >
             <HeartHandshake size={38} />
@@ -116,10 +116,10 @@ export default function CTASection() {
               className="
                 inline-flex items-center gap-3
                 rounded-full
-                bg-[#F47B3A]
+                bg-[#fff]
                 px-8 py-4
                 font-medium
-                text-white
+                text-[#BC1D26]
                 transition-all duration-300
                 hover:scale-[1.03]
               "

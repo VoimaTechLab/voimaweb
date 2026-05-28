@@ -1,5 +1,9 @@
 // src/components/sections/home/MissionSection.jsx
-import { Link } from "react-router-dom";
+
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
+
+import "swiper/css";
 
 export default function MissionSection() {
   const missionSteps = [
@@ -21,7 +25,7 @@ export default function MissionSection() {
       number: "03",
       title: "Voima App",
       description:
-        "Building intelligent digital tools that help individuals with SCD manage care, track symptoms, and access support.",
+        "Building intelligent digital tools that help individuals with SCD manage care and access support.",
     },
 
     {
@@ -33,22 +37,30 @@ export default function MissionSection() {
   ];
 
   return (
-    <section className="bg-[#ffff] px-6 py-28">
+    <section className="relative overflow-hidden bg-[#BC1D26] mt-20 py-20 pb-30">
+
+      {/* Glow 
       <div
         className="
-          mx-auto grid max-w-7xl
-          gap-20
-          lg:grid-cols-[1fr_1.1fr]
+          absolute left-1/2 top-0
+          h-[400px] w-[400px]
+          -translate-x-1/2
+          rounded-full
+          bg-[#BC1D26]/5
+          blur-3xl
         "
-      >
+      />*/}
 
-        {/* Left Content */}
-        <div className="lg:sticky lg:top-24 h-fit">
+      <div className="relative mx-auto max-w-7xl">
+
+        {/* Header */}
+        <div className="px-6 text-center">
+
           <span
             className="
               text-sm font-semibold uppercase
               tracking-[0.2em]
-              text-[#F47B3A]
+              text-[#fff]
             "
           >
             Our Mission
@@ -56,133 +68,136 @@ export default function MissionSection() {
 
           <h2
             className="
-              mt-6
+              mx-auto mt-6
+              max-w-4xl
               text-4xl font-bold
               leading-tight
-              text-[#800000]
-              md:text-5xl
+              text-[#fff]
+              md:text-6xl
             "
           >
             Empowering sickle cell communities
-            through healthcare, innovation,
-            and AI-driven support.
+            through innovation, awareness,
+            and AI-driven healthcare support.
           </h2>
 
-          <p
-            className="
-              mt-8
-              max-w-xl
-              text-lg leading-9
-              text-black/70
-            "
-          >
-            We believe technology and community
-            action can transform sickle cell care.
-            Through awareness, early intervention,
-            and intelligent healthcare tools,
-            we are building a future where people
-            living with SCD receive better support,
-            dignity, and opportunities.
-          </p>
-
-        <Link
-            to="/about"
-            className="
-                mt-10 inline-flex
-                items-center justify-center
-                rounded-full
-                bg-[#800000]
-                px-8 py-4
-                font-medium text-white
-                transition-all duration-300
-                hover:bg-[#5f0000]
-            "
-            >
-            Learn More
-        </Link>
         </div>
 
-        {/* Timeline */}
-        <div className="relative">
+        {/* Carousel */}
+        <div className="mt-20">
 
-          {/* Vertical Line */}
-          <div
-            className="
-              absolute left-[28px] top-0
-              h-full w-[2px]
-              bg-gradient-to-b
-              from-[#F47B3A]
-              via-[#FF457A]
-              to-transparent
-            "
-          />
+          <Swiper
+            modules={[Autoplay]}
+            spaceBetween={24}
+            loop={true}
+            speed={6000}
+            allowTouchMove={false}
+            autoplay={{
+              delay: 0,
+              disableOnInteraction: false,
+            }}
+            breakpoints={{
+              0: {
+                slidesPerView: 1.1,
+              },
 
-          <div className="space-y-10">
-            {missionSteps.map((step) => (
-              <div
-                key={step.number}
-                className="
-                  relative flex gap-8
-                "
-              >
+              640: {
+                slidesPerView: 1.4,
+              },
 
-                {/* Number */}
+              1024: {
+                slidesPerView: 2.4,
+              },
+
+              1280: {
+                slidesPerView: 3,
+              },
+            }}
+            className="!overflow-visible"
+          >
+
+            {[...missionSteps, ...missionSteps].map((step, index) => (
+              <SwiperSlide key={index}>
+
                 <div
                   className="
-                    relative z-10
-                    flex h-14 w-14
-                    shrink-0 items-center
-                    justify-center
-                    rounded-full
-                    bg-[#800000]
-                    text-sm font-bold
-                    text-white
-                    shadow-lg
-                  "
-                >
-                  {step.number}
-                </div>
-
-                {/* Card */}
-                <div
-                  className="
-                    flex-1
-                    rounded-[28px]
+                    group
+                    relative h-full
+                    overflow-hidden
+                    rounded-[36px]
                     border border-black/5
-                    bg-white/80
-                    p-8
-                    backdrop-blur-xl
+                    bg-white
+                    p-10
+                    shadow-[0_10px_40px_rgba(0,0,0,0.04)]
                     transition-all duration-500
-                    hover:-translate-y-1
-                    hover:shadow-[0_15px_40px_rgba(0,0,0,0.06)]
+                    hover:-translate-y-2
+                    hover:shadow-[0_20px_60px_rgba(0,0,0,0.08)]
                   "
                 >
-                  <h3
-                    className="
-                      text-2xl font-semibold
-                      text-[#800000]
-                    "
-                  >
-                    {step.title}
-                  </h3>
 
-                  <p
+                  {/* Glow */}
+                  <div
                     className="
-                      mt-4
-                      leading-8
-                      text-black/65
+                      absolute right-[-60px] top-[-60px]
+                      h-52 w-52
+                      rounded-full
+                      bg-[#BC1D26]/5
+                      blur-3xl
+                    "
+                  />
+
+                  {/* Number */}
+                  <div
+                    className="
+                      relative z-10
+                      flex h-16 w-16
+                      items-center justify-center
+                      rounded-2xl
+                      bg-[#BC1D26]
+                      text-lg font-bold
+                      text-white
+                      shadow-lg shadow-[#BC1D26]/20
                     "
                   >
-                    {step.description}
-                  </p>
+                    {step.number}
+                  </div>
+
+                  {/* Content */}
+                  <div className="relative z-10 mt-10">
+
+                    <h3
+                      className="
+                        text-2xl font-bold
+                        leading-tight
+                        text-[#800000]
+                      "
+                    >
+                      {step.title}
+                    </h3>
+
+                    <p
+                      className="
+                        mt-5
+                        leading-8
+                        text-black/65
+                      "
+                    >
+                      {step.description}
+                    </p>
+
+                  </div>
+
                 </div>
 
-              </div>
+              </SwiperSlide>
             ))}
-          </div>
+
+          </Swiper>
+
         </div>
 
       </div>
+
     </section>
   );
 }

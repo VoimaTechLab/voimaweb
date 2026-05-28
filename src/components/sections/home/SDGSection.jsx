@@ -1,11 +1,16 @@
 // src/components/sections/home/SDGSection.jsx
 import { Link } from "react-router-dom"
+import SDG1 from "../../../assets/ourImpact.png"
+import SDG2 from "../../../assets/ourImpact.png"
+import SDG3 from "../../../assets/ourImpact.png"
+import SDG4 from "../../../assets/ourImpact.png"
 
 
 const goals = [
   {
     number: "03",
-    image: "/images/sdg/sdg-03.png",
+    image: SDG1,
+    color: "#4C9F38",
     title: "Good Health & Well-Being",
     description:
       "Improving awareness, early intervention, and healthcare access for individuals living with sickle cell disease.",
@@ -13,7 +18,8 @@ const goals = [
 
   {
     number: "04",
-    image: "/images/sdg/sdg-04.png",
+    image: SDG2,
+    color: "#C5192D",
     title: "Quality Education",
     description:
       "Providing accessible education, awareness campaigns, and health literacy programs within communities.",
@@ -21,7 +27,8 @@ const goals = [
 
   {
     number: "09",
-    image: "/images/sdg/sdg-09.png",
+    image: SDG3,
+    color: "#FD6925",
     title: "Industry & Innovation",
     description:
       "Leveraging AI-powered healthcare tools and digital innovation to improve patient support systems.",
@@ -29,7 +36,8 @@ const goals = [
 
   {
     number: "10",
-    image: "/images/sdg/sdg-10.png",
+    image: SDG4,
+    color: "#DD1367",
     title: "Reduced Inequalities",
     description:
       "Addressing healthcare disparities affecting underserved communities across Africa and beyond.",
@@ -52,7 +60,7 @@ export default function SDGSection() {
           absolute left-[-10%] top-0
           h-[400px] w-[400px]
           rounded-full
-          bg-[#F47B3A]/10
+          bg-[#BC1D26]/10
           blur-3xl
         "
       />*/}
@@ -66,7 +74,7 @@ export default function SDGSection() {
             className="
               text-sm font-semibold uppercase
               tracking-[0.2em]
-              text-[#F47B3A]
+              text-[#BC1D26]/70
             "
           >
             Sustainable Development Goals
@@ -77,7 +85,7 @@ export default function SDGSection() {
               mt-6
               text-4xl font-bold
               leading-tight
-              text-primary-800
+              text-[#BC1D26]
               md:text-5xl
             "
           >
@@ -85,7 +93,7 @@ export default function SDGSection() {
             Sustainable Development Goals
           </h2>
 
-          <p
+          {/*<p
             className="
               mx-auto mt-8
               max-w-3xl
@@ -98,7 +106,7 @@ export default function SDGSection() {
             focused on healthcare access,
             innovation, education, and reducing
             inequalities in underserved communities.
-          </p>
+          </p>*/}
 
         </div>
 
@@ -111,173 +119,90 @@ export default function SDGSection() {
             lg:grid-cols-4
           "
         >
-          {goals.map((goal) => (
-            <div
-              key={goal.number}
-              className="
-                group relative overflow-hidden
-                rounded-[32px]
-                border border-primary-800/10
-                bg-white/[0.04]
-                p-8
-                transition-all duration-500
-                hover:-translate-y-2
-                hover:bg-white/[0.07]
-                hover:shadow-[0_20px_60px_rgba(0,0,0,0.18)]
-              "
-            >
-
-              {/* Glow */}
-              <div
-                className="
-                  absolute right-[-30px] top-[-30px]
-                  h-[100px] w-[100px]
-                  rounded-full
-                  bg-[#F47B3A]/10
-                  blur-3xl
-                  transition-all duration-500
-                  group-hover:bg-[#F47B3A]/20
-                "
-              />
-
-              {/* Number */}
-              <div
-                className="
-                  flex h-16 w-16
-                  items-center justify-center
-                  rounded-2xl
-                  bg-[#F47B3A]/10
-                  text-2xl font-bold
-                  text-[#F47B3A]
-                "
-              >
-                {goal.number}
-              </div>
-
-              {/* Content */}
-              <h3
-                className="
-                  mt-8
-                  text-2xl font-semibold
-                  leading-snug
-                  text-primary-800
-                "
-              >
-                {goal.title}
-              </h3>
-
-              <p
-                className="
-                  mt-5
-                  leading-8
-                  text-primary-800/70
-                "
-              >
-                {goal.description}
-              </p>
-
-            </div>
-          ))}
-        </div>
-
-        {/* Bottom CTA Banner */}
+      {goals.map((goal) => (
         <div
+          key={goal.number}
           className="
-            relative overflow-hidden
-            mt-20
-            rounded-[48px]
-            border border-primary-800/10
-            bg-[#800000]
-            p-10 md:p-14
-            text-center
+            group relative overflow-hidden
+            rounded-[32px]
+            p-8
+            text-white
+            min-h-[420px]
+            flex flex-col justify-end
+            transition-all duration-500
+            hover:-translate-y-2
+            hover:shadow-[0_20px_60px_rgba(0,0,0,0.2)]
           "
+          style={{
+            backgroundColor: goal.color,
+          }}
         >
 
-          {/* Inner Glow */}
-          <div
+          {/* Background Image */}
+          <img
+            src={goal.image}
+            alt={goal.title}
             className="
-              absolute right-[-10%] top-[-20%]
-              h-[250px] w-[250px]
-              rounded-full
-              bg-[#F47B3A]/10
-              blur-3xl
+              absolute inset-0
+              h-full w-full
+              object-cover
+              opacity-25
+              transition-all duration-500
+              group-hover:scale-110
+              group-hover:opacity-30
             "
           />
 
-          <div className="relative">
+          {/* Dark Overlay */}
+          <div
+            className="
+              absolute inset-0
+              bg-gradient-to-t
+              from-black/70
+              via-black/30
+              to-black/10
+            "
+          />
 
-            <h3
-              className="
-                text-3xl font-bold
-                leading-tight
-                text-white/90
-                md:text-4xl
-              "
-            >
-              Building a healthier and more
-              equitable future through
-              technology and community action.
-            </h3>
+          {/* Content */}
+          <div className="relative z-10">
 
-            <p
-              className="
-                mx-auto mt-6
-                max-w-3xl
-                text-lg leading-9
-                text-white/70
-              "
-            >
-              By combining healthcare advocacy,
-              AI innovation, and grassroots
-              partnerships, Voima Initiative
-              contributes toward sustainable,
-              inclusive, and people-centered
-              healthcare solutions.
-            </p>
-
-            {/* CTA Links */}
+            {/* Number */}
             <div
               className="
-                mt-10
-                flex flex-wrap
-                justify-center gap-5
+                text-6xl font-black
+                text-white/20
               "
             >
-
-              <Link
-               to="/"
-                className="
-                  rounded-full
-                  bg-[#F47B3A]
-                  px-8 py-4
-                  font-medium
-                  text-white
-                  transition-all duration-300
-                  hover:scale-[1.02]
-                "
-              >
-                Learn More
-              </Link>
-
-              <Link
-               to="/"
-                className="
-                  rounded-full
-                  border border-white/15
-                  bg-white/5
-                  px-8 py-4
-                  font-medium
-                  text-white
-                  transition-all duration-300
-                  hover:bg-white/10
-                "
-              >
-                Support Our Mission
-              </Link>
-
+              {goal.number}
             </div>
 
+            {/* Title */}
+            <h3
+              className="
+                mt-4
+                text-2xl font-bold text-white
+                leading-snug
+              "
+            >
+              {goal.title}
+            </h3>
+
+            {/* Description */}
+            <p
+              className="
+                mt-5
+                leading-8
+                text-white/85
+              "
+            >
+              {goal.description}
+            </p>
+
           </div>
+
+        </div>
+      ))}
         </div>
 
       </div>
