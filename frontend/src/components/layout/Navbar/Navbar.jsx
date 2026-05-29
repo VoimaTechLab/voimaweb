@@ -56,8 +56,7 @@ export default function Navbar() {
           ${
             scrolled
               ? `
-                bg-white/75
-                backdrop-blur-2xl
+                bg-white
                 shadow-[0_8px_30px_rgba(0,0,0,0.06)]
                 border-b border-black/5
                 rounded-b-[18px]

@@ -293,11 +293,10 @@ export default function ImpactStats() {
                 className="
                   mb-5 w-fit
                   rounded-full
-                  bg-white/10
+                  bg-white
                   px-4 py-2
-                  text-sm font-medium
-                  text-white
-                  backdrop-blur-md
+                  text-sm font-bold
+                  text-[#BC1D26]
                 "
               >
                 Community Impact
