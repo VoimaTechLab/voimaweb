@@ -1,10 +1,10 @@
 // src/components/sections/home/CTASection.jsx
 
-import { Link } from "react-router-dom";
 import {
   ArrowRight,
   HeartHandshake,
 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export default function CTASection() {
   return (
@@ -35,7 +35,7 @@ export default function CTASection() {
             relative overflow-hidden
             rounded-[48px]
             border border-primary-800/10
-            bg-[#800000]
+            bg-[#BC1D26]
             px-8 py-14
             text-center
             backdrop-blur-xl

@@ -58,14 +58,14 @@ function Footer() {
               inline-flex items-center gap-3
               rounded-full
               border border-white/10
-              bg-white/10
+              bg-white
               px-4 py-2
               backdrop-blur-md
             "
           >
-            <div className="h-3 w-3 rounded-full bg-white" />
+            <div className="h-3 w-3 rounded-full bg-[#BC1D26]" />
 
-            <span className="text-sm font-medium tracking-wide">
+            <span className="text-sm font-bold tracking-wide text-[#BC1D26]">
               Voima
             </span>
           </div>
