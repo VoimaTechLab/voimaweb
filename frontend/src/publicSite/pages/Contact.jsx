@@ -1,13 +1,12 @@
+import { fadeUp, pageTransition } from "@/publicSite/motion/variants";
 import { motion } from "framer-motion";
-import { pageTransition, fadeUp } from "../motion/variants";
-import { useState } from "react";
 import {
-  Mail,
-  MapPin,
-  Phone,
-  Send,
-  ArrowRight,
+    Mail,
+    MapPin,
+    Phone,
+    Send
 } from "lucide-react";
+import { useState } from "react";
 
 export default function Contact() {
   const [form, setForm] = useState({

@@ -1,14 +1,12 @@
 // src/components/sections/home/NewsPreview.jsx
 
-import { Link } from "react-router-dom";
 import {
-  ArrowRight,
-  CalendarDays,
+    ArrowRight,
+    CalendarDays,
 } from "lucide-react";
+import { Link } from "react-router-dom";
 
-import NewsImage01 from "../../../assets/Web_red.jpg"
-import NewsImage02 from "../../../assets/Web_red.jpg"
-import NewsImage03 from "../../../assets/Web_red.jpg"
+import { default as NewsImage01, default as NewsImage02, default as NewsImage03 } from "../../../assets/Web_red.jpg";
 
 const news = [
   {

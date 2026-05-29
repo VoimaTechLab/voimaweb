@@ -1,15 +1,15 @@
-import { motion } from "framer-motion";
 import {
-  pageTransition,
-  fadeUp,
-  stagger,
-} from "../motion/variants";
+    fadeUp,
+    pageTransition,
+    stagger,
+} from "@/publicSite/motion/variants";
+import { motion } from "framer-motion";
 
 import {
-  Calendar,
-  ArrowRight,
-  Clock3,
-  Tag,
+    ArrowRight,
+    Calendar,
+    Clock3,
+    Tag,
 } from "lucide-react";
 
 import { Link } from "react-router-dom";

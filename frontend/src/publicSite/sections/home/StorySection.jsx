@@ -1,7 +1,7 @@
 // src/components/sections/home/StorySection.jsx
 
-import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 import Story from "../../../assets/ourStory.jpg";
 

@@ -1,9 +1,5 @@
 // src/components/sections/home/SDGSection.jsx
-import { Link } from "react-router-dom"
-import SDG1 from "../../../assets/ourImpact.png"
-import SDG2 from "../../../assets/ourImpact.png"
-import SDG3 from "../../../assets/ourImpact.png"
-import SDG4 from "../../../assets/ourImpact.png"
+import { default as SDG1, default as SDG2, default as SDG3, default as SDG4 } from "../../../assets/ourImpact.png";
 
 
 const goals = [

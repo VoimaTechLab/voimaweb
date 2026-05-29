@@ -1,22 +1,22 @@
-import { motion } from "framer-motion";
 import {
-  pageTransition,
-  fadeUp,
-} from "../motion/variants";
+    fadeUp,
+    pageTransition,
+} from "@/publicSite/motion/variants";
+import { motion } from "framer-motion";
 
 import {
-  Heart,
-  ArrowRight,
-  CircleDollarSign,
-  Briefcase,
-  Sparkles,
-  ShieldCheck,
-  Globe2,
-  HeartHandshake,
+    ArrowRight,
+    Briefcase,
+    CircleDollarSign,
+    Globe2,
+    Heart,
+    HeartHandshake,
+    ShieldCheck,
+    Sparkles,
 } from "lucide-react";
 
-import Banner from "../assets/PC_White1.png"
-import Story from "../assets/ourStory.jpg"
+import Banner from "../../assets/PC_White1.png";
+import Story from "../../assets/ourStory.jpg";
 
 import { Link } from "react-router-dom";
 

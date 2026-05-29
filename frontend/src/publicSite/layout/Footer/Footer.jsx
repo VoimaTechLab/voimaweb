@@ -1,8 +1,8 @@
 import {
+  ArrowUpRight,
   Mail,
   MapPin,
   Phone,
-  ArrowUpRight,
 } from "lucide-react";
 
 function Footer() {
@@ -11,7 +11,7 @@ function Footer() {
       className="
         relative overflow-hidden
         rounded-t-[48px]
-        bg-[#800000]
+        bg-[#BC1D26]
         text-white
       "
     >
@@ -187,7 +187,7 @@ function Footer() {
             {[
               "Home",
               "About",
-              "Programs",
+              "Journey",
               "Events",
               "News",
               "Contact",

@@ -1,8 +1,8 @@
+import { pageTransition } from "@/publicSite/motion/variants";
 import { motion } from "framer-motion";
-import { pageTransition } from "../motion/variants";
-import { Link } from  "react-router-dom"
-import AppDemo from "../assets/voima_website_prototype_01.mp4"
-import Story from "../assets/ourStory.jpg"
+import { Link } from "react-router-dom";
+import Story from "../../assets/ourStory.jpg";
+import AppDemo from "../../assets/voima_website_prototype_01.mp4";
 export default function About() {
   return (
     <motion.main

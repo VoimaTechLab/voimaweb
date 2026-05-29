@@ -1,7 +1,7 @@
+import { pageTransition } from '@/publicSite/motion/variants'
 import { motion } from 'framer-motion'
-import { pageTransition } from '../motion/variants'
-import { Link } from 'react-router-dom'
 import { ArrowLeft } from 'lucide-react'
+import { Link } from 'react-router-dom'
 
 export default function NotFound() {
   return (

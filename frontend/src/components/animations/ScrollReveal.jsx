@@ -1,6 +1,5 @@
-import { motion } from 'framer-motion';
-import { fadeUp } from '@/motion/variants';
-import { useReducedMotion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
+import { fadeUp } from '../motion/variants';
  
 export function ScrollReveal({ children, delay = 0, className = '' }) {
   const shouldReduce = useReducedMotion();

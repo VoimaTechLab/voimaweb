@@ -1,7 +1,7 @@
 // src/pages/CareerDetail.jsx
 
+import { pageTransition } from "@/publicSite/motion/variants";
 import { motion } from "framer-motion";
-import { pageTransition } from "../motion/variants";
 import { ArrowRight } from "lucide-react";
 
 export default function CareerDetail() {

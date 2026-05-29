@@ -1,10 +1,7 @@
 // src/components/sections/home/ImpactStats.jsx
 
-import StatCard from "@/components/ui/StatCard/StatCard";
-import { STATS } from "@/constants/stats";
-import Impact from "../../../assets/ourImpact.png"
-import ImpactVideo from "../../../assets/voima_website_prototype.mp4"
-import {HeartPulse,Brain,Globe,BookOpenText,} from "lucide-react";
+import { BookOpenText, Brain, Globe, HeartPulse, } from "lucide-react";
+import ImpactVideo from "../../../assets/voima_website_prototype.mp4";
 
 export default function ImpactStats() {
   return (

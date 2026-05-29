@@ -1,9 +1,9 @@
 // src/pages/Careers.jsx
 
+import { pageTransition } from "@/publicSite/motion/variants";
 import { motion } from "framer-motion";
-import { pageTransition } from "../motion/variants";
-import { Link } from "react-router-dom";
 import { ArrowRight, Briefcase } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const jobs = [
   {

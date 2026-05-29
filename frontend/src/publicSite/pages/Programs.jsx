@@ -1,21 +1,21 @@
-import { motion } from "framer-motion";
 import {
-  pageTransition,
-  fadeUp,
-  stagger,
-} from "../motion/variants";
+    fadeUp,
+    pageTransition,
+    stagger,
+} from "@/publicSite/motion/variants";
+import { motion } from "framer-motion";
 
 import {
-  Users,
-  FlaskConical,
-  CalendarDays,
-  ArrowRight,
-  HeartHandshake,
-  Microscope,
-  Megaphone,
+    ArrowRight,
+    CalendarDays,
+    FlaskConical,
+    HeartHandshake,
+    Megaphone,
+    Microscope,
+    Users,
 } from "lucide-react";
-import Impact from "../assets/ourImpact.png"
 import { Link } from "react-router-dom";
+import Impact from "../../assets/ourImpact.png";
 
 const programs = [
   {

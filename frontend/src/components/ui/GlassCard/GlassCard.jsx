@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { scaleIn } from '@/motion/variants';
+import { scaleIn } from '../motion/variants';
  
 export function GlassCard({ children, className = '', delay = 0 }) {
   return (

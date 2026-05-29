@@ -1,7 +1,7 @@
 // src/components/sections/home/AppShowcaseSection.jsx
 
+import { ArrowRight, Play } from "lucide-react";
 import { Link } from "react-router-dom";
-import {ArrowRight,Play} from "lucide-react";
 
 import AppDemo from "../../../assets/voima_website_prototype.mp4";
 

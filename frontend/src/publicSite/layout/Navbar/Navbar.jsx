@@ -1,7 +1,7 @@
+import { AnimatePresence, motion } from "framer-motion";
+import { ArrowRight, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ArrowRight } from "lucide-react";
 
 const NAV_LINKS = [
   { label: "Home", href: "/" },
@@ -107,10 +107,10 @@ export default function Navbar() {
                     relative text-sm font-medium transition-all duration-300
                     ${
                       scrolled
-                        ? "text-[#800000] hover:text-black"
+                        ? "text-[#BC1D26] hover:text-[#a21a20]"
                         : "text-primary-700 hover:text-maroon"
                     }
-                    ${isActive ? "text-[#111]" : "#800020"}
+                    ${isActive ? "text-[#d72e36]" : "#800020"}
                   `
                 }
               >
