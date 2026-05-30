@@ -1,15 +1,14 @@
-// src/pages/Home.jsx
+import { motion } from "framer-motion";
 
-import AppShowcaseSection from '@/publicSite/sections/home/AppShowcaseSection';
-import CTASection from '@/publicSite/sections/home/CTASection';
-import Hero from '@/publicSite/sections/home/Hero';
-import ImpactStats from '@/publicSite/sections/home/ImpactStats';
-import MissionSection from '@/publicSite/sections/home/MissionSection';
-import SDGSection from '@/publicSite/sections/home/SDGSection';
-import StorySection from '@/publicSite/sections/home/StorySection';
-import SEOHead from '@/seo/SEOHead';
-import { motion } from 'framer-motion';
-import { pageTransition } from '../motion/variants';
+import { pageTransition } from "@/publicSite/motion/variants";
+import AppShowcaseSection from "@/publicSite/sections/home/AppShowcaseSection";
+import CTASection from "@/publicSite/sections/home/CTASection";
+import Hero from "@/publicSite/sections/home/Hero";
+import ImpactStats from "@/publicSite/sections/home/ImpactStats";
+import MissionSection from "@/publicSite/sections/home/MissionSection";
+import SDGSection from "@/publicSite/sections/home/SDGSection";
+import StorySection from "@/publicSite/sections/home/StorySection";
+import SEOHead from "@/seo/SEOHead";
 
 export default function Home() {
   return (
@@ -20,10 +19,7 @@ export default function Home() {
       <MissionSection />
       <StorySection />
       <AppShowcaseSection />
-      {/*<ProgramsPreview />*/}
       <SDGSection />
-      {/*<EventsPreview />*/}
-      {/*<NewsPreview />*/}
       <CTASection />
     </motion.main>
   );

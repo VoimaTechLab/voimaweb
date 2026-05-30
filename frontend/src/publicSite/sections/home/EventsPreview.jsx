@@ -1,39 +1,10 @@
-// src/components/sections/home/EventsPreview.jsx
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
+import { ArrowRight, CalendarDays, MapPin } from "lucide-react";
 
-import {
-  CalendarDays,
-  MapPin,
-  ArrowRight,
-} from "lucide-react";
-
-const events = [
-  {
-    date: "August 24, 2026",
-    title: "SCD Community Awareness Walk",
-    location: "Accra, Ghana",
-    description:
-      "A public awareness campaign bringing together patients, families, advocates, and healthcare professionals.",
-  },
-
-  {
-    date: "September 12, 2026",
-    title: "Youth Leadership & Health Summit",
-    location: "Kumasi, Ghana",
-    description:
-      "Empowering young leaders through healthcare education, innovation, mentorship, and advocacy discussions.",
-  },
-
-  {
-    date: "October 05, 2026",
-    title: "AI & Healthcare Innovation Forum",
-    location: "Virtual Event",
-    description:
-      "Exploring how artificial intelligence can improve proactive healthcare support and patient outcomes.",
-  },
-];
+import { eventsPreviewSection } from "@/data/homeData";
 
 export default function EventsPreview() {
+  const { eyebrow, title, description, events, banner } = eventsPreviewSection;
   return (
     <section
       className="
@@ -74,7 +45,7 @@ export default function EventsPreview() {
                 text-[#F47B3A]
               "
             >
-              Upcoming Events
+              {eyebrow}
             </span>
 
             <h2
@@ -86,9 +57,7 @@ export default function EventsPreview() {
                 md:text-5xl
               "
             >
-              Bringing communities together
-              through awareness, innovation,
-              and advocacy.
+              {title}
             </h2>
 
           </div>
@@ -100,10 +69,7 @@ export default function EventsPreview() {
               text-black/65
             "
           >
-            Join upcoming Voima Initiative events
-            focused on healthcare awareness,
-            youth empowerment, community support,
-            and AI-driven healthcare innovation.
+            {description}
           </p>
 
         </div>
@@ -247,8 +213,7 @@ export default function EventsPreview() {
                 md:text-5xl
               "
             >
-              Every event is an opportunity
-              to inspire awareness and save lives.
+              {banner.title}
             </h3>
 
             <p
@@ -259,15 +224,11 @@ export default function EventsPreview() {
                 text-white/70
               "
             >
-              From awareness walks to innovation
-              forums and youth summits, Voima
-              Initiative creates spaces where
-              communities can connect, learn,
-              and drive meaningful healthcare change.
+              {banner.description}
             </p>
 
            <Link
-                to="/events"
+                to={banner.cta.link}
                 className="
                     mt-10 inline-flex
                     items-center justify-center
@@ -280,7 +241,7 @@ export default function EventsPreview() {
                     hover:scale-[1.03]
                 "
                 >
-                Explore All Events
+                {banner.cta.text}
             </Link>
           </div>
         </div>

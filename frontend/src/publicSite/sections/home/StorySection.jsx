@@ -1,11 +1,13 @@
-// src/components/sections/home/StorySection.jsx
-
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
-import Story from "../../../assets/ourStory.jpg";
+import SectionHeader from "@/components/ui/SectionHeader/SectionHeader";
+import { storySection } from "@/data/homeData";
 
 export default function StorySection() {
+  const { eyebrow, title, description, quote, image, imageAlt, cta } =
+    storySection;
+
   return (
     <section className="bg-white px-6 py-28">
       <div
@@ -16,21 +18,7 @@ export default function StorySection() {
           lg:grid-cols-2
         "
       >
-
-        {/* Left Image */}
         <div className="relative">
-
-          {/* Glow 
-          <div
-            className="
-              absolute -left-10 -top-10
-              h-40 w-40
-              rounded-full
-              bg-[#F47B3A]/10
-              blur-3xl
-            "
-          />*/}
-
           <div
             className="
               relative overflow-hidden
@@ -40,16 +28,12 @@ export default function StorySection() {
             "
           >
             <img
-              src={Story}
-              alt="Voima Initiative community story"
-              className="
-                h-[520px] w-full
-                object-cover
-              "
+              src={image}
+              alt={imageAlt}
+              className="h-[520px] w-full object-cover"
             />
           </div>
 
-          {/* Floating Card */}
           <div
             className="
               absolute bottom-6 left-6
@@ -62,69 +46,25 @@ export default function StorySection() {
               shadow-xl
             "
           >
-            <p
-              className="
-                text-sm leading-7
-                text-black/70
-              "
-            >
-              “Technology alone cannot solve healthcare
-              inequality, but human-centered innovation
-              can transform how people experience care.”
-            </p>
+            <p className="text-sm leading-7 text-black/70">&ldquo;{quote}&rdquo;</p>
           </div>
-
         </div>
 
-        {/* Right Content */}
         <div>
+          <SectionHeader
+            eyebrow={eyebrow}
+            title={title}
+            align="left"
+            maxWidth=""
+            titleClassName="mt-6 text-4xl font-bold leading-tight text-[#BC1D26] md:text-5xl"
+          />
 
-          <span
-            className="
-              text-sm font-semibold uppercase
-              tracking-[0.2em]
-              text-[#BC1D26]/70
-            "
-          >
-            Our Story
-          </span>
-
-          <h2
-            className="
-              mt-6
-              text-4xl font-bold
-              leading-tight
-              text-[#BC1D26]
-              md:text-5xl
-            "
-          >
-            Building hope through
-            collaboration, empathy,
-            and innovation.
-          </h2>
-
-          <div
-            className="
-              mt-8
-              text-lg leading-9
-              text-black/70
-            "
-          >
-            <p>
-              Born from loss and fueled by purpose,
-              Voima was founded in 2023 by Emmanuel
-              and young leaders to build AI-powered
-              healthcare solutions that help people
-              anticipate crises, understand their
-              health, and reclaim their lives —
-              because no one should face chronic
-              illness alone.
-            </p>
+          <div className="mt-8 text-lg leading-9 text-black/70">
+            <p>{description}</p>
           </div>
 
-          {/* CTA Button */}
           <Link
-            to="/journey"
+            to={cta.link}
             className="
               mt-10 inline-flex
               items-center gap-2
@@ -139,12 +79,10 @@ export default function StorySection() {
               hover:bg-[#A11922]
             "
           >
-            Read Our Journey
+            {cta.text}
             <ArrowRight size={18} />
           </Link>
-
         </div>
-
       </div>
     </section>
   );

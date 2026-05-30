@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
-import { Autoplay, EffectFade, Navigation, Pagination, } from "swiper/modules";
+import { Autoplay, EffectFade, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
@@ -10,95 +10,22 @@ import "swiper/css/effect-fade";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
-import HeroImage from "@/assets/content/app/hero-app.jpg";
-import InnovationImage from "@/assets/content/app/innovation.jpg";
-import StoryImage from "@/assets/content/journey/story.jpg";
+import { heroSlides } from "@/data/homeData";
 
-const slides = [
-  {
-    eyebrow: "Building Healthier Lives Using AI",
-
-    title: (
-      <>
-        Fighting Sickle Cell Together{" "}
-        <span className="text-[var(--color-primary-400)]">
-          Through Preventive Care.
-        </span>
-      </>
-    ),
-
-    description:
-      "Voima is building proactive and personalized support systems for people living with sickle cell disease and chronic conditions.",
-
-    image: HeroImage,
-
-    primaryBtn: "Explore Events",
-    primaryLink: "/events",
-
-    secondaryBtn: "Our Story",
-    secondaryLink: "/journey",
-  },
-
-  {
-    eyebrow: "A Mission Rooted In Real Stories",
-
-    title: (
-      <>
-        Technology Inspired By{" "}
-        <span className="text-[var(--color-primary-400)]">
-          Human Experiences.
-        </span>
-      </>
-    ),
-
-    description:
-      "Voima was founded after witnessing firsthand the devastating impact of sickle cell disease on families, patients, and communities.",
-
-    image: StoryImage,
-
-    primaryBtn: "Read Our Journey",
-    primaryLink: "/journey",
-
-    secondaryBtn: "About Voima",
-    secondaryLink: "/about",
-  },
-
-  {
-    eyebrow: "Healthcare Innovation",
-
-    title: (
-      <>
-        The Future Of{" "}
-        <span className="text-[var(--color-primary-400)]">
-          AI-Powered Care.
-        </span>
-      </>
-    ),
-
-    description:
-      "We are creating intelligent healthcare tools that help patients better understand their health and anticipate crises earlier.",
-
-    image: InnovationImage,
-
-    primaryBtn: "Explore The App",
-    primaryLink: "/app",
-
-    secondaryBtn: "Contact Us",
-    secondaryLink: "/contact",
-  },
-];
+function HeroTitle({ before, highlight }) {
+  return (
+    <>
+      {before}{" "}
+      <span className="text-[var(--color-primary-400)]">{highlight}</span>
+    </>
+  );
+}
 
 export default function Hero() {
   return (
     <section className="relative overflow-hidden">
-
       <Swiper
-        modules={[
-          Autoplay,
-          Pagination,
-          EffectFade,
-          Navigation,
-        ]}
+        modules={[Autoplay, Pagination, EffectFade, Navigation]}
         effect="fade"
         loop
         speed={1200}
@@ -115,13 +42,9 @@ export default function Hero() {
         }}
         className="min-h-screen"
       >
-
-        {slides.map((slide, index) => (
-          <SwiperSlide key={index}>
-
+        {heroSlides.map((slide) => (
+          <SwiperSlide key={slide.id}>
             <div className="relative flex min-h-screen items-center overflow-hidden">
-
-              {/* Background Image */}
               <img
                 src={slide.image}
                 alt=""
@@ -133,7 +56,6 @@ export default function Hero() {
                 "
               />
 
-              {/* Brand Overlay */}
               <div
                 className="
                   absolute inset-0
@@ -144,7 +66,6 @@ export default function Hero() {
                 "
               />
 
-              {/* Soft Red Blend */}
               <div
                 className="
                   absolute inset-0
@@ -152,7 +73,6 @@ export default function Hero() {
                 "
               />
 
-              {/* Grid Texture */}
               <div
                 className="absolute inset-0 opacity-[0.04]"
                 style={{
@@ -162,17 +82,13 @@ export default function Hero() {
                 }}
               />
 
-              {/* Content */}
               <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pt-32 pb-24 md:px-10">
-
                 <motion.div
                   initial={{ opacity: 0, y: 40 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8 }}
                   className="max-w-3xl"
                 >
-
-                  {/* Eyebrow */}
                   <div
                     className="
                       inline-flex items-center gap-3
@@ -187,11 +103,9 @@ export default function Hero() {
                     "
                   >
                     <span className="h-2 w-2 rounded-full bg-[#BC1D26]" />
-
                     {slide.eyebrow}
                   </div>
 
-                  {/* Heading */}
                   <h1
                     className="
                       mt-8
@@ -206,10 +120,9 @@ export default function Hero() {
                       lg:text-7xl
                     "
                   >
-                    {slide.title}
+                    <HeroTitle {...slide.title} />
                   </h1>
 
-                  {/* Description */}
                   <p
                     className="
                       mt-7
@@ -223,40 +136,36 @@ export default function Hero() {
                     {slide.description}
                   </p>
 
-
-                  {/* Buttons */}
                   <div
-                      className="
-                        mt-10
-                        flex flex-col
-                        gap-4
-                        sm:flex-row
-                        sm:items-center
-                      "
-                    >
-
+                    className="
+                      mt-10
+                      flex flex-col
+                      gap-4
+                      sm:flex-row
+                      sm:items-center
+                    "
+                  >
                     <Link
                       to={slide.primaryLink}
                       className="
-                          inline-flex
-                          w-full sm:w-auto
-                          items-center
-                          justify-center
-                          gap-2
-                          rounded-full
-                          bg-[#BC1D26]
-                          px-6 sm:px-7
-                          py-3.5 sm:py-4
-                          text-sm font-semibold
-                          text-white
-                          shadow-lg shadow-[#BC1D26]/30
-                          transition-all duration-300
-                          hover:scale-[1.03]
-                          hover:bg-[#A11922]
-                        "
+                        inline-flex
+                        w-full sm:w-auto
+                        items-center
+                        justify-center
+                        gap-2
+                        rounded-full
+                        bg-[#BC1D26]
+                        px-6 sm:px-7
+                        py-3.5 sm:py-4
+                        text-sm font-semibold
+                        text-white
+                        shadow-lg shadow-[#BC1D26]/30
+                        transition-all duration-300
+                        hover:scale-[1.03]
+                        hover:bg-[#A11922]
+                      "
                     >
                       {slide.primaryBtn}
-
                       <ArrowRight size={18} />
                     </Link>
 
@@ -282,58 +191,12 @@ export default function Hero() {
                     >
                       {slide.secondaryBtn}
                     </Link>
-
-
                   </div>
-
                 </motion.div>
-
               </div>
-
             </div>
-
           </SwiperSlide>
         ))}
-
-        {/* Navigation Buttons 
-        <button
-          className="
-            hero-prev
-            absolute left-4 top-1/2 z-20
-            hidden h-12 w-12 -translate-y-1/2
-            items-center justify-center
-            rounded-full
-            border border-white/15
-            bg-black/30
-            text-white
-            backdrop-blur-md
-            transition-all duration-300
-            hover:bg-[#BC1D26]
-            md:flex
-          "
-        >
-          <ChevronLeft size={22} />
-        </button>
-
-        <button
-          className="
-            hero-next
-            absolute right-4 top-1/2 z-20
-            hidden h-12 w-12 -translate-y-1/2
-            items-center justify-center
-            rounded-full
-            border border-white/15
-            bg-black/30
-            text-white
-            backdrop-blur-md
-            transition-all duration-300
-            hover:bg-[#BC1D26]
-            md:flex
-          "
-        >
-          <ChevronRight size={22} />
-        </button>*/}
-
       </Swiper>
     </section>
   );
