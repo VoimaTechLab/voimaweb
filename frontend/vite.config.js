@@ -30,11 +30,25 @@ export default defineConfig({
     sourcemap: true,
     rollupOptions: {
       output: {
-        manualChunks: {
-          react:   ['react', 'react-dom'],
-          router:  ['react-router-dom'],
-          motion:  ['framer-motion'],
-          icons:   ['lucide-react'],
+        manualChunks(id) {
+          if (
+            id.includes('node_modules/react-dom') ||
+            /node_modules[/\\]react[/\\]/.test(id)
+          ) {
+            return 'react';
+          }
+
+          if (id.includes('node_modules/react-router-dom')) {
+            return 'router';
+          }
+
+          if (id.includes('node_modules/framer-motion')) {
+            return 'motion';
+          }
+
+          if (id.includes('node_modules/lucide-react')) {
+            return 'icons';
+          }
         },
       },
     },
