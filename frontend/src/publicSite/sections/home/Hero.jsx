@@ -113,13 +113,13 @@ export default function Hero() {
           nextEl: ".hero-next",
           prevEl: ".hero-prev",
         }}
-        className="hero-swiper min-h-[100dvh] min-h-screen [&_.swiper-pagination]:bottom-6 sm:[&_.swiper-pagination]:bottom-8"
+        className="min-h-screen"
       >
 
         {slides.map((slide, index) => (
-          <SwiperSlide key={index} className="h-auto">
+          <SwiperSlide key={index}>
 
-            <div className="relative flex min-h-[100dvh] min-h-screen items-center overflow-hidden">
+            <div className="relative flex min-h-screen items-center overflow-hidden">
 
               {/* Background Image */}
               <img
@@ -128,23 +128,19 @@ export default function Hero() {
                 className="
                   absolute inset-0
                   h-full w-full
-                  object-cover object-center
-                  md:scale-105
+                  object-cover
+                  scale-105
                 "
               />
 
-              {/* Brand Overlay — stronger on mobile for text contrast */}
+              {/* Brand Overlay */}
               <div
                 className="
                   absolute inset-0
-                  bg-gradient-to-b
-                  from-[#140506]/95
-                  via-[#140506]/85
-                  to-[#140506]/75
-                  md:bg-gradient-to-r
-                  md:from-[#140506]/90
-                  md:via-[#140506]/70
-                  md:to-[#140506]/30
+                  bg-gradient-to-r
+                  from-[#140506]/90
+                  via-[#140506]/70
+                  to-[#140506]/30
                 "
               />
 
@@ -167,55 +163,47 @@ export default function Hero() {
               />
 
               {/* Content */}
-              <div className="relative z-10 mx-auto w-full max-w-7xl px-4 pt-28 pb-28 sm:px-6 sm:pt-32 sm:pb-24 md:px-10">
+              <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pt-32 pb-24 md:px-10">
 
                 <motion.div
                   initial={{ opacity: 0, y: 40 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8 }}
-                  className="w-full min-w-0 max-w-3xl"
+                  className="max-w-3xl"
                 >
 
                   {/* Eyebrow */}
                   <div
                     className="
-                      inline-flex max-w-full flex-wrap
-                      items-center gap-2
+                      inline-flex items-center gap-3
                       rounded-full
                       border border-white/10
                       bg-white
-                      px-4 py-2
-                      text-xs font-semibold
+                      px-5 py-2.5
+                      text-sm font-semibold
                       tracking-wide
                       text-[#BC1D26]
                       backdrop-blur-md
-                      sm:gap-3 sm:px-5 sm:py-2.5 sm:text-sm
                     "
                   >
-                    <span className="h-2 w-2 shrink-0 rounded-full bg-[#BC1D26]" />
+                    <span className="h-2 w-2 rounded-full bg-[#BC1D26]" />
 
-                    <span className="min-w-0 break-words">{slide.eyebrow}</span>
+                    {slide.eyebrow}
                   </div>
 
                   {/* Heading */}
                   <h1
                     className="
-                      mt-6
+                      mt-8
                       font-heading
-                      text-3xl
+                      text-4xl
                       font-extrabold
-                      leading-[1.12]
-                      tracking-[-0.02em]
+                      leading-[0.95]
+                      tracking-[-0.03em]
                       text-white
-                      text-balance
-                      break-words
-                      sm:mt-8
-                      sm:text-4xl
-                      sm:leading-[1.08]
-                      md:text-5xl
-                      md:leading-[1.05]
-                      lg:text-6xl
-                      xl:text-7xl
+                      sm:text-5xl
+                      md:text-6xl
+                      lg:text-7xl
                     "
                   >
                     {slide.title}
@@ -224,14 +212,11 @@ export default function Hero() {
                   {/* Description */}
                   <p
                     className="
-                      mt-5
+                      mt-7
                       max-w-2xl
-                      text-sm
-                      leading-7
+                      text-base
+                      leading-8
                       text-white/90
-                      sm:mt-7
-                      sm:text-base
-                      sm:leading-8
                       md:text-lg
                     "
                   >
@@ -242,11 +227,11 @@ export default function Hero() {
                   {/* Buttons */}
                   <div
                       className="
-                        mt-8
-                        flex w-full max-w-md
-                        flex-col gap-3
-                        sm:mt-10 sm:max-w-none sm:gap-4
-                        md:flex-row md:items-center
+                        mt-10
+                        flex flex-col
+                        gap-4
+                        sm:flex-row
+                        sm:items-center
                       "
                     >
 
@@ -254,47 +239,45 @@ export default function Hero() {
                       to={slide.primaryLink}
                       className="
                           inline-flex
-                          w-full
+                          w-full sm:w-auto
                           items-center
                           justify-center
                           gap-2
                           rounded-full
                           bg-[#BC1D26]
-                          px-6
-                          py-3.5
+                          px-6 sm:px-7
+                          py-3.5 sm:py-4
                           text-sm font-semibold
                           text-white
                           shadow-lg shadow-[#BC1D26]/30
                           transition-all duration-300
                           hover:scale-[1.03]
                           hover:bg-[#A11922]
-                          md:w-auto md:px-7 md:py-4
                         "
                     >
                       {slide.primaryBtn}
 
-                      <ArrowRight size={18} className="shrink-0" />
+                      <ArrowRight size={18} />
                     </Link>
 
                     <Link
                       to={slide.secondaryLink}
                       className="
                         inline-flex
-                        w-full
+                        w-full sm:w-auto
                         items-center
                         justify-center
                         gap-2
                         rounded-full
                         border border-white/15
                         bg-white
-                        px-6
-                        py-3.5
+                        px-6 sm:px-7
+                        py-3.5 sm:py-4
                         text-sm font-semibold
                         text-[#BC1D26]
                         backdrop-blur-md
                         transition-all duration-300
                         hover:bg-white/90
-                        md:w-auto md:px-7 md:py-4
                       "
                     >
                       {slide.secondaryBtn}
