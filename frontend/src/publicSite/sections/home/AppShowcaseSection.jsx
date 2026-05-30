@@ -1,9 +1,7 @@
-// src/components/sections/home/AppShowcaseSection.jsx
-
 import { ArrowRight, Play } from "lucide-react";
 import { Link } from "react-router-dom";
 
-import AppDemo from "../../../assets/voima_website_prototype.mp4";
+import { appShowcaseSection } from "@/data/homeData";
 
 const AppleIcon = () => (
   <svg
@@ -17,26 +15,19 @@ const AppleIcon = () => (
 );
 
 export default function AppShowcaseSection() {
+  const {
+    eyebrow,
+    title,
+    description,
+    primaryCta,
+    secondaryCta,
+    storeLinks,
+    floatingCard,
+    videoSrc,
+  } = appShowcaseSection;
+
   return (
-    <section
-      className="
-        relative overflow-hidden
-        bg-[#BC1D26]
-        px-6 py-32
-      "
-    >
-
-      {/* Glow 
-      <div
-        className="
-          absolute right-[-10%] top-0
-          h-[420px] w-[420px]
-          rounded-full
-          bg-[#BC1D26]/20
-          blur-3xl
-        "
-      />*/}
-
+    <section className="relative overflow-hidden bg-[#BC1D26] px-6 py-32">
       <div
         className="
           relative mx-auto
@@ -45,10 +36,7 @@ export default function AppShowcaseSection() {
           lg:grid-cols-2
         "
       >
-
-        {/* LEFT — CONTENT */}
         <div className="max-w-xl">
-
           <span
             className="
               text-sm font-semibold uppercase
@@ -56,7 +44,7 @@ export default function AppShowcaseSection() {
               text-[#fff]
             "
           >
-            Voima App
+            {eyebrow}
           </span>
 
           <h2
@@ -68,36 +56,14 @@ export default function AppShowcaseSection() {
               md:text-5xl
             "
           >
-            Smarter support for people
-            living with sickle cell disease.
+            {title}
           </h2>
 
-          <p
-            className="
-              mt-8
-              text-lg leading-9
-              text-white/90
-            "
-          >
-            Designed with empathy and powered by AI, the
-            Voima app combines intelligent health tracking,
-            reminders, and proactive insights to help users
-            better understand their bodies, reduce avoidable
-            crises, and feel more in control. Voima transforms
-            healthcare support into a more personal, accessible,
-            and empowering experience for patients and families.
-          </p>
+          <p className="mt-8 text-lg leading-9 text-white/90">{description}</p>
 
-          {/* CTA Buttons */}
-          <div
-            className="
-              mt-10
-              flex flex-wrap gap-4
-            "
-          >
-
+          <div className="mt-10 flex flex-wrap gap-4">
             <Link
-              to="/app"
+              to={primaryCta.link}
               className="
                 inline-flex items-center gap-2
                 rounded-full
@@ -110,12 +76,12 @@ export default function AppShowcaseSection() {
                 hover:bg-[#fff]/90
               "
             >
-              Explore The App
+              {primaryCta.text}
               <ArrowRight size={18} />
             </Link>
 
             <Link
-              to="/contact"
+              to={secondaryCta.link}
               className="
                 inline-flex items-center gap-2
                 rounded-full
@@ -129,93 +95,53 @@ export default function AppShowcaseSection() {
                 hover:bg-white/10
               "
             >
-              Learn More
+              {secondaryCta.text}
             </Link>
-
           </div>
 
-          {/* Download Buttons */}
-          <div
-            className="
-              mt-8
-              flex flex-wrap gap-5
-            "
-          >
-
-            <Link
-              to="/"
-              className="
-                inline-flex items-center gap-3
-                rounded-5xl
-                bg-white
-                px-6 py-4
-                font-medium text-black
-                transition-all duration-300
-                hover:scale-[1.03]
-              "
-            >
-              <AppleIcon />
-              App Store
-            </Link>
-
-            <Link
-              to="/"
-              className="
-                inline-flex items-center gap-3
-                rounded-5xl
-                border border-white/10
-                bg-white/5
-                px-6 py-4
-                font-medium text-white
-                backdrop-blur-md
-                transition-all duration-300
-                hover:bg-white/10
-              "
-            >
-              <Play size={18} />
-              Google Play
-            </Link>
-
+          <div className="mt-8 flex flex-wrap gap-5">
+            {storeLinks.map((store) => (
+              <Link
+                key={store.label}
+                to={store.link}
+                className={
+                  store.variant === "light"
+                    ? `
+                      inline-flex items-center gap-3
+                      rounded-5xl
+                      bg-white
+                      px-6 py-4
+                      font-medium text-black
+                      transition-all duration-300
+                      hover:scale-[1.03]
+                    `
+                    : `
+                      inline-flex items-center gap-3
+                      rounded-5xl
+                      border border-white/10
+                      bg-white/5
+                      px-6 py-4
+                      font-medium text-white
+                      backdrop-blur-md
+                      transition-all duration-300
+                      hover:bg-white/10
+                    `
+                }
+              >
+                {store.variant === "light" ? <AppleIcon /> : <Play size={18} />}
+                {store.label}
+              </Link>
+            ))}
           </div>
-
         </div>
 
-        {/* RIGHT — PHONE MOCKUP */}
-        <div className="relative flex justify-center items-center">
-
-          {/* Rings */}
-          <div className="absolute inset-0 flex items-center justify-center z-0">
-
-            <div
-              className="
-                absolute
-                h-[520px] w-[520px]
-                rounded-full
-                border border-white/40
-              "
-            />
-
-            <div
-              className="
-                absolute
-                h-[420px] w-[420px]
-                rounded-full
-                border border-white/40
-              "
-            />
-
-            <div
-              className="
-                absolute
-                h-[320px] w-[320px]
-                rounded-full
-                border border-white/40
-              "
-            />
-
+        <div className="relative flex items-center justify-center">
+          <div className="absolute inset-0 z-0 flex items-center justify-center">
+            <div className="absolute h-[520px] w-[520px] rounded-full border border-white/40" />
+            <div className="absolute h-[420px] w-[420px] rounded-full border border-white/40" />
+            <div className="absolute h-[320px] w-[320px] rounded-full border border-white/40" />
           </div>
 
-          {/* Phone */}
           <div
             className="
               relative z-10
@@ -227,8 +153,6 @@ export default function AppShowcaseSection() {
               bg-black
             "
           >
-
-            {/* Notch */}
             <div
               className="
                 absolute left-1/2 top-3
@@ -238,26 +162,11 @@ export default function AppShowcaseSection() {
               "
             />
 
-            {/* Video */}
-            <video
-              autoPlay
-              muted
-              loop
-              playsInline
-              className="
-                h-full w-full
-                object-cover
-              "
-            >
-              <source
-                src={AppDemo}
-                type="video/mp4"
-              />
+            <video autoPlay muted loop playsInline className="h-full w-full object-cover">
+              <source src={videoSrc} type="video/mp4" />
             </video>
-
           </div>
 
-          {/* Floating Card */}
           <div
             className="
               absolute -bottom-6 right-0
@@ -272,27 +181,15 @@ export default function AppShowcaseSection() {
             "
           >
             <p className="text-sm font-semibold text-[#BC1D26]">
-              AI Health Assistant
+              {floatingCard.title}
             </p>
 
-            <p
-              className="
-                mt-2
-                text-sm leading-7
-                text-[#BC1D26]/70
-              "
-            >
-              Smart symptom tracking,
-              reminders, crisis prevention,
-              and personalized support.
+            <p className="mt-2 text-sm leading-7 text-[#BC1D26]/70">
+              {floatingCard.description}
             </p>
           </div>
-
-
         </div>
-
       </div>
-
     </section>
   );
 }

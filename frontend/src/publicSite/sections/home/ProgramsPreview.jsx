@@ -1,36 +1,9 @@
-// src/components/sections/home/ProgramsPreview.jsx
+import { ArrowRight } from "lucide-react";
 
-import {
-  HeartPulse,
-  BrainCircuit,
-  Users,
-  ArrowRight,
-} from "lucide-react";
-
-const programs = [
-  {
-    title: "SCD Awareness Campaigns",
-    description:
-      "Educating communities about sickle cell disease, early detection, stigma reduction, and preventive healthcare.",
-    icon: HeartPulse,
-  },
-
-  {
-    title: "AI Health Support Tools",
-    description:
-      "Building intelligent digital tools that help individuals manage symptoms, monitor triggers, and access support earlier.",
-    icon: BrainCircuit,
-  },
-
-  {
-    title: "Community & Patient Support",
-    description:
-      "Creating support systems for patients, caregivers, and families through advocacy, outreach, and partnerships.",
-    icon: Users,
-  },
-];
+import { programsPreviewSection } from "@/data/homeData";
 
 export default function ProgramsPreview() {
+  const { eyebrow, title, description, programs } = programsPreviewSection;
   return (
     <section
       className="
@@ -71,7 +44,7 @@ export default function ProgramsPreview() {
                 text-[#F47B3A]
               "
             >
-              Our Programs
+              {eyebrow}
             </span>
 
             <h2
@@ -83,9 +56,7 @@ export default function ProgramsPreview() {
                 md:text-5xl
               "
             >
-              Initiatives designed to improve
-              healthcare access, awareness,
-              and long-term community support.
+              {title}
             </h2>
 
           </div>
@@ -97,12 +68,7 @@ export default function ProgramsPreview() {
               text-black/65
             "
           >
-            Through advocacy, education,
-            technology, and partnerships,
-            Voima Initiative is creating
-            sustainable healthcare solutions
-            for individuals living with
-            sickle cell disease.
+            {description}
           </p>
 
         </div>

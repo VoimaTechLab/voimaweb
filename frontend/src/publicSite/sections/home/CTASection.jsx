@@ -1,35 +1,14 @@
-// src/components/sections/home/CTASection.jsx
-
-import {
-  ArrowRight,
-  HeartHandshake,
-} from "lucide-react";
+import { ArrowRight, HeartHandshake } from "lucide-react";
 import { Link } from "react-router-dom";
 
+import { ctaSection } from "@/data/homeData";
+
 export default function CTASection() {
+  const { title, description, primaryCta, secondaryCta } = ctaSection;
+
   return (
-    <section
-      className="
-        relative overflow-hidden
-        bg-[#ffffff]
-        px-6 py-32
-        text-white
-      "
-    >
-
-      {/* Background Glow 
-      <div
-        className="
-          absolute left-[-10%] top-[-20%]
-          h-[350px] w-[350px]
-          rounded-full
-          bg-[#fff]/10
-          blur-3xl
-        "
-      />*/}
-
-      <div className="relative mx-auto max-w-6xl mt-1">
-
+    <section className="relative overflow-hidden bg-[#ffffff] px-6 py-32 text-white">
+      <div className="relative mx-auto mt-1 max-w-6xl">
         <div
           className="
             relative overflow-hidden
@@ -42,8 +21,6 @@ export default function CTASection() {
             md:px-16 md:py-20
           "
         >
-
-          {/* Inner Glow */}
           <div
             className="
               absolute right-[-10%] top-[-20%]
@@ -54,7 +31,6 @@ export default function CTASection() {
             "
           />
 
-          {/* Icon */}
           <div
             className="
               mx-auto flex h-20 w-20
@@ -67,7 +43,6 @@ export default function CTASection() {
             <HeartHandshake size={38} />
           </div>
 
-          {/* Heading */}
           <h2
             className="
               mx-auto mt-10
@@ -78,13 +53,9 @@ export default function CTASection() {
               md:text-6xl
             "
           >
-            Join us in building a future
-            where healthcare support is
-            proactive, accessible,
-            and life-changing.
+            {title}
           </h2>
 
-          {/* Paragraph */}
           <p
             className="
               mx-auto mt-8
@@ -93,26 +64,12 @@ export default function CTASection() {
               text-white/70
             "
           >
-            Through technology, advocacy,
-            education, and community action,
-            Voima Initiative is creating
-            innovative healthcare solutions
-            that empower individuals living
-            with sickle cell disease and
-            other chronic conditions.
+            {description}
           </p>
 
-          {/* CTA Buttons */}
-          <div
-            className="
-              mt-12
-              flex flex-wrap
-              justify-center gap-5
-            "
-          >
-
+          <div className="mt-12 flex flex-wrap justify-center gap-5">
             <Link
-              to="/get-involved"
+              to={primaryCta.link}
               className="
                 inline-flex items-center gap-3
                 rounded-full
@@ -124,12 +81,12 @@ export default function CTASection() {
                 hover:scale-[1.03]
               "
             >
-              Get Involved
+              {primaryCta.text}
               <ArrowRight size={18} />
             </Link>
 
             <Link
-              to="/donate"
+              to={secondaryCta.link}
               className="
                 inline-flex items-center
                 rounded-full
@@ -142,13 +99,10 @@ export default function CTASection() {
                 hover:bg-white/10
               "
             >
-              Support Our Mission
+              {secondaryCta.text}
             </Link>
-
           </div>
-
         </div>
-
       </div>
     </section>
   );

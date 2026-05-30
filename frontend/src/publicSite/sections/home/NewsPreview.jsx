@@ -1,40 +1,10 @@
-// src/components/sections/home/NewsPreview.jsx
-
-import {
-    ArrowRight,
-    CalendarDays,
-} from "lucide-react";
+import { ArrowRight, CalendarDays } from "lucide-react";
 import { Link } from "react-router-dom";
 
-import { default as NewsImage01, default as NewsImage02, default as NewsImage03 } from "../../../assets/Web_red.jpg";
-
-const news = [
-  {
-    title: "Voima Launches AI-Powered SCD Support Initiative",
-    date: "May 18, 2026",
-    image: NewsImage01 ,
-    description:
-      "Voima Initiative introduces intelligent healthcare support tools designed to help individuals living with sickle cell disease manage symptoms proactively.",
-  },
-
-  {
-    title: "Community Outreach Program Reaches Hundreds",
-    date: "April 30, 2026",
-    image: NewsImage02 ,
-    description:
-      "Healthcare education and awareness campaigns continue expanding access to information and support across underserved communities.",
-  },
-
-  {
-    title: "Youth Leaders Join Healthcare Innovation Summit",
-    date: "April 12, 2026",
-    image: NewsImage03 ,
-    description:
-      "Young innovators, advocates, and healthcare professionals gathered to discuss technology-driven healthcare solutions for chronic conditions.",
-  },
-];
+import { newsPreviewSection } from "@/data/homeData";
 
 export default function NewsPreview() {
+  const { eyebrow, title, description, articles, banner } = newsPreviewSection;
   return (
     <section
       className="
@@ -75,7 +45,7 @@ export default function NewsPreview() {
                 text-[#F47B3A]
               "
             >
-              Latest News
+              {eyebrow}
             </span>
 
             <h2
@@ -87,9 +57,7 @@ export default function NewsPreview() {
                 md:text-5xl
               "
             >
-              Stories, innovations,
-              and updates from
-              our community.
+              {title}
             </h2>
 
           </div>
@@ -101,10 +69,7 @@ export default function NewsPreview() {
               text-black/65
             "
           >
-            Stay updated with the latest
-            initiatives, healthcare innovation,
-            outreach programs, and impact stories
-            from Voima Initiative.
+            {description}
           </p>
 
         </div>
@@ -118,7 +83,7 @@ export default function NewsPreview() {
             lg:grid-cols-3
           "
         >
-          {news.map((article, index) => (
+          {articles.map((article, index) => (
             <div
               key={index}
               className="
@@ -239,9 +204,7 @@ export default function NewsPreview() {
                 md:text-5xl
               "
             >
-              Sharing stories that inspire
-              awareness, innovation,
-              and meaningful action.
+              {banner.title}
             </h3>
 
             <p
@@ -252,14 +215,11 @@ export default function NewsPreview() {
                 text-white/70
               "
             >
-              Explore the latest updates,
-              healthcare insights, community
-              initiatives, and stories driving
-              change through Voima Initiative.
+              {banner.description}
             </p>
 
             <Link
-              to="/news"
+              to={banner.cta.link}
               className="
                 mt-10 inline-flex
                 items-center justify-center
@@ -272,7 +232,7 @@ export default function NewsPreview() {
                 hover:scale-[1.03]
               "
             >
-              Explore All News
+              {banner.cta.text}
             </Link>
 
           </div>
