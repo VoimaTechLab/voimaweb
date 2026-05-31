@@ -1,15 +1,15 @@
 import {
-    fadeUp,
-    pageTransition,
-    stagger,
+  fadeUp,
+  pageTransition,
+  stagger,
 } from "@/publicSite/motion/variants";
 import { motion } from "framer-motion";
 
 import {
-    ArrowRight,
-    Calendar,
-    Clock3,
-    Tag,
+  ArrowRight,
+  Calendar,
+  Clock3,
+  Tag,
 } from "lucide-react";
 
 import { Link } from "react-router-dom";
@@ -169,7 +169,7 @@ export default function blog() {
               variants={fadeUp}
               className="text-sm font-semibold uppercase tracking-[0.2em] text-[#F47B3A]"
             >
-              blog & Updates
+              Blog & Updates
             </motion.p>
 
             <motion.h1

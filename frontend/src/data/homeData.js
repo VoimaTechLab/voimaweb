@@ -1,11 +1,10 @@
 import HeroImage from "@/assets/content/app/hero-app.jpg";
 import InnovationImage from "@/assets/content/app/innovation.jpg";
 import JourneyStoryImage from "@/assets/content/journey/story.jpg";
-import StoryImage from "@/assets/ourStory.jpg";
 import SdgBackgroundImage from "@/assets/ourImpact.png";
-import NewsImage from "@/assets/Web_red.jpg";
-import AppDemoVideo from "@/assets/voima_website_prototype.mp4";
-import ImpactVideo from "@/assets/voima_website_prototype.mp4";
+import StoryImage from "@/assets/ourStory.jpg";
+import { default as AppDemoVideo, default as ImpactVideo } from "@/assets/voima_website_prototype.mp4";
+import BlogImage from "@/assets/Web_red.jpg";
 import {
   BookOpenText,
   Brain,
@@ -305,7 +304,7 @@ export const eventsPreviewSection = {
 };
 
 export const newsPreviewSection = {
-  eyebrow: "Latest News",
+  eyebrow: "Latest Blog",
   title: "Stories, innovations, and updates from our community.",
   description:
     "Stay updated with the latest initiatives, healthcare innovation, outreach programs, and impact stories from Voima Initiative.",
@@ -313,21 +312,21 @@ export const newsPreviewSection = {
     {
       title: "Voima Launches AI-Powered SCD Support Initiative",
       date: "May 18, 2026",
-      image: NewsImage,
+      image: BlogImage,
       description:
         "Voima Initiative introduces intelligent healthcare support tools designed to help individuals living with sickle cell disease manage symptoms proactively.",
     },
     {
       title: "Community Outreach Program Reaches Hundreds",
       date: "April 30, 2026",
-      image: NewsImage,
+      image: BlogImage,
       description:
         "Healthcare education and awareness campaigns continue expanding access to information and support across underserved communities.",
     },
     {
       title: "Youth Leaders Join Healthcare Innovation Summit",
       date: "April 12, 2026",
-      image: NewsImage,
+      image: BlogImage,
       description:
         "Young innovators, advocates, and healthcare professionals gathered to discuss technology-driven healthcare solutions for chronic conditions.",
     },
@@ -338,8 +337,8 @@ export const newsPreviewSection = {
     description:
       "Explore the latest updates, healthcare insights, community initiatives, and stories driving change through Voima Initiative.",
     cta: {
-      text: "Explore All News",
-      link: "/news",
+      text: "Explore All Blog",
+      link: "/blog",
     },
   },
 };

@@ -26,6 +26,7 @@ const Donate = lazy(() => import("../pages/Donate"));
 const Contact = lazy(() => import("../pages/Contact"));
 
 const OurJourney = lazy(() => import("../pages/OurJourney"));
+const OurJourneyStory = lazy(() => import("../pages/OurJourneyStory"));
 const VoimaApp = lazy(() => import("../pages/VoimaApp"));
 
 const NotFound = lazy(() => import("../pages/NotFound"));
@@ -81,7 +82,7 @@ export default function AppRoutes() {
 
           {/* OUR JOURNEY */}
           <Route path="our-journey" element={<OurJourney />} />
-          <Route path="our-journey/:slug" element={<OurJourney />} />
+          <Route path="our-journey/:slug" element={<OurJourneyStory />} />
 
           {/* VOIMA APP */}
           <Route path="voima-app" element={<VoimaApp />} />

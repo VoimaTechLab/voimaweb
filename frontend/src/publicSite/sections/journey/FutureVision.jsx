@@ -13,7 +13,7 @@ export default function FutureVision() {
           text-white
         "
       >
-        <h2 className="max-w-3xl text-6xl font-bold">
+        <h2 className="max-w-3xl text-6xl font-bold text-white">
           The journey continues.
         </h2>
 
@@ -26,14 +26,14 @@ export default function FutureVision() {
         <div className="mt-12 flex gap-4">
           <Link
             to="/get-involved"
-            className="rounded-full bg-white px-7 py-4 font-semibold text-[#BC1D26]"
+            className="rounded-full bg-white px-7 py-4 font-semibold text-[#BC1D26] hover:scale-[1.02] duration-300 transition-all"
           >
             Join Our Mission
           </Link>
 
           <Link
-            to="/partner-with-us"
-            className="rounded-full border border-white/20 px-7 py-4 font-semibold"
+            to="/get-involved#partner"
+            className="rounded-full border border-white/20 px-7 py-4 font-semibold hover:bg-white/10  transition-all duration-300"
           >
             Become A Partner
           </Link>

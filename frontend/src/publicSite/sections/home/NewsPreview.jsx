@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import { newsPreviewSection } from "@/data/homeData";
 
-export default function NewsPreview() {
+export default function BlogPreview() {
   const { eyebrow, title, description, articles, banner } = newsPreviewSection;
   return (
     <section
@@ -74,7 +74,7 @@ export default function NewsPreview() {
 
         </div>
 
-        {/* News Grid */}
+        {/* Blog Grid */}
         <div
           className="
             mt-20
@@ -151,7 +151,7 @@ export default function NewsPreview() {
 
                 {/* Link */}
                 <Link
-                  to="/news"
+                  to="/blog"
                   className="
                     mt-8 inline-flex
                     items-center gap-2
