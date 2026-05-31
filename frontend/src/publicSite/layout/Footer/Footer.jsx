@@ -189,7 +189,7 @@ function Footer() {
               "About",
               "Journey",
               "Events",
-              "News",
+              "Blog",
               "Contact",
             ].map((item, index) => (
               <li key={index}>
@@ -224,9 +224,9 @@ function Footer() {
 
           <ul className="mt-6 space-y-4">
             {[
-              "AI Healthcare",
-              "Education Initiatives",
-              "Community Programs",
+              "Voima App",
+              "Voima Community",
+              "Healthcare Talks",
               "Youth Empowerment",
               "Sustainability",
             ].map((item, index) => (
@@ -305,7 +305,7 @@ function Footer() {
 
           </div>
 
-          {/* Newsletter */}
+          {/* Blog */}
           <div className="mt-10">
 
             <p

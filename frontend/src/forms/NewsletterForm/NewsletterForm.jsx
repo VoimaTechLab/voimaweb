@@ -1,15 +1,15 @@
-// src/forms/NewsletterForm/NewsletterForm.jsx
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
-import { useState } from 'react';
+// src/forms/BlogletterForm/BlogletterForm.jsx
 import { newsletterService } from '@/services/newsletter.service';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
  
 const schema = z.object({
   email: z.string().email('Please enter a valid email address'),
 });
  
-export function NewsletterForm() {
+export function BlogletterForm() {
   const [status, setStatus] = useState('idle'); // idle | loading | success | error
  
   const {

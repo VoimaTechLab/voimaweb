@@ -1,6 +1,7 @@
 // src/publicSite/data/journeyData.js
 
-import { default as Journey1, default as Journey2, default as Journey3, default as Journey4 } from "@/assets/journey/journey-1.jpg";
+import { default as Journey1, default as Journey3, default as Journey4 } from "@/assets/journey/journey-1.jpg";
+import Journey2 from "@/assets/journey/voima_website_prototype_01.mp4";
 
 export const heroData = {
   eyebrow: "Our Journey",
@@ -12,31 +13,137 @@ export const heroData = {
 export const milestones = [
   {
     year: "2021",
+    slug: "foundation-year",
     title: "The Beginning",
     description:
       "Voima Initiative was founded with a vision of improving healthcare awareness, advocacy, and community support.",
-    image: Journey1,
+
+    media: {
+      type: "image",
+      src: Journey1,
+    },
+
+    story: {
+      content: [
+        "Voima Initiative was established to bridge the gap between healthcare awareness and community action.",
+        "Early outreach focused on local health seminars and volunteer-led screenings.",
+        "This foundation year laid the groundwork for the impact that would follow."
+      ],
+
+      highlights: [
+        "Organization established",
+        "Initial volunteer recruitment",
+        "Community engagement launched"
+      ]
+    }
   },
+
   {
     year: "2022",
-    title: "Community Outreach",
+    slug: "awareness-campaign",
+    title: "Growing Awareness",
     description:
-      "Our first outreach programs connected us with students, families, and healthcare advocates.",
-    image: Journey2,
+      "A nationwide campaign helped Voima raise awareness on preventive healthcare and connect with new communities.",
+
+    media: {
+      type: "video",
+      src: Journey2,
+    },
+
+    story: {
+      content: [
+        "In 2022, Voima launched its first large-scale health awareness campaign.",
+        "Workshops and school sessions reached families and young adults across the region.",
+        "Partnerships with local clinics strengthened community trust and access to care."
+      ],
+
+      highlights: [
+        "Countrywide campaign",
+        "School and community workshops",
+        "Clinic partnerships formed"
+      ]
+    }
   },
+
   {
     year: "2023",
-    title: "Partnerships & Growth",
+    slug: "volunteer-network",
+    title: "Building Community",
     description:
-      "We expanded collaborations with volunteers, organizations, and institutions.",
-    image: Journey3,
+      "Volunteer networks expanded and new training programs empowered community leaders to drive health education.",
+
+    media: {
+      type: "image",
+      src: Journey3,
+    },
+
+    story: {
+      content: [
+        "The volunteer network grew to include regional ambassadors and community health advocates.",
+        "Training sessions gave volunteers tools to deliver effective education and support.",
+        "Community feedback helped refine programs and tailor them to local needs."
+      ],
+
+      highlights: [
+        "Regional volunteer chapters",
+        "Training curriculum launched",
+        "Community-led initiatives"
+      ]
+    }
   },
+
   {
     year: "2024",
-    title: "Technology & Innovation",
+    slug: "strategic-partnerships",
+    title: "Stronger Together",
     description:
-      "The development of the Voima digital ecosystem began, bringing healthcare support closer to communities.",
-    image: Journey4,
+      "Voima partnered with healthcare providers and organizations to improve access to preventive services.",
+
+    media: {
+      type: "image",
+      src: Journey4,
+    },
+
+    story: {
+      content: [
+        "Strategic partnerships brought new resources to Voima programs.",
+        "Collaborative projects improved access to screenings and health education.",
+        "Shared expertise helped scale our work sustainably."
+      ],
+
+      highlights: [
+        "Healthcare partnerships",
+        "Shared resources",
+        "Expanded preventive services"
+      ]
+    }
+  },
+
+  {
+    year: "2025",
+    slug: "future-focus",
+    title: "Future Forward",
+    description:
+      "The latest phase focuses on digital health education and sustainable regional support for long-term impact.",
+
+    media: {
+      type: "image",
+      src: Journey1,
+    },
+
+    story: {
+      content: [
+        "The most recent stage emphasizes digital outreach and virtual health education.",
+        "New programs are designed to support communities with sustainable, long-term healthcare resources.",
+        "The journey continues with renewed energy, innovation, and community-led progress."
+      ],
+
+      highlights: [
+        "Digital health launch",
+        "Sustainable programming",
+        "Regional support expansion"
+      ]
+    }
   },
 ];
 
@@ -47,22 +154,33 @@ export const stats = [
   { value: "5", label: "Regions" },
 ];
 
-export const stories = [
+export const testimonials = [
   {
     quote:
-      "Meeting students who had never received sickle cell awareness training showed us how important education really is.",
-    author: "Volunteer",
+      "Voima helped me understand the importance of preventive healthcare.",
+
+    name: "Ama Serwaa",
+
+    role: "Program Participant"
   },
+
   {
     quote:
-      "The outreach program changed how I understand preventive healthcare and community wellbeing.",
-    author: "Participant",
+      "Being part of the outreach program inspired me to give back to my community.",
+
+    name: "Kwame Mensah",
+
+    role: "Volunteer"
   },
+
   {
     quote:
-      "Being part of Voima gave me an opportunity to contribute to something meaningful.",
-    author: "Community Member",
-  },
+      "The awareness sessions changed how I approach health education.",
+
+    name: "University Student",
+
+    role: "Participant"
+  }
 ];
 
 export const gallery = [

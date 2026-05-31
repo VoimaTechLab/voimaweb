@@ -7,9 +7,9 @@ export const ENDPOINTS = {
   // Contact
   CONTACT_SUBMIT: '/contact',
 
-  // News
-  NEWS_LIST:    '/news',
-  NEWS_DETAIL:  (slug) => `/news/${slug}`,
+  // blog
+  NEWS_LIST:    '/blog',
+  NEWS_DETAIL:  (slug) => `/blog/${slug}`,
 
   // Events
   EVENTS_LIST:   '/events',

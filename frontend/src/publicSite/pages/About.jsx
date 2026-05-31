@@ -4,7 +4,6 @@ import { pageTransition } from "@/publicSite/motion/variants"
 import { motion } from "framer-motion"
 
 import AboutHero from "@/publicSite/sections/about/AboutHero"
-import AppSection from "@/publicSite/sections/about/AppSection"
 import GalleryCTA from "@/publicSite/sections/about/GalleryCTA"
 import MissionVision from "@/publicSite/sections/about/MissionVision"
 import StorySection from "@/publicSite/sections/about/StorySection"
@@ -28,8 +27,6 @@ export default function About() {
       <TeamSection />
 
       <GalleryCTA />
-
-      <AppSection />
     </motion.main>
   )
 }
