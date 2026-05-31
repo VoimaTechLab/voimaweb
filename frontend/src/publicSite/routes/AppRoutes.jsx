@@ -9,8 +9,8 @@ import MainLayout from "../layout/MainLayout";
 const Home = lazy(() => import("../pages/Home"));
 const About = lazy(() => import("../pages/About"));
 
-const News = lazy(() => import("../pages/News"));
-const NewsArticle = lazy(() => import("../pages/NewsArticle"));
+const Blog = lazy(() => import("../pages/Blog"));
+const BlogDetail = lazy(() => import("../pages/BlogDetail"));
 
 const Events = lazy(() => import("../pages/Events"));
 const EventDetail = lazy(() => import("../pages/EventDetail"));
@@ -47,9 +47,9 @@ export default function AppRoutes() {
           <Route path="events" element={<Events />} />
           <Route path="events/:slug" element={<EventDetail />} />
 
-          {/* NEWS */}
-          <Route path="news" element={<News />} />
-          <Route path="news/:slug" element={<NewsArticle />} />
+          {/* BLOG */}
+          <Route path="blog" element={<Blog />} />
+          <Route path="blog/:slug" element={<BlogDetail />} />
 
           {/* GET INVOLVED */}
           <Route path="get-involved" element={<GetInvolved />} />
@@ -81,6 +81,7 @@ export default function AppRoutes() {
 
           {/* OUR JOURNEY */}
           <Route path="our-journey" element={<OurJourney />} />
+          <Route path="our-journey/:slug" element={<OurJourney />} />
 
           {/* VOIMA APP */}
           <Route path="voima-app" element={<VoimaApp />} />

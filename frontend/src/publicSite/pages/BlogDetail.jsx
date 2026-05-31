@@ -1,4 +1,4 @@
-// src/pages/NewsArticle.jsx
+// src/pages/BlogDetail.jsx
 
 import { useParams } from "react-router-dom";
 
@@ -7,7 +7,7 @@ function NewsArticle() {
 
   return (
     <section className="min-h-screen flex flex-col items-center justify-center">
-      <h1 className="text-5xl font-bold">News Article</h1>
+      <h1 className="text-5xl font-bold">blog Article</h1>
 
       <p className="mt-4 text-lg opacity-70">
         Slug: {slug}
