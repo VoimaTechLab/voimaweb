@@ -146,7 +146,7 @@ function categoryStyles(category) {
   );
 }
 
-export default function News() {
+export default function blog() {
   return (
     <motion.main
       {...pageTransition}
@@ -169,7 +169,7 @@ export default function News() {
               variants={fadeUp}
               className="text-sm font-semibold uppercase tracking-[0.2em] text-[#F47B3A]"
             >
-              News & Updates
+              blog & Updates
             </motion.p>
 
             <motion.h1
@@ -199,7 +199,7 @@ export default function News() {
         <div className="mx-auto max-w-7xl">
           
           <Link
-            to={`/news/${featuredArticle.slug}`}
+            to={`/blog/${featuredArticle.slug}`}
             className="
               group grid overflow-hidden
               rounded-[42px]
@@ -326,7 +326,7 @@ export default function News() {
               variants={fadeUp}
             >
               <Link
-                to={`/news/${article.slug}`}
+                to={`/blog/${article.slug}`}
                 className="
                   group flex h-full flex-col
                   overflow-hidden rounded-[34px]
