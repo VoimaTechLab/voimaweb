@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { X } from 'lucide-react';
-import { NavLink } from 'react-router-dom';
 import { useEffect } from 'react';
+import { NavLink } from 'react-router-dom';
  
 const menuVariants = {
   hidden:  { x: '100%' },

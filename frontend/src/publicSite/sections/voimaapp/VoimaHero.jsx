@@ -25,14 +25,14 @@ export default function VoimaHero() {
           <div className="mt-10 flex flex-wrap gap-4">
             <Link
               to={heroData.primaryCTA.link}
-              className="rounded-full bg-[#BC1D26] px-7 py-4 font-semibold text-white"
+              className="rounded-full bg-[#BC1D26] px-7 py-4 font-semibold text-white hover:scale-[1.02] duration-300 transition-all"
             >
               {heroData.primaryCTA.text}
             </Link>
 
             <Link
               to={heroData.secondaryCTA.link}
-              className="rounded-full border border-black/10 px-7 py-4 font-semibold"
+              className="rounded-full border border-black/10 px-7 py-4 font-semibold text-[#BC1D26]"
             >
               {heroData.secondaryCTA.text}
             </Link>
