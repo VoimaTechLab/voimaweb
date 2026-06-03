@@ -1,0 +1,75 @@
+import { features } from "@/publicSite/data/voimaAppData";
+import { useParams } from "react-router-dom";
+
+export default function VoimaAppFeature() {
+  const { slug } = useParams();
+
+  const feature = features.find(
+    item => item.slug === slug
+  );
+
+  if (!feature) {
+    return (
+      <div className="py-40 text-center">
+        Feature not found.
+      </div>
+    );
+  }
+
+  return (
+    <main className="pt-[90px]">
+      <section className="px-6 py-24">
+        <div className="mx-auto max-w-5xl">
+
+          <h1 className="text-6xl font-bold text-[#BC1D26]">
+            {feature.title}
+          </h1>
+
+          <p className="mt-8 text-xl text-black/65">
+            {feature.description}
+          </p>
+
+          {feature.heroImage && (
+            <img
+              src={feature.heroImage}
+              alt={feature.title}
+              className="
+                mt-12
+                h-[500px]
+                w-full
+                rounded-[40px]
+                object-cover
+              "
+            />
+          )}
+
+          <div className="mt-16 space-y-8">
+            {feature.content?.map((paragraph, index) => (
+              <p
+                key={index}
+                className="text-lg leading-9 text-black/70"
+              >
+                {paragraph}
+              </p>
+            ))}
+          </div>
+
+          <div className="mt-16 rounded-[32px] bg-[#fafafa] p-10">
+            <h2 className="text-2xl font-bold text-[#BC1D26]">
+              Key Benefits
+            </h2>
+
+            <ul className="mt-8 space-y-4">
+              {feature.highlights?.map((item, index) => (
+                <li key={index}>
+                  • {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+        </div>
+      </section>
+    </main>
+  );
+}
