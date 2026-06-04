@@ -1,11 +1,19 @@
-// src/pages/Events.jsx
+import { pageTransition } from "@/publicSite/motion/variants";
+import { motion } from "framer-motion";
 
-function Events() {
+import EventsGrid from "@/publicSite/sections/events/EventsGrid";
+import EventsHero from "@/publicSite/sections/events/EventsHero";
+import FeaturedEvent from "@/publicSite/sections/events/FeaturedEvent";
+
+export default function Events() {
   return (
-    <section className="min-h-screen flex items-center justify-center">
-      <h1 className="text-5xl font-bold">Events Page</h1>
-    </section>
+    <motion.main
+      {...pageTransition}
+      className="overflow-hidden pt-[90px]"
+    >
+      <EventsHero />
+      <FeaturedEvent />
+      <EventsGrid />
+    </motion.main>
   );
 }
-
-export default Events;
