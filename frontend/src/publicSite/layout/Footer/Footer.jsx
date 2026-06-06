@@ -6,6 +6,73 @@ import {
   Phone,
 } from "lucide-react";
 
+import { Link } from "react-router-dom";
+
+const navigationLinks = [
+  {
+    label: "Home",
+    path: "/",
+  },
+
+  {
+    label: "About",
+    path: "/about",
+  },
+
+  {
+    label: "Journey",
+    path: "/our-journey",
+  },
+
+  {
+    label: "Events",
+    path: "/events",
+  },
+
+  {
+    label: "Blog",
+    path: "/blog",
+  },
+
+  {
+    label: "Contact",
+    path: "/contact",
+  },
+];
+
+const programLinks = [
+  {
+    label: "Voima App",
+    path: "/voima-app",
+  },
+
+  {
+    label: "Careers",
+    path: "/careers",
+  },
+
+  {
+    label: "Donate",
+    path: "/donate",
+  },
+
+  {
+    label: "Community",
+    path: "/blog",
+  },
+
+  {
+    label: "Partner With Us",
+    path: "/get-involved",
+  },
+];
+
+const socials = {
+  facebook: "https://facebook.com/voimainitiative",
+  instagram: "https://instagram.com/voimainitiative",
+  linkedin: "https://linkedin.com/company/voimainitiative",
+};
+
 function Footer() {
   return (
     <footer
@@ -102,7 +169,9 @@ function Footer() {
 
             {/* Facebook */}
             <a
-              href="/"
+              href={socials.facebook}
+              target="_blank"
+              rel="noopener noreferrer"
               className="
                 flex h-12 w-12
                 items-center justify-center
@@ -127,7 +196,9 @@ function Footer() {
 
             {/* Instagram */}
             <a
-              href="/"
+              href={socials.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
               className="
                 flex h-12 w-12
                 items-center justify-center
@@ -152,7 +223,9 @@ function Footer() {
 
             {/* LinkedIn */}
             <a
-              href="/"
+              href={socials.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
               className="
                 flex h-12 w-12
                 items-center justify-center
@@ -185,24 +258,17 @@ function Footer() {
           </h3>
 
           <ul className="mt-6 space-y-4">
-            {[
-              "Home",
-              "About",
-              "Journey",
-              "Events",
-              "Blog",
-              "Contact",
-            ].map((item, index) => (
-              <li key={index}>
-                <a
-                  href="/"
+            {navigationLinks.map((item) => (
+              <li key={item.label}>
+                <Link
+                  to={item.path}
                   className="
                     group inline-flex items-center
                     gap-2 text-white/70
                     transition hover:text-white
                   "
                 >
-                  {item}
+                  {item.label}
 
                   <ArrowUpRight
                     size={14}
@@ -211,7 +277,7 @@ function Footer() {
                       group-hover:opacity-100
                     "
                   />
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
@@ -224,23 +290,18 @@ function Footer() {
           </h3>
 
           <ul className="mt-6 space-y-4">
-            {[
-              "Voima App",
-              "Voima Community",
-              "Healthcare Talks",
-              "Youth Empowerment",
-              "Sustainability",
-            ].map((item, index) => (
-              <li key={index}>
-                <a
-                  href="/"
+            {programLinks.map((item) => (
+              <li key={item.label}>
+                <Link
+                  to={item.path}
                   className="
                     text-white/70
-                    transition hover:text-white
+                    transition
+                    hover:text-white
                   "
                 >
-                  {item}
-                </a>
+                  {item.label}
+                </Link>
               </li>
             ))}
           </ul>
@@ -300,7 +361,16 @@ function Footer() {
               />
 
               <p className="leading-7 text-white/75">
-                +233 00 000 0000
+                <a
+                  href="tel:+233000000000"
+                  className="
+                    text-white/75
+                    transition
+                    hover:text-white
+                  "
+                >
+                  +233 00 000 0000
+                </a>
               </p>
             </div>
 
@@ -347,26 +417,26 @@ function Footer() {
 
           <div className="flex flex-wrap items-center gap-6">
 
-            <a
-              href="/"
+            <Link
+              href="/privacy-policy"
               className="transition hover:text-white"
             >
               Privacy Policy
-            </a>
+            </Link>
 
-            <a
-              href="/"
+            <Link
+              href="/terms-of-service"
               className="transition hover:text-white"
             >
               Terms of Service
-            </a>
+            </Link>
 
-            <a
-              href="/"
+            <Link
+              href="/acessibility"
               className="transition hover:text-white"
             >
               Accessibility
-            </a>
+            </Link>
 
           </div>
 

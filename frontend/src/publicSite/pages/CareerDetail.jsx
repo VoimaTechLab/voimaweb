@@ -1,93 +1,147 @@
-// src/pages/CareerDetail.jsx
-
-import { pageTransition } from "@/publicSite/motion/variants";
-import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { jobs } from "@/publicSite/data/careersData";
+import { Link, useParams } from "react-router-dom";
 
 export default function CareerDetail() {
+  const { slug } = useParams();
+
+  const job = jobs.find(
+    (item) => item.slug === slug
+  );
+
+  if (!job) {
+    return (
+      <section className="py-40 text-center">
+        <h1 className="text-5xl font-bold text-[#BC1D26]">
+          Role Not Found
+        </h1>
+
+        <Link
+          to="/careers"
+          className="mt-8 inline-flex rounded-full bg-[#BC1D26] px-6 py-3 text-white"
+        >
+          Back To Careers
+        </Link>
+      </section>
+    );
+  }
+
   return (
-    <motion.main
-      {...pageTransition}
-      className="bg-[#fafafa] pt-[90px]"
-    >
-      <section className="px-6 py-28">
-        <div className="mx-auto max-w-4xl">
+    <main className="pt-[90px]">
 
-          <span className="rounded-full bg-[#F47B3A]/10 px-5 py-2 text-sm font-medium text-[#F47B3A]">
-            Internship
-          </span>
+      <section className="px-6 py-24">
+        <div className="mx-auto max-w-5xl">
 
-          <h1 className="mt-8 text-6xl font-bold leading-tight text-black">
-            Project Manager
-          </h1>
+          <Link
+            to="/careers"
+            className="
+              inline-flex
+              items-center
+              gap-2
+              rounded-full
+              border
+              border-black/10
+              px-5
+              py-3
+              hover:border-[#BC1D26]
+              hover:text-[#BC1D26]
+            "
+          >
+            ← Back To Careers
+          </Link>
 
-          <p className="mt-6 text-lg leading-9 text-black/65">
-            Join Voima Initiative in building modern
-            healthcare experiences that empower
-            underserved communities.
-          </p>
+          <div className="mt-12">
 
-          {/* CONTENT */}
-          <div className="mt-20 space-y-14">
+            <span className="rounded-full bg-[#BC1D26]/10 px-4 py-2 text-sm text-[#BC1D26]">
+              {job.type}
+            </span>
 
-            <div>
-              <h2 className="text-3xl font-bold text-black">
-                About The Role
-              </h2>
+            <h1 className="mt-6 text-6xl font-bold text-[#BC1D26]">
+              {job.title}
+            </h1>
 
-              <p className="mt-6 leading-9 text-black/65">
-                We are looking for an experienced Project Manager
-                passionate about driving healthcare innovation,
-                leading cross-functional teams, and delivering
-                impactful solutions to underserved communities.
-              </p>
+            <div className="mt-6 flex flex-wrap gap-3">
+
+              <span className="rounded-full bg-black/5 px-4 py-2">
+                {job.location}
+              </span>
+
+              <span className="rounded-full bg-black/5 px-4 py-2">
+                {job.department}
+              </span>
+
+              <span className="rounded-full bg-black/5 px-4 py-2">
+                {job.experience}
+              </span>
+
             </div>
 
-            <div>
-              <h2 className="text-3xl font-bold text-black">
-                Responsibilities
-              </h2>
-
-              <ul className="mt-6 space-y-4 text-black/65">
-                <li>• Lead and coordinate project initiatives</li>
-                <li>• Manage timelines and resource allocation</li>
-                <li>• Facilitate cross-functional collaboration</li>
-                <li>• Monitor project performance and deliverables</li>
-              </ul>
-            </div>
-
-            <div>
-              <h2 className="text-3xl font-bold text-black">
-                Requirements
-              </h2>
-
-              <ul className="mt-6 space-y-4 text-black/65">
-                <li>• 3+ years project management experience</li>
-                <li>• Strong stakeholder management skills</li>
-                <li>• Agile/Scrum methodology knowledge</li>
-                <li>• Passion for social impact</li>
-              </ul>
-            </div>
-
-            {/* APPLY */}
-            <a
-              href="https://forms.gle/yourform"
-              target="_blank"
-              rel="noreferrer"
-              className="
-                inline-flex items-center gap-3
-                rounded-full bg-[#F47B3A]
-                px-7 py-4 text-sm font-semibold
-                text-white transition
-                hover:scale-[1.02]
-              "
-            >
-              Apply Now
-              <ArrowRight size={18} />
-            </a>
           </div>
+
+          <div className="mt-16">
+
+            <h2 className="text-3xl font-bold">
+              Overview
+            </h2>
+
+            <p className="mt-6 text-lg leading-9 text-black/70">
+              {job.overview}
+            </p>
+
+          </div>
+
+          <div className="mt-16">
+
+            <h2 className="text-3xl font-bold">
+              Responsibilities
+            </h2>
+
+            <ul className="mt-8 space-y-4">
+              {job.responsibilities.map((item, index) => (
+                <li key={index}>
+                  • {item}
+                </li>
+              ))}
+            </ul>
+
+          </div>
+
+          <div className="mt-16">
+
+            <h2 className="text-3xl font-bold">
+              Requirements
+            </h2>
+
+            <ul className="mt-8 space-y-4">
+              {job.requirements.map((item, index) => (
+                <li key={index}>
+                  • {item}
+                </li>
+              ))}
+            </ul>
+
+          </div>
+
+          <Link
+            to="/get-involved"
+            className="
+              mt-16
+              inline-flex
+              items-center
+              gap-3
+              rounded-full
+              bg-[#BC1D26]
+              px-8
+              py-4
+              font-semibold
+              text-white
+            "
+          >
+            Apply Now
+          </Link>
+
         </div>
       </section>
-    </motion.main>
+
+    </main>
   );
 }
