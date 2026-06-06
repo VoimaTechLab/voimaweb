@@ -1,3 +1,4 @@
+import { NewsletterForm } from "@/forms/NewsletterForm/NewsletterForm";
 import {
   ArrowUpRight,
   Mail,
@@ -305,9 +306,8 @@ function Footer() {
 
           </div>
 
-          {/* Blog */}
+          {/* Newsletter */}
           <div className="mt-10">
-
             <p
               className="
                 mb-4
@@ -319,41 +319,7 @@ function Footer() {
               Newsletter
             </p>
 
-            <div
-              className="
-                overflow-hidden
-                rounded-2xl
-                border border-white/10
-                bg-white
-              "
-            >
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="
-                  w-full
-                  bg-transparent
-                  px-5 py-4
-                  text-sm text-black
-                  outline-none
-                  placeholder:text-black/40
-                "
-              />
-
-              <button
-                className="
-                  w-full
-                  bg-[#BC1D26]
-                  px-5 py-4
-                  text-sm font-semibold
-                  text-white
-                  transition hover:bg-[#A11922]
-                "
-              >
-                Join Newsletter
-              </button>
-            </div>
-
+            <NewsletterForm />
           </div>
         </div>
 
