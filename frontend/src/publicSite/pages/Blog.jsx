@@ -107,7 +107,7 @@ export default function Blog() {
                   </p>
 
                   <p className="text-sm text-black/50">
-                    {featuredPost.date} • {featuredPost.readTime}
+                    {featuredPost.publishedAt} • {featuredPost.readTime}
                   </p>
                 </div>
 
@@ -206,7 +206,7 @@ export default function Blog() {
                       </p>
 
                       <p className="text-sm text-black/50">
-                        {post.date} • {post.readTime}
+                        {post.publishedAt} • {post.readTime}
                       </p>
 
                     </div>

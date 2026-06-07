@@ -19,7 +19,7 @@ export default function BlogDetail() {
       ...story,
       category: "Community Story",
       readTime: "4 min read",
-      date: "Community Submission",
+      publishedAt: "Community Submission",
       media: {
         type: "image",
         src: story.image,
@@ -115,7 +115,7 @@ export default function BlogDetail() {
               </h3>
 
               <p className="text-black/50">
-                {post.date} • {post.readTime}
+                {post.publishedAt} • {post.readTime}
               </p>
             </div>
 

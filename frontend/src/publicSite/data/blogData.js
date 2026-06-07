@@ -9,7 +9,7 @@ export const blogHero = {
     "Real stories, research, awareness and community impact.",
 
   description:
-    "Explore community stories, healthcare education, sickle cell awareness, research updates and insights from the Voima community."
+    "Explore community stories, healthcare education, sickle cell awareness, research uppublishedAts and insights from the Voima community."
 };
 
 export const featuredPost = {
@@ -30,13 +30,14 @@ export const featuredPost = {
     role: "Community Member",
   },
 
-  date: "May 14, 2026",
+  publishedAt: "2026-05-12",
 
   readTime: "6 min read",
 
   media: {
     type: "image",
     src: Blog1,
+    alt: "altTypeBasedonImage/Video",
   },
 
   story: {
@@ -62,7 +63,7 @@ export const categories = [
   "Healthcare Tips",
   "Technology",
   "Events",
-  "Voima Updates"
+  "Voima UppublishedAts"
 ];
 
 export const posts = [
@@ -84,13 +85,14 @@ export const posts = [
         role: "Admin"
     },
 
-    date: "May 01, 2026",
+    publishedAt: "2026-05-12",
 
     readTime: "5 min read",
 
     media: {
       type: "image",
-      src: Blog2
+      src: Blog2,
+      alt: "altTypeBasedonImage/Video",
     },
 
     story: {
@@ -127,13 +129,14 @@ export const posts = [
         role: "Research Team",
     },
 
-    date: "April 18, 2026",
+    publishedAt: "2026-05-12",
 
     readTime: "7 min read",
 
     media: {
       type: "image",
-      src: Blog3
+      src: Blog3,
+      alt: "altTypeBasedonImage/Video",
     },
 
     story: {
@@ -172,6 +175,7 @@ export const communityStories = [
       "A story of resilience, education and support.",
 
     image: Blog4,
+    alt: "altTypeBasedonImage/Video",
 
     source: "Voima App",
 
