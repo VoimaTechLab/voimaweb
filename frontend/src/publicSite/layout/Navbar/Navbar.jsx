@@ -7,6 +7,7 @@ const NAV_LINKS = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "Journey", href: "/our-journey" },
+  { label: "Voima App", href: "/voima-app" },
   { label: "Events", href: "/events" },
   { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/contact" },

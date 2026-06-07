@@ -1,5 +1,5 @@
 import { milestones } from "@/publicSite/data/journeyData";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 export default function OurJourneyStory() {
   const { slug } = useParams();
@@ -20,6 +20,26 @@ export default function OurJourneyStory() {
     <main className="pt-[90px]">
       <section className="px-6 py-24">
         <div className="mx-auto max-w-5xl">
+          <Link
+            to="/our-journey"
+            className="
+              mb-10
+              inline-flex
+              items-center
+              gap-2
+              rounded-full
+              border
+              border-black/10
+              px-5
+              py-3
+              transition-all
+              duration-300
+              hover:border-[#BC1D26]
+              hover:text-[#BC1D26]
+            "
+          >
+            ← Back to Journey
+          </Link>
 
           <p className="uppercase tracking-[0.2em] text-[#BC1D26]/60">
             {story.year}
@@ -44,6 +64,8 @@ export default function OurJourneyStory() {
         ) : (
         <video
             controls
+            autoPlay
+            muted
             className="
             mt-12
             h-[500px]
@@ -83,6 +105,110 @@ export default function OurJourneyStory() {
               ))}
             </ul>
           </div>
+
+          {story.contributors?.length > 0 && (
+            <section className="mt-20">
+              <div className="max-w-2xl">
+                <h2 className="text-4xl font-bold text-[#BC1D26]">
+                  {story.contributorsSectionTitle}
+                </h2>
+
+                <p className="mt-4 text-black/60">
+                  The individuals who helped shape this milestone and
+                  move the mission forward.
+                </p>
+              </div>
+
+              <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                {story.contributors.map((person, index) => (
+                  <div
+                    key={index}
+                    className="
+                      group
+                      relative
+                      overflow-hidden
+                      rounded-[24px]
+                      h-[400px]
+                      transition-all
+                      duration-500
+                      cursor-pointer
+                    "
+                  >
+                    <img
+                      src={person.image}
+                      alt={person.name}
+                      className="
+                        h-full
+                        w-full
+                        object-cover
+                        transition-transform
+                        duration-500
+                        group-hover:scale-110
+                      "
+                    />
+
+                    <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/60 opacity-100 transition-opacity duration-500"></div>
+
+                    <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                      <h3 className="text-xl font-bold text-white">
+                        {person.name}
+                      </h3>
+
+                      <p className="mt-2 text-sm font-medium uppercase tracking-[0.1em] text-white/80">
+                        {person.role}
+                      </p>
+                    </div>
+
+                    <div className="absolute bottom-0 left-0 right-0 bg-[#BC1D26] rounded-[24px] opacity-0 group-hover:opacity-95 transition-opacity duration-500 flex items-center justify-center p-8 h-[45%]">
+                      <p className="text-center italic text-lg leading-8 text-white font-light">
+                        "{person.quote}"
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+          {story.gallery?.length > 0 && (
+            <section className="mt-24">
+              <div className="max-w-2xl">
+                <h2 className="text-4xl font-bold text-[#BC1D26]">
+                  Moments From This Journey
+                </h2>
+
+                <p className="mt-4 text-black/60">
+                  Capturing the people, programs and impact that
+                  defined this milestone.
+                </p>
+              </div>
+
+              <div className="mt-12 grid grid-cols-2 gap-4 md:grid-cols-3">
+                {story.gallery.map((image, index) => (
+                  <div
+                    key={index}
+                    className="
+                      overflow-hidden
+                      rounded-[24px]
+                      aspect-square
+                    "
+                  >
+                    <img
+                      src={image}
+                      alt={`${story.title} gallery ${index + 1}`}
+                      className="
+                        h-full
+                        w-full
+                        object-cover
+                        transition-transform
+                        duration-500
+                        hover:scale-110
+                      "
+                    />
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
 
         </div>
       </section>

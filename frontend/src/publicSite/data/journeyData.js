@@ -1,7 +1,7 @@
-// src/publicSite/data/journeyData.js
-
-import { default as Journey1, default as Journey3, default as Journey4 } from "@/assets/journey/journey-1.jpg";
-import Journey2 from "@/assets/journey/voima_website_prototype_01.mp4";
+import { default as Founder1, default as Founder2 } from "@/assets/journey/founder-1.jpg";
+import { default as Journey1, default as Journey2, default as Journey3, default as Journey4 } from "@/assets/journey/journey-1.jpg";
+import Testimonial1 from "@/assets/journey/testimonial-1.jpg";
+import Journey5 from "@/assets/journey/voima_website_prototype_01.mp4";
 
 export const heroData = {
   eyebrow: "Our Journey",
@@ -35,7 +35,34 @@ export const milestones = [
         "Initial volunteer recruitment",
         "Community engagement launched"
       ]
+    },
+
+    contributors: [
+    {
+      name: "Dr. Sarah Mensah",
+      role: "Founding Director",
+      image: Founder1,
+      quote:
+        "We believed healthcare awareness should be accessible to every community."
+    },
+
+    {
+      name: "Kwame Boateng",
+      role: "Community Coordinator",
+      image: Founder2,
+      quote:
+        "The vision was simple: create impact through education and action."
     }
+  ],
+    contributorsSectionTitle: "The People Behind The Vision",
+  gallery : [
+    Journey1,
+    Journey2,
+    Journey3,
+    Journey4,
+    Journey1,
+    Journey2,
+  ]
   },
 
   {
@@ -47,7 +74,7 @@ export const milestones = [
 
     media: {
       type: "video",
-      src: Journey2,
+      src: Journey5,
     },
 
     story: {
@@ -62,7 +89,33 @@ export const milestones = [
         "School and community workshops",
         "Clinic partnerships formed"
       ]
+    },
+    contributors: [
+    {
+      name: "Dr. Sarah Mensah",
+      role: "Founding Director",
+      image: Founder1,
+      quote:
+        "We believed healthcare awareness should be accessible to every community."
+    },
+
+    {
+      name: "Kwame Boateng",
+      role: "Community Coordinator",
+      image: Founder2,
+      quote:
+        "The vision was simple: create impact through education and action."
     }
+  ],
+    contributorsSectionTitle: "Champions of Awareness",
+  gallery : [
+    Journey1,
+    Journey2,
+    Journey3,
+    Journey4,
+    Journey1,
+    Journey2,
+  ]
   },
 
   {
@@ -89,7 +142,33 @@ export const milestones = [
         "Training curriculum launched",
         "Community-led initiatives"
       ]
+    },
+    contributors: [
+    {
+      name: "Dr. Sarah Mensah",
+      role: "Founding Director",
+      image: Founder1,
+      quote:
+        "We believed healthcare awareness should be accessible to every community."
+    },
+
+    {
+      name: "Kwame Boateng",
+      role: "Community Coordinator",
+      image: Founder2,
+      quote:
+        "The vision was simple: create impact through education and action."
     }
+  ],
+   contributorsSectionTitle: "Community Leaders",
+  gallery : [
+    Journey1,
+    Journey2,
+    Journey3,
+    Journey4,
+    Journey1,
+    Journey2,
+  ]
   },
 
   {
@@ -116,7 +195,33 @@ export const milestones = [
         "Shared resources",
         "Expanded preventive services"
       ]
+    },
+    contributors: [
+    {
+      name: "Dr. Sarah Mensah",
+      role: "Founding Director",
+      image: Founder1,
+      quote:
+        "We believed healthcare awareness should be accessible to every community."
+    },
+
+    {
+      name: "Kwame Boateng",
+      role: "Community Coordinator",
+      image: Founder2,
+      quote:
+        "The vision was simple: create impact through education and action."
     }
+  ],
+   contributorsSectionTitle: "Partners In Impact",
+  gallery : [
+    Journey1,
+    Journey2,
+    Journey3,
+    Journey4,
+    Journey1,
+    Journey2,
+  ]
   },
 
   {
@@ -143,7 +248,33 @@ export const milestones = [
         "Sustainable programming",
         "Regional support expansion"
       ]
+    },
+    contributors: [
+    {
+      name: "Dr. Sarah Mensah",
+      role: "Founding Director",
+      image: Founder1,
+      quote:
+        "We believed healthcare awareness should be accessible to every community."
+    },
+
+    {
+      name: "Kwame Boateng",
+      role: "Community Coordinator",
+      image: Founder2,
+      quote:
+        "The vision was simple: create impact through education and action."
     }
+  ],
+   contributorsSectionTitle: "Driving The Future",
+  gallery : [
+    Journey1,
+    Journey2,
+    Journey3,
+    Journey4,
+    Journey1,
+    Journey2,
+  ]
   },
 ];
 
@@ -155,39 +286,41 @@ export const stats = [
 ];
 
 export const testimonials = [
-  {
-    quote:
-      "Voima helped me understand the importance of preventive healthcare.",
+{
+  quote:
+    "Voima helped me understand the importance of preventive healthcare.",
 
-    name: "Ama Serwaa",
+  name: "Ama Serwaa",
 
-    role: "Program Participant"
-  },
+  role: "Program Participant",
 
-  {
-    quote:
-      "Being part of the outreach program inspired me to give back to my community.",
+  image: Testimonial1,
 
-    name: "Kwame Mensah",
+  location: "Accra, Ghana"
+},
+{
+  quote:
+    "Voima helped me understand the importance of preventive healthcare.",
 
-    role: "Volunteer"
-  },
+  name: "Ama Serwaa",
 
-  {
-    quote:
-      "The awareness sessions changed how I approach health education.",
+  role: "Program Participant",
 
-    name: "University Student",
+  image: Testimonial1,
 
-    role: "Participant"
-  }
+  location: "Accra, Ghana"
+},
+{
+  quote:
+    "Voima helped me understand the importance of preventive healthcare.",
+
+  name: "Ama Serwaa",
+
+  role: "Program Participant",
+
+  image: Testimonial1,
+
+  location: "Accra, Ghana"
+},
 ];
 
-export const gallery = [
-  Journey1,
-  Journey2,
-  Journey3,
-  Journey4,
-  Journey1,
-  Journey2,
-];
