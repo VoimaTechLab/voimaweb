@@ -31,6 +31,8 @@ const OurJourneyStory = lazy(() => import("../pages/OurJourneyStory"));
 const VoimaApp = lazy(() => import("../pages/VoimaApp"));
 const VoimaAppFeature = lazy(() => import("../pages/VoimaAppFeature"));
 
+const Waitlist = lazy(() => import("../pages/Waitlist.jsx"));
+
 const NotFound = lazy(() => import("../pages/NotFound"));
 
 export default function AppRoutes() {
@@ -89,6 +91,9 @@ export default function AppRoutes() {
           {/* VOIMA APP */}
           <Route path="voima-app" element={<VoimaApp />} />
           <Route path="voima-app/:slug" element={<VoimaAppFeature />} />
+
+          {/*WAITLIST */}
+          <Route path="/waitlist" element={<Waitlist />} />
 
           {/* FUTURE */}
           {/*

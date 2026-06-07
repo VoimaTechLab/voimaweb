@@ -1,20 +1,32 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 
-import Navbar from "./Navbar/Navbar";
 import Footer from "./Footer/Footer";
+import Navbar from "./Navbar/Navbar";
 
-function MainLayout() {
+import WaitlistFooter from "./Footer/WaitlistFooter";
+import WaitlistNavbar from "./Navbar/WaitlistNavbar";
+
+export default function MainLayout() {
+  const location = useLocation();
+
+  const isWaitlist =
+    location.pathname.startsWith("/waitlist");
+
   return (
     <>
-      <Navbar />
+      {isWaitlist ? (
+        <WaitlistNavbar />
+      ) : (
+        <Navbar />
+      )}
 
-      <main>
-        <Outlet />
-      </main>
+      <Outlet />
 
-      <Footer />
+      {isWaitlist ? (
+        <WaitlistFooter />
+      ) : (
+        <Footer />
+      )}
     </>
   );
 }
-
-export default MainLayout;

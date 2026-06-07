@@ -19,7 +19,7 @@ export const heroData = {
 
   primaryCTA: {
     text: "Join Waitlist",
-    link: "/get-involved",
+    link: "/waitlist",
   },
 
   secondaryCTA: {
@@ -262,12 +262,12 @@ export const downloadCTA = {
 
   primaryButton: {
     text: "Join Waitlist",
-    link: "/waitlistform",
+    link: "/waitlist",
   },
 
   secondaryButton: {
     text: "Partner With Us",
-    link: "/voima-app/get-involved",
+    link: "/get-involved",
   },
 };
 export const demoData = {
