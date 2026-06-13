@@ -93,7 +93,7 @@ export default function AppRoutes() {
           <Route path="voima-app/:slug" element={<VoimaAppFeature />} />
 
           {/*WAITLIST */}
-          <Route path="/waitlist" element={<Waitlist />} />
+          <Route path="waitlist" element={<Waitlist />} />
 
           {/* FUTURE */}
           {/*
