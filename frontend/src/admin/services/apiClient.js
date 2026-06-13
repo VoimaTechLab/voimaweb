@@ -1,76 +1,86 @@
 import axios from "axios";
+import { ACCESS_TOKEN_KEY, API_BASE } from "../config";
 
-const apiClient = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || "http://localhost:5000/api",
-  withCredentials: true, // send httpOnly refresh cookie
+export const api = axios.create({
+  baseURL: API_BASE,
+  withCredentials: true, // send/receive the httpOnly refresh cookie
 });
 
-// --- Token storage (memory-first, localStorage as backup) ---
-let accessToken = localStorage.getItem("voima_access_token") || null;
+// --- token helpers ---
+export const getAccessToken = () => localStorage.getItem(ACCESS_TOKEN_KEY);
+export const setAccessToken = (t) =>
+  t ? localStorage.setItem(ACCESS_TOKEN_KEY, t) : localStorage.removeItem(ACCESS_TOKEN_KEY);
 
-export const setAccessToken = (token) => {
-  accessToken = token;
-  if (token) localStorage.setItem("voima_access_token", token);
-  else localStorage.removeItem("voima_access_token");
-};
-
-export const getAccessToken = () => accessToken;
-
-// --- Attach token to every request ---
-apiClient.interceptors.request.use((config) => {
-  if (accessToken) config.headers.Authorization = `Bearer ${accessToken}`;
+// --- request: attach bearer ---
+api.interceptors.request.use((config) => {
+  const token = getAccessToken();
+  if (token) config.headers.Authorization = `Bearer ${token}`;
   return config;
 });
 
-// --- Auto-refresh on 401 ---
+// --- response: handle 401 with single-flight refresh ---
 let isRefreshing = false;
 let queue = [];
 
-const processQueue = (error, token = null) => {
-  queue.forEach((p) => (error ? p.reject(error) : p.resolve(token)));
+const resolveQueue = (token) => {
+  queue.forEach((cb) => cb(token));
   queue = [];
 };
 
-apiClient.interceptors.response.use(
+// Optional: allow AuthContext to react to a hard logout
+let onAuthFailure = () => {};
+export const setAuthFailureHandler = (fn) => { onAuthFailure = fn; };
+
+api.interceptors.response.use(
   (res) => res,
   async (error) => {
-    const original = error.config;
+    const { config, response } = error;
+    const original = config;
 
-    if (error.response?.status === 401 && !original._retry) {
+    // Don't try to refresh the refresh/login endpoints themselves
+    const isAuthRoute =
+      original?.url?.includes("/auth/refresh") ||
+      original?.url?.includes("/auth/login");
+
+    if (response?.status === 401 && !original._retry && !isAuthRoute) {
+      original._retry = true;
+
       if (isRefreshing) {
+        // wait for the in-flight refresh, then retry
         return new Promise((resolve, reject) => {
-          queue.push({ resolve, reject });
-        }).then((token) => {
-          original.headers.Authorization = `Bearer ${token}`;
-          return apiClient(original);
+          queue.push((token) => {
+            if (!token) return reject(error);
+            original.headers.Authorization = `Bearer ${token}`;
+            resolve(api(original));
+          });
         });
       }
 
-      original._retry = true;
       isRefreshing = true;
-
       try {
         const { data } = await axios.post(
-          `${apiClient.defaults.baseURL}/auth/refresh`,
+          `${API_BASE}/auth/refresh`,
           {},
           { withCredentials: true }
         );
-        setAccessToken(data.accessToken);
-        processQueue(null, data.accessToken);
-        original.headers.Authorization = `Bearer ${data.accessToken}`;
-        return apiClient(original);
-      } catch (err) {
-        processQueue(err, null);
+        const newToken = data.data.accessToken;
+        setAccessToken(newToken);
+        resolveQueue(newToken);
+        original.headers.Authorization = `Bearer ${newToken}`;
+        return api(original);
+      } catch (e) {
+        resolveQueue(null);
         setAccessToken(null);
-        window.location.href = "/admin/login";
-        return Promise.reject(err);
+        onAuthFailure(); // tell AuthContext to clear user + redirect
+        return Promise.reject(e);
       } finally {
         isRefreshing = false;
       }
     }
 
-    return Promise.reject(error);
+    // Normalize error message for the UI
+    const message =
+      response?.data?.message || error.message || "Something went wrong";
+    return Promise.reject({ ...error, message });
   }
 );
-
-export default apiClient;

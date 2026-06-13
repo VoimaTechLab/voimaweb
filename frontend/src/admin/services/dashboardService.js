@@ -1,26 +1,34 @@
 import { USE_MOCK } from "../config";
-import * as mock from "../data/mockData";
+import {
+  mockActivity,
+  mockEvents,
+  mockGrowthSeries,
+  mockMessages,
+  mockStories,
+  mockSubscribers, mockWaitlist,
+  mockWaitlistByRole,
+} from "../data/mock";
+import { api } from "./apiClient";
 
-const delay = (ms) => new Promise((r) => setTimeout(r, ms));
-
-export const dashboardService = {
-  async getStats() {
-    if (USE_MOCK) {
-      await delay(300);
-      return {
-        messages: mock.mockMessages.length,
-        unreadMessages: mock.mockMessages.filter((m) => m.status === "unread").length,
-        subscribers: mock.mockSubscribers.length,
-        waitlist: mock.mockWaitlist.length,
-        blogPosts: mock.mockBlogPosts.length,
-        events: mock.mockEvents.length,
-        pendingStories: mock.mockStories.filter((s) => s.status === "pending").length,
-        growthSeries: mock.mockGrowthSeries,
-        waitlistByRole: mock.mockWaitlistByRole,
-        activity: mock.mockActivity,
-      };
-    }
-    // const { data } = await apiClient.get("/dashboard/stats");
-    // return data;
-  },
-};
+export async function getDashboardStats() {
+  if (USE_MOCK) {
+    return {
+      cards: {
+        totalMessages: mockMessages.length,
+        unreadMessages: mockMessages.filter((m) => m.status === "unread").length,
+        totalSubscribers: mockSubscribers.length,
+        totalWaitlist: mockWaitlist.length,
+        totalStories: mockStories.length,
+        pendingStories: mockStories.filter((s) => s.status === "pending").length,
+        totalEvents: mockEvents.length,
+        totalBlogPosts: 3,        // from Sanity in real mode
+        totalGalleryImages: 24,   // from Sanity in real mode
+      },
+      growthSeries: mockGrowthSeries,
+      waitlistByRole: mockWaitlistByRole,
+      activity: mockActivity,
+    };
+  }
+  const { data } = await api.get("/dashboard/stats");
+  return data.data;
+}

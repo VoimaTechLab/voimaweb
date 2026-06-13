@@ -19,7 +19,7 @@ const empty = {
 };
 
 const input =
-  "w-full rounded-lg border border-slate-200 px-3 py-2 text-sm outline-none focus:border-slate-400";
+  "w-full rounded-lg border border-neutral-200 px-3 py-2 text-sm outline-none focus:border-primary-500";
 
 export default function EventsManager() {
   const [events, setEvents] = useState([]);
@@ -107,18 +107,18 @@ export default function EventsManager() {
           {events.map((ev) => (
             <Card key={ev.id} className="p-5">
               <div className="flex items-start justify-between">
-                <h3 className="font-medium text-slate-900">
+                <h3 className="font-medium text-neutral-900">
                   {ev.title}
                 </h3>
 
                 <Badge status={ev.status} />
               </div>
 
-              <p className="mt-2 text-sm text-slate-500">
+              <p className="mt-2 text-sm text-neutral-500">
                 {ev.description}
               </p>
 
-              <div className="mt-3 flex flex-col gap-1 text-xs text-slate-400">
+              <div className="mt-3 flex flex-col gap-1 text-xs text-neutral-400">
                 <span className="flex items-center gap-1">
                   <Calendar className="h-3 w-3" />
                   {fmtDate(ev.eventDate)}

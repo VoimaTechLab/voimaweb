@@ -5,37 +5,42 @@ export default {
   content: ['./index.html', './src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     extend: {
-      // BRAND COLORS 
+      // BRAND COLORS - Voima Initiative Design System
       colors: {
         primary: {
-          50:  '#FFF4EE',
-          100: '#FFE0CC',
-          200: '#FFC09A',
-          300: '#FF9E67',
-          400: '#F47B3A',
-          500: '#E8621E',  // Main brand
-          600: '#C4481A',
-          700: '#9A3315',
-          800: '#72230E',
-          900: '#3D1206',
+          50:  '#FFF5F5',
+          100: '#FDE8EA',
+          200: '#F8C8CD',
+          300: '#F19BA3',
+          400: '#D44A56',
+          500: '#BC1D26',  // Main brand (Voima Red)
+          600: '#A11922',
+          700: '#7E131A',
+          800: '#5C0D12',
+          900: '#39070A',
         },
         neutral: {
-          50:  '#FAFAF8',   // Page bg
-          100: '#F2F1EE',   // Card surfaces
-          200: '#E4E2DC',   // Borders
-          300: '#CBC9C2',
-          400: '#9B9891',
-          500: '#76746D',
-          600: '#5C5A55',   // Secondary text
-          700: '#44423E',
-          800: '#2C2B28',   // Body text
-          900: '#1A1916',   // Headings
+          0:   '#FFFFFF',
+          50:  '#FAFAFA',
+          100: '#F5F5F5',
+          200: '#E5E5E5',
+          300: '#D4D4D4',
+          400: '#A3A3A3',
+          500: '#737373',
+          600: '#525252',   // Secondary text
+          700: '#404040',
+          800: '#262626',   // Body text
+          900: '#171717',   // Headings
         },
-        teal: {
-          50:  '#E1F5EE',
-          100: '#9FE1CB',
-          400: '#1D9E75',
-          600: '#0F6E56',
+        success: {
+          50:  '#E6F6F1',
+          500: '#1D9E75',
+        },
+        warning: {
+          500: '#F59E0B',
+        },
+        danger: {
+          500: '#DC2626',
         },
       },
 

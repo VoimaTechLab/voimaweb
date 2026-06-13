@@ -50,7 +50,7 @@ export default function Waitlist() {
       </div>
 
       <Card>
-        <div className="flex flex-wrap items-center gap-3 border-b border-slate-100 p-3">
+        <div className="flex flex-wrap items-center gap-3 border-b border-neutral-200 p-3">
           <SearchInput value={query} onChange={setQuery} placeholder="Search name, email…" />
           <div className="flex gap-1">
             {roles.map((r) => (
@@ -58,7 +58,7 @@ export default function Waitlist() {
                 key={r}
                 onClick={() => setRole(r)}
                 className={`rounded-md px-2.5 py-1 text-xs font-medium ${
-                  role === r ? "bg-slate-900 text-white" : "text-slate-500 hover:bg-slate-100"
+                  role === r ? "bg-primary-500 text-white" : "text-neutral-500 hover:bg-neutral-100"
                 }`}
               >
                 {r}
@@ -69,7 +69,7 @@ export default function Waitlist() {
 
         <div className="overflow-x-auto">
           <table className="w-full text-left text-sm">
-            <thead className="text-xs uppercase text-slate-400">
+            <thead className="text-xs uppercase text-neutral-400">
               <tr>
                 <th className="px-5 py-3 font-medium">Name</th>
                 <th className="px-5 py-3 font-medium">Email</th>
@@ -81,13 +81,13 @@ export default function Waitlist() {
             </thead>
             <tbody>
               {filtered.map((r) => (
-                <tr key={r.id} className="border-t border-slate-50 hover:bg-slate-50">
-                  <td className="px-5 py-3 font-medium text-slate-800">{r.fullName}</td>
-                  <td className="px-5 py-3 text-slate-600">{r.email}</td>
-                  <td className="px-5 py-3 text-slate-500">{r.phone}</td>
-                  <td className="px-5 py-3 text-slate-600">{r.location}</td>
-                  <td className="px-5 py-3"><Badge status="default">{r.role}</Badge></td>
-                  <td className="px-5 py-3 text-slate-500">{fmtDate(r.createdAt)}</td>
+                <tr key={r.id} className="border-t border-neutral-100 hover:bg-neutral-50">
+                  <td className="px-5 py-3 font-medium text-neutral-800">{r.fullName}</td>
+                  <td className="px-5 py-3 text-neutral-600">{r.email}</td>
+                  <td className="px-5 py-3 text-neutral-500">{r.phone}</td>
+                  <td className="px-5 py-3 text-neutral-600">{r.location}</td>
+                  <td className="px-5 py-3"><Badge status={r.role}>{r.role}</Badge></td>
+                  <td className="px-5 py-3 text-neutral-500">{fmtDate(r.createdAt)}</td>
                 </tr>
               ))}
             </tbody>

@@ -54,7 +54,7 @@ export default function Messages() {
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-[360px_1fr]">
         {/* List */}
         <Card className="flex flex-col overflow-hidden">
-          <div className="space-y-3 border-b border-slate-100 p-3">
+          <div className="space-y-3 border-b border-neutral-200 p-3">
             <SearchInput value={query} onChange={setQuery} placeholder="Search messages…" />
             <div className="flex gap-1">
               {FILTERS.map((f) => (
@@ -62,7 +62,7 @@ export default function Messages() {
                   key={f}
                   onClick={() => setFilter(f)}
                   className={`rounded-md px-2.5 py-1 text-xs font-medium capitalize ${
-                    filter === f ? "bg-slate-900 text-white" : "text-slate-500 hover:bg-slate-100"
+                    filter === f ? "bg-primary-500 text-white" : "text-neutral-500 hover:bg-neutral-100"
                   }`}
                 >
                   {f}
@@ -79,17 +79,17 @@ export default function Messages() {
                 <button
                   key={m.id}
                   onClick={() => openMessage(m)}
-                  className={`flex w-full flex-col gap-1 border-b border-slate-50 p-4 text-left hover:bg-slate-50 ${
-                    selected?.id === m.id ? "bg-slate-50" : ""
+                  className={`flex w-full flex-col gap-1 border-b border-neutral-100 p-4 text-left hover:bg-neutral-50 ${
+                    selected?.id === m.id ? "bg-neutral-50" : ""
                   }`}
                 >
                   <div className="flex items-center justify-between">
-                    <span className={`text-sm ${m.status === "unread" ? "font-semibold text-slate-900" : "text-slate-700"}`}>
+                    <span className={`text-sm ${m.status === "unread" ? "font-semibold text-neutral-900" : "text-neutral-700"}`}>
                       {m.name}
                     </span>
-                    <span className="text-xs text-slate-400">{fmtRelative(m.createdAt)}</span>
+                    <span className="text-xs text-neutral-400">{fmtRelative(m.createdAt)}</span>
                   </div>
-                  <span className="truncate text-sm text-slate-500">{m.subject}</span>
+                  <span className="truncate text-sm text-neutral-500">{m.subject}</span>
                   <Badge status={m.status} />
                 </button>
               ))
@@ -103,17 +103,17 @@ export default function Messages() {
             <motion.div key={selected.id} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
               <div className="flex items-start justify-between">
                 <div>
-                  <h2 className="text-lg font-semibold text-slate-900">{selected.subject}</h2>
-                  <p className="mt-1 text-sm text-slate-500">
-                    {selected.name} · <a href={`mailto:${selected.email}`} className="text-blue-600">{selected.email}</a>
+                  <h2 className="text-lg font-semibold text-neutral-900">{selected.subject}</h2>
+                  <p className="mt-1 text-sm text-neutral-500">
+                    {selected.name} · <a href={`mailto:${selected.email}`} className="text-primary-600">{selected.email}</a>
                   </p>
                 </div>
                 <Badge status={selected.status} />
               </div>
 
-              <p className="mt-6 whitespace-pre-wrap leading-relaxed text-slate-700">{selected.message}</p>
+              <p className="mt-6 whitespace-pre-wrap leading-relaxed text-neutral-700">{selected.message}</p>
 
-              <div className="mt-8 flex gap-2 border-t border-slate-100 pt-5">
+              <div className="mt-8 flex gap-2 border-t border-neutral-200 pt-5">
                 <Button variant="secondary" onClick={() => updateStatus(selected.id, "read")}>Mark read</Button>
                 <Button onClick={() => updateStatus(selected.id, "replied")}>Mark replied</Button>
                 <Button variant="ghost" onClick={() => (window.location.href = `mailto:${selected.email}`)}>Reply via email</Button>

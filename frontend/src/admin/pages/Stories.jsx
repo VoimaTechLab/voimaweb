@@ -34,7 +34,7 @@ export default function Stories() {
             key={f}
             onClick={() => setFilter(f)}
             className={`rounded-md px-3 py-1.5 text-sm font-medium capitalize ${
-              filter === f ? "bg-slate-900 text-white" : "text-slate-500 hover:bg-slate-100"
+              filter === f ? "bg-primary-500 text-white" : "text-neutral-500 hover:bg-neutral-100"
             }`}
           >
             {f}
@@ -50,16 +50,16 @@ export default function Stories() {
             <Card key={s.id} className="p-5">
               <div className="flex items-start justify-between">
                 <div>
-                  <h3 className="font-medium text-slate-900">{s.contributorName}</h3>
-                  <p className="text-xs text-slate-400">{s.location} · {fmtDate(s.createdAt)}</p>
+                  <h3 className="font-medium text-neutral-900">{s.contributorName}</h3>
+                  <p className="text-xs text-neutral-400">{s.location} · {fmtDate(s.createdAt)}</p>
                 </div>
                 <Badge status={s.status} />
               </div>
-              <p className="mt-3 leading-relaxed text-slate-700">{s.story}</p>
+              <p className="mt-3 leading-relaxed text-neutral-700">{s.story}</p>
 
               {s.status === "pending" && (
-                <div className="mt-4 flex gap-2 border-t border-slate-100 pt-4">
-                  <Button onClick={() => setStatus(s.id, "approved")}>
+                <div className="mt-4 flex gap-2 border-t border-neutral-200 pt-4">
+                  <Button variant="success" onClick={() => setStatus(s.id, "approved")}>
                     <Check className="h-4 w-4" /> Approve
                   </Button>
                   <Button variant="danger" onClick={() => setStatus(s.id, "rejected")}>

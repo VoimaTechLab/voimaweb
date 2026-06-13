@@ -1,49 +1,52 @@
 import { createContext, useCallback, useContext, useEffect, useState } from "react";
-import { getAccessToken } from "../services/apiClient";
-import { authService } from "../services/authService";
+import { setAuthFailureHandler } from "../services/apiClient";
+import {
+  bootstrapSession,
+  login as loginService,
+  logout as logoutService,
+} from "../services/authService";
 
 const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
-  const [admin, setAdmin] = useState(null);
+  const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // On mount: if we have a token, fetch the current admin
+  // Restore session on app load
   useEffect(() => {
+    let mounted = true;
     (async () => {
-      if (!getAccessToken()) {
-        setLoading(false);
-        return;
-      }
-      try {
-        const me = await authService.me();
-        setAdmin(me);
-      } catch {
-        setAdmin(null);
-      } finally {
+      const restored = await bootstrapSession();
+      if (mounted) {
+        setUser(restored);
         setLoading(false);
       }
     })();
+    return () => { mounted = false; };
+  }, []);
+
+  // If a token refresh fails anywhere, clear the user (forces login)
+  useEffect(() => {
+    setAuthFailureHandler(() => setUser(null));
   }, []);
 
   const login = useCallback(async (email, password) => {
-    const admin = await authService.login(email, password);
-    setAdmin(admin);
+    const admin = await loginService(email, password);
+    setUser(admin);
     return admin;
   }, []);
 
   const logout = useCallback(async () => {
-    await authService.logout();
-    setAdmin(null);
+    await logoutService();
+    setUser(null);
   }, []);
 
   const value = {
-    admin,
+    user,
     loading,
-    isAuthenticated: !!admin,
+    isAuthenticated: !!user,
     login,
     logout,
-    hasRole: (...roles) => admin && roles.includes(admin.role),
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
@@ -52,6 +55,6 @@ export function AuthProvider({ children }) {
 // eslint-disable-next-line react-refresh/only-export-components
 export function useAuth() {
   const ctx = useContext(AuthContext);
-  if (!ctx) throw new Error("useAuth must be used within <AuthProvider>");
+  if (!ctx) throw new Error("useAuth must be used within AuthProvider");
   return ctx;
 }

@@ -1,10 +1,11 @@
 import clsx from "clsx";
 
 const variants = {
-  primary: "bg-slate-900 text-white hover:bg-slate-800",
-  secondary: "border border-slate-200 bg-white text-slate-700 hover:bg-slate-50",
-  danger: "bg-red-600 text-white hover:bg-red-700",
-  ghost: "text-slate-600 hover:bg-slate-100",
+  primary: "bg-primary-500 text-white hover:bg-primary-600",
+  secondary: "border border-neutral-200 bg-white text-neutral-700 hover:bg-neutral-50",
+  danger: "bg-danger-500 text-white hover:bg-red-700",
+  success: "bg-success-500 text-white hover:bg-green-600",
+  ghost: "text-neutral-600 hover:bg-neutral-100",
 };
 
 export default function Button({ variant = "primary", className, children, ...props }) {
