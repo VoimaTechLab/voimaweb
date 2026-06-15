@@ -109,7 +109,7 @@ PORT=5000
 API_PREFIX=/api/v1
 
 # Frontend
-CLIENT_URL=http://localhost:5173
+CLIENT_URL=http://localhost:3000
 COOKIE_DOMAIN=localhost
 
 # Database (PostgreSQL)
@@ -363,7 +363,7 @@ GET    /api/v1/dashboard/activity  # Activity feed
 ## Key Configurations
 
 ### CORS (Cross-Origin)
-- Frontend at `http://localhost:5173` can call backend at `http://localhost:5000`
+- Frontend at `http://localhost:3000` can call backend at `http://localhost:5000`
 - Frontend URL: `CLIENT_URL` in `.env`
 
 ### JWT Tokens

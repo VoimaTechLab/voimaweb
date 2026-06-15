@@ -1,5 +1,5 @@
 import { prisma } from "../database/prisma.js";
-import { asyncHandler } from "../utils/asyncHandler.js";
+import { asyncHandler } from "../utils/aysncHandler.js";
 import { ok } from "../utils/response.js";
 
 const DEFAULTS = {

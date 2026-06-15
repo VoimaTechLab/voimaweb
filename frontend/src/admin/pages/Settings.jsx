@@ -26,27 +26,33 @@ const TABS = [
 
 const Field = ({ label, ...props }) => (
   <div className="space-y-1.5">
-    <label className="text-sm font-medium text-slate-700 dark:text-slate-300">
+    <label className="text-sm font-medium text-slate-700">
       {label}
     </label>
     <input
       {...props}
-      className="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-sm text-slate-900 outline-none transition focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100"
+      className="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-sm text-slate-900 outline-none transition focus:border-primary-500 focus:ring-2 focus:ring-primary-100"
     />
   </div>
 );
 
 const Card = ({ icon: Icon, title, desc, children }) => (
-  <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+  <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
     <div className="mb-5 flex items-start gap-3">
-      <span className="rounded-xl bg-teal-50 p-2.5 text-teal-600 dark:bg-teal-500/10">
+      <span className="rounded-xl bg-primary-50 p-2.5 text-primary-500">
         <Icon size={18} />
       </span>
+
       <div>
-        <h3 className="font-semibold text-slate-900 dark:text-slate-100">{title}</h3>
-        {desc && <p className="text-sm text-slate-500 dark:text-slate-400">{desc}</p>}
+        <h3 className="font-semibold text-slate-900">{title}</h3>
+        {desc && (
+          <p className="text-sm text-slate-500">
+            {desc}
+          </p>
+        )}
       </div>
     </div>
+
     {children}
   </div>
 );
@@ -60,9 +66,11 @@ export default function Settings() {
   const [toast, setToast] = useState("");
 
   // Dark mode (Tailwind 'class' strategy)
-  const [dark, setDark] = useState(
-    () => document.documentElement.classList.contains("dark")
-  );
+  const [dark, setDark] = useState(false);
+
+  useEffect(() => {
+    document.documentElement.classList.remove("dark");
+  }, []);
 
   // Password form
   const [pw, setPw] = useState({ currentPassword: "", newPassword: "", confirm: "" });
@@ -89,7 +97,7 @@ export default function Settings() {
   if (loading || !form)
     return (
       <div className="flex h-[60vh] items-center justify-center">
-        <Loader2 className="animate-spin text-teal-600" />
+        <Loader2 className="animate-spin text-primary-500" />
       </div>
     );
 
@@ -141,7 +149,7 @@ export default function Settings() {
     <div className="mx-auto max-w-4xl space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-100">Settings</h1>
+          <h1 className="text-2xl font-medium text-neutral-900">Settings</h1>
           <p className="text-sm text-slate-500 dark:text-slate-400">
             Manage your organization, branding, and account.
           </p>
@@ -150,8 +158,8 @@ export default function Settings() {
           <button
             onClick={handleSave}
             disabled={saving}
-            className="inline-flex items-center gap-2 rounded-xl bg-teal-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-teal-700 disabled:opacity-60"
-          >
+            className="inline-flex items-center gap-2 rounded-xl bg-primary-500 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-primary-600 disabled:opacity-60"
+            >
             {saving ? <Loader2 size={16} className="animate-spin" /> : <Save size={16} />}
             Save Changes
           </button>
@@ -159,15 +167,15 @@ export default function Settings() {
       </div>
 
       {/* Tabs */}
-      <div className="flex flex-wrap gap-1 rounded-xl border border-slate-200 bg-white p-1 dark:border-slate-800 dark:bg-slate-900">
+      <div className="flex flex-wrap gap-1 rounded-xl border border-slate-200 bg-white p-1">
         {TABS.map((t) => (
           <button
             key={t.id}
             onClick={() => setTab(t.id)}
             className={`inline-flex items-center gap-2 rounded-lg px-3.5 py-2 text-sm font-medium transition ${
               tab === t.id
-                ? "bg-teal-600 text-white"
-                : "text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
+                ? "bg-primary-500 text-white"
+                : "text-slate-600 hover:bg-primary-50"
             }`}
           >
             <t.icon size={15} /> {t.label}
@@ -211,14 +219,14 @@ export default function Settings() {
             <Field label="Meta Title" value={form.seo.metaTitle || ""}
               onChange={(e) => set("seo", "metaTitle", e.target.value)} />
             <div className="space-y-1.5">
-              <label className="text-sm font-medium text-slate-700 dark:text-slate-300">
+              <label className="text-sm font-medium text-slate-900">
                 Meta Description
               </label>
               <textarea
                 rows={3}
                 value={form.seo.metaDescription || ""}
                 onChange={(e) => set("seo", "metaDescription", e.target.value)}
-                className="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-sm text-slate-900 outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100"
+                className="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-sm text-slate-900 outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-100"
               />
             </div>
           </div>
@@ -232,10 +240,14 @@ export default function Settings() {
               onClick={toggleDark}
               className="flex w-full items-center justify-between rounded-xl border border-slate-200 px-4 py-3 dark:border-slate-700"
             >
-              <span className="text-sm font-medium text-slate-700 dark:text-slate-300">
+              <span className="text-sm font-medium text-slate-70">
                 Dark Mode
               </span>
-              <span className={`relative h-6 w-11 rounded-full transition ${dark ? "bg-teal-600" : "bg-slate-300"}`}>
+                <span
+                  className={`relative h-6 w-11 rounded-full transition ${
+                    dark ? "bg-primary-500" : "bg-slate-300"
+                  }`}
+                >
                 <span className={`absolute top-0.5 h-5 w-5 rounded-full bg-white transition ${dark ? "left-[22px]" : "left-0.5"}`} />
               </span>
             </button>
@@ -249,7 +261,7 @@ export default function Settings() {
                 ["newStory", "New community story"],
               ].map(([key, label]) => (
                 <label key={key} className="flex items-center justify-between rounded-xl border border-slate-200 px-4 py-3 dark:border-slate-700">
-                  <span className="text-sm text-slate-700 dark:text-slate-300">{label}</span>
+                  <span className="text-sm text-slate-700">{label}</span>
                   <input
                     type="checkbox"
                     checked={!!form.preferences?.notifications?.[key]}
@@ -265,7 +277,7 @@ export default function Settings() {
                         },
                       }))
                     }
-                    className="h-4 w-4 rounded accent-teal-600"
+                   className="h-4 w-4 rounded accent-primary-500"
                   />
                 </label>
               ))}
@@ -287,7 +299,7 @@ export default function Settings() {
               <button
                 onClick={handlePassword}
                 disabled={pwSaving}
-                className="inline-flex w-fit items-center gap-2 rounded-xl bg-teal-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-teal-700 disabled:opacity-60"
+                className="inline-flex w-fit items-center gap-2 rounded-xl bg-primary-500 px-4 py-2.5 text-sm font-semibold text-white hover:bg-primary-600 disabled:opacity-60"
               >
                 {pwSaving ? <Loader2 size={16} className="animate-spin" /> : <Lock size={16} />}
                 Update Password
@@ -301,7 +313,7 @@ export default function Settings() {
                 <p className="text-slate-500">Signed in as</p>
                 <p className="font-medium text-slate-900 dark:text-slate-100">{user?.email}</p>
               </div>
-              <div className="rounded-xl bg-slate-50 p-3 dark:bg-slate-800">
+              <div className="rounded-xl bg-primary-50 p-3">
                 <p className="text-slate-500">Role</p>
                 <p className="font-medium text-slate-900 dark:text-slate-100">{user?.role}</p>
               </div>
@@ -311,7 +323,7 @@ export default function Settings() {
       )}
 
       {toast && (
-        <div className="fixed bottom-6 right-6 z-50 rounded-xl bg-slate-900 px-4 py-3 text-sm font-medium text-white shadow-lg dark:bg-teal-600">
+        <div className="fixed bottom-6 right-6 z-50 rounded-xl bg-primary-500 px-4 py-3 text-sm font-medium text-white shadow-lg">
           {toast}
         </div>
       )}

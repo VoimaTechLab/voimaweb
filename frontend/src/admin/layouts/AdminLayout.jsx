@@ -24,7 +24,8 @@ const nav = [
 ];
 
 export default function AdminLayout() {
-  const { admin, logout, hasRole } = useAuth();
+  const { admin, logout } = useAuth();
+  console.log("AUTH DATA:", useAuth());
   const navigate = useNavigate();
 
   const handleLogout = async () => {
@@ -40,7 +41,10 @@ export default function AdminLayout() {
 
         <nav className="flex-1 space-y-1 px-3">
           {nav
-            .filter((i) => !i.role || hasRole(...i.role))
+            .filter((i) => {
+              if (!i.role) return true;
+              return i.role.includes(admin?.role);
+            })
             .map(({ to, label, icon: Icon }) => (
               <NavLink
                 key={to}

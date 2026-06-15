@@ -1,22 +1,20 @@
 import { USE_MOCK } from "../config";
-import { mockWaitlist } from "../data/mock";
+import { mockWaitlist } from "../data/mockData";
 import { api } from "./apiClient";
+import { safeGet, safeMutate } from "./http";
 
-export async function getWaitlist(params = {}) {
-  if (USE_MOCK) return Promise.resolve(mockWaitlist);
-  const { data } = await api.get("/waitlist", { params });
-  return data.data;
-}
-export async function deleteWaitlistUser(id) {
-  if (USE_MOCK) return Promise.resolve({ id });
-  const { data } = await api.delete(`/waitlist/${id}`);
-  return data.data;
-}
+export const getWaitlist = (params) =>
+  USE_MOCK ? Promise.resolve(mockWaitlist) : safeGet("/waitlist", mockWaitlist, params);
+
+export const deleteWaitlistUser = (id) =>
+  USE_MOCK ? Promise.resolve({ id }) : safeMutate(api.delete(`/waitlist/${id}`), { id });
+
 export async function exportWaitlist() {
   if (USE_MOCK) return;
-  const res = await api.get("/waitlist/export", { responseType: "blob" });
-  const url = URL.createObjectURL(res.data);
-  const a = document.createElement("a");
-  a.href = url; a.download = "waitlist.csv"; a.click();
-  URL.revokeObjectURL(url);
+  try {
+    const res = await api.get("/waitlist/export", { responseType: "blob" });
+    const url = URL.createObjectURL(res.data);
+    const a = document.createElement("a"); a.href = url; a.download = "waitlist.csv"; a.click();
+    URL.revokeObjectURL(url);
+  } catch (e) { console.warn("export failed:", e.message); }
 }

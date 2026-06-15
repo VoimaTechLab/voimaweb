@@ -1,13 +1,13 @@
 import { env } from "../config/env.js";
 import { prisma } from "../database/prisma.js";
 import {
-    storySubmittedAdminEmail,
-    storySubmittedUserEmail,
+  storySubmittedAdminEmail,
+  storySubmittedUserEmail,
 } from "../emails/templates.js";
-import { logActivity } from "../services/activity.service.js";
-import { destroyImage, publicIdFromUrl } from "../services/cloudinary.service.js";
-import { sendEmail } from "../services/email.service.js";
-import { asyncHandler } from "../utils/asyncHandler.js";
+import { logActivity } from "../services/activityService.js";
+import { destroyImage, publicIdFromUrl } from "../services/cloudinaryService.js";
+import { sendEmail } from "../services/emailService.js";
+import { asyncHandler } from "../utils/aysncHandler.js";
 import { created, ok } from "../utils/response.js";
 
 // PUBLIC (multipart: optional image via req.file)

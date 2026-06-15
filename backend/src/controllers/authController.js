@@ -1,15 +1,15 @@
 import { env } from "../config/env.js";
 import { prisma } from "../database/prisma.js";
-import { logActivity } from "../services/activity.service.js";
-import { toPublicAdmin, verifyCredentials } from "../services/auth.service.js";
+import { logActivity } from "../services/activityService.js";
+import { toPublicAdmin, verifyCredentials } from "../services/authService.js";
 import {
-    isRefreshTokenValid,
-    issueTokens,
-    revokeRefreshToken,
-    rotateRefreshToken,
-} from "../services/token.service.js";
+  isRefreshTokenValid,
+  issueTokens,
+  revokeRefreshToken,
+  rotateRefreshToken,
+} from "../services/tokenService.js";
 import { ApiError } from "../utils/ApiError.js";
-import { asyncHandler } from "../utils/asyncHandler.js";
+import { asyncHandler } from "../utils/aysncHandler.js";
 import { ok } from "../utils/response.js";
 import { verifyRefreshToken } from "../utils/tokens.js";
 

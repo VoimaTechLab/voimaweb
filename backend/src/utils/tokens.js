@@ -10,13 +10,13 @@ export const signAccessToken = (admin) =>
   );
 
 export const signRefreshToken = (admin) =>
-  jwt.sign({ sub: admin.id }, env.jwt.refreshSecret, {
-    expiresIn: `${env.jwt.refreshExpiresDays}d`,
-  });
+  jwt.sign(
+    { sub: admin.id, jti: crypto.randomUUID() }, // ✅ unique every time → no hash collision
+    env.jwt.refreshSecret,
+    { expiresIn: `${env.jwt.refreshExpiresDays}d` }
+  );
 
 export const verifyAccessToken = (t) => jwt.verify(t, env.jwt.accessSecret);
 export const verifyRefreshToken = (t) => jwt.verify(t, env.jwt.refreshSecret);
-
-// Hash refresh tokens before DB storage (never store raw)
 export const hashToken = (t) =>
   crypto.createHash("sha256").update(t).digest("hex");

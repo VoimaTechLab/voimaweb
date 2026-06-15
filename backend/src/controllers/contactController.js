@@ -1,9 +1,9 @@
 import { env } from "../config/env.js";
 import { prisma } from "../database/prisma.js";
 import { contactAdminEmail, contactUserEmail } from "../emails/templates.js";
-import { logActivity } from "../services/activity.service.js";
-import { sendEmail } from "../services/email.service.js";
-import { asyncHandler } from "../utils/asyncHandler.js";
+import { logActivity } from "../services/activityService.js";
+import { sendEmail } from "../services/emailService.js";
+import { asyncHandler } from "../utils/aysncHandler.js";
 import { created, ok } from "../utils/response.js";
 
 // PUBLIC
