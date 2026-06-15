@@ -1,34 +1,9 @@
-# Voima Sanity CMS
+# Sanity Clean Content Studio
 
-## Setup
-```bash
-npm create sanity@latest -- --template clean --create-project "Voima CMS" --dataset production
-cd voima-cms && npm run dev   # studio at http://localhost:3333
-Schemas to create (schemaTypes/)
+Congratulations, you have now installed the Sanity Content Studio, an open-source real-time content editing environment connected to the Sanity backend.
 
-post.js     → title, slug, excerpt, body(portableText), coverImage, author(ref), categories[], publishedAt
-author.js   → name, image, bio
-category.js → title, description
-event.js    → title, description, location, eventDate, image
-gallery.js  → title, images[]
+Now you can do the following things:
 
-Public site reads via CDN (read-only token)
-Set in frontend .env:
-VITE_SANITY_PROJECT_ID=...
-VITE_SANITY_DATASET=production
-Copy
-**Frontend Sanity client** — `frontend/src/services/sanityClient.js`
-
-```js
-import { createClient } from "@sanity/client";
-import imageUrlBuilder from "@sanity/image-url";
-
-export const sanity = createClient({
-  projectId: import.meta.env.VITE_SANITY_PROJECT_ID,
-  dataset: import.meta.env.VITE_SANITY_DATASET || "production",
-  apiVersion: "2024-01-01",
-  useCdn: true, // fast, cached reads for public site
-});
-
-const builder = imageUrlBuilder(sanity);
-export const urlFor = (src) => builder.image(src);
+- [Read “getting started” in the docs](https://www.sanity.io/docs/introduction/getting-started?utm_source=readme)
+- [Join the Sanity community](https://www.sanity.io/community/join?utm_source=readme)
+- [Extend and build plugins](https://www.sanity.io/docs/content-studio/extending?utm_source=readme)

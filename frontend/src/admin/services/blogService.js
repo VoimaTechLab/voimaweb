@@ -1,5 +1,5 @@
 import { USE_MOCK } from "../config";
-import { mockBlogPosts } from "../data/mock";
+import { mockBlogPosts } from "../data/mockData";
 import { api } from "./apiClient";
 // READS can use your existing Sanity client directly:
 import { sanity } from "@/sanity/client"; // ← change if your export differs

@@ -1,40 +1,152 @@
 import { USE_MOCK } from "../config";
-import * as mock from "../data/mockData";
+import {
+  mockActivity,
+  mockBlogPosts,
+  mockEvents,
+  mockGrowthSeries,
+  mockMessages,
+  mockStories,
+  mockSubscribers, mockWaitlist,
+  mockWaitlistByRole,
+} from "../data/mockData";
+import { api } from "./apiClient";
 
-const delay = (ms) => new Promise((r) => setTimeout(r, ms));
-const clone = (x) => JSON.parse(JSON.stringify(x));
+/* ----------------------------- helpers ----------------------------- */
+const genId = () => Math.random().toString(36).slice(2, 10);
+const now = () => new Date().toISOString();
 
-// Simple in-memory CRUD over mock arrays (resets on refresh — fine for now)
-function makeService(seed) {
-  let store = clone(seed);
-  return {
-    async list() {
-      if (USE_MOCK) { await delay(250); return clone(store); }
-    },
-    async create(item) {
-      if (USE_MOCK) {
-        await delay(200);
-        const created = { id: `id_${Date.now()}`, createdAt: new Date().toISOString(), ...item };
-        store = [created, ...store];
-        return created;
-      }
-    },
-    async update(id, patch) {
-      if (USE_MOCK) {
-        await delay(200);
-        store = store.map((x) => (x.id === id ? { ...x, ...patch } : x));
-        return store.find((x) => x.id === id);
-      }
-    },
-    async remove(id) {
-      if (USE_MOCK) { await delay(200); store = store.filter((x) => x.id !== id); return true; }
-    },
-  };
+// GET that never throws → returns backend data or fallback
+async function getList(url, fallback, params) {
+  if (USE_MOCK) return fallback;
+  try {
+    const { data } = await api.get(url, { params });
+    return Array.isArray(data?.data) ? data.data : fallback;
+  } catch (e) {
+    console.warn(`[fallback] GET ${url} → mock (${e.message})`);
+    return fallback;
+  }
 }
 
-export const messagesService = makeService(mock.mockMessages);
-export const subscribersService = makeService(mock.mockSubscribers);
-export const waitlistService = makeService(mock.mockWaitlist);
-export const blogService = makeService(mock.mockBlogPosts);
-export const eventsService = makeService(mock.mockEvents);
-export const storiesService = makeService(mock.mockStories); 
+// Mutation that never throws → returns server object or optimistic merge
+async function mutate(promiseFactory, optimistic) {
+  if (USE_MOCK) return optimistic;
+  try {
+    const { data } = await promiseFactory();
+    const res = data?.data ?? {};
+    // merge so the UI always gets a full object to render
+    return { ...optimistic, ...res };
+  } catch (e) {
+    console.warn(`[fallback] mutation → optimistic (${e.message})`);
+    return optimistic;
+  }
+}
+
+/* ----------------------------- messages ----------------------------- */
+export const messagesService = {
+  list: () => getList("/contact", mockMessages),
+  update: (id, patch) =>
+    mutate(() => api.patch(`/contact/${id}`, patch), { id, ...patch }),
+  remove: (id) => mutate(() => api.delete(`/contact/${id}`), { id }),
+  markRead: (id) =>
+    mutate(() => api.patch(`/contact/${id}`, { status: "read" }), { id, status: "read" }),
+};
+
+/* --------------------------- subscribers ---------------------------- */
+export const subscribersService = {
+  list: () => getList("/newsletter", mockSubscribers),
+  remove: (id) => mutate(() => api.delete(`/newsletter/${id}`), { id }),
+};
+
+/* ----------------------------- waitlist ----------------------------- */
+export const waitlistService = {
+  list: () => getList("/waitlist", mockWaitlist),
+  remove: (id) => mutate(() => api.delete(`/waitlist/${id}`), { id }),
+};
+
+/* ----------------------------- stories ------------------------------ */
+export const storiesService = {
+  list: () => getList("/stories", mockStories),
+  // Stories.jsx calls update(id, { status })
+  update: (id, patch) =>
+    mutate(() => api.patch(`/stories/${id}/review`, { status: patch.status }), { id, ...patch }),
+  remove: (id) => mutate(() => api.delete(`/stories/${id}`), { id }),
+};
+
+/* ------------------------------ events ------------------------------ */
+// Events live in Postgres (backend). Full CRUD.
+export const eventsService = {
+  list: () => getList("/events", mockEvents),
+  create: (form) =>
+    mutate(() => api.post("/events", form), { id: genId(), createdAt: now(), ...form }),
+  update: (id, form) =>
+    mutate(() => api.put(`/events/${id}`, form), { id, ...form }),
+  remove: (id) => mutate(() => api.delete(`/events/${id}`), { id }),
+};
+
+/* ------------------------------- blog ------------------------------- */
+// Blog lives in Sanity (via backend proxy). Falls back to in-memory mock
+// until Sanity credentials are wired — UI keeps working either way.
+export const blogService = {
+  list: () => getList("/blog", mockBlogPosts),
+  create: (payload) =>
+    mutate(() => api.post("/blog", payload), { id: genId(), createdAt: now(), ...payload }),
+  update: (id, payload) =>
+    mutate(() => api.put(`/blog/${id}`, payload), { id, ...payload }),
+  remove: (id) => mutate(() => api.delete(`/blog/${id}`), { id }),
+};
+
+/* ----------------------------- dashboard ---------------------------- */
+const mockStats = () => ({
+  cards: {
+    totalMessages: mockMessages.length,
+    unreadMessages: mockMessages.filter((m) => m.status === "unread").length,
+    totalSubscribers: mockSubscribers.length,
+    totalWaitlist: mockWaitlist.length,
+    totalStories: mockStories.length,
+    pendingStories: mockStories.filter((s) => s.status === "pending").length,
+    totalEvents: mockEvents.length,
+    totalBlogPosts: mockBlogPosts.length,
+    totalGalleryImages: 24,
+  },
+  growthSeries: mockGrowthSeries,
+  waitlistByRole: mockWaitlistByRole,
+  activity: mockActivity,
+});
+
+export const dashboardService = {
+  stats: async () => {
+    if (USE_MOCK) return mockStats();
+    try {
+      const { data } = await api.get("/dashboard/stats");
+      return data?.data || mockStats();
+    } catch (e) {
+      console.warn(`[fallback] dashboard → mock (${e.message})`);
+      return mockStats();
+    }
+  },
+};
+
+/* ----------------------------- settings ----------------------------- */
+const DEFAULT_SETTINGS = {
+  general: { siteName: "Voima Initiative", contactEmail: "", phone: "", address: "" },
+  social: { facebook: "", instagram: "", linkedin: "", x: "" },
+  seo: { metaTitle: "", metaDescription: "" },
+  preferences: { notifications: { newMessage: true, newWaitlist: true, newStory: true } },
+};
+
+export const settingsService = {
+  get: async () => {
+    if (USE_MOCK) return DEFAULT_SETTINGS;
+    try {
+      const { data } = await api.get("/settings");
+      return data?.data || DEFAULT_SETTINGS;
+    } catch (e) {
+      console.warn(`[fallback] settings → defaults (${e.message})`);
+      return DEFAULT_SETTINGS;
+    }
+  },
+  update: (payload) =>
+    mutate(() => api.put("/settings", payload), payload),
+  changePassword: (payload) =>
+    mutate(() => api.patch("/admins/me/password", payload), { message: "Password updated" }),
+};

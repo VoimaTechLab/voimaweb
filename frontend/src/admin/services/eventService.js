@@ -1,33 +1,27 @@
 import { USE_MOCK } from "../config";
-import { mockEvents } from "../data/mock";
+import { mockEvents } from "../data/mockData";
 import { api } from "./apiClient";
+import { safeGet, safeMutate } from "./http";
 
-export async function getEvents(params = {}) {
-  if (USE_MOCK) return Promise.resolve(mockEvents);
-  const { data } = await api.get("/events", { params });
-  return data.data;
-}
+export const getEvents = (params) =>
+  USE_MOCK ? Promise.resolve(mockEvents) : safeGet("/events", mockEvents, params);
+
+export const deleteEvent = (id) =>
+  USE_MOCK ? Promise.resolve({ id }) : safeMutate(api.delete(`/events/${id}`), { id });
+
 export async function createEvent(payload, imageFile) {
-  if (USE_MOCK) return Promise.resolve({ id: `e_${Date.now()}`, ...payload });
-  const fd = buildEventForm(payload, imageFile);
-  const { data } = await api.post("/events", fd);
-  return data.data;
+  if (USE_MOCK) return { id: `e_${Date.now()}`, ...payload };
+  const fd = toForm(payload, imageFile);
+  return safeMutate(api.post("/events", fd), { id: `tmp_${Date.now()}`, ...payload });
 }
 export async function updateEvent(id, payload, imageFile) {
-  if (USE_MOCK) return Promise.resolve({ id, ...payload });
-  const fd = buildEventForm(payload, imageFile);
-  const { data } = await api.put(`/events/${id}`, fd);
-  return data.data;
+  if (USE_MOCK) return { id, ...payload };
+  const fd = toForm(payload, imageFile);
+  return safeMutate(api.put(`/events/${id}`, fd), { id, ...payload });
 }
-export async function deleteEvent(id) {
-  if (USE_MOCK) return Promise.resolve({ id });
-  const { data } = await api.delete(`/events/${id}`);
-  return data.data;
-}
-
-function buildEventForm(payload, imageFile) {
+function toForm(payload, file) {
   const fd = new FormData();
   Object.entries(payload).forEach(([k, v]) => v != null && fd.append(k, v));
-  if (imageFile) fd.append("image", imageFile);
+  if (file) fd.append("image", file);
   return fd;
 }

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import * as c from "../controllers/gallery.controller.js";
+import * as c from "../controllers/galleryController.js";
 import { requireAuth } from "../middleware/auth.js";
 import { authorize } from "../middleware/authorize.js";
 import { memoryUpload } from "../middleware/memoryUpload.js";

@@ -1,21 +1,14 @@
 import { USE_MOCK } from "../config";
-import { mockMessages } from "../data/mock"; // existing mock file
+import { mockMessages } from "../data/mockData";
 import { api } from "./apiClient";
+import { safeGet, safeMutate } from "./http";
 
-export async function getMessages(params = {}) {
-  if (USE_MOCK) return Promise.resolve(mockMessages);
-  const { data } = await api.get("/contact", { params });
-  return data.data; // array, matches mockMessages shape
-}
+export const getMessages = (params) =>
+  USE_MOCK ? Promise.resolve(mockMessages) : safeGet("/contact", mockMessages, params);
 
-export async function updateMessageStatus(id, status) {
-  if (USE_MOCK) return Promise.resolve({ id, status });
-  const { data } = await api.patch(`/contact/${id}`, { status });
-  return data.data;
-}
+export const updateMessageStatus = (id, status) =>
+  USE_MOCK ? Promise.resolve({ id, status })
+           : safeMutate(api.patch(`/contact/${id}`, { status }), { id, status });
 
-export async function deleteMessage(id) {
-  if (USE_MOCK) return Promise.resolve({ id });
-  const { data } = await api.delete(`/contact/${id}`);
-  return data.data;
-}
+export const deleteMessage = (id) =>
+  USE_MOCK ? Promise.resolve({ id }) : safeMutate(api.delete(`/contact/${id}`), { id });

@@ -41,12 +41,23 @@ export function AuthProvider({ children }) {
     setUser(null);
   }, []);
 
+  const hasRole = useCallback(
+    (roles) => {
+      if (!user) return false;
+      const allowed = Array.isArray(roles) ? roles : [roles];
+      return allowed.includes(user.role);
+    },
+    [user]
+  );
+
   const value = {
     user,
+    admin: user , // compatibility with existing admin pages
     loading,
     isAuthenticated: !!user,
     login,
     logout,
+    hasRole
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

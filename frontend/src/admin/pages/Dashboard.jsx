@@ -1,5 +1,4 @@
 import { Calendar, FileText, ListChecks, Mail, MessageSquare, Send } from "lucide-react";
-import { useEffect, useState } from "react";
 import {
   Area,
   AreaChart,
@@ -11,33 +10,81 @@ import {
   PieChart,
   ResponsiveContainer,
   Tooltip,
-  XAxis, YAxis,
+  XAxis,
+  YAxis,
 } from "recharts";
 
 import Card from "../components/ui/Card";
 import PageHeader from "../components/ui/PageHeader";
 import StatCard from "../components/ui/StatCard";
-import { dashboardService } from "../services/dashboardService";
+
+
+import { useResource } from "../hooks/useResource";
+import { getDashboardStats } from "../services/dashboardService";
 import { fmtRelative } from "../utils/format";
 
 const PIE_COLORS = ["#BC1D26", "#0000ff", "#800080", "#ffff00"];
 
+
 export default function Dashboard() {
-  const [stats, setStats] = useState(null);
+  const {
+    data: stats,
+    loading,
+  } = useResource(getDashboardStats, null);
 
-  useEffect(() => {
-    dashboardService.getStats().then(setStats);
-  }, []);
+  if (loading) {
+    return (
+      <div className="text-neutral-400">
+        Loading analytics...
+      </div>
+    );
+  }
 
-  if (!stats) return <div className="text-neutral-400">Loading analytics…</div>;
+  if (!stats) {
+    return (
+      <div className="text-neutral-400">
+        No analytics available.
+      </div>
+    );
+  }
 
   const cards = [
-    { label: "Messages", value: stats.messages, icon: Mail, trend: 12 },
-    { label: "Subscribers", value: stats.subscribers, icon: Send, trend: 8 },
-    { label: "Waitlist", value: stats.waitlist, icon: ListChecks, trend: 23 },
-    { label: "Blog Posts", value: stats.blogPosts, icon: FileText, trend: 4 },
-    { label: "Events", value: stats.events, icon: Calendar, trend: -2 },
-    { label: "Pending Stories", value: stats.pendingStories, icon: MessageSquare, trend: 15 },
+    {
+      label: "Messages",
+      value: stats.cards.totalMessages,
+      icon: Mail,
+      trend: 12,
+    },
+    {
+      label: "Subscribers",
+      value: stats.cards.totalSubscribers,
+      icon: Send,
+      trend: 8,
+    },
+    {
+      label: "Waitlist",
+      value: stats.cards.totalWaitlist,
+      icon: ListChecks,
+      trend: 23,
+    },
+    {
+      label: "Blog Posts",
+      value: stats.cards.totalBlogPosts,
+      icon: FileText,
+      trend: 4,
+    },
+    {
+      label: "Events",
+      value: stats.cards.totalEvents,
+      icon: Calendar,
+      trend: -2,
+    },
+    {
+      label: "Pending Stories",
+      value: stats.cards.pendingStories,
+      icon: MessageSquare,
+      trend: 15,
+    },
   ];
 
   return (
