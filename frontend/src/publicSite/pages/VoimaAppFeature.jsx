@@ -1,25 +1,28 @@
-import { features } from "@/publicSite/data/voimaAppData";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+
+import { useAppFeature } from "@/publicSite/hooks/useAppFeatures";
 
 export default function VoimaAppFeature() {
   const { slug } = useParams();
+  const { feature, loading } = useAppFeature(slug);
 
-  const feature = features.find(
-    item => item.slug === slug
-  );
+  if (loading && !feature)
+    return <div className="py-40 text-center text-black/50">Loading…</div>;
 
-  if (!feature) {
-    return (
-      <div className="py-40 text-center">
-        Feature not found.
-      </div>
-    );
-  }
+  if (!feature)
+    return <div className="py-40 text-center">Feature not found.</div>;
 
   return (
     <main className="pt-[90px]">
       <section className="px-6 py-24">
         <div className="mx-auto max-w-5xl">
+          {/* Back Button */}
+          <Link
+            to="/voima-app"
+            className="mb-8 inline-flex items-center gap-2 rounded-full border border-black/10 bg-white px-5 py-3 text-sm font-medium text-black transition hover:border-[#BC1D26] hover:text-[#BC1D26]"
+          >
+            ← Back to Voima App
+          </Link>
 
           <h1 className="text-6xl font-bold text-[#BC1D26]">
             {feature.title}
@@ -33,13 +36,7 @@ export default function VoimaAppFeature() {
             <img
               src={feature.heroImage}
               alt={feature.title}
-              className="
-                mt-12
-                h-[500px]
-                w-full
-                rounded-[40px]
-                object-cover
-              "
+              className="mt-12 h-[500px] w-full rounded-[40px] object-cover"
             />
           )}
 
@@ -61,13 +58,10 @@ export default function VoimaAppFeature() {
 
             <ul className="mt-8 space-y-4">
               {feature.highlights?.map((item, index) => (
-                <li key={index}>
-                  • {item}
-                </li>
+                <li key={index}>• {item}</li>
               ))}
             </ul>
           </div>
-
         </div>
       </section>
     </main>

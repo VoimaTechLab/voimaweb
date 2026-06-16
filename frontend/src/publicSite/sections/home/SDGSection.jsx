@@ -1,8 +1,10 @@
 import SDGCard from "@/components/ui/SDGCard/SDGCard";
 import SectionHeader from "@/components/ui/SectionHeader/SectionHeader";
-import { sdgSection } from "@/data/homeData";
+import { useHome } from "@/publicSite/hooks/useHome";
 
 export default function SDGSection() {
+  
+const { sdgSection } = useHome();
   const { eyebrow, title, goals } = sdgSection;
 
   return (

@@ -1,6 +1,6 @@
-import { teamData } from "@/publicSite/data/aboutData";
-
-export default function TeamSection() {
+import { useAbout } from "@/publicSite/hooks/useAbout";
+export default function StorySection() {
+  const { teamData } = useAbout();
   return (
     <section className="px-6 py-32">
       <div className="mx-auto max-w-7xl">

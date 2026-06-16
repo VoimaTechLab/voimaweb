@@ -1,7 +1,7 @@
+import { useHome } from "@/publicSite/hooks/useHome";
 import { ArrowRight, Play } from "lucide-react";
 import { Link } from "react-router-dom";
 
-import { appShowcaseSection } from "@/data/homeData";
 
 const AppleIcon = () => (
   <svg
@@ -15,6 +15,8 @@ const AppleIcon = () => (
 );
 
 export default function AppShowcaseSection() {
+  
+const { appShowcaseSection } = useHome();
   const {
     eyebrow,
     title,

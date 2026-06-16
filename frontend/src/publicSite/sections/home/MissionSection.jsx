@@ -1,3 +1,4 @@
+import { useHome } from "@/publicSite/hooks/useHome";
 import { Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -5,9 +6,10 @@ import "swiper/css";
 
 import MissionStepCard from "@/components/ui/MissionStepCard/MissionStepCard";
 import SectionHeader from "@/components/ui/SectionHeader/SectionHeader";
-import { missionSection } from "@/data/homeData";
 
 export default function MissionSection() {
+
+const { missionSection } = useHome();
   const { eyebrow, title, steps } = missionSection;
   const carouselSteps = [...steps, ...steps];
 

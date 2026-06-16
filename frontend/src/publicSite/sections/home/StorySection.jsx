@@ -2,9 +2,11 @@ import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
 import SectionHeader from "@/components/ui/SectionHeader/SectionHeader";
-import { storySection } from "@/data/homeData";
+import { useHome } from "@/publicSite/hooks/useHome";
 
 export default function StorySection() {
+
+const { storySection } = useHome();
   const { eyebrow, title, description, quote, image, imageAlt, cta } =
     storySection;
 

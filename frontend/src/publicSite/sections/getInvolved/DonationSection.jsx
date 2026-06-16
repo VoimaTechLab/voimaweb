@@ -1,11 +1,11 @@
 import { ArrowRight, CircleDollarSign } from "lucide-react";
 import { Link } from "react-router-dom";
 
-import {
-    donationData,
-} from "@/publicSite/data/getInvolvedData";
+
+import { useGetInvolved } from "../../hooks/useGetInvolved";
 
 export default function DonationSection() {
+  const { donationData } = useGetInvolved();
   return (
     <section className="px-6 py-28">
 

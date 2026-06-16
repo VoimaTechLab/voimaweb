@@ -55,3 +55,8 @@ export const exportWaitlist = asyncHandler(async (_req, res) => {
   res.setHeader("Content-Disposition", "attachment; filename=waitlist.csv");
   res.send(csv);
 });
+
+export const waitlistCount = asyncHandler(async (_req, res) => {
+  const total = await prisma.waitlistUser.count();
+  ok(res, { total });
+});

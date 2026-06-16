@@ -1,6 +1,7 @@
-import { benefits } from "@/publicSite/data/voimaAppData";
+import { useVoimaApp } from "../../hooks/useVoimaApp";
 
 export default function AppBenefits() {
+  const { benefits } = useVoimaApp();
   return (
     <section className="px-6 py-32">
       <div className="mx-auto max-w-7xl">

@@ -1,8 +1,8 @@
-import { events } from "@/publicSite/data/eventsData";
+import { events as fallback } from "@/publicSite/data/eventsData";
 import { useRef } from "react";
 import { Link } from "react-router-dom";
 
-export default function EventsGrid() {
+export default function EventsGrid({ events = fallback}) {
   return (
     <section className="px-6 pb-32">
       <div className="mx-auto max-w-7xl">
@@ -63,8 +63,8 @@ function EventCard({ event }) {
             muted
             loop
             playsInline
-            onMouseEnter={(e) => videoRef.current?.play()}
-            onMouseLeave={(e) => {
+            onMouseEnter={() => videoRef.current?.play()}
+            onMouseLeave={() => {
               videoRef.current?.pause();
               videoRef.current.currentTime = 0;
             }}

@@ -1,22 +1,12 @@
-const API_URL = import.meta.env.VITE_API_URL;
+import axios from "axios";
+
+const API = import.meta.env.VITE_API_BASE || "http://localhost:5000/api/v1";
+const client = axios.create({ baseURL: API });
 
 export const contactService = {
-  sendMessage: async (payload) => {
-    const response = await fetch(
-      `${API_URL}/contact`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      }
-    );
-
-    if (!response.ok) {
-      throw new Error("Failed to send message");
-    }
-
-    return response.json();
+  // data = { name, email, subject, message }  (matches your contactSchema)
+  sendMessage: async (data) => {
+    const res = await client.post("/contact", data);
+    return res.data;
   },
 };

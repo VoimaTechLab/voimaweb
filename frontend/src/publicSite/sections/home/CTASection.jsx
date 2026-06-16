@@ -1,9 +1,12 @@
 import { ArrowRight, HeartHandshake } from "lucide-react";
 import { Link } from "react-router-dom";
 
-import { ctaSection } from "@/data/homeData";
+import { useHome } from "@/publicSite/hooks/useHome";
+
+
 
 export default function CTASection() {
+  const { ctaSection } = useHome();
   const { title, description, primaryCta, secondaryCta } = ctaSection;
 
   return (

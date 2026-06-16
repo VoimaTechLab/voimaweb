@@ -1,6 +1,6 @@
-import { traceFramework } from "@/publicSite/data/aboutData";
-
-export default function TraceFramework() {
+import { useAbout } from "@/publicSite/hooks/useAbout";
+export default function StorySection() {
+  const { traceFramework } = useAbout();
   return (
     <section className="px-6 py-24">
       <div className="mx-auto max-w-7xl rounded-[40px] bg-[#fafafa] p-10">

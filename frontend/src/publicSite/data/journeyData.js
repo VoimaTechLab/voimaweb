@@ -280,9 +280,9 @@ export const milestones = [
 
 export const stats = [
   { value: "10+", label: "Programs" },
-  { value: "500+", label: "Participants" },
-  { value: "20+", label: "Partners" },
-  { value: "5", label: "Regions" },
+  { value: "50+", label: "Participants" },
+  { value: "10+", label: "Partners" },
+  { value: "5", label: "Countries" },
 ];
 
 export const testimonials = [

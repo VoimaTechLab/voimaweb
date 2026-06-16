@@ -2,15 +2,14 @@ import { pageTransition } from "@/publicSite/motion/variants";
 import { motion } from "framer-motion";
 
 import {
-  blogHero,
-  communityStories,
-  featuredPost,
-  posts,
+  blogHero
 } from "@/publicSite/data/blogData";
+import { useBlog } from "@/publicSite/hooks/useBlog";
 
 import { Link } from "react-router-dom";
 
 export default function Blog() {
+  const { featuredPost, posts, communityStories } = useBlog();
   return (
     <motion.main
       {...pageTransition}

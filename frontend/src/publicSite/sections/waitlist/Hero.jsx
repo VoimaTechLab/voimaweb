@@ -1,6 +1,6 @@
-import { waitlistAvatars, waitlistData } from "@/publicSite/data/waitlistData";
-
+import { useWaitlist } from "../../hooks/useWaitlist";
 export default function Hero() {
+  const { waitlistData, waitlistAvatars } = useWaitlist();
   return (
     <section className="px-6 pt-40 pb-20">
       <div className="mx-auto max-w-4xl text-center">

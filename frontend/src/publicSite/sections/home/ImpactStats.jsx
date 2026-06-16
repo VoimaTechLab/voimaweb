@@ -1,8 +1,10 @@
 import FeatureCard from "@/components/ui/FeatureCard/FeatureCard";
 import SectionHeader from "@/components/ui/SectionHeader/SectionHeader";
-import { impactSection } from "@/data/homeData";
+import { useHome } from "@/publicSite/hooks/useHome";
 
 export default function ImpactStats() {
+
+const { impactSection } = useHome(); 
   const { eyebrow, title, areas, banner } = impactSection;
 
   return (

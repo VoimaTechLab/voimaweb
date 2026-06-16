@@ -48,7 +48,7 @@ export default function WaitlistFooter() {
         </div>
 
         <p className="text-xs md:text-sm text-white/40">
-          © 2026 Voima Initiative
+          © 2026 Voima
         </p>
       </div>
     </footer>

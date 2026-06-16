@@ -7,12 +7,13 @@ import {
 } from "lucide-react";
 import { useCallback, useRef } from "react";
 
-import { testimonials } from "@/publicSite/data/journeyData";
+import { useTestimonials } from "../../hooks/useJourney";
 
 export default function Testimonials() {
+  const testimonials = useTestimonials();
   const autoplay = useRef(
     Autoplay({
-      delay: 3000,
+      delay: 4000,
       stopOnInteraction: false,
       stopOnMouseEnter: true,
     })

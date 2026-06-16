@@ -1,19 +1,15 @@
-import { milestones } from "@/publicSite/data/journeyData";
+import { useMilestone } from "@/publicSite/hooks/useJourney";
 import { Link, useParams } from "react-router-dom";
 
 export default function OurJourneyStory() {
   const { slug } = useParams();
+  const { milestone: story, loading } = useMilestone(slug); // keeps `story` var name
 
-  const story = milestones.find(
-    item => item.slug === slug
-  );
+  if (loading && !story)
+    return <div className="py-40 text-center text-black/50">Loading…</div>;
 
   if (!story) {
-    return (
-      <div className="py-40 text-center">
-        Story not found.
-      </div>
-    );
+    return <div className="py-40 text-center">Story not found.</div>;
   }
 
   return (

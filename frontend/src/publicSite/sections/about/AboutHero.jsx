@@ -1,7 +1,8 @@
-import { heroData } from "@/publicSite/data/aboutData";
 import { Link } from "react-router-dom";
+import { useAbout } from "../../hooks/useAbout";
 
 export default function AboutHero() {
+  const { heroData } = useAbout();
   return (
     <section className="relative px-6 py-28">
       <div className="mx-auto grid max-w-7xl items-center gap-20 lg:grid-cols-2">

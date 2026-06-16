@@ -1,82 +1,74 @@
 import { logActivity } from "../services/activityService.js";
 import { sanityWrite, uploadSanityImage } from "../services/sanityWriteService.js";
 import { ApiError } from "../utils/ApiError.js";
-import { asyncHandler } from "../utils/aysncHandler.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
 import { created, ok } from "../utils/response.js";
 
-const POST_PROJECTION = `{
-  "id": _id, title, "slug": slug.current, excerpt,
-  "author": author->name, "authorId": author._ref,
+const PROJECTION = `{
+  "id": _id, title, "slug": slug.current, excerpt, category, readTime,
+  kind, featured, location, source, author, story,
+  "coverImage": coverImage.asset->url,
   "status": select(defined(publishedAt) && publishedAt <= now() => "published", "draft"),
-  "coverImage": coverImage.asset->url, publishedAt, "createdAt": _createdAt
+  publishedAt, "createdAt": _createdAt
 }`;
 
+const guard = () => { if (!sanityWrite) throw ApiError.badRequest("Sanity not configured (missing SANITY_WRITE_TOKEN)"); };
+
+// admin form sends: { title, slug, excerpt, content, author, status, category?, readTime?, kind?, featured? }
+const buildDoc = (b) => {
+  const doc = {
+    _type: "post",
+    title: b.title,
+    slug: { _type: "slug", current: b.slug },
+    excerpt: b.excerpt || "",
+    category: b.category || "",
+    readTime: b.readTime || "",
+    kind: b.kind || "article",
+    featured: !!b.featured,
+    ...(b.location && { location: b.location }),
+    ...(b.source && { source: b.source }),
+    ...(b.author && { author: { name: b.author, role: b.authorRole || "" } }),
+    ...(b.content && { story: { content: Array.isArray(b.content) ? b.content : [b.content], highlights: b.highlights || [] } }),
+    publishedAt: b.status === "published" ? (b.publishedAt || new Date().toISOString()) : null,
+  };
+  return doc;
+};
+
 export const listPosts = asyncHandler(async (_req, res) => {
-  const posts = await sanityWrite.fetch(
-    `*[_type == "post"] | order(_createdAt desc) ${POST_PROJECTION}`
-  );
-  ok(res, posts);
+  guard();
+  ok(res, await sanityWrite.fetch(`*[_type=="post"] | order(_createdAt desc) ${PROJECTION}`));
 });
 
 export const createPost = asyncHandler(async (req, res) => {
-  const { title, slug, excerpt, body, authorId, publishedAt, tags } = req.body;
-  if (!title || !slug) throw ApiError.badRequest("Title and slug are required");
-
-  const doc = {
-    _type: "post",
-    title,
-    slug: { _type: "slug", current: slug },
-    excerpt,
-    body, // expect portable text or plain; adapt to your schema
-    tags: tags ? JSON.parse(tags) : [],
-    ...(authorId && { author: { _type: "reference", _ref: authorId } }),
-    ...(publishedAt && { publishedAt }),
-  };
-
+  guard();
+  if (!req.body.title || !req.body.slug) throw ApiError.badRequest("Title and slug required");
+  const doc = buildDoc(req.body);
   if (req.file) doc.coverImage = await uploadSanityImage(req.file);
-
   const result = await sanityWrite.create(doc);
-  logActivity({ type: "blog", text: `Blog post "${title}" created`, adminId: req.user.id });
-  created(res, { id: result._id });
+  logActivity({ type: "blog", text: `Blog post "${req.body.title}" created`, adminId: req.user.id });
+  created(res, { id: result._id, ...req.body });
 });
 
 export const updatePost = asyncHandler(async (req, res) => {
-  const { id } = req.params;
-  const { title, slug, excerpt, body, authorId, publishedAt, tags } = req.body;
-
-  const patch = {};
-  if (title) patch.title = title;
-  if (slug) patch.slug = { _type: "slug", current: slug };
-  if (excerpt !== undefined) patch.excerpt = excerpt;
-  if (body !== undefined) patch.body = body;
-  if (tags) patch.tags = JSON.parse(tags);
-  if (authorId) patch.author = { _type: "reference", _ref: authorId };
-  if (publishedAt !== undefined) patch.publishedAt = publishedAt || null;
+  guard();
+  const patch = buildDoc(req.body);
+  delete patch._type; // can't change type on patch
   if (req.file) patch.coverImage = await uploadSanityImage(req.file);
-
-  await sanityWrite.patch(id).set(patch).commit();
-  ok(res, { id });
+  await sanityWrite.patch(req.params.id).set(patch).commit();
+  ok(res, { id: req.params.id, ...req.body });
 });
 
 export const publishPost = asyncHandler(async (req, res) => {
-  const { id } = req.params;
-  const { publish } = req.body; // boolean
-  await sanityWrite
-    .patch(id)
-    .set({ publishedAt: publish ? new Date().toISOString() : null })
-    .commit();
-  ok(res, { id, published: !!publish });
+  guard();
+  await sanityWrite.patch(req.params.id)
+    .set({ publishedAt: req.body.publish ? new Date().toISOString() : null }).commit();
+  ok(res, { id: req.params.id, published: !!req.body.publish });
 });
 
 export const deletePost = asyncHandler(async (req, res) => {
+  guard();
   await sanityWrite.delete(req.params.id);
   ok(res, { id: req.params.id });
 });
 
-// Authors dropdown for the editor
-export const listAuthors = asyncHandler(async (_req, res) => {
-  const authors = await sanityWrite.fetch(
-    `*[_type == "author"]{ "id": _id, name }`
-  );
-  ok(res, authors);
-});
+export const listAuthors = asyncHandler(async (_req, res) => ok(res, [])); // inline authors now

@@ -1,7 +1,8 @@
-import { galleryData } from "@/publicSite/data/aboutData";
 import { Link } from "react-router-dom";
+import { useAbout } from "../../hooks/useAbout";
 
 export default function GalleryCTA() {
+  const { galleryData } = useAbout();
   return (
     <section className="px-6 py-24">
       <div

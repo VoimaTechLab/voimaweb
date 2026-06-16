@@ -1,12 +1,8 @@
 import ContactForm from "@/forms/ContactForm/ContactForm";
-
-import {
-  contactHero,
-  officeInfo,
-  socialLinks
-} from "@/publicSite/data/contactData";
+import { useContact } from "@/publicSite/hooks/useContact"; // 
 
 export default function Contact() {
+  const { contactHero, officeInfo, socialLinks } = useContact(); //
   return (
     <main className="overflow-hidden pt-[90px]">
 

@@ -1,7 +1,8 @@
-import { heroData } from "@/publicSite/data/voimaAppData";
 import { Link } from "react-router-dom";
+import { useVoimaApp } from "../../hooks/useVoimaApp";
 
 export default function VoimaHero() {
+  const { heroData } = useVoimaApp();
   return (
     <section className="relative overflow-hidden px-6 py-28">
       <div className="absolute right-0 top-0 h-[500px] w-[500px] rounded-full bg-[#BC1D26]/10 blur-3xl" />
