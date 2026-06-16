@@ -1,6 +1,6 @@
-import { faqs } from "@/publicSite/data/voimaAppData";
 import { Minus, Plus } from "lucide-react";
 import { useState } from "react";
+import { useVoimaApp } from "../../hooks/useVoimaApp";
 
 export default function FAQSection() {
   const [openIndex, setOpenIndex] = useState(null);
@@ -9,6 +9,7 @@ export default function FAQSection() {
     setOpenIndex(openIndex === index ? null : index);
   };
 
+  const { faqs } = useVoimaApp();
   return (
     <section className="bg-[#fff] px-6 py-32">
       <div className="mx-auto max-w-4xl">

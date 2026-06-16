@@ -1,6 +1,6 @@
-import { storyData } from "@/publicSite/data/aboutData";
-
+import { useAbout } from "@/publicSite/hooks/useAbout";
 export default function StorySection() {
+  const { storyData } = useAbout();
   return (
     <section className="px-6 py-28">
       <div className="mx-auto grid max-w-7xl items-center gap-20 lg:grid-cols-2">

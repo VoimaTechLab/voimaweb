@@ -10,7 +10,7 @@ import "swiper/css/effect-fade";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
-import { heroSlides } from "@/data/homeData";
+import { useHome } from "@/publicSite/hooks/useHome";
 
 function HeroTitle({ before, highlight }) {
   return (
@@ -22,6 +22,7 @@ function HeroTitle({ before, highlight }) {
 }
 
 export default function Hero() {
+const { heroSlides } = useHome();
   return (
     <section className="relative overflow-hidden">
       <Swiper

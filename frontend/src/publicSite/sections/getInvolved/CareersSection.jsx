@@ -1,9 +1,10 @@
 import { ArrowRight, Briefcase } from "lucide-react";
 import { Link } from "react-router-dom";
 
-import { careersCTA } from "@/publicSite/data/getinvolvedData";
+import { useGetInvolved } from "../../hooks/useGetInvolved";
 
 export default function CareersCTA() {
+  const { careersCTA } = useGetInvolved();
   return (
     <section className="px-6 py-24">
       <div

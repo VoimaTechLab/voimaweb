@@ -11,4 +11,5 @@ router.post("/", strictLimiter, validate(waitlistSchema), c.join);
 router.get("/", requireAuth, authorize("waitlist"), c.listWaitlist);
 router.get("/export", requireAuth, authorize("waitlist"), c.exportWaitlist);
 router.delete("/:id", requireAuth, authorize("waitlist"), c.deleteWaitlistUser);
+router.get("/count", waitlistCount); //  public
 export default router;

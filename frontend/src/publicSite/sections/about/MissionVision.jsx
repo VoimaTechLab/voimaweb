@@ -1,6 +1,6 @@
-import { missionVisionData } from "@/publicSite/data/aboutData";
-
-export default function MissionVision() {
+import { useAbout } from "@/publicSite/hooks/useAbout";
+export default function StorySection() {
+  const { missionVisionData } = useAbout();
   return (
     <section className="px-6 py-32">
       <div className="mx-auto max-w-7xl">

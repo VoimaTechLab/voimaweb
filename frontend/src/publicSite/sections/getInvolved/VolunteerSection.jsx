@@ -1,11 +1,11 @@
 import { ArrowRight, Heart } from "lucide-react";
 import { Link } from "react-router-dom";
 
-import {
-    volunteerData,
-} from "@/publicSite/data/getInvolvedData";
+
+import { useGetInvolved } from "../../hooks/useGetInvolved";
 
 export default function VolunteerSection() {
+  const { volunteerData } = useGetInvolved();
   return (
     <section className="px-6 py-24">
       <div className="mx-auto grid max-w-7xl items-center gap-20 lg:grid-cols-2">

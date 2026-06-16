@@ -1,11 +1,9 @@
 import { fadeUp } from "@/publicSite/motion/variants";
 import { motion } from "framer-motion";
-
-import {
-    heroData,
-} from "@/publicSite/data/getInvolvedData";
+import { useGetInvolved } from "../../hooks/useGetInvolved";
 
 export default function GetInvolvedHero() {
+  const { heroData } = useGetInvolved();
   return (
     <section className="relative px-6 py-28">
 

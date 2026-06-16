@@ -1,20 +1,15 @@
-import { milestones } from "@/publicSite/data/journeyData";
 import { useRef } from "react";
 import { Link } from "react-router-dom";
+import { useMilestones } from "../../hooks/useJourney";
 
 export default function MilestonesTimeline() {
+  const milestones = useMilestones();
   return (
     <section className="px-6 py-24">
       <div className="mx-auto max-w-7xl space-y-32">
-
         {milestones.map((item, index) => (
-          <MilestoneCard
-            key={item.slug}
-            item={item}
-            reverse={index % 2 !== 0}
-          />
+          <MilestoneCard key={item.slug} item={item} reverse={index % 2 !== 0} />
         ))}
-
       </div>
     </section>
   );

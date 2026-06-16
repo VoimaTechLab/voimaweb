@@ -1,7 +1,8 @@
-import { downloadCTA } from "@/publicSite/data/voimaAppData";
 import { Link } from "react-router-dom";
+import { useVoimaApp } from "../../hooks/useVoimaApp";
 
 export default function DownloadCTA() {
+  const { downloadCTA } = useVoimaApp();
   return (
     <section className="px-6 py-24">
       <div

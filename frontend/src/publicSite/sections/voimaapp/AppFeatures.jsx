@@ -1,11 +1,12 @@
-import { features } from "@/publicSite/data/voimaAppData";
 import { Link } from "react-router-dom";
+import { useAppFeatures } from "../../hooks/useAppFeatures";
 
 import { Activity, Bell, Bot, Users } from "lucide-react";
 
 const iconMap = {Bell,Activity,Bot,Users,};
 
 export default function AppFeatures() {
+  const features = useAppFeatures(); 
   return (
     <section className="bg-white px-6 py-32">
       <div className="mx-auto max-w-7xl">
