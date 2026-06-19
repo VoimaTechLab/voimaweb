@@ -1,6 +1,6 @@
 import { logActivity } from "../services/activityService.js";
 import { sanityWrite, uploadSanityImage } from "../services/sanityWriteService.js";
-import { asyncHandler } from "../utils/aysncHandler.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
 import { created, ok } from "../utils/response.js";
 
 export const listGallery = asyncHandler(async (_req, res) => {

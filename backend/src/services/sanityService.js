@@ -9,10 +9,13 @@ const client = projectId && createClient({
 export const getSanityCounts = async () => {
   if (!client) return { totalBlogPosts: 0, totalGalleryImages: 0 };
   try {
-    const [totalBlogPosts, totalGalleryImages] = await Promise.all([
-      client.fetch(`count(*[_type == "post"])`),
-      client.fetch(`count(*[_type == "gallery"])`),
-    ]);
-    return { totalBlogPosts: totalBlogPosts || 0, totalGalleryImages: totalGalleryImages || 0 };
+    const [totalBlogPosts, totalGalleryImages, totalEvents] = await Promise.all([
+  client.fetch(`count(*[_type == "post"])`),
+  client.fetch(`count(*[_type == "gallery"].images[])`),
+  client.fetch(`count(*[_type == "event"])`),
+]);
+return { totalBlogPosts: totalBlogPosts||0, totalGalleryImages: totalGalleryImages||0, totalEvents: totalEvents||0 };
   } catch (e) { console.error("sanity counts:", e.message); return { totalBlogPosts: 0, totalGalleryImages: 0 }; }
+  
 };
+

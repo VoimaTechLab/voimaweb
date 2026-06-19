@@ -1,5 +1,6 @@
 import { Router } from "express";
 import * as c from "../controllers/waitlistController.js";
+import { waitlistCount } from "../controllers/waitlistController.js";
 import { requireAuth } from "../middleware/auth.js";
 import { authorize } from "../middleware/authorize.js";
 import { strictLimiter } from "../middleware/rateLimit.js";

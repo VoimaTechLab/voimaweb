@@ -11,6 +11,8 @@ import {
 } from "../data/mockData";
 import { api } from "./apiClient";
 
+import { sanity } from "@/sanity/client";
+
 /* ----------------------------- helpers ----------------------------- */
 const genId = () => Math.random().toString(36).slice(2, 10);
 const now = () => new Date().toISOString();
@@ -72,27 +74,37 @@ export const storiesService = {
   remove: (id) => mutate(() => api.delete(`/stories/${id}`), { id }),
 };
 
-/* ------------------------------ events ------------------------------ */
-// Events live in Postgres (backend). Full CRUD.
-export const eventsService = {
-  list: () => getList("/events", mockEvents),
-  create: (form) =>
-    mutate(() => api.post("/events", form), { id: genId(), createdAt: now(), ...form }),
-  update: (id, form) =>
-    mutate(() => api.put(`/events/${id}`, form), { id, ...form }),
-  remove: (id) => mutate(() => api.delete(`/events/${id}`), { id }),
+/* ----- blog (Sanity-managed via backend proxy) ----- */
+const BLOG_GROQ = `*[_type=="post"] | order(_createdAt desc){
+  "id": _id, title, "slug": slug.current, excerpt,
+  "author": author.name,
+  "status": select(defined(publishedAt) && publishedAt <= now() => "published", "draft"),
+  publishedAt, "createdAt": _createdAt
+}`;
+
+export const blogService = {
+  list: () =>
+    USE_MOCK ? Promise.resolve(mockBlogPosts)
+             : sanity.fetch(BLOG_GROQ).catch(() => mockBlogPosts),
+  remove: (id) => mutate(() => api.delete(`/blog/${id}`), { id }),
+  publish: (id, publish) =>
+    mutate(() => api.patch(`/blog/${id}/publish`, { publish }),
+      { id, status: publish ? "published" : "draft" }),
 };
 
-/* ------------------------------- blog ------------------------------- */
-// Blog lives in Sanity (via backend proxy). Falls back to in-memory mock
-// until Sanity credentials are wired — UI keeps working either way.
-export const blogService = {
-  list: () => getList("/blog", mockBlogPosts),
-  create: (payload) =>
-    mutate(() => api.post("/blog", payload), { id: genId(), createdAt: now(), ...payload }),
-  update: (id, payload) =>
-    mutate(() => api.put(`/blog/${id}`, payload), { id, ...payload }),
-  remove: (id) => mutate(() => api.delete(`/blog/${id}`), { id }),
+/* ----- events (read Sanity, delete via proxy; edit in Studio) ----- */
+const EVENTS_GROQ = `*[_type=="event"] | order(_createdAt desc){
+  "id": _id, title, "slug": slug.current, category, date, location, featured,
+  description, "image": coverImage.asset->url, "status": "published"
+}`;
+
+export const eventsService = {
+  list: () =>
+    USE_MOCK ? Promise.resolve(mockEvents)
+             : sanity.fetch(EVENTS_GROQ).catch(() => mockEvents),
+  remove: (id) =>
+    USE_MOCK ? Promise.resolve({ id })
+             : mutate(() => api.delete(`/cms/events/${id}`), { id }),
 };
 
 /* ----------------------------- dashboard ---------------------------- */

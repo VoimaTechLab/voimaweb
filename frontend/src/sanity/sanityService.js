@@ -11,6 +11,8 @@ const mapPost = (p) => ({
   media: { type: p.media?.type || "image", src: p.media?.src || p.image || null },
 });
 
+
+/* ------ blog sanity service -------- */
 export async function getBlogData() {
   try {
     const items = await sanity.fetch(BLOG_QUERY);
@@ -40,6 +42,7 @@ export async function getBlogPost(slug) {
 }
 
 
+/* ------ events sanity service -------- */
 export async function getEventsData() {
   try {
     const items = await sanity.fetch(EVENTS_QUERY);
@@ -64,6 +67,8 @@ export async function getEvent(slug) {
   }
 }
 
+
+/* ------ milestone sanity service -------- */
 export async function getMilestones() {
   try {
     const items = await sanity.fetch(MILESTONES_QUERY);
@@ -85,6 +90,7 @@ export async function getMilestone(slug) {
 }
 
 
+/* ------ testimonials sanity service -------- */
 export async function getTestimonials() {
   try {
     const items = await sanity.fetch(TESTIMONIALS_QUERY);
@@ -95,6 +101,8 @@ export async function getTestimonials() {
   }
 }
 
+
+/* ------ about sanity service -------- */
 export async function getAboutData() {
   try {
     const data = await sanity.fetch(ABOUT_QUERY);
@@ -105,7 +113,7 @@ export async function getAboutData() {
   }
 }
 
-
+/* ------ voima app sanity service -------- */
 export async function getVoimaAppData() {
   try {
     const data = await sanity.fetch(VOIMA_APP_QUERY);
@@ -116,6 +124,7 @@ export async function getVoimaAppData() {
   }
 }
 
+/* ------ app features sanity service -------- */
 export async function getAppFeatures() {
   try { const i = await sanity.fetch(APP_FEATURES_QUERY); return i?.length ? i : null; }
   catch (e) { console.warn("[sanity] app features fallback:", e.message); return null; }
@@ -125,6 +134,7 @@ export async function getAppFeature(slug) {
   catch (e) { console.warn("[sanity] app feature fallback:", e.message); return null; }
 }
 
+/* ------ cpntact sanity service -------- */
 export async function getContactData() {
   try {
     const data = await sanity.fetch(CONTACT_QUERY);
@@ -135,6 +145,8 @@ export async function getContactData() {
   }
 }
 
+
+/* ------ waitlist sanity service -------- */
 export async function getWaitlistData() {
   try {
     const data = await sanity.fetch(WAITLIST_QUERY);
@@ -145,11 +157,15 @@ export async function getWaitlistData() {
   }
 }
 
+
+/* ------ getinvolved sanity service -------- */
 export async function getGetInvolvedData() {
   try { return (await sanity.fetch(GET_INVOLVED_QUERY)) || null; }
   catch (e) { console.warn("[sanity] get-involved fallback:", e.message); return null; }
 }
 
+
+/* ------ home sanity service -------- */
 export async function getHomeData() {
   try { return (await sanity.fetch(HOME_QUERY)) || null; }
   catch (e) { console.warn("[sanity] home fallback:", e.message); return null; }

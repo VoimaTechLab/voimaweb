@@ -17,7 +17,7 @@ export const contactAdminEmail = (m) =>
 
 export const contactUserEmail = (m) =>
   baseLayout(`
-    <h2 style="margin:0 0 8px;font-size:18px;">We received your message 💚</h2>
+    <h2 style="margin:0 0 8px;font-size:18px;">We received your message!❤️</h2>
     <p style="color:#475569;font-size:14px;">Hi ${m.name}, thanks for reaching out to Voima Initiative. Our team will get back to you shortly.</p>
     <p style="color:#475569;font-size:14px;margin-top:16px;">Your message:</p>
     <div style="padding:14px;background:#f8fafc;border-radius:12px;font-size:14px;color:#334155;">${m.message}</div>
@@ -50,4 +50,11 @@ export const storySubmittedAdminEmail = (s) =>
       <tr><td style="color:#64748b;padding:6px 0;">Location</td><td>${s.location || "—"}</td></tr>
     </table>
     <div style="margin-top:16px;padding:16px;background:#f8fafc;border-radius:12px;font-size:14px;color:#334155;">${s.story}</div>
+  `);
+
+export const broadcastEmail = (message) =>
+  baseLayout(`
+    <div style="font-size:15px;line-height:1.7;color:#334155;">
+      ${message.split("\n").map((p) => `<p style="margin:0 0 14px;">${p}</p>`).join("")}
+    </div>
   `);
