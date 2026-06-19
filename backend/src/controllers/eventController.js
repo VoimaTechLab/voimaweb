@@ -1,7 +1,7 @@
 import { prisma } from "../database/prisma.js";
 import { logActivity } from "../services/activityService.js";
 import { destroyImage, publicIdFromUrl } from "../services/cloudinaryService.js";
-import { asyncHandler } from "../utils/aysncHandler.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
 import { created, ok } from "../utils/response.js";
 
 export const listEvents = asyncHandler(async (req, res) => {

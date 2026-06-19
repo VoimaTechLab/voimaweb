@@ -5,9 +5,8 @@ import {
   ListChecks,
   LogOut,
   Mail,
-  MessagesSquare,
   Send,
-  Settings,
+  Settings
 } from "lucide-react";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
@@ -18,7 +17,7 @@ const nav = [
   { to: "/admin/newsletter", label: "Newsletter", icon: Send },
   { to: "/admin/waitlist", label: "Waitlist", icon: ListChecks },
   { to: "/admin/blog", label: "Blog", icon: FileText },
-  { to: "/admin/stories", label: "Stories", icon: MessagesSquare },
+ /* { to: "/admin/stories", label: "Stories", icon: MessagesSquare }, */
   { to: "/admin/events", label: "Events", icon: Calendar },
   { to: "/admin/settings", label: "Settings", icon: Settings, role: ["SUPER_ADMIN"] },
 ];

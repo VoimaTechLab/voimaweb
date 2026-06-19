@@ -1,6 +1,6 @@
 import { prisma } from "../database/prisma.js";
 import { ApiError } from "../utils/ApiError.js";
-import { asyncHandler } from "../utils/aysncHandler.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
 import { verifyAccessToken } from "../utils/tokens.js";
 
 export const requireAuth = asyncHandler(async (req, _res, next) => {

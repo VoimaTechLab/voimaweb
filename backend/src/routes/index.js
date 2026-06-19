@@ -1,6 +1,7 @@
 import { Router } from "express";
 import adminRoutes from "./adminRoutes.js";
 import authRoutes from "./authRoutes.js";
+import cmsRoutes from "./cmsRoutes.js";
 import contactRoutes from "./contactRoutes.js";
 import dashboardRoutes from "./dashboardRoutes.js";
 import eventRoutes from "./eventRoutes.js";
@@ -21,4 +22,5 @@ router.use("/events", eventRoutes);
 router.use("/admins", adminRoutes);
 router.use("/settings", settingsRoutes);
 router.use("/dashboard", dashboardRoutes);
+router.use("/cms", cmsRoutes);
 export default router;

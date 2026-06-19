@@ -11,10 +11,14 @@ import { subscribersService } from "../services/dataService";
 import { exportToCsv } from "../utils/exportCsv";
 import { fmtDate } from "../utils/format";
 
+import { monthlyStats } from "../utils/growth";
+
+
 export default function Newsletter() {
   const [subs, setSubs] = useState([]);
   const [query, setQuery] = useState("");
   const search = useDebounce(query);
+  const { thisMonth, growth } = monthlyStats(subs, "subscribedAt");
 
   useEffect(() => { subscribersService.list().then(setSubs); }, []);
 
@@ -37,8 +41,8 @@ export default function Newsletter() {
 
       <div className="mb-6 grid grid-cols-2 gap-4 md:grid-cols-3">
         <StatCard label="Total Subscribers" value={subs.length} icon={Send} />
-        <StatCard label="This Month" value={Math.floor(subs.length * 0.3)} trend={8} />
-        <StatCard label="Growth Rate" value="8%" trend={8} />
+        <StatCard label="This Month" value={thisMonth} trend={growth} />
+        <StatCard label="Growth Rate" value={`${growth}%`} trend={growth} />
       </div>
 
       <Card>

@@ -1,6 +1,6 @@
 import { getDashboardStats } from "../services/dashboardService.js";
 import { getSanityCounts } from "../services/sanityService.js";
-import { asyncHandler } from "../utils/aysncHandler.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
 import { ok } from "../utils/response.js";
 
 export const dashboardStats = asyncHandler(async (_req, res) => {

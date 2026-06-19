@@ -4,69 +4,157 @@ const dayKey = (d) => d.toISOString().slice(5, 10); // MM-DD
 
 const buildSeries = (records, field) => {
   const map = {};
+
   records.forEach((r) => {
-    const k = dayKey(r[field]);
-    map[k] = (map[k] || 0) + 1;
+    const key = dayKey(r[field]);
+    map[key] = (map[key] || 0) + 1;
   });
-  // last 30 days cumulative-ish series matching mock shape { date, subscribers, waitlist }
+
   const out = [];
   for (let i = 29; i >= 0; i--) {
-    const d = new Date(Date.now() - i * 86400000);
-    out.push({ date: dayKey(d), key: d });
+    const date = new Date(Date.now() - i * 86400000);
+    out.push({ date: dayKey(date) });
   }
+
   return { out, map };
 };
 
 export const getDashboardStats = async () => {
   const since = new Date(Date.now() - 30 * 86400000);
 
+  const now = new Date();
+  const startThis = new Date(now.getFullYear(), now.getMonth(), 1);
+  const startPrev = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+
+  const growth = (current, previous) =>
+    previous === 0
+      ? current > 0
+        ? 100
+        : 0
+      : Math.round(((current - previous) / previous) * 100);
+
   const [
-    totalMessages, unreadMessages,
-    totalSubscribers, totalWaitlist,
-    totalStories, pendingStories,
+    totalMessages,
+    unreadMessages,
+    totalSubscribers,
+    totalWaitlist,
+    totalStories,
+    pendingStories,
     totalEvents,
-    subs30, wait30,
+    subs30,
+    wait30,
     waitlistByRoleRaw,
     activityRaw,
+    subThis,
+    subPrev,
+    waitThis,
+    waitPrev,
   ] = await Promise.all([
     prisma.message.count(),
-    prisma.message.count({ where: { status: "unread" } }),
-    prisma.newsletterSubscriber.count({ where: { status: "active" } }),
+    prisma.message.count({
+      where: { status: "unread" },
+    }),
+
+    prisma.newsletterSubscriber.count({
+      where: { status: "active" },
+    }),
+
     prisma.waitlistUser.count(),
+
     prisma.story.count(),
-    prisma.story.count({ where: { status: "pending" } }),
+
+    prisma.story.count({
+      where: { status: "pending" },
+    }),
+
     prisma.event.count(),
+
     prisma.newsletterSubscriber.findMany({
-      where: { subscribedAt: { gte: since } },
-      select: { subscribedAt: true },
+      where: {
+        subscribedAt: { gte: since },
+      },
+      select: {
+        subscribedAt: true,
+      },
     }),
+
     prisma.waitlistUser.findMany({
-      where: { createdAt: { gte: since } },
-      select: { createdAt: true },
+      where: {
+        createdAt: { gte: since },
+      },
+      select: {
+        createdAt: true,
+      },
     }),
-    prisma.waitlistUser.groupBy({ by: ["role"], _count: { role: true } }),
-    prisma.activityLog.findMany({ orderBy: { createdAt: "desc" }, take: 8 }),
+
+    prisma.waitlistUser.groupBy({
+      by: ["role"],
+      _count: {
+        role: true,
+      },
+    }),
+
+    prisma.activityLog.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
+      take: 8,
+    }),
+
+    prisma.newsletterSubscriber.count({
+      where: {
+        subscribedAt: {
+          gte: startThis,
+        },
+      },
+    }),
+
+    prisma.newsletterSubscriber.count({
+      where: {
+        subscribedAt: {
+          gte: startPrev,
+          lt: startThis,
+        },
+      },
+    }),
+
+    prisma.waitlistUser.count({
+      where: {
+        createdAt: {
+          gte: startThis,
+        },
+      },
+    }),
+
+    prisma.waitlistUser.count({
+      where: {
+        createdAt: {
+          gte: startPrev,
+          lt: startThis,
+        },
+      },
+    }),
   ]);
 
-  // growth series matching mockGrowthSeries shape
   const subSeries = buildSeries(subs30, "subscribedAt");
   const waitSeries = buildSeries(wait30, "createdAt");
-  const growthSeries = subSeries.out.map((p) => ({
-    date: p.date,
-    subscribers: subSeries.map[p.date] || 0,
-    waitlist: waitSeries.map[p.date] || 0,
+
+  const growthSeries = subSeries.out.map((item) => ({
+    date: item.date,
+    subscribers: subSeries.map[item.date] || 0,
+    waitlist: waitSeries.map[item.date] || 0,
   }));
 
-  const waitlistByRole = waitlistByRoleRaw.map((r) => ({
-    name: r.role || "Unspecified",
-    value: r._count.role,
+  const waitlistByRole = waitlistByRoleRaw.map((item) => ({
+    name: item.role || "Unspecified",
+    value: item._count.role,
   }));
 
-  const activity = activityRaw.map((a) => ({
-    id: a.id,
-    type: a.type,
-    text: a.text,
-    time: a.createdAt,
+  const activity = activityRaw.map((item) => ({
+    id: item.id,
+    type: item.type,
+    text: item.text,
+    time: item.createdAt,
   }));
 
   return {
@@ -78,7 +166,11 @@ export const getDashboardStats = async () => {
       totalStories,
       pendingStories,
       totalEvents,
+
+      subscriberGrowth: growth(subThis, subPrev),
+      waitlistGrowth: growth(waitThis, waitPrev),
     },
+
     growthSeries,
     waitlistByRole,
     activity,

@@ -7,7 +7,7 @@ import {
 import { logActivity } from "../services/activityService.js";
 import { destroyImage, publicIdFromUrl } from "../services/cloudinaryService.js";
 import { sendEmail } from "../services/emailService.js";
-import { asyncHandler } from "../utils/aysncHandler.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
 import { created, ok } from "../utils/response.js";
 
 // PUBLIC (multipart: optional image via req.file)
