@@ -12,3 +12,9 @@ export const updateMessageStatus = (id, status) =>
 
 export const deleteMessage = (id) =>
   USE_MOCK ? Promise.resolve({ id }) : safeMutate(api.delete(`/contact/${id}`), { id });
+
+export const replyMessage = async (id, message) => {
+  if (USE_MOCK) return { id, status: "replied" };
+  const { data } = await api.post(`/contact/${id}/reply`, { message });
+  return data.data;
+};

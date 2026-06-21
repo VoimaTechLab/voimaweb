@@ -27,3 +27,10 @@ export const updateSettings = asyncHandler(async (req, res) => {
   });
   ok(res, row.data);
 });
+
+export const getPublicSettings = asyncHandler(async (_req, res) => {
+  const row = await prisma.setting.findUnique({ where: { id: "site" } });
+  const d = { ...DEFAULTS, ...(row?.data || {}) };
+  ok(res, { general: d.general, social: d.social, seo: d.seo }); // no preferences (private)
+});
+

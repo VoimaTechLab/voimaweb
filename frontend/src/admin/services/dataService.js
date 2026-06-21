@@ -57,12 +57,18 @@ export const messagesService = {
 export const subscribersService = {
   list: () => getList("/newsletter", mockSubscribers),
   remove: (id) => mutate(() => api.delete(`/newsletter/${id}`), { id }),
+  broadcast: (payload) =>
+    USE_MOCK ? Promise.resolve({ sent: mockSubscribers.length })
+             : mutate(() => api.post("/newsletter/broadcast", payload), { sent: 0 }),
 };
 
-/* ----------------------------- waitlist ----------------------------- */
+/* --------------------------- waitlist ---------------------------- */
 export const waitlistService = {
   list: () => getList("/waitlist", mockWaitlist),
   remove: (id) => mutate(() => api.delete(`/waitlist/${id}`), { id }),
+  broadcast: (payload) =>
+    USE_MOCK ? Promise.resolve({ sent: mockWaitlist.length })
+             : mutate(() => api.post("/waitlist/broadcast", payload), { sent: 0 }),
 };
 
 /* ----------------------------- stories ------------------------------ */

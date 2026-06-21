@@ -52,9 +52,29 @@ export const storySubmittedAdminEmail = (s) =>
     <div style="margin-top:16px;padding:16px;background:#f8fafc;border-radius:12px;font-size:14px;color:#334155;">${s.story}</div>
   `);
 
-export const broadcastEmail = (message) =>
+export const broadcastEmail = ({ subject, message }) =>
   baseLayout(`
-    <div style="font-size:15px;line-height:1.7;color:#334155;">
-      ${message.split("\n").map((p) => `<p style="margin:0 0 14px;">${p}</p>`).join("")}
+    <h2 style="margin:0 0 12px;font-size:20px;">${subject}</h2>
+    ${String(message)
+      .split("\n").filter(Boolean)
+      .map((p) => `<p style="color:#475569;font-size:14px;line-height:1.7;margin:0 0 12px;">${p}</p>`)
+      .join("")}
+    <p style="margin-top:20px;font-size:12px;color:#94a3b8;">
+      You received this because you subscribed to Voima Initiative.
+    </p>
+  `);
+
+  export const contactReplyEmail = ({ name, originalMessage, replyMessage }) =>
+  baseLayout(`
+    <h2 style="margin:0 0 12px;font-size:18px;">Reply from Voima Initiative</h2>
+    <p style="color:#475569;font-size:14px;">Hi ${name},</p>
+    ${String(replyMessage).split("\n").filter(Boolean)
+      .map((p) => `<p style="color:#334155;font-size:14px;line-height:1.7;margin:0 0 10px;">${p}</p>`)
+      .join("")}
+    <div style="margin-top:18px;padding-top:14px;border-top:1px solid #eef2f7;">
+      <p style="font-size:12px;color:#94a3b8;margin:0 0 6px;">In response to your message:</p>
+      <blockquote style="margin:0;padding:12px;background:#f8fafc;border-radius:10px;font-size:13px;color:#64748b;">
+        ${originalMessage}
+      </blockquote>
     </div>
   `);

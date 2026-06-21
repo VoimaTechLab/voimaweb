@@ -1,9 +1,10 @@
 import { prisma } from "../database/prisma.js";
 import { broadcastEmail, newsletterWelcomeEmail } from "../emails/templates.js";
 import { logActivity } from "../services/activityService.js";
-import { sendEmail } from "../services/emailService.js";
+import { sendBulk, sendEmail } from "../services/emailService.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { created, ok } from "../utils/response.js";
+
 
 // PUBLIC (idempotent — re-subscribe reactivates)
 export const subscribe = asyncHandler(async (req, res) => {
@@ -47,19 +48,14 @@ export const exportSubscribers = asyncHandler(async (_req, res) => {
   res.send(csv);
 });
 
-export const broadcastNewsletter = asyncHandler(async (req, res) => {
+export const broadcast = asyncHandler(async (req, res) => {
   const { subject, message } = req.body;
   const subs = await prisma.newsletterSubscriber.findMany({
     where: { status: "active" }, select: { email: true },
   });
-  const html = broadcastEmail(message);
-
-  // send in small batches to avoid provider limits
-  const batchSize = 25;
-  for (let i = 0; i < subs.length; i += batchSize) {
-    const batch = subs.slice(i, i + batchSize);
-    await Promise.allSettled(batch.map((s) => sendEmail({ to: s.email, subject, html })));
-  }
-  logActivity({ type: "newsletter", text: `Broadcast "${subject}" → ${subs.length} subscribers`, adminId: req.user.id });
-  ok(res, { sent: subs.length });
+  const recipients = subs.map((s) => s.email);
+  const html = broadcastEmail({ subject, message });
+  const { sent } = await sendBulk({ recipients, subject, html });
+  logActivity({ type: "newsletter", text: `Newsletter "${subject}" sent to ${sent} subscribers`, adminId: req.user.id });
+  ok(res, { sent, total: recipients.length });
 });

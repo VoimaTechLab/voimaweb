@@ -6,6 +6,7 @@ import Badge from "../components/ui/Badge";
 import Button from "../components/ui/Button";
 import Card from "../components/ui/Card";
 import EmptyState from "../components/ui/EmptyState";
+import Modal from "../components/ui/Modal";
 import PageHeader from "../components/ui/PageHeader";
 import SearchInput from "../components/ui/SearchInput";
 
@@ -14,6 +15,7 @@ import { useResource } from "../hooks/useResource";
 
 import {
   getMessages,
+  replyMessage,
   updateMessageStatus,
 } from "../services/messageService";
 
@@ -31,6 +33,10 @@ export default function Messages() {
   const [selected, setSelected] = useState(null);
   const [filter, setFilter] = useState("all");
   const [query, setQuery] = useState("");
+
+  const [replyOpen, setReplyOpen] = useState(false);
+  const [replyText, setReplyText] = useState("");
+  const [replying, setReplying] = useState(false);
 
   const search = useDebounce(query);
 
@@ -54,27 +60,31 @@ export default function Messages() {
   }, [messages, filter, search]);
 
   const updateStatus = async (id, status) => {
-    await updateMessageStatus(id, status);
+    try {
+      await updateMessageStatus(id, status);
 
-    setData((prev) =>
-      prev.map((m) =>
-        m.id === id
+      setData((prev) =>
+        prev.map((m) =>
+          m.id === id
+            ? {
+                ...m,
+                status,
+              }
+            : m
+        )
+      );
+
+      setSelected((prev) =>
+        prev?.id === id
           ? {
-              ...m,
+              ...prev,
               status,
             }
-          : m
-      )
-    );
-
-    setSelected((prev) =>
-      prev?.id === id
-        ? {
-            ...prev,
-            status,
-          }
-        : prev
-    );
+          : prev
+      );
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const openMessage = (message) => {
@@ -82,6 +92,45 @@ export default function Messages() {
 
     if (message.status === "unread") {
       updateStatus(message.id, "read");
+    }
+  };
+
+  const sendReply = async (e) => {
+    e.preventDefault();
+
+    if (!selected || !replyText.trim()) return;
+
+    setReplying(true);
+
+    try {
+      await replyMessage(selected.id, replyText);
+
+      setData((prev) =>
+        prev.map((m) =>
+          m.id === selected.id
+            ? {
+                ...m,
+                status: "replied",
+              }
+            : m
+        )
+      );
+
+      setSelected((prev) =>
+        prev
+          ? {
+              ...prev,
+              status: "replied",
+            }
+          : prev
+      );
+
+      setReplyText("");
+      setReplyOpen(false);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setReplying(false);
     }
   };
 
@@ -106,6 +155,7 @@ export default function Messages() {
               {FILTERS.map((f) => (
                 <button
                   key={f}
+                  type="button"
                   onClick={() => setFilter(f)}
                   className={`rounded-md px-2.5 py-1 text-xs font-medium capitalize ${
                     filter === f
@@ -133,6 +183,7 @@ export default function Messages() {
               filtered.map((message) => (
                 <button
                   key={message.id}
+                  type="button"
                   onClick={() => openMessage(message)}
                   className={`flex w-full flex-col gap-1 border-b border-neutral-100 p-4 text-left hover:bg-neutral-50 ${
                     selected?.id === message.id
@@ -199,7 +250,7 @@ export default function Messages() {
                 {selected.message}
               </p>
 
-              <div className="mt-8 flex gap-2 border-t border-neutral-200 pt-5">
+              <div className="mt-8 flex flex-wrap gap-2 border-t border-neutral-200 pt-5">
                 <Button
                   variant="secondary"
                   onClick={() =>
@@ -218,12 +269,12 @@ export default function Messages() {
                 </Button>
 
                 <Button
-                  variant="ghost"
-                  onClick={() =>
-                    (window.location.href = `mailto:${selected.email}`)
-                  }
+                  onClick={() => {
+                    setReplyText("");
+                    setReplyOpen(true);
+                  }}
                 >
-                  Reply via email
+                  Reply
                 </Button>
               </div>
             </motion.div>
@@ -235,6 +286,56 @@ export default function Messages() {
           )}
         </Card>
       </div>
+
+      <Modal
+        open={replyOpen}
+        onClose={() => {
+          setReplyOpen(false);
+          setReplyText("");
+        }}
+        title={`Reply to ${selected?.name || ""}`}
+        width="max-w-lg"
+      >
+        <form onSubmit={sendReply} className="space-y-4">
+          <div className="rounded-lg bg-neutral-50 p-3 text-sm text-neutral-600">
+            <p className="font-medium text-neutral-700">
+              Re: {selected?.subject}
+            </p>
+
+            <p className="mt-1 line-clamp-3">
+              {selected?.message}
+            </p>
+          </div>
+
+          <textarea
+            required
+            rows={7}
+            value={replyText}
+            onChange={(e) => setReplyText(e.target.value)}
+            placeholder={`Write your reply to ${
+              selected?.email || "the sender"
+            }...`}
+            className="w-full rounded-lg border border-neutral-300 px-3 py-2 text-sm outline-none focus:border-primary-500"
+          />
+
+          <div className="flex justify-end gap-2">
+            <Button
+              type="button"
+              variant="secondary"
+              onClick={() => {
+                setReplyOpen(false);
+                setReplyText("");
+              }}
+            >
+              Cancel
+            </Button>
+
+            <Button type="submit" disabled={replying}>
+              {replying ? "Sending..." : "Send Reply"}
+            </Button>
+          </div>
+        </form>
+      </Modal>
     </div>
   );
 }
