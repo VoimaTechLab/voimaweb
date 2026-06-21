@@ -3,10 +3,10 @@ import { prisma } from "../database/prisma.js";
 import { logActivity } from "../services/activityService.js";
 import { toPublicAdmin, verifyCredentials } from "../services/authService.js";
 import {
-    isRefreshTokenValid,
-    issueTokens,
-    revokeRefreshToken,
-    rotateRefreshToken,
+  isRefreshTokenValid,
+  issueTokens,
+  revokeRefreshToken,
+  rotateRefreshToken,
 } from "../services/tokenService.js";
 import { ApiError } from "../utils/ApiError.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
@@ -16,12 +16,12 @@ import { verifyRefreshToken } from "../utils/tokens.js";
 const COOKIE = "voima_refresh";
 
 const cookieOpts = () => ({
-  httpOnly: true,
-  secure: env.isProd,
-  sameSite: env.isProd ? "none" : "lax",
-  domain: env.cookieDomain,
-  path: "/",
-  maxAge: env.jwt.refreshExpiresDays * 24 * 60 * 60 * 1000,
+httpOnly: true,
+secure: env.isProd, // true in prod
+sameSite: env.isProd ? "none" : "lax", // none for cross-site (Vercel↔Render)
+path: "/",
+maxAge: env.jwt.refreshExpiresDays * 86400000,
+...(env.isProd ? {} : { domain: env.cookieDomain }), // DON'T set domain in prod
 });
 
 const meta = (req) => ({ userAgent: req.headers["user-agent"], ip: req.ip });
@@ -70,3 +70,4 @@ export const logout = asyncHandler(async (req, res) => {
   res.clearCookie(COOKIE, { ...cookieOpts(), maxAge: 0 });
   ok(res, { message: "Logged out" });
 });
+

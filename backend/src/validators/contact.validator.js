@@ -1,5 +1,7 @@
 import { z } from "zod";
 
+const replySchema = z.object({ message: z.string().min(1).max(5000) });
+
 export const contactSchema = z.object({
   name: z.string().min(2).max(120),
   email: z.string().email(),
@@ -10,3 +12,4 @@ export const contactSchema = z.object({
 export const updateMessageSchema = z.object({
   status: z.enum(["unread", "read", "replied", "archived"]),
 });
+

@@ -1,6 +1,6 @@
 import { env } from "../config/env.js";
 import { prisma } from "../database/prisma.js";
-import { contactAdminEmail, contactUserEmail } from "../emails/templates.js";
+import { contactAdminEmail, contactReplyEmail, contactUserEmail } from "../emails/templates.js";
 import { logActivity } from "../services/activityService.js";
 import { sendEmail } from "../services/emailService.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
@@ -50,4 +50,18 @@ export const updateMessage = asyncHandler(async (req, res) => {
 export const deleteMessage = asyncHandler(async (req, res) => {
   await prisma.message.delete({ where: { id: req.params.id } });
   ok(res, { id: req.params.id });
+});
+
+
+
+export const replyMessage = asyncHandler(async (req, res) => {
+  const msg = await prisma.message.findUniqueOrThrow({ where: { id: req.params.id } });
+  sendEmail({
+    to: msg.email,
+    subject: `Re: ${msg.subject}`,
+    html: contactReplyEmail({ name: msg.name, originalMessage: msg.message, replyMessage: req.body.message }),
+  });
+  const updated = await prisma.message.update({ where: { id: msg.id }, data: { status: "replied" } });
+  logActivity({ type: "message", text: `Replied to ${msg.name}`, adminId: req.user.id });
+  ok(res, updated);
 });

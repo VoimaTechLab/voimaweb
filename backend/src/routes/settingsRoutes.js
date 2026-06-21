@@ -6,6 +6,9 @@ import { validate } from "../middleware/validate.js";
 import { settingsSchema } from "../validators/settings.validator.js";
 
 const router = Router();
+
+router.get("/public", c.getPublicSettings); //  public, no auth
 router.get("/", requireAuth, authorize("settings"), c.getSettings);
 router.put("/", requireAuth, authorize("settings"), validate(settingsSchema), c.updateSettings);
+
 export default router;

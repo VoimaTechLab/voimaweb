@@ -1,18 +1,22 @@
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
 
-const prisma = new PrismaClient();
+// Use the DIRECT (non-pooler) connection for one-shot scripts like seeding.
+const prisma = new PrismaClient({
+  datasources: {
+    db: { url: process.env.DIRECT_URL || process.env.DATABASE_URL },
+  },
+});
 
 async function main() {
-  const email = process.env.SEED_ADMIN_EMAIL || "admin@voima.org";
-  const password = process.env.SEED_ADMIN_PASSWORD || "voima123";
-  const name = process.env.SEED_ADMIN_NAME || "Voima Admin";
-
+  const name = process.env.SEED_ADMIN_NAME || "Emmanuel Dey";
+  const email = process.env.SEED_ADMIN_EMAIL || "voimagh@gmail.com";
+  const password = process.env.SEED_ADMIN_PASSWORD || "voimaIsAdminat26";
   const passwordHash = await bcrypt.hash(password, 12);
 
-  await prisma.admin.upsert({
+  const admin = await prisma.admin.upsert({
     where: { email },
-    update: {},
+    update: { name, passwordHash, role: "SUPER_ADMIN", isActive: true },
     create: { name, email, passwordHash, role: "SUPER_ADMIN" },
   });
 
@@ -22,7 +26,7 @@ async function main() {
     create: { id: "site", data: {} },
   });
 
-  console.log(`✅ Seeded SUPER_ADMIN: ${email}`);
+  console.log(`✅ Super Admin ready: ${admin.name} <${admin.email}>`);
 }
 
 main()

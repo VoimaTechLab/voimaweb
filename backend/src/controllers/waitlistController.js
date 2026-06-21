@@ -1,10 +1,9 @@
 import { prisma } from "../database/prisma.js";
 import { broadcastEmail, waitlistWelcomeEmail } from "../emails/templates.js";
 import { logActivity } from "../services/activityService.js";
-import { sendEmail } from "../services/emailService.js";
+import { sendBulk, sendEmail } from "../services/emailService.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { created, ok } from "../utils/response.js";
-
 // PUBLIC
 export const join = asyncHandler(async (req, res) => {
   const user = await prisma.waitlistUser.upsert({
@@ -61,14 +60,13 @@ export const waitlistCount = asyncHandler(async (_req, res) => {
   ok(res, { total });
 });
 
+
 export const broadcastWaitlist = asyncHandler(async (req, res) => {
   const { subject, message } = req.body;
   const users = await prisma.waitlistUser.findMany({ select: { email: true } });
-  const html = broadcastEmail(message);
-  const batchSize = 25;
-  for (let i = 0; i < users.length; i += batchSize) {
-    await Promise.allSettled(users.slice(i, i + batchSize).map((u) => sendEmail({ to: u.email, subject, html })));
-  }
-  logActivity({ type: "waitlist", text: `Broadcast "${subject}" → ${users.length} waitlist`, adminId: req.user.id });
-  ok(res, { sent: users.length });
+  const recipients = users.map((u) => u.email);
+  const html = broadcastEmail({ subject, message });
+  const { sent } = await sendBulk({ recipients, subject, html });
+  logActivity({ type: "waitlist", text: `Announcement "${subject}" sent to ${sent} waitlist users`, adminId: req.user.id });
+  ok(res, { sent, total: recipients.length });
 });
