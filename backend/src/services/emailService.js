@@ -1,5 +1,8 @@
+import dns from "dns";
 import nodemailer from "nodemailer";
 import { env } from "../config/env.js";
+
+dns.setDefaultResultOrder("ipv4first"); // prefer IPv4 (what fixed your test)
 
 let transporter;
 const getTransporter = () => {
@@ -9,29 +12,24 @@ const getTransporter = () => {
     port: env.email.port,
     secure: env.email.secure,
     auth: env.email.user ? { user: env.email.user, pass: env.email.pass } : undefined,
+    family: 4,                 // force IPv4
+    connectionTimeout: 15000,
+    tls: { rejectUnauthorized: false },
   });
   return transporter;
 };
 
-// Single transactional email
 export const sendEmail = async ({ to, subject, html }) => {
   try {
-    if (!env.email.host) {
-      console.log(`[email skipped: no SMTP] → ${to} :: ${subject}`);
-      return;
-    }
+    if (!env.email.host) { console.log(`[email skipped: no SMTP] → ${to} :: ${subject}`); return; }
     await getTransporter().sendMail({ from: env.email.from, to, subject, html });
   } catch (e) {
     console.error("email failed:", e.message);
   }
 };
 
-// Bulk broadcast (BCC in batches of 50)
 export const sendBulk = async ({ recipients, subject, html }) => {
-  if (!env.email.host) {
-    console.log(`[bulk skipped: no SMTP] ${recipients.length} recipients`);
-    return { sent: 0 };
-  }
+  if (!env.email.host) { console.log(`[bulk skipped: no SMTP] ${recipients.length} recipients`); return { sent: 0 }; }
   const t = getTransporter();
   const size = 50;
   let sent = 0;
@@ -40,9 +38,7 @@ export const sendBulk = async ({ recipients, subject, html }) => {
     try {
       await t.sendMail({ from: env.email.from, to: env.email.from, bcc: chunk, subject, html });
       sent += chunk.length;
-    } catch (e) {
-      console.error("bulk chunk failed:", e.message);
-    }
+    } catch (e) { console.error("bulk chunk failed:", e.message); }
   }
   return { sent };
 };
