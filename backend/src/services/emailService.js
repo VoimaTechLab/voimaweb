@@ -2,7 +2,7 @@ import dns from "dns";
 import nodemailer from "nodemailer";
 import { env } from "../config/env.js";
 
-dns.setDefaultResultOrder("ipv4first"); // prefer IPv4 (what fixed your test)
+dns.setDefaultResultOrder("ipv4first"); // prefer IPv4 fixed test
 
 let transporter;
 const getTransporter = () => {
