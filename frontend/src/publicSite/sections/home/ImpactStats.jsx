@@ -41,9 +41,9 @@ const { impactSection } = useHome();
               className="
                 absolute inset-0 z-10
                 bg-gradient-to-r
-                from-black/75
-                via-black/40
-                to-black/10
+                from-red-800/75
+                via-red-800/40
+                to-red-800/10
               "
             />
 

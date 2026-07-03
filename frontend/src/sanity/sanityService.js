@@ -1,5 +1,5 @@
 import { sanity } from "./client";
-import { ABOUT_QUERY, APP_FEATURES_QUERY, APP_FEATURE_BY_SLUG_QUERY, BLOG_QUERY, CONTACT_QUERY, EVENTS_QUERY, EVENT_BY_SLUG_QUERY, FOOTER_QUERY, GET_INVOLVED_QUERY, HOME_QUERY, MILESTONES_QUERY, MILESTONE_BY_SLUG_QUERY, POST_BY_SLUG_QUERY, TESTIMONIALS_QUERY, VOIMA_APP_QUERY, WAITLIST_QUERY } from "./queries";
+import { ABOUT_QUERY, APP_FEATURES_QUERY, APP_FEATURE_BY_SLUG_QUERY, BLOG_QUERY, CONTACT_QUERY, EVENTS_QUERY, EVENT_BY_SLUG_QUERY, FOOTER_QUERY, GET_INVOLVED_QUERY, HOME_QUERY, JOURNEY_STATS_QUERY, MILESTONES_QUERY, MILESTONE_BY_SLUG_QUERY, POST_BY_SLUG_QUERY, TESTIMONIALS_QUERY, VOIMA_APP_QUERY, WAITLIST_QUERY } from "./queries";
 
 const initials = (name = "") =>
   name.split(" ").filter(Boolean).map((w) => w[0]).slice(0, 2).join("").toUpperCase();
@@ -178,6 +178,24 @@ export async function getFooterData() {
     return data || null;
   } catch (e) {
     console.warn("[sanity] footer failed → static fallback:", e.message);
+    return null;
+  }
+}
+
+/* ------- journey stats sanity service ----- */
+export async function getJourneyStats() {
+  try {
+    const data = await sanity.fetch(
+      JOURNEY_STATS_QUERY
+    );
+
+    return data?.stats || null;
+  } catch (e) {
+    console.warn(
+      "[sanity] journey stats fallback:",
+      e.message
+    );
+
     return null;
   }
 }

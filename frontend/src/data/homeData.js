@@ -3,7 +3,7 @@ import InnovationImage from "@/assets/content/app/innovation.jpg";
 import JourneyStoryImage from "@/assets/content/journey/story.jpg";
 import SdgBackgroundImage from "@/assets/ourImpact.png";
 import StoryImage from "@/assets/ourStory.jpg";
-import { default as AppDemoVideo, default as ImpactVideo } from "@/assets/voima_website_prototype.mp4";
+import { default as AppDemoVideo, default as ImpactVideo } from "@/assets/voima_website_prototype (2).mp4";
 import BlogImage from "@/assets/Web_red.jpg";
 import {
   BookOpenText,
