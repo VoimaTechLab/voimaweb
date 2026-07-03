@@ -1,7 +1,6 @@
-import { milestones as fbMilestones, testimonials as fbTestimonials } from "@/publicSite/data/journeyData";
-import { getMilestone, getMilestones, getTestimonials } from "@/sanity/sanityService";
+import { milestones as fbMilestones, stats as fbStats, testimonials as fbTestimonials } from "@/publicSite/data/journeyData";
+import { getJourneyStats, getMilestone, getMilestones, getTestimonials } from "@/sanity/sanityService";
 import { useEffect, useState } from "react";
-
 export function useMilestones() {
   const [list, setList] = useState(fbMilestones);
 
@@ -39,4 +38,17 @@ export function useTestimonials() {
   }, []);
 
   return list;
+}
+
+export function useJourneyStats() {
+  const [stats, setStats] =
+    useState(fbStats);
+
+  useEffect(() => {
+    getJourneyStats().then((s) => {
+      if (s) setStats(s);
+    });
+  }, []);
+
+  return stats;
 }

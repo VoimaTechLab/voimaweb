@@ -179,3 +179,8 @@ export const FOOTER_QUERY = `*[_type == "footerSettings"][0]{
   phone,
   bottomLinks
 }`;
+
+export const JOURNEY_STATS_QUERY = `
+*[_type == "journeyStats"][0]{
+  stats
+}`;
