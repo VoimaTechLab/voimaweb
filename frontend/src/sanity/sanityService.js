@@ -134,7 +134,7 @@ export async function getAppFeature(slug) {
   catch (e) { console.warn("[sanity] app feature fallback:", e.message); return null; }
 }
 
-/* ------ cpntact sanity service -------- */
+/* ------ contact sanity service -------- */
 export async function getContactData() {
   try {
     const data = await sanity.fetch(CONTACT_QUERY);

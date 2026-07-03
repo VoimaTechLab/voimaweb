@@ -184,3 +184,11 @@ export const JOURNEY_STATS_QUERY = `
 *[_type == "journeyStats"][0]{
   stats
 }`;
+
+export const GALLERY_QUERY = `
+*[_type == "gallery"] | order(_createdAt desc){
+  _id,
+  title,
+  category,
+  "images": images[].asset->url
+}`;
