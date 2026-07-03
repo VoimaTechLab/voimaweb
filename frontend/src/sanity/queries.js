@@ -166,3 +166,16 @@ export const HOME_QUERY = `*[_type == "homePage"][0]{
   },
   "ctaSection": cta
 }`;
+
+export const FOOTER_QUERY = `*[_type == "footerSettings"][0]{
+  tagline,
+  title,
+  description,
+  navigationLinks,
+  programLinks,
+  socialLinks,
+  location,
+  email,
+  phone,
+  bottomLinks
+}`;

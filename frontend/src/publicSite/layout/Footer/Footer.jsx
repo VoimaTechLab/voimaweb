@@ -1,14 +1,15 @@
 import { NewsletterForm } from "@/forms/NewsletterForm/NewsletterForm";
+import { getFooterData } from "@/sanity/sanityService";
 import {
   ArrowUpRight,
   Mail,
   MapPin,
   Phone,
 } from "lucide-react";
-
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-const navigationLinks = [
+const defaultNavigationLinks = [
   {
     label: "Home",
     path: "/",
@@ -40,7 +41,7 @@ const navigationLinks = [
   },
 ];
 
-const programLinks = [
+const defaultProgramLinks = [
   {
     label: "Voima App",
     path: "/voima-app",
@@ -67,13 +68,73 @@ const programLinks = [
   },
 ];
 
-const socials = {
+const defaultSocials = {
   facebook: "https://facebook.com/voimainitiative",
   instagram: "https://instagram.com/voimainitiative",
   linkedin: "https://linkedin.com/company/voimainitiative",
 };
 
 function Footer() {
+  const [footerData, setFooterData] = useState(null);
+
+  useEffect(() => {
+    getFooterData().then(setFooterData);
+  }, []);
+  const navigationLinks =
+  footerData?.navigationLinks ||
+  defaultNavigationLinks;
+
+const programLinks =
+  footerData?.programLinks ||
+  defaultProgramLinks;
+
+const socials =
+  footerData?.socialLinks ||
+  defaultSocials;
+
+const location =
+  footerData?.location ||
+  "Accra, Ghana";
+
+const email =
+  footerData?.email ||
+  "hello@voimainitiative.com";
+
+const phone =
+  footerData?.phone ||
+  "+233 00 000 0000";
+
+const tagline =
+  footerData?.tagline ||
+  "Voima";
+
+const title =
+  footerData?.title ||
+  "Building healthier lives through innovation and AI.";
+
+const description =
+  footerData?.description ||
+  `Voima Initiative is creating
+  accessible healthcare solutions,
+  awareness programs, and AI-powered
+  support systems for sickle cell
+  communities across Africa.`;
+
+const bottomLinks =
+  footerData?.bottomLinks || [
+    {
+      label: "Privacy Policy",
+      path: "/privacy-policy",
+    },
+    {
+      label: "Terms of Service",
+      path: "/terms-of-service",
+    },
+    {
+      label: "Accessibility",
+      path: "/accessibility",
+    },
+  ];
   return (
     <footer
       className="
@@ -134,22 +195,21 @@ function Footer() {
             <div className="h-3 w-3 rounded-full bg-[#BC1D26]" />
 
             <span className="text-sm font-bold tracking-wide text-[#BC1D26]">
-              Voima
+              {tagline}
             </span>
           </div>
 
           <h2
             className="
               mt-8
+              whitespace-pre-line
               text-4xl font-bold
               leading-tight
               text-white
             "
           >
-            Building healthier lives
-            through innovation and AI.
+            {title}
           </h2>
-
           <p
             className="
               mt-6
@@ -157,11 +217,7 @@ function Footer() {
               text-white/70
             "
           >
-            Voima Initiative is creating
-            accessible healthcare solutions,
-            awareness programs, and AI-powered
-            support systems for sickle cell
-            communities across Africa.
+            {description}
           </p>
 
           {/* Socials */}
@@ -326,7 +382,7 @@ function Footer() {
               />
 
               <p className="leading-7 text-white/75">
-                Accra, Ghana
+                {location}
               </p>
             </div>
 
@@ -340,14 +396,14 @@ function Footer() {
               />
 
               <a
-                href="mailto:hello@voimainitiative.com"
+                href={`mailto:${email}`}
                 className="
                   break-all leading-7
                   text-white/75
                   transition hover:text-white
                 "
               >
-                hello@voimainitiative.com
+               {email}
               </a>
             </div>
 
@@ -362,14 +418,14 @@ function Footer() {
 
               <p className="leading-7 text-white/75">
                 <a
-                  href="tel:+233000000000"
+                  href={`tel:${phone}`}
                   className="
                     text-white/75
                     transition
                     hover:text-white
                   "
                 >
-                  +233 00 000 0000
+                  {phone}
                 </a>
               </p>
             </div>
@@ -416,30 +472,16 @@ function Footer() {
           </p>
 
           <div className="flex flex-wrap items-center gap-6">
-
-            <Link
-              href="/privacy-policy"
-              className="transition hover:text-white"
-            >
-              Privacy Policy
-            </Link>
-
-            <Link
-              href="/terms-of-service"
-              className="transition hover:text-white"
-            >
-              Terms of Service
-            </Link>
-
-            <Link
-              href="/acessibility"
-              className="transition hover:text-white"
-            >
-              Accessibility
-            </Link>
-
+            {bottomLinks.map((item) => (
+              <Link
+                key={item.label}
+                to={item.path}
+                className="transition hover:text-white"
+              >
+                {item.label}
+              </Link>
+            ))}
           </div>
-
         </div>
 
       </div>
