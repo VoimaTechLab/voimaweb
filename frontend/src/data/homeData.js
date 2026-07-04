@@ -181,6 +181,36 @@ export const appShowcaseSection = {
   videoSrc: AppDemoVideo,
 };
 
+export const impactStatsSection = {
+  eyebrow: "OUR IMPACT",
+  title: "Creating measurable change across sickle cell communities.",
+  description:
+    "Every conversation, partnership, and initiative brings us closer to transforming sickle cell care in Africa.",
+
+  stats: [
+    {
+      title: "15K+ Reached",
+      description:
+        "Through awareness campaigns, outreach programs, and education.",
+    },
+    {
+      title: "80+ Interviews",
+      description:
+        "Deep conversations with patients and caregivers shaping our product.",
+    },
+    {
+      title: "350+ Community Members",
+      description:
+        "Growing community supporting better sickle cell care.",
+    },
+    {
+      title: "500+ Waitlist Signups",
+      description:
+        "Strong demand for proactive sickle cell support.",
+    },
+  ],
+};
+
 export const sdgSection = {
   eyebrow: "Sustainable Development Goals",
   title: "Supporting the United Nations Sustainable Development Goals",
