@@ -14,7 +14,7 @@ export default function PartnersSection() {
   } = usePartners();
 
   const carouselPartners =
-    partners.length >= 5
+    partners.length >= 2
       ? [...partners, ...partners]
       : partners;
 

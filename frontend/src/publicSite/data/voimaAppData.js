@@ -4,7 +4,7 @@ import DashboardScreen from "@/assets/app/dashboard.png";
 import AppImage from "@/assets/app/DemoVideo.mp4";
 import ReminderImage from "@/assets/app/Webb_white.jpg";
 
-import { Activity, Bell, HeartPulse, User, Users } from "lucide-react";
+import { Bell, HeartPulse, Users } from "lucide-react";
 
 
 // VoimaHero 
@@ -224,31 +224,36 @@ export const faqs = [
 
 // HowItWorks
 
-export const steps = [
-  {
-    number: "01",
-    title: "Create Account",
-    description:
-      "Set up your profile and personalize your healthcare journey.",
-    icon: User,
-  },
+export const howItWorks = {
+  eyebrow: "HOW IT WORKS",
+  title: "Take control of your sickle cell journey.",
+  description:
+    "A simple experience designed to help you monitor symptoms, stay informed, and connect with support.",
 
-  {
-    number: "02",
-    title: "Track Wellness",
-    description:
-      "Monitor symptoms, hydration, medication and daily habits.",
-    icon: Activity,
-  },
-
-  {
-    number: "03",
-    title: "Receive Support",
-    description:
-      "Get reminders, insights and access to community resources.",
-    icon: Bell,
-  },
-];
+  steps: [
+    {
+      number: "01",
+      iconName: "Bell",
+      title: "Create Your Profile",
+      description:
+        "Set up your account and personalize your health journey.",
+    },
+    {
+      number: "02",
+      iconName: "Activity",
+      title: "Track Your Health",
+      description:
+        "Monitor symptoms and important health indicators.",
+    },
+    {
+      number: "03",
+      iconName: "Users",
+      title: "Connect & Learn",
+      description:
+        "Access resources and engage with the community.",
+    },
+  ],
+};
 
 
 // DownloadCTA
