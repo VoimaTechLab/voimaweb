@@ -20,6 +20,67 @@ export default {
       ],
     },
     {
+    name: "howItWorks",
+    title: "How It Works Section",
+    type: "object",
+    fields: [
+      {
+        name: "eyebrow",
+        title: "Eyebrow",
+        type: "string",
+      },
+      {
+        name: "title",
+        title: "Title",
+        type: "string",
+      },
+      {
+        name: "steps",
+        title: "Steps",
+        type: "array",
+        of: [
+          {
+            type: "object",
+            fields: [
+              {
+                name: "number",
+                title: "Number",
+                type: "string",
+              },
+              {
+                name: "iconName",
+                title: "Icon",
+                type: "string",
+                options: {
+                  list: [
+                    "Download",
+                    "UserPlus",
+                    "Activity",
+                    "Bell",
+                    "Heart",
+                    "Shield",
+                    "Bot",
+                    "Users",
+                  ],
+                },
+              },
+              {
+                name: "title",
+                title: "Title",
+                type: "string",
+              },
+              {
+                name: "description",
+                title: "Description",
+                type: "text",
+              },
+            ],
+          },
+        ],
+      },
+    ],
+    },
+    {
       name: "appScreens", title: "App Screens", type: "array",
       of: [{ type: "object", fields: [
         { name: "title", type: "string" },

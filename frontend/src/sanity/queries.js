@@ -88,6 +88,16 @@ export const VOIMA_APP_QUERY = `*[_type == "voimaAppPage"][0]{
       "backScreen": hero.showcase.backScreen.asset->url
     }
   },
+  "howItWorks": {
+  "eyebrow": howItWorks.eyebrow,
+  "title": howItWorks.title,
+  "steps": howItWorks.steps[]{
+    number,
+    iconName,
+    title,
+    description
+  }
+},
   "appScreens": appScreens[]{ title, description, "image": image.asset->url },
   "benefits": benefits,
   "faqs": faqs,
