@@ -40,11 +40,11 @@ export default function PartnersSection() {
             <h2
               className="
                 mt-4
-                text-4xl
+                text-5xl
                 font-bold
                 leading-tight
                 text-[#BC1D26]
-                md:text-5xl
+                md:text-6xl
               "
             >
               {title}
