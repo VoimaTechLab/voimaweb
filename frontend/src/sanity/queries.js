@@ -160,6 +160,12 @@ export const HOME_QUERY = `*[_type == "homePage"][0]{
     "storeLinks": appShowcase.storeLinks, "floatingCard": appShowcase.floatingCard,
     "videoSrc": appShowcase.video.asset->url
   },
+  "impactStatsSection": {
+  "eyebrow": impactStats.eyebrow,
+  "title": impactStats.title,
+  "description": impactStats.description,
+  "stats": impactStats.stats
+},
   "sdgSection": {
     "eyebrow": sdg.eyebrow, "title": sdg.title,
     "goals": sdg.goals[]{ number, color, title, description, "image": image.asset->url }
@@ -191,4 +197,16 @@ export const GALLERY_QUERY = `
   title,
   category,
   "images": images[].asset->url
+}`;
+
+export const PARTNERS_QUERY = `
+*[_type == "partnersSection"][0]{
+  eyebrow,
+  title,
+  description,
+  "partners": partners[]{
+    name,
+    website,
+    "logo": logo.asset->url
+  }
 }`;

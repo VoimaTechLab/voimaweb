@@ -2,16 +2,18 @@ import { getHomeData } from "@/sanity/sanityService";
 import { BookOpenText, Brain, Globe, HeartPulse } from "lucide-react";
 import { useEffect, useState } from "react";
 import {
-    appShowcaseSection,
-    ctaSection,
-    heroSlides, impactSection, missionSection,
-    sdgSection,
-    storySection,
+  appShowcaseSection,
+  ctaSection,
+  heroSlides, impactSection,
+  impactStatsSection,
+  missionSection,
+  sdgSection,
+  storySection
 } from "../../data/homeData";
 
 const FALLBACK = {
   heroSlides, impactSection, missionSection, storySection,
-  appShowcaseSection, sdgSection, ctaSection,
+  appShowcaseSection, sdgSection, ctaSection, impactStatsSection
 };
 
 const ICONS = { HeartPulse, Brain, Globe, BookOpenText };
@@ -47,6 +49,10 @@ export function useHome() {
         missionSection: d.missionSection?.steps?.length ? d.missionSection : FALLBACK.missionSection,
         storySection: d.storySection || FALLBACK.storySection,
         appShowcaseSection: d.appShowcaseSection || FALLBACK.appShowcaseSection,
+        impactStatsSection:
+          d.impactStatsSection?.stats?.length
+            ? d.impactStatsSection
+            : FALLBACK.impactStatsSection,
         sdgSection: d.sdgSection?.goals?.length ? d.sdgSection : FALLBACK.sdgSection,
         ctaSection: d.ctaSection || FALLBACK.ctaSection,
       };

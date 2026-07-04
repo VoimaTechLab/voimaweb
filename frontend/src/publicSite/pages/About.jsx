@@ -9,6 +9,7 @@ import MissionVision from "@/publicSite/sections/about/MissionVision"
 import StorySection from "@/publicSite/sections/about/StorySection"
 import TeamSection from "@/publicSite/sections/about/TeamSection"
 import TraceFramework from "@/publicSite/sections/about/TraceFramework"
+import SDGSection from "../sections/home/SDGSection"
 
 export default function About() {
   return (
@@ -21,6 +22,8 @@ export default function About() {
       <StorySection />
 
       <MissionVision />
+
+      <SDGSection />
 
       <TraceFramework />
 

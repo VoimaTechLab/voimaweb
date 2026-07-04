@@ -68,6 +68,50 @@ export default {
       ],
     },
     {
+      name: "impactStats",
+      title: "Impact Section",
+      type: "object",
+      fields: [
+        {
+          name: "eyebrow",
+          title: "Eyebrow",
+          type: "string",
+        },
+        {
+          name: "title",
+          title: "Title",
+          type: "text",
+        },
+        {
+          name: "description",
+          title: "Description",
+          type: "text",
+        },
+        {
+          name: "stats",
+          title: "Impact Cards",
+          type: "array",
+          of: [
+            {
+              type: "object",
+              fields: [
+                {
+                  name: "title",
+                  title: "Title",
+                  type: "string",
+                },
+                {
+                  name: "description",
+                  title: "Description",
+                  type: "text",
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    {
       name: "sdg", title: "SDG Section", type: "object",
       fields: [
         { name: "eyebrow", type: "string" }, { name: "title", type: "text" },

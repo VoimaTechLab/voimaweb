@@ -8,9 +8,10 @@ import getInvolvedPage from "./getInvolvedPage";
 import homePage from "./homePage";
 import journeyStats from "./journeyStats";
 import milestones from "./milestones";
+import partnerSection from "./partnerSection";
 import post from "./post";
 import testimonials from "./testimonials";
 import voimaAppPage from "./voimaAppPage";
 import waitlistPage from "./waitlistPage";
 
-export const schemaTypes = [post, gallery, events, milestones, testimonials,aboutPage, voimaAppPage, contactPage, waitlistPage, appFeature, getInvolvedPage, homePage, footerSettings, journeyStats];
+export const schemaTypes = [post, gallery, events, milestones, testimonials,aboutPage, voimaAppPage, contactPage, waitlistPage, appFeature, getInvolvedPage, homePage, footerSettings, journeyStats, partnerSection];
