@@ -60,6 +60,18 @@ export const mockWaitlistByRole = [
   { name: "Volunteer", value: 8 },
 ];
 
+export const mockVolunteers =
+  Array.from({ length: 18 }).map((_, i) => ({
+    id: `v${i + 1}`,
+    fullName: `Volunteer ${i + 1}`,
+    email: `volunteer${i + 1}@example.com`,
+    motivation: "I want to help.",
+    status: "new",
+    createdAt: daysAgo(
+      Math.floor(Math.random() * 30)
+    ),
+  }));
+
 export const mockActivity = [
   { id: "a1", type: "message", text: "New message from Sarah Johnson", time: daysAgo(0) },
   { id: "a2", type: "waitlist", text: "User 32 joined the waitlist", time: daysAgo(0) },

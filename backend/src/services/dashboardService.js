@@ -33,23 +33,27 @@ export const getDashboardStats = async () => {
         : 0
       : Math.round(((current - previous) / previous) * 100);
 
-  const [
-    totalMessages,
-    unreadMessages,
-    totalSubscribers,
-    totalWaitlist,
-    totalStories,
-    pendingStories,
-    totalEvents,
-    subs30,
-    wait30,
-    waitlistByRoleRaw,
-    activityRaw,
-    subThis,
-    subPrev,
-    waitThis,
-    waitPrev,
-  ] = await Promise.all([
+ const [
+  totalMessages,
+  unreadMessages,
+  totalSubscribers,
+  totalWaitlist,
+  totalVolunteers,
+  totalStories,
+  pendingStories,
+  totalEvents,
+  subs30,
+  wait30,
+  volunteer30,
+  waitlistByRoleRaw,
+  activityRaw,
+  subThis,
+  subPrev,
+  waitThis,
+  waitPrev,
+  volunteerThis,
+  volunteerPrev,
+] = await Promise.all([
     prisma.message.count(),
     prisma.message.count({
       where: { status: "unread" },
@@ -60,6 +64,8 @@ export const getDashboardStats = async () => {
     }),
 
     prisma.waitlistUser.count(),
+
+    prisma.volunteerApplication.count(),
 
     prisma.story.count(),
 
@@ -86,6 +92,16 @@ export const getDashboardStats = async () => {
         createdAt: true,
       },
     }),
+
+
+    prisma.volunteerApplication.findMany({
+    where: {
+      createdAt: { gte: since },
+    },
+    select: {
+      createdAt: true,
+    },
+  }),
 
     prisma.waitlistUser.groupBy({
       by: ["role"],
@@ -126,6 +142,15 @@ export const getDashboardStats = async () => {
       },
     }),
 
+
+    prisma.volunteerApplication.count({
+  where: {
+    createdAt: {
+      gte: startThis,
+    },
+  },
+}),
+
     prisma.waitlistUser.count({
       where: {
         createdAt: {
@@ -136,14 +161,28 @@ export const getDashboardStats = async () => {
     }),
   ]);
 
+  prisma.volunteerApplication.count({
+  where: {
+    createdAt: {
+      gte: startPrev,
+      lt: startThis,
+    },
+  },
+});
+
   const subSeries = buildSeries(subs30, "subscribedAt");
   const waitSeries = buildSeries(wait30, "createdAt");
+  const volunteerSeries = buildSeries(
+  volunteer30,
+  "createdAt"
+);
 
-  const growthSeries = subSeries.out.map((item) => ({
-    date: item.date,
-    subscribers: subSeries.map[item.date] || 0,
-    waitlist: waitSeries.map[item.date] || 0,
-  }));
+const growthSeries = subSeries.out.map((item) => ({
+  date: item.date,
+  subscribers: subSeries.map[item.date] || 0,
+  waitlist: waitSeries.map[item.date] || 0,
+  volunteers: volunteerSeries.map[item.date] || 0,
+}));
 
   const waitlistByRole = waitlistByRoleRaw.map((item) => ({
     name: item.role || "Unspecified",
@@ -158,18 +197,23 @@ export const getDashboardStats = async () => {
   }));
 
   return {
-    cards: {
-      totalMessages,
-      unreadMessages,
-      totalSubscribers,
-      totalWaitlist,
-      totalStories,
-      pendingStories,
-      totalEvents,
+  cards: {
+    totalMessages,
+    unreadMessages,
+    totalSubscribers,
+    totalWaitlist,
+    totalVolunteers,
+    totalStories,
+    pendingStories,
+    totalEvents,
 
-      subscriberGrowth: growth(subThis, subPrev),
-      waitlistGrowth: growth(waitThis, waitPrev),
-    },
+    subscriberGrowth: growth(subThis, subPrev),
+    waitlistGrowth: growth(waitThis, waitPrev),
+    volunteerGrowth: growth(
+      volunteerThis,
+      volunteerPrev
+    ),
+  },
 
     growthSeries,
     waitlistByRole,

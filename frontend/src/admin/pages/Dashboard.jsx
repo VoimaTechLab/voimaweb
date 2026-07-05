@@ -1,4 +1,4 @@
-import { Calendar, FileText, ListChecks, Mail, Send } from "lucide-react";
+import { Calendar, FileText, HeartHandshake, ListChecks, Mail, Send } from "lucide-react";
 import {
   Area,
   AreaChart,
@@ -63,6 +63,12 @@ export default function Dashboard() {
       value: stats.cards.totalWaitlist,
       icon: ListChecks,
       trend: stats.cards.waitlistGrowth,
+    },
+    {
+      label: "Volunteer",
+      value: stats.cards.totalVolunteer,
+      change: stats.cards.volunteerGrowth,
+      icon: HeartHandshake,
     },
     {
       label: "Blog Posts",
