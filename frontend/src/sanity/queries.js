@@ -123,12 +123,25 @@ export const CONTACT_QUERY = `*[_type == "contactPage"][0]{
   "socialLinks": socialLinks
 }`;
 
-
 export const WAITLIST_QUERY = `*[_type == "waitlistPage"][0]{
-  launchDate, eyebrow, title, description,
-  stats, form, launchMessage, features,
+  launchDate,
+  eyebrow,
+  title,
+  description,
+  stats,
+  form,
+  launchMessage,
+  features,
+
   "avatars": avatars[].asset->url,
-  "appMockups": appMockups[].asset->url
+  "appMockups": appMockups[].asset->url,
+
+  "appMockup": {
+    "eyebrow": appMockup.eyebrow,
+    "title": appMockup.title,
+    "description": appMockup.description,
+    "image": appMockup.image.asset->url
+  }
 }`;
 
 

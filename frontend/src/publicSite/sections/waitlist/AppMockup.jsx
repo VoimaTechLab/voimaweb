@@ -1,13 +1,12 @@
+import { useWaitlist } from "@/publicSite/hooks/useWaitlist";
 import {
-    Bell,
-    CalendarDays,
-    HeartPulse,
-    MessageCircleHeart,
-    ShieldCheck,
-    Users,
+  Bell,
+  CalendarDays,
+  HeartPulse,
+  MessageCircleHeart,
+  ShieldCheck,
+  Users,
 } from "lucide-react";
-
-import AppImage from "@/assets/app/community.png";
 
 const leftFeatures = [
   {
@@ -56,6 +55,14 @@ const rightFeatures = [
 ];
 
 export default function AppMockup() {
+    const { appMockup } = useWaitlist();
+
+  const {
+    eyebrow,
+    title,
+    description,
+    image,
+  } = appMockup;
   return (
     <section className="relative overflow-hidden px-6 py-32">
       <div className="mx-auto max-w-7xl">
@@ -203,8 +210,8 @@ export default function AppMockup() {
               {/* App UI */}
 
               <img 
-                src= { AppImage } 
-                alt="App mockup" 
+                src= {image} 
+                alt= {title}
                 className="h-full w-full rounded-[50px] object-cover"
               />
 

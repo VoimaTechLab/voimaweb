@@ -124,14 +124,12 @@ export default function PartnersSection() {
                       src={partner.logo}
                       alt={partner.name}
                       className="
-                        h-30
+                        h-50
                         w-auto
                         max-w-full
                         object-contain
-                        grayscale
                         transition
                         duration-300
-                        hover:grayscale-0
                       "
                     />
                   </a>
@@ -139,7 +137,7 @@ export default function PartnersSection() {
                   <div
                     className="
                       flex
-                      h-30
+                      h-50
                       items-center
                       justify-center
                       rounded-[2rem]
@@ -158,14 +156,12 @@ export default function PartnersSection() {
                       src={partner.logo}
                       alt={partner.name}
                       className="
-                        h-30
+                        h-50
                         w-auto
                         max-w-full
                         object-contain
-                        grayscale
                         transition
                         duration-300
-                        hover:grayscale-0
                       "
                     />
                   </div>

@@ -34,6 +34,36 @@ export default {
       ]}],
     },
     {
+  name: "appMockup",
+  title: "App Mockup Section",
+  type: "object",
+  fields: [
+    {
+      name: "eyebrow",
+      title: "Eyebrow",
+      type: "string",
+    },
+    {
+      name: "title",
+      title: "Title",
+      type: "string",
+    },
+    {
+      name: "description",
+      title: "Description",
+      type: "text",
+    },
+    {
+      name: "image",
+      title: "Mockup Image",
+      type: "image",
+      options: {
+        hotspot: true,
+      },
+    },
+  ],
+},
+    {
       name: "avatars", title: "Social Proof Avatars", type: "array",
       of: [{ type: "image", options: { hotspot: true } }],
     },
