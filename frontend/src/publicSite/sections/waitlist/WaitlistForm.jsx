@@ -17,24 +17,28 @@ export default function WaitlistForm() {
     e.preventDefault();
     setError("");
 
-    // Map form fields → backend shape (handles `name` or `fullName`)
+    // Map form fields → backend shape (handles `ename` or `email name`)
       const payload = {
-        fullName: formData.fullName || "",
         email: formData.email || "",
         phone: formData.phone || "",
-        location: formData.location || formData.country || "", // location
+        location: formData.location || formData.country || "",
         role: formData.role || "",
       };
-    if (!payload.fullName.trim() || !payload.email.trim()) {
-      setError("Please provide your name and email.");
-      return;
-    }
+      if (!payload.email.trim()) {
+        setError("Please provide your email.");
+        return;
+      }
 
     setStatus("loading");
     try {
       await waitlistService.join(payload);
       setStatus("success");
-      setFormData({});
+      setFormData({
+        email: "",
+        phone: "",
+        location: "",
+        role: "",
+      });
     } catch (err) {
       setStatus("error");
       setError(err?.response?.data?.message || "Something went wrong. Please try again.");

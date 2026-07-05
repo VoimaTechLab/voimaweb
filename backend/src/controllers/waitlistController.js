@@ -12,7 +12,7 @@ export const join = asyncHandler(async (req, res) => {
     create: { ...req.body },
   });
   sendEmail({ to: user.email, subject: "Welcome to the Voima waitlist 🚀", html: waitlistWelcomeEmail(user) });
-  logActivity({ type: "waitlist", text: `${user.fullName} joined the waitlist` });
+  logActivity({ type: "waitlist", text: `${user.email} joined the waitlist` });
   created(res, { id: user.id });
 });
 
@@ -23,7 +23,6 @@ export const listWaitlist = asyncHandler(async (req, res) => {
     ...(role && role !== "all" && { role }),
     ...(search && {
       OR: [
-        { fullName: { contains: search, mode: "insensitive" } },
         { email: { contains: search, mode: "insensitive" } },
         { location: { contains: search, mode: "insensitive" } },
       ],
@@ -46,9 +45,9 @@ export const deleteWaitlistUser = asyncHandler(async (req, res) => {
 
 export const exportWaitlist = asyncHandler(async (_req, res) => {
   const users = await prisma.waitlistUser.findMany({ orderBy: { createdAt: "desc" } });
-  const rows = [["fullName", "email", "phone", "location", "role", "createdAt"]];
+  const rows = [["email", "phone", "location", "role", "createdAt"]];
   users.forEach((u) =>
-    rows.push([u.fullName, u.email, u.phone || "", u.location || "", u.role || "", u.createdAt.toISOString()]));
+    rows.push([u.email, u.phone || "", u.location || "", u.role || "", u.createdAt.toISOString()]));
   const csv = rows.map((r) => r.map((c) => `"${c}"`).join(",")).join("\n");
   res.setHeader("Content-Type", "text/csv");
   res.setHeader("Content-Disposition", "attachment; filename=waitlist.csv");

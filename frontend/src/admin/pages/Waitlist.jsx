@@ -28,7 +28,10 @@ export default function Waitlist() {
     return rows
       .filter((r) => role === "all" || r.role === role)
       .filter((r) =>
-        [r.fullName, r.email, r.location].join(" ").toLowerCase().includes(search.toLowerCase())
+        [r.email, r.location]
+          .join(" ")
+          .toLowerCase()
+          .includes(search.toLowerCase())
       );
   }, [rows, role, search]);
 
@@ -54,7 +57,7 @@ export default function Waitlist() {
 
       <Card>
         <div className="flex flex-wrap items-center gap-3 border-b border-neutral-200 p-3">
-          <SearchInput value={query} onChange={setQuery} placeholder="Search name, email…" />
+          <SearchInput value={query} onChange={setQuery} placeholder="Search email or loc…" />
           <div className="flex gap-1">
             {roles.map((r) => (
               <button key={r} onClick={() => setRole(r)}
@@ -73,7 +76,6 @@ export default function Waitlist() {
           <table className="w-full text-left text-sm">
             <thead className="text-xs uppercase text-neutral-400">
               <tr>
-                <th className="px-5 py-3 font-medium">Name</th>
                 <th className="px-5 py-3 font-medium">Email</th>
                 <th className="px-5 py-3 font-medium">Phone</th>
                 <th className="px-5 py-3 font-medium">Location</th>
@@ -84,7 +86,6 @@ export default function Waitlist() {
             <tbody>
               {filtered.map((r) => (
                 <tr key={r.id} className="border-t border-neutral-100 hover:bg-neutral-50">
-                  <td className="px-5 py-3 font-medium text-neutral-800">{r.fullName}</td>
                   <td className="px-5 py-3 text-neutral-600">{r.email}</td>
                   <td className="px-5 py-3 text-neutral-500">{r.phone}</td>
                   <td className="px-5 py-3 text-neutral-600">{r.location}</td>
