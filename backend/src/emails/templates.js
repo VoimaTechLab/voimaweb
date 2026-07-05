@@ -31,7 +31,7 @@ export const newsletterWelcomeEmail = (email) =>
 
 export const waitlistWelcomeEmail = (u) =>
   baseLayout(`
-    <h2 style="margin:0 0 8px;font-size:18px;">Welcome to the Voima waitlist, ${u.fullName}! 🚀</h2>
+    <h2 style="margin:0 0 8px;font-size:18px;">Welcome to the Voima waitlist, ${u.email}! 🚀</h2>
     <p style="color:#475569;font-size:14px;">We're thrilled to have you. We'll notify you the moment the Voima App is ready.</p>
     ${btn("You're #early")}
   `);

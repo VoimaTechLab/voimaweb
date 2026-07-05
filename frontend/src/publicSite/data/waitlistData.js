@@ -68,12 +68,6 @@ export const features = [
 ];
 
 export const waitlistFormFields = [
-  {
-    name: "fullName",
-    label: "Full Name",
-    type: "text",
-    required: true
-  },
 
   {
     name: "email",

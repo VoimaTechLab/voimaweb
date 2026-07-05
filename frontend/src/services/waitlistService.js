@@ -4,7 +4,7 @@ const API = import.meta.env.VITE_API_BASE || "http://localhost:5000/api/v1";
 const client = axios.create({ baseURL: API });
 
 export const waitlistService = {
-  // payload = { fullName, email, phone, location, role }
+  // payload = { email, phone, location, role }
   join: async (payload) => {
     const res = await client.post("/waitlist", payload);
     return res.data;
