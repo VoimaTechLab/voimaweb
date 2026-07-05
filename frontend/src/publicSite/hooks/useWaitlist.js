@@ -1,7 +1,8 @@
+import AppImage from "@/assets/app/community.png";
 import {
-    waitlistAvatars as fbAvatars,
-    waitlistData as fbData,
-    features as fbFeatures,
+  waitlistAvatars as fbAvatars,
+  waitlistData as fbData,
+  features as fbFeatures,
 } from "@/publicSite/data/waitlistData";
 import { getWaitlistData } from "@/sanity/sanityService";
 import { waitlistService } from "@/services/waitlistService";
@@ -12,6 +13,14 @@ const FALLBACK = {
   features: fbFeatures,
   waitlistAvatars: fbAvatars,
   appMockups: [],
+    appMockup: {
+    eyebrow: "The Experience",
+    title: "Healthcare support built around real life.",
+    description:
+      "Track wellness, receive reminders, access support, connect with community and stay informed.",
+    image: AppImage,
+  },
+
 };
 
 let cache = null;
@@ -43,6 +52,7 @@ export function useWaitlist() {
         features: base.features?.length ? base.features : FALLBACK.features,
         waitlistAvatars: base.avatars?.length ? base.avatars : FALLBACK.waitlistAvatars,
         appMockups: base.appMockups?.length ? base.appMockups : FALLBACK.appMockups,
+         appMockup: d.appMockup || FALLBACK.appMockup,
       };
       setData(cache);
     });
