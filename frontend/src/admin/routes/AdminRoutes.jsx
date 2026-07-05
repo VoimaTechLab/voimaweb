@@ -16,6 +16,7 @@ const Stories = lazy(() => import("../pages/Stories"));
 const EventsManager = lazy(() => import("../pages/EventsManager"));
 const Settings = lazy(() => import("../pages/Settings"));
 const NotFound = lazy(() => import("../pages/NotFound"));
+const Volunteers = lazy(() => import("../pages/Volunteer"));
 
 export default function AdminRoutes() {
   return (
@@ -34,6 +35,7 @@ export default function AdminRoutes() {
             <Route path="waitlist" element={<Waitlist />} />
             <Route path="blog" element={<BlogManager />} />
             <Route path="stories" element={<Stories />} />
+            <Route path="volunteers" element={<Volunteers />}/>
             <Route path="events" element={<EventsManager />} />
 
             {/* ROLE-RESTRICTED: only Super Admin can manage accounts */}

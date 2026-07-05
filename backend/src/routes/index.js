@@ -8,6 +8,7 @@ import eventRoutes from "./eventRoutes.js";
 import newsletterRoutes from "./newsletterRoutes.js";
 import settingsRoutes from "./settingsRoutes.js";
 import storyRoutes from "./storyRoutes.js";
+import volunteerRoutes from "./volunteerRoutes.js";
 import waitlistRoutes from "./waitlistRoutes.js";
 
 const router = Router();
@@ -17,6 +18,7 @@ router.use("/auth", authRoutes);
 router.use("/contact", contactRoutes);
 router.use("/newsletter", newsletterRoutes);
 router.use("/waitlist", waitlistRoutes);
+router.use("/volunteers", volunteerRoutes);
 router.use("/stories", storyRoutes);
 router.use("/events", eventRoutes);
 router.use("/admins", adminRoutes);

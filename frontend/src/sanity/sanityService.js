@@ -1,5 +1,5 @@
 import { sanity } from "./client";
-import { ABOUT_QUERY, APP_FEATURES_QUERY, APP_FEATURE_BY_SLUG_QUERY, BLOG_QUERY, CONTACT_QUERY, EVENTS_QUERY, EVENT_BY_SLUG_QUERY, FOOTER_QUERY, GALLERY_QUERY, GET_INVOLVED_QUERY, HOME_QUERY, JOURNEY_STATS_QUERY, MILESTONES_QUERY, MILESTONE_BY_SLUG_QUERY, PARTNERS_QUERY, POST_BY_SLUG_QUERY, TESTIMONIALS_QUERY, VOIMA_APP_QUERY, WAITLIST_QUERY } from "./queries";
+import { ABOUT_QUERY, APP_FEATURES_QUERY, APP_FEATURE_BY_SLUG_QUERY, BLOG_QUERY, CONTACT_QUERY, EVENTS_QUERY, EVENT_BY_SLUG_QUERY, FOOTER_QUERY, GALLERY_QUERY, GET_INVOLVED_QUERY, HOME_QUERY, JOURNEY_STATS_QUERY, MILESTONES_QUERY, MILESTONE_BY_SLUG_QUERY, PARTNERS_QUERY, POST_BY_SLUG_QUERY, TESTIMONIALS_QUERY, VOIMA_APP_QUERY, VOLUNTEER_PAGE_QUERY } from "./queries";
 
 const initials = (name = "") =>
   name.split(" ").filter(Boolean).map((w) => w[0]).slice(0, 2).join("").toUpperCase();
@@ -223,6 +223,23 @@ export async function getPartnersData() {
   } catch (e) {
     console.warn(
       "[sanity] partners fallback:",
+      e.message
+    );
+
+    return null;
+  }
+}
+
+export async function getVolunteerPage() {
+  try {
+    const data = await sanity.fetch(
+      VOLUNTEER_PAGE_QUERY
+    );
+
+    return data || null;
+  } catch (e) {
+    console.warn(
+      "[sanity] volunteer page failed → static fallback:",
       e.message
     );
 

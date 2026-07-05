@@ -233,3 +233,14 @@ export const PARTNERS_QUERY = `
     "logo": logo.asset->url
   }
 }`;
+
+export const VOLUNTEER_PAGE_QUERY = `
+*[_type == "volunteerPage"][0]{
+  eyebrow,
+  title,
+  description,
+  imageTitle,
+  imageDescription,
+  "image": image.asset->url
+}
+`;

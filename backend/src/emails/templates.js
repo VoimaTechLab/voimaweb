@@ -78,3 +78,52 @@ export const broadcastEmail = ({ subject, message }) =>
       </blockquote>
     </div>
   `);
+
+  export const volunteerConfirmationEmail = (name) => `
+<div style="font-family:Arial,sans-serif;line-height:1.6;">
+  <h2 style="color:#BC1D26;">Thank you for volunteering ❤️</h2>
+
+  <p>Hi ${name},</p>
+
+  <p>
+    Thank you for submitting your volunteer application to
+    Voima Initiative.
+  </p>
+
+  <p>
+    We appreciate your willingness to support our mission of
+    creating awareness and improving the lives of individuals
+    living with sickle cell.
+  </p>
+
+  <p>
+    Our team will review your application and get back to you
+    soon.
+  </p>
+
+  <p>
+    Thank you for choosing to make an impact.
+  </p>
+
+  <br/>
+
+  <p>
+    — The Voima Initiative Team
+  </p>
+</div>
+`;
+
+export const volunteerAdminEmail = (volunteer) => `
+<div style="font-family:Arial,sans-serif;line-height:1.6;">
+  <h2>New Volunteer Application</h2>
+
+  <p><strong>Name:</strong> ${volunteer.fullName}</p>
+  <p><strong>Email:</strong> ${volunteer.email}</p>
+
+  <p>
+    <strong>Motivation:</strong>
+  </p>
+
+  <p>${volunteer.motivation}</p>
+</div>
+`;
