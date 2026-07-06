@@ -159,16 +159,18 @@ export const getDashboardStats = async () => {
         },
       },
     }),
-  ]);
 
-  prisma.volunteerApplication.count({
-  where: {
-    createdAt: {
-      gte: startPrev,
-      lt: startThis,
+    prisma.volunteerApplication.count({
+    where: {
+      createdAt: {
+        gte: startPrev,
+        lt: startThis,
+      },
     },
-  },
-});
+  }),
+  
+]);
+
 
   const subSeries = buildSeries(subs30, "subscribedAt");
   const waitSeries = buildSeries(wait30, "createdAt");
