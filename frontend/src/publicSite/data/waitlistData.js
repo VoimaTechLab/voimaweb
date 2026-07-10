@@ -1,7 +1,7 @@
-import Avatar1 from "@/assets/avatars/avatar-1.jpg";
-import Avatar2 from "@/assets/avatars/avatar-2.jpg";
-import Avatar3 from "@/assets/avatars/avatar-3.jpg";
-import Avatar4 from "@/assets/avatars/avatar-4.jpg";
+import Avatar4 from "@/assets/avatars/5929411444480872309_121.jpg";
+import Avatar1 from "@/assets/avatars/avatar_1.jfif";
+import Avatar2 from "@/assets/avatars/avatar_2.jfif";
+import Avatar3 from "@/assets/avatars/avatar_3.jfif";
 
 export const waitlistAvatars = [
   Avatar1,
@@ -11,7 +11,7 @@ export const waitlistAvatars = [
 ]
 
 export const waitlistData = {
-  launchDate: "2026-12-01T00:00:00",
+  launchDate: "2026-10-01 17:27",
 
   eyebrow: "Voima App",
 

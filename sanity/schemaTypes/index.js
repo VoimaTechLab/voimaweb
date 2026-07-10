@@ -14,5 +14,4 @@ import testimonials from "./testimonials";
 import voimaAppPage from "./voimaAppPage";
 import volunteerPage from "./volunteerPage";
 import waitlistPage from "./waitlistPage";
-
 export const schemaTypes = [post, gallery, events, milestones, testimonials,aboutPage, voimaAppPage, contactPage, waitlistPage, appFeature, getInvolvedPage, homePage, footerSettings, journeyStats, partnerSection, volunteerPage];

@@ -183,8 +183,8 @@ export default function AppMockup() {
               className="
                 relative
                 h-[720px]
-                w-[360px]
-                rounded-[60px]
+                w-[345px]
+                rounded-[65px]
                 border-[10px]
                 border-black
                 bg-white
@@ -192,7 +192,7 @@ export default function AppMockup() {
               "
             >
 
-              {/* Notch */}
+              {/* Notch 
 
               <div
                 className="
@@ -205,7 +205,7 @@ export default function AppMockup() {
                   rounded-full
                   bg-black
                 "
-              />
+              />*/}
 
               {/* App UI */}
 

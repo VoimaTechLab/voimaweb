@@ -24,78 +24,54 @@ export default function AppScreens() {
         </div>
 
         <div className="mt-20">
-          <Swiper
-            modules={[Autoplay, Pagination]}
-            spaceBetween={40}
-            loop
-            centeredSlides
-            speed={1000}
-            autoplay={{
-              delay: 3000,
-              disableOnInteraction: false,
-            }}
-            breakpoints={{
-              0: {
-                slidesPerView: 1.1,
-              },
-              640: {
-                slidesPerView: 1.5,
-              },
-              768: {
-                slidesPerView: 2,
-              },
-              1024: {
-                slidesPerView: 3,
-              },
-            }}
-            className="!overflow-visible"
-          >
-            {appScreens.map((screen, index) => (
-              <SwiperSlide key={index}>
-                <div
-                  className="
-                    group
-                    mx-auto
-                    max-w-[320px]
-                    transition-all
-                    duration-500
-                    hover:-translate-y-4
-                  "
-                >
-                  <div
-                    className="
-                      overflow-hidden
-                      rounded-[45px]
-                      border-[10px]
-                      border-black
-                      shadow-2xl
-                    "
-                  >
-                    <img
-                      src={screen.image}
-                      alt={screen.title}
-                      className="
-                        h-[620px]
-                        w-full
-                        object-cover
-                        transition-transform
-                        duration-700
-                        group-hover:scale-105
-                      "
-                    />
+          {/* OPTIMIZATION: Only init once images/screens have loaded */}
+          {appScreens && appScreens.length > 0 && (
+            <Swiper
+              modules={[Autoplay, Pagination]}
+              spaceBetween={40}
+              loop={true}
+              centeredSlides={true}
+              speed={1000}
+              autoplay={{
+                delay: 3000,
+                disableOnInteraction: false,
+              }}
+              /* OPTIMIZATION: Watches for the images finishing painting layout sizes */
+              observer={true}
+              observeParents={true}
+              breakpoints={{
+                0: { slidesPerView: 1.1 },
+                640: { slidesPerView: 1.5 },
+                768: { slidesPerView: 2 },
+                1024: { slidesPerView: 3 },
+              }}
+              className="!overflow-visible"
+            >
+              {appScreens.map((screen, index) => (
+                <SwiperSlide key={index}>
+                  <div className="group mx-auto max-w-[320px] transition-all duration-500 hover:-translate-y-4">
+                    <div className="overflow-hidden rounded-[45px] border-[10px] border-black shadow-2xl">
+                      <img
+                        src={screen.image}
+                        alt={screen.title}
+                        /* OPTIMIZATION: native lazy loading helps massive screen images */
+                        loading="lazy"
+                        className="h-[620px] w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                    </div>
+
+                    <h3 className="mt-8 text-2xl font-bold text-[#BC1D26]">
+                      {screen.title}
+                    </h3>
+
+                    <p className="mt-3 leading-7 text-black/60">
+                      {screen.description}
+                    </p>
                   </div>
-
-                  <h3 className="mt-8 text-2xl font-bold text-[#BC1D26]">
-                    {screen.title}
-                  </h3>
-
-                  <p className="mt-3 leading-7 text-black/60">
-                    {screen.description}
-                  </p>
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          )}
         </div>
       </div>
     </section>
