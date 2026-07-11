@@ -1,34 +1,39 @@
 import { env } from "../config/env.js";
 import { prisma } from "../database/prisma.js";
 import {
-    volunteerAdminEmail,
-    volunteerConfirmationEmail,
+  volunteerAdminEmail,
+  volunteerConfirmationEmail,
 } from "../emails/templates.js";
 import { logActivity } from "../services/activityService.js";
 import { sendEmail } from "../services/emailService.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { created, ok } from "../utils/response.js";
 export const createVolunteer = asyncHandler(async (req, res) => {
-  const volunteer =
-    await prisma.volunteerApplication.create({
-      data: req.body,
-    });
+const volunteer = await prisma.volunteerApplication.create({
+  data: req.body,
+});
 
+try {
   await sendEmail({
     to: volunteer.email,
     subject: "Thank you for volunteering with Voima ❤️",
-    html: volunteerConfirmationEmail(
-      volunteer.fullName
-    ),
+    html: volunteerConfirmationEmail(volunteer.fullName),
   });
+} catch (err) {
+  console.error("Volunteer email failed:", err);
+}
 
+try {
   await sendEmail({
     to: env.email.adminNotify,
     subject: "New Volunteer Application",
-    html: volunteerAdminEmail(
-      volunteer
-    ),
+    html: volunteerAdminEmail(volunteer),
   });
+} catch (err) {
+  console.error("Admin email failed:", err);
+}
+
+created(res, { id: volunteer.id });
 
   logActivity({
     type: "volunteer",
