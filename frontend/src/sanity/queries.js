@@ -299,7 +299,9 @@ export const CAREER_ROLE_QUERY = `
   location,
   department,
   experience,
+  applicationLink,
   responsibilities,
-  requirements
+  requirements,
+  benefits
 }
 `;

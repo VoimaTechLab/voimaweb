@@ -1,4 +1,3 @@
-
 export default {
   name: "careerRole",
   title: "Career Role",
@@ -66,6 +65,22 @@ export default {
       title: "Requirements",
       type: "array",
       of: [{ type: "string" }],
+    },
+
+    {
+      name: "benefits",
+      title: "Benefits",
+      type: "array",
+      of: [{ type: "string" }],
+    },
+    {
+        name: "applicationLink",
+        title: "Application Link",
+        type: "url",
+        description: "Google Form or external application URL",
+        validation: (Rule) => Rule.uri({
+            scheme: ["http", "https"],
+        }),
     },
   ],
 
