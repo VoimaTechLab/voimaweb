@@ -17,6 +17,45 @@ export default {
           { name: "frontScreen", type: "image", options: { hotspot: true } },
           { name: "backScreen", type: "image", options: { hotspot: true } },
         ]},
+        {
+          name: "demoVideo",
+          title: "Demo Video",
+          type: "object",
+          fields: [
+            {
+              name: "videoType",
+              title: "Video Source",
+              type: "string",
+              initialValue: "upload",
+              options: {
+                list: [
+                  { title: "Upload Video", value: "upload" },
+                  { title: "YouTube Link", value: "youtube" },
+                ],
+                layout: "radio",
+              },
+            },
+
+            {
+              name: "uploadedVideo",
+              title: "Uploaded Video",
+              type: "file",
+              options: {
+                accept: "video/mp4,video/webm",
+              },
+              hidden: ({ parent }) =>
+                parent?.videoType !== "upload",
+            },
+
+            {
+              name: "youtubeUrl",
+              title: "YouTube URL",
+              type: "url",
+              hidden: ({ parent }) =>
+                parent?.videoType !== "youtube",
+            },
+          ],
+        },
       ],
     },
     {

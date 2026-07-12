@@ -80,14 +80,24 @@ export const ABOUT_QUERY = `*[_type == "aboutPage"][0]{
 }`;
 
 export const VOIMA_APP_QUERY = `*[_type == "voimaAppPage"][0]{
-  "heroData": {
-    "eyebrow": hero.eyebrow, "title": hero.title, "description": hero.description,
-    "primaryCTA": hero.primaryCTA, "secondaryCTA": hero.secondaryCTA,
-    "showcase": {
-      "frontScreen": hero.showcase.frontScreen.asset->url,
-      "backScreen": hero.showcase.backScreen.asset->url
-    }
+"heroData": {
+  "eyebrow": hero.eyebrow,
+  "title": hero.title,
+  "description": hero.description,
+  "primaryCTA": hero.primaryCTA,
+  "secondaryCTA": hero.secondaryCTA,
+
+  "demoVideo": {
+    "videoType": hero.demoVideo.videoType,
+    "uploadedVideo": hero.demoVideo.uploadedVideo.asset->url,
+    "youtubeUrl": hero.demoVideo.youtubeUrl
   },
+
+  "showcase": {
+    "frontScreen": hero.showcase.frontScreen.asset->url,
+    "backScreen": hero.showcase.backScreen.asset->url
+  }
+},
   "howItWorks": {
   "eyebrow": howItWorks.eyebrow,
   "title": howItWorks.title,
