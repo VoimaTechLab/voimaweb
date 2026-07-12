@@ -132,7 +132,7 @@ export default function Blog() {
         </div>
       </section>
 
-      {/* POSTS */}
+      {/* POSTS 
       <section className="px-6 py-24">
         <div className="mx-auto max-w-7xl">
 
@@ -257,7 +257,7 @@ export default function Blog() {
           </div>
 
         </div>
-      </section>
+      </section>*/}
 
       {/* COMMUNITY STORIES
       <section className="bg-[#fff] px-6 py-24">

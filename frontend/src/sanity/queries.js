@@ -244,3 +244,52 @@ export const VOLUNTEER_PAGE_QUERY = `
   "image": image.asset->url
 }
 `;
+
+export const CAREER_PAGE_QUERY = `
+*[_type=="careerPage"][0]{
+  eyebrow,
+  title,
+  description,
+
+  roles[]->{
+    _id,
+    title,
+    "slug": slug.current,
+    overview,
+    type,
+    location,
+    department,
+    experience
+  },
+  membersEyebrow,
+  membersTitle,
+  membersDescription,
+
+  members[]->{
+    _id,
+    name,
+    role,
+    bio,
+    linkedin,
+    twitter,
+    github,
+    website,
+    "image": image.asset->url
+  }
+}
+`;
+
+export const CAREER_ROLE_QUERY = `
+*[_type=="careerRole" && slug.current==$slug][0]{
+  _id,
+  title,
+  "slug": slug.current,
+  overview,
+  type,
+  location,
+  department,
+  experience,
+  responsibilities,
+  requirements
+}
+`;
