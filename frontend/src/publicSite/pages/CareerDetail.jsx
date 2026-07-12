@@ -1,12 +1,12 @@
-import { jobs } from "@/publicSite/data/careersData";
+import { useCareerRole } from "@/publicSite/hooks/useCareerRole";
 import { Link, useParams } from "react-router-dom";
 
 export default function CareerDetail() {
   const { slug } = useParams();
 
-  const job = jobs.find(
-    (item) => item.slug === slug
-  );
+  const { job, loading } = useCareerRole(slug);
+
+  if (loading) return null;
 
   if (!job) {
     return (

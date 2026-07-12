@@ -1,5 +1,12 @@
 import { sanity } from "./client";
-import { ABOUT_QUERY, APP_FEATURES_QUERY, APP_FEATURE_BY_SLUG_QUERY, BLOG_QUERY, CONTACT_QUERY, EVENTS_QUERY, EVENT_BY_SLUG_QUERY, FOOTER_QUERY, GALLERY_QUERY, GET_INVOLVED_QUERY, HOME_QUERY, JOURNEY_STATS_QUERY, MILESTONES_QUERY, MILESTONE_BY_SLUG_QUERY, PARTNERS_QUERY, POST_BY_SLUG_QUERY, TESTIMONIALS_QUERY, VOIMA_APP_QUERY, VOLUNTEER_PAGE_QUERY, WAITLIST_QUERY } from "./queries";
+import {
+  ABOUT_QUERY,
+  APP_FEATURES_QUERY, APP_FEATURE_BY_SLUG_QUERY, BLOG_QUERY,
+  CAREER_PAGE_QUERY,
+  CAREER_ROLE_QUERY,
+  CONTACT_QUERY, EVENTS_QUERY, EVENT_BY_SLUG_QUERY, FOOTER_QUERY, GALLERY_QUERY, GET_INVOLVED_QUERY, HOME_QUERY, JOURNEY_STATS_QUERY, MILESTONES_QUERY, MILESTONE_BY_SLUG_QUERY, PARTNERS_QUERY, POST_BY_SLUG_QUERY, TESTIMONIALS_QUERY, VOIMA_APP_QUERY, VOLUNTEER_PAGE_QUERY, WAITLIST_QUERY
+} from "./queries";
+
 
 const initials = (name = "") =>
   name.split(" ").filter(Boolean).map((w) => w[0]).slice(0, 2).join("").toUpperCase();
@@ -243,6 +250,29 @@ export async function getVolunteerPage() {
       e.message
     );
 
+    return null;
+  }
+}
+
+/* ------ career sanity service -------- */
+
+export async function getCareerPage() {
+  try {
+    const page = await sanity.fetch(CAREER_PAGE_QUERY);
+    return page || null;
+  } catch (e) {
+    console.warn("[sanity] career page failed:", e.message);
+    return null;
+  }
+}
+
+export async function getCareerRole(slug) {
+  try {
+    return await sanity.fetch(CAREER_ROLE_QUERY, {
+      slug,
+    });
+  } catch (e) {
+    console.warn("[sanity] career role failed:", e.message);
     return null;
   }
 }
