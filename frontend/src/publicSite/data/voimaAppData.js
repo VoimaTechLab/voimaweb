@@ -1,7 +1,7 @@
 import CTAImage from "@/assets/app/app.png";
-import CommunityScreen from "@/assets/app/community.png";
 import AppImage from "@/assets/app/DemoVideo.mp4";
 import DashboardScreen from "@/assets/app/How_it_works.png";
+import BackScreen from "@/assets/app/profile1.png";
 import ReminderImage from "@/assets/app/Webb_white.jpg";
 
 import { Bell, HeartPulse, Users } from "lucide-react";
@@ -30,7 +30,7 @@ export const heroData = {
   showcase: {
     //frontVideo: DemoApp,
     frontScreen: DashboardScreen,
-    backScreen: CommunityScreen,
+    backScreen: BackScreen,
   },
 };
 
