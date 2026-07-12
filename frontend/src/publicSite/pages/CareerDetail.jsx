@@ -27,7 +27,6 @@ export default function CareerDetail() {
 
   return (
     <main className="pt-[90px]">
-
       <section className="px-6 py-24">
         <div className="mx-auto max-w-5xl">
 
@@ -42,6 +41,7 @@ export default function CareerDetail() {
               border-black/10
               px-5
               py-3
+              transition
               hover:border-[#BC1D26]
               hover:text-[#BC1D26]
             "
@@ -50,7 +50,6 @@ export default function CareerDetail() {
           </Link>
 
           <div className="mt-12">
-
             <span className="rounded-full bg-[#BC1D26]/10 px-4 py-2 text-sm text-[#BC1D26]">
               {job.type}
             </span>
@@ -74,11 +73,11 @@ export default function CareerDetail() {
               </span>
 
             </div>
-
           </div>
 
-          <div className="mt-16">
+          {/* Overview */}
 
+          <section className="mt-16">
             <h2 className="text-3xl font-bold">
               Overview
             </h2>
@@ -86,62 +85,120 @@ export default function CareerDetail() {
             <p className="mt-6 text-lg leading-9 text-black/70">
               {job.overview}
             </p>
+          </section>
 
-          </div>
+          {/* Responsibilities */}
 
-          <div className="mt-16">
-
+          <section className="mt-16">
             <h2 className="text-3xl font-bold">
               Responsibilities
             </h2>
 
             <ul className="mt-8 space-y-4">
-              {job.responsibilities.map((item, index) => (
-                <li key={index}>
-                  • {item}
+              {job.responsibilities?.map((item, index) => (
+                <li
+                  key={index}
+                  className="flex gap-3"
+                >
+                  <span className="mt-1 text-[#BC1D26]">•</span>
+
+                  <span>{item}</span>
                 </li>
               ))}
             </ul>
+          </section>
 
-          </div>
+          {/* Requirements */}
 
-          <div className="mt-16">
-
+          <section className="mt-16">
             <h2 className="text-3xl font-bold">
               Requirements
             </h2>
 
             <ul className="mt-8 space-y-4">
-              {job.requirements.map((item, index) => (
-                <li key={index}>
-                  • {item}
+              {job.requirements?.map((item, index) => (
+                <li
+                  key={index}
+                  className="flex gap-3"
+                >
+                  <span className="mt-1 text-[#BC1D26]">•</span>
+
+                  <span>{item}</span>
                 </li>
               ))}
             </ul>
+          </section>
 
-          </div>
+          {/* Benefits */}
 
-          <Link
-            to="/get-involved"
-            className="
+          {job.benefits?.length > 0 && (
+            <section className="mt-16">
+
+              <h2 className="text-3xl font-bold">
+                Benefits
+              </h2>
+
+              <div className="mt-8 grid gap-6 md:grid-cols-2">
+
+                {job.benefits.map((benefit, index) => (
+                  <div
+                    key={index}
+                    className="
+                      rounded-3xl
+                      border
+                      border-black/5
+                      bg-[#BC1D26]/5
+                      p-6
+                      transition
+                      duration-300
+                      hover:-translate-y-1
+                      hover:border-[#BC1D26]/20
+                    "
+                  >
+                    <div className="flex items-start gap-3">
+
+                      <div className="mt-1 h-3 w-3 rounded-full bg-[#BC1D26]" />
+
+                      <p className="leading-8 text-black/70">
+                        {benefit}
+                      </p>
+
+                    </div>
+                  </div>
+                ))}
+
+              </div>
+
+            </section>
+          )}
+
+          <a
+            href={job.applicationLink || "#"}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`
               mt-16
               inline-flex
               items-center
               gap-3
               rounded-full
-              bg-[#BC1D26]
               px-8
               py-4
               font-semibold
-              text-white
-            "
+              transition-all
+              duration-300
+              ${
+                job.applicationLink
+                  ? "bg-[#BC1D26] text-white hover:scale-[1.02] hover:bg-[#a31821]"
+                  : "cursor-not-allowed bg-gray-200 text-gray-500"
+              }
+            `}
           >
             Apply Now
-          </Link>
+          </a>
 
         </div>
       </section>
-
     </main>
   );
 }
