@@ -48,7 +48,7 @@ export default function VolunteerSection() {
           </div>
 
           <Link
-            to="/get-involved/volunteer"
+            to="/careers/general-volunteer"
             className="
               mt-10
               inline-flex
