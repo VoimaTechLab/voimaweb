@@ -143,6 +143,7 @@ export default function Careers() {
                       relative
                       overflow-hidden
                       rounded-[36px]
+                      h-auto
                       border
                       border-black/5
                       bg-white
@@ -162,13 +163,13 @@ export default function Careers() {
                         src={member.image}
                         alt={member.name}
                         className="
-                          h-[360px]
+                          aspect-[5/5]
                           w-full
                           object-cover
-                          object-top
+                          object-center
                           transition-transform
                           duration-700
-                          group-hover:scale-110
+                          group-hover:scale-105
                         "
                       />
 
@@ -212,14 +213,7 @@ export default function Careers() {
 
                       <div
                         className="
-                          max-h-0
-                          overflow-hidden
-                          opacity-0
-                          transition-all
-                          duration-500
-                          group-hover:mt-5
-                          group-hover:max-h-72
-                          group-hover:opacity-100
+                        mt-5
                         "
                       >
                         <p className="text-sm leading-7 text-black/60">

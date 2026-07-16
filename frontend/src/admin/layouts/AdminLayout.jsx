@@ -1,7 +1,6 @@
 import {
   Calendar,
   FileText,
-  HeartHandshake,
   LayoutDashboard,
   ListChecks,
   LogOut,
@@ -17,7 +16,7 @@ const nav = [
   { to: "/admin/messages", label: "Messages", icon: Mail },
   { to: "/admin/newsletter", label: "Newsletter", icon: Send },
   { to: "/admin/waitlist", label: "Waitlist", icon: ListChecks },
-  { to: "/admin/volunteers", label: "Volunteers", icon: HeartHandshake },
+  /*{ to: "/admin/volunteers", label: "Volunteers", icon: HeartHandshake }, */
   { to: "/admin/blog", label: "Blog", icon: FileText },
  /* { to: "/admin/stories", label: "Stories", icon: MessagesSquare }, */
   { to: "/admin/events", label: "Events", icon: Calendar },
