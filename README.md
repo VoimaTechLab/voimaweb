@@ -29,12 +29,28 @@ Modern public-facing website for **Voima**, built with React and Vite. The site 
 - **Node.js** 20.19+ or 22.12+ (required for Vite 8)
 - **npm** (or your preferred Node package manager)
 
-### Run locally
+### Run the frontend locally:
 
 ```bash
 cd frontend
 npm install
 cp .env.example .env   # optional — configure API URL and port
+npm run dev
+```
+
+### Run the backend locally:
+
+```bash
+cd backend
+npx prisma install
+node server.js
+```
+
+### Run Sanity locally:
+
+```bash
+cd sanity
+npm install
 npm run dev
 ```
 
@@ -47,7 +63,9 @@ cd frontend
 npm run build
 ```
 
-Output is written to `frontend/dist/`. Preview the production build with:
+This builds the full production website and writes optimized output to `frontend/dist/`.
+
+Preview the production build with:
 
 ```bash
 npm run preview
@@ -65,51 +83,53 @@ npm run lint
 ## Repository Structure
 
 ```text
-voimaweb/
-└── frontend/
-    ├── public/
-    ├── src/
-    │
-    │   ├── admin/                 # Internal admin dashboard
-    │   │   ├── pages/
-    │   │   ├── components/
-    │   │   ├── routes/
-    │   │   └── layouts/
-    │   │
-    │   ├── assets/                # Images, videos, icons, media
-    │   │
-    │   ├── components/            # Shared reusable components
-    │   │   ├── ui/
-    │   │   └── animations/
-    │   │
-    │   ├── services/              # Data fetching layer
-    │   │   ├── blogService.js
-    │   │   ├── eventService.js
-    │   │   ├── journeyService.js
-    │   │   └── appService.js
-    │   │
-    │   ├── sanity/                # Sanity CMS integration
-    │   │   ├── client.js
-    │   │   ├── queries/
-    │   │   ├── schemas/
-    │   │   └── utils/
-    │   │
-    │   ├── publicSite/            # Public-facing website
-    │   │   ├── data/              # Temporary local content
-    │   │   ├── layout/
-    │   │   ├── motion/
-    │   │   ├── pages/
-    │   │   ├── routes/
-    │   │   └── sections/
-    │   │
-    │   ├── seo/
-    │   ├── styles/
-    │   └── App.jsx
-    │
-    ├── index.html
-    ├── vite.config.js
-    ├── tailwind.config.js
-    └── package.json
+voima-website/
+├── frontend/                    # Vite + React public site & admin
+│   ├── public/
+│   ├── src/
+│   │   ├── admin/               # Internal admin dashboard
+│   │   │   ├── pages/
+│   │   │   ├── components/
+│   │   │   ├── routes/
+│   │   │   └── layouts/
+│   │   ├── assets/              # Images, videos, icons, media
+│   │   ├── components/          # Shared reusable components
+│   │   │   ├── ui/
+│   │   │   └── animations/
+│   │   ├── services/            # Data fetching layer
+│   │   │   ├── blogService.js
+│   │   │   ├── eventService.js
+│   │   │   ├── journeyService.js
+│   │   │   └── appService.js
+│   │   ├── sanity/              # Sanity CMS integration
+│   │   │   ├── client.js
+│   │   │   ├── queries/
+│   │   │   ├── schemas/
+│   │   │   └── utils/
+│   │   ├── publicSite/          # Public-facing website
+│   │   │   ├── data/            # Temporary local content
+│   │   │   ├── layout/
+│   │   │   ├── motion/
+│   │   │   ├── pages/
+│   │   │   ├── routes/
+│   │   │   └── sections/
+│   │   ├── seo/
+│   │   ├── styles/
+│   │   └── App.jsx
+│   ├── index.html
+│   ├── vite.config.js
+│   ├── tailwind.config.js
+│   └── package.json
+├── backend/                     # Optional: API, webhooks, serverless
+│   ├── api/
+│   ├── functions/
+│   └── package.json
+├── mobile/                      # Optional: React Native / Expo app
+├── infra/                       # Deployment manifests, terraform, k8s
+├── scripts/                     # Utility and CI scripts
+├── docs/                        # Design docs, API specs
+├── .github/                     # CI workflows
+└── README.md
 ```
 
 ---
