@@ -124,10 +124,10 @@ voima-website/
 │   ├── api/
 │   ├── functions/
 │   └── package.json
-├── mobile/                      # Optional: React Native / Expo app
-├── infra/                       # Deployment manifests, terraform, k8s
-├── scripts/                     # Utility and CI scripts
-├── docs/                        # Design docs, API specs
+├── sanity/                     # Optional: API, webhooks, serverless
+│   ├── schemaTypes/
+│   ├── static/
+│   └── package.json
 ├── .github/                     # CI workflows
 └── README.md
 ```

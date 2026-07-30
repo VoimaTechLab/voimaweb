@@ -76,7 +76,7 @@ CREATE TABLE "waitlist_users" (
     "role" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
-    CONSTRAINT "waitlist_users_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "waitlist_users_pkey" PRIMARY KEY ("id")  npx prisma migrate dev --name remove-fullName-from-waitlist
 );
 
 -- CreateTable

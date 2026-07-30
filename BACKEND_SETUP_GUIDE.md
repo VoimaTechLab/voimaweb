@@ -121,7 +121,8 @@ JWT_REFRESH_SECRET=your_long_random_refresh_secret_here
 JWT_ACCESS_EXPIRES=15m
 JWT_REFRESH_EXPIRES_DAYS=7
 
-# Cloudinary (for image uploads)
+# Cloudinary (for image uploads) 
+#NOTE: CLOUDINARY WAS INITIALLY INSTALLED FOR STORY UPLOAD (not in use for now)
 CLOUDINARY_CLOUD_NAME=your_cloud_name
 CLOUDINARY_API_KEY=your_api_key
 CLOUDINARY_API_SECRET=your_api_secret

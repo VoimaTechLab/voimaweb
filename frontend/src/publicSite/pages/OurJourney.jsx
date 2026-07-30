@@ -1,6 +1,7 @@
 import { pageTransition } from "@/publicSite/motion/variants";
 import { motion } from "framer-motion";
 
+
 import FutureVision from "@/publicSite/sections/journey/FutureVision";
 import GrowthStats from "@/publicSite/sections/journey/GrowthStats";
 import JourneyHero from "@/publicSite/sections/journey/JourneyHero";
