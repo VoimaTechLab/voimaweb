@@ -123,23 +123,23 @@ const description =
 const bottomLinks =
   footerData?.bottomLinks || [
     {
-      label: "Privacy Policy",
-      path: "/privacy-policy",
+      label: "Data Privacy",
+      path: "/data-privacy",
     },
     {
-      label: "Terms of Service",
-      path: "/terms-of-service",
+      label: "Contact Support",
+      path: "/contact-support",
     },
     {
-      label: "Accessibility",
-      path: "/accessibility",
+      label: "SCD Resources",
+      path: "/scd-resources",
     },
   ];
   return (
     <footer
       className="
         relative overflow-hidden
-        rounded-t-[48px]
+        border-t-4 border-black
         bg-[#BC1D26]
         text-white
       "
@@ -185,16 +185,15 @@ const bottomLinks =
           <div
             className="
               inline-flex items-center gap-3
-              rounded-full
-              border border-white/10
+              border-2 border-black
               bg-white
               px-4 py-2
-              backdrop-blur-md
+              shadow-[4px_4px_0px_rgba(0,0,0,1)]
             "
           >
-            <div className="h-3 w-3 rounded-full bg-[#BC1D26]" />
+            <div className="h-3 w-3 bg-[#BC1D26] border border-black" />
 
-            <span className="text-sm font-bold tracking-wide text-[#BC1D26]">
+            <span className="text-sm font-black uppercase tracking-widest text-[#BC1D26]">
               {tagline}
             </span>
           </div>
@@ -203,8 +202,8 @@ const bottomLinks =
             className="
               mt-8
               whitespace-pre-line
-              text-4xl font-bold
-              leading-tight
+              text-4xl font-black uppercase font-heading tracking-tight
+              leading-none
               text-white
             "
           >
@@ -213,8 +212,9 @@ const bottomLinks =
           <p
             className="
               mt-6
-              text-base leading-8
-              text-white/70
+              text-lg font-semibold
+              leading-8
+              text-white/90
             "
           >
             {description}
@@ -231,12 +231,13 @@ const bottomLinks =
               className="
                 flex h-12 w-12
                 items-center justify-center
-                rounded-2xl
-                border border-white/10
-                bg-white/5
-                transition-all duration-300
-                hover:-translate-y-1
-                hover:bg-white/10
+                border-2 border-black
+                bg-white
+                text-black
+                transition-all duration-200
+                shadow-[4px_4px_0px_rgba(0,0,0,1)]
+                hover:-translate-y-0.5
+                hover:shadow-[6px_6px_0px_rgba(0,0,0,1)]
               "
             >
               <svg
@@ -258,12 +259,13 @@ const bottomLinks =
               className="
                 flex h-12 w-12
                 items-center justify-center
-                rounded-2xl
-                border border-white/10
-                bg-white/5
-                transition-all duration-300
-                hover:-translate-y-1
-                hover:bg-white/10
+                border-2 border-black
+                bg-white
+                text-black
+                transition-all duration-200
+                shadow-[4px_4px_0px_rgba(0,0,0,1)]
+                hover:-translate-y-0.5
+                hover:shadow-[6px_6px_0px_rgba(0,0,0,1)]
               "
             >
               <svg
@@ -285,12 +287,13 @@ const bottomLinks =
               className="
                 flex h-12 w-12
                 items-center justify-center
-                rounded-2xl
-                border border-white/10
-                bg-white/5
-                transition-all duration-300
-                hover:-translate-y-1
-                hover:bg-white/10
+                border-2 border-black
+                bg-white
+                text-black
+                transition-all duration-200
+                shadow-[4px_4px_0px_rgba(0,0,0,1)]
+                hover:-translate-y-0.5
+                hover:shadow-[6px_6px_0px_rgba(0,0,0,1)]
               "
             >
               <svg
@@ -309,7 +312,7 @@ const bottomLinks =
 
         {/* Navigation */}
         <div>
-          <h3 className="text-lg font-semibold text-white">
+          <h3 className="text-xs font-black uppercase tracking-widest text-white">
             Navigation
           </h3>
 
@@ -320,8 +323,8 @@ const bottomLinks =
                   to={item.path}
                   className="
                     group inline-flex items-center
-                    gap-2 text-white/70
-                    transition hover:text-white
+                    gap-2 text-white font-black uppercase tracking-wider text-sm
+                    transition hover:text-white/70 hover:translate-x-1
                   "
                 >
                   {item.label}
@@ -341,7 +344,7 @@ const bottomLinks =
 
         {/* Programs */}
         <div>
-          <h3 className="text-lg font-semibold text-white">
+          <h3 className="text-xs font-black uppercase tracking-widest text-white">
             Programs
           </h3>
 
@@ -351,9 +354,9 @@ const bottomLinks =
                 <Link
                   to={item.path}
                   className="
-                    text-white/70
-                    transition
-                    hover:text-white
+                    group inline-flex items-center
+                    gap-2 text-white font-black uppercase tracking-wider text-sm
+                    transition hover:text-white/70 hover:translate-x-1
                   "
                 >
                   {item.label}
@@ -365,8 +368,7 @@ const bottomLinks =
 
         {/* Contact */}
         <div className="min-w-0">
-
-          <h3 className="text-lg font-semibold text-white">
+          <h3 className="text-xs font-black uppercase tracking-widest text-white">
             Contact
           </h3>
 
@@ -381,7 +383,7 @@ const bottomLinks =
                 "
               />
 
-              <p className="leading-7 text-white/75">
+              <p className="leading-7 text-white font-semibold">
                 {location}
               </p>
             </div>
@@ -399,8 +401,8 @@ const bottomLinks =
                 href={`mailto:${email}`}
                 className="
                   break-all leading-7
-                  text-white/75
-                  transition hover:text-white
+                  text-white font-semibold
+                  transition hover:text-white/70
                 "
               >
                {email}
@@ -420,9 +422,9 @@ const bottomLinks =
                 <a
                   href={`tel:${phone}`}
                   className="
-                    text-white/75
+                    text-white font-semibold
                     transition
-                    hover:text-white
+                    hover:text-white/70
                   "
                 >
                   {phone}
@@ -437,9 +439,8 @@ const bottomLinks =
             <p
               className="
                 mb-4
-                text-sm uppercase
-                tracking-[0.2em]
-                text-white/40
+                text-xs font-black uppercase tracking-widest
+                text-white
               "
             >
               Newsletter
@@ -452,7 +453,7 @@ const bottomLinks =
       </div>
 
       {/* Bottom */}
-      <div className="border-t border-white/10">
+      <div className="border-t-4 border-black bg-black text-white">
 
         <div
           className="
@@ -461,7 +462,7 @@ const bottomLinks =
             flex-col items-center
             justify-between gap-4
             px-6 py-6
-            text-sm text-white/70
+            text-xs font-black uppercase tracking-widest text-white/70
             md:flex-row
           "
         >

@@ -1,5 +1,6 @@
 import { useMilestone } from "@/publicSite/hooks/useJourney";
 import { Link, useParams } from "react-router-dom";
+import { ScrollReveal } from "@/components/animations/ScrollReveal";
 
 export default function OurJourneyStory() {
   const { slug } = useParams();
@@ -37,23 +38,26 @@ export default function OurJourneyStory() {
             ← Back to Journey
           </Link>
 
-          <p className="uppercase tracking-[0.2em] text-[#BC1D26]/60">
-            {story.year}
-          </p>
+          <ScrollReveal variant="fade-up">
+            <p className="text-xs sm:text-sm font-black uppercase tracking-[0.2em] text-[#BC1D26]">
+              {story.year}
+            </p>
 
-          <h1 className="mt-4 text-6xl font-bold text-[#BC1D26]">
-            {story.title}
-          </h1>
+            <h1 className="mt-4 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black uppercase text-[#BC1D26] font-heading tracking-tight">
+              {story.title}
+            </h1>
+          </ScrollReveal>
 
         {story.media.type === "image" ? (
         <img
             src={story.media.src}
             alt={story.title}
             className="
-            mt-12
-            h-[500px]
+            mt-8 sm:mt-12
+            h-[240px] sm:h-[380px] md:h-[500px]
             w-full
-            rounded-[40px]
+            border-4 border-black
+            shadow-[8px_8px_0px_rgba(0,0,0,1)] sm:shadow-[12px_12px_0px_rgba(0,0,0,1)] md:shadow-[16px_16px_0px_rgba(0,0,0,1)]
             object-cover
             "
         />
@@ -63,10 +67,11 @@ export default function OurJourneyStory() {
             autoPlay
             muted
             className="
-            mt-12
-            h-[500px]
+            mt-8 sm:mt-12
+            h-[240px] sm:h-[380px] md:h-[500px]
             w-full
-            rounded-[40px]
+            border-4 border-black
+            shadow-[8px_8px_0px_rgba(0,0,0,1)] sm:shadow-[12px_12px_0px_rgba(0,0,0,1)] md:shadow-[16px_16px_0px_rgba(0,0,0,1)]
             object-cover
             "
         >
@@ -77,30 +82,34 @@ export default function OurJourneyStory() {
         </video>
         )}
 
-          <div className="mt-16 space-y-8">
-            {story.story.content.map((paragraph, index) => (
-              <p
-                key={index}
-                className="text-lg leading-9 text-black/70"
-              >
-                {paragraph}
-              </p>
-            ))}
-          </div>
-
-          <div className="mt-16 rounded-[32px] bg-[#fafafa] p-10">
-            <h3 className="text-2xl font-bold text-[#BC1D26]">
-              Key Highlights
-            </h3>
-
-            <ul className="mt-8 space-y-4">
-              {story.story.highlights.map((item, index) => (
-                <li key={index}>
-                  • {item}
-                </li>
+          <ScrollReveal variant="fade-up" delay={0.15}>
+            <div className="mt-10 sm:mt-16 space-y-6 sm:space-y-8">
+              {story.story.content.map((paragraph, index) => (
+                <p
+                  key={index}
+                  className="text-base sm:text-lg leading-7 sm:leading-9 text-black/80 font-medium"
+                >
+                  {paragraph}
+                </p>
               ))}
-            </ul>
-          </div>
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal variant="fade-up" delay={0.1}>
+            <div className="mt-10 sm:mt-16 border-4 border-black bg-white shadow-[8px_8px_0px_rgba(0,0,0,1)] sm:shadow-[12px_12px_0px_rgba(0,0,0,1)] md:shadow-[16px_16px_0px_rgba(0,0,0,1)] p-6 sm:p-10">
+              <h3 className="text-2xl sm:text-3xl font-black uppercase text-[#BC1D26] font-heading tracking-tight">
+                Key Highlights
+              </h3>
+
+              <ul className="mt-8 space-y-4">
+                {story.story.highlights.map((item, index) => (
+                  <li key={index}>
+                    • {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </ScrollReveal>
 
           {story.contributors?.length > 0 && (
             <section className="mt-20">

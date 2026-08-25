@@ -1,204 +1,137 @@
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-import { Autoplay, EffectFade, Navigation, Pagination } from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
-
-import "swiper/css";
-import "swiper/css/effect-fade";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-
-import { useHome } from "@/publicSite/hooks/useHome";
-
-function HeroTitle({ before, highlight }) {
-  return (
-    <>
-      {before}{" "}
-      <span className="text-[var(--color-primary-400)]">{highlight}</span>
-    </>
-  );
-}
+import HeroVid from "@/assets/Hero/herovid.mov";
+import { heroSlides } from "@/data/homeData";
 
 export default function Hero() {
-const { heroSlides } = useHome();
+  const [current, setCurrent] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % heroSlides.length);
+    }, 6500);
+    return () => clearInterval(timer);
+  }, []);
+
+  const slide = heroSlides[current];
+
   return (
-    <section className="relative overflow-hidden">
-      <Swiper
-        modules={[Autoplay, Pagination, EffectFade, Navigation]}
-        effect="fade"
+    <section className="relative w-full h-screen min-h-[650px] overflow-hidden flex flex-col justify-between bg-black text-white">
+      {/* ── Background Video ── */}
+      <video
+        autoPlay
         loop
-        speed={1200}
-        autoplay={{
-          delay: 3500,
-          disableOnInteraction: false,
-        }}
-        pagination={{
-          clickable: true,
-        }}
-        navigation={{
-          nextEl: ".hero-next",
-          prevEl: ".hero-prev",
-        }}
-        className="min-h-screen"
+        muted
+        playsInline
+        className="absolute inset-0 w-full h-full object-fill md:object-cover md:object-center z-0"
       >
-        {heroSlides.map((slide) => (
-          <SwiperSlide key={slide.id}>
-            <div className="relative flex min-h-screen items-center overflow-hidden">
-              <img
-                src={slide.image}
-                alt=""
-                className="
-                  absolute inset-0
-                  h-full w-full
-                  object-cover
-                  scale-105
-                "
-              />
+        <source src={HeroVid} type="video/mp4" />
+        <source src={HeroVid} type="video/quicktime" />
+      </video>
 
-              <div
-                className="
-                  absolute inset-0
-                  bg-gradient-to-r
-                  from-[#140506]/90
-                  via-[#140506]/70
-                  to-[#140506]/30
-                "
-              />
+      {/* ── Dark Overlay for Contrast ── */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/65 to-black/35 z-10" />
 
-              <div
-                className="
-                  absolute inset-0
-                  bg-[radial-gradient(circle_at_top_left,_rgba(188,29,38,0.35),_transparent_45%)]
-                "
-              />
-
-              <div
-                className="absolute inset-0 opacity-[0.04]"
-                style={{
-                  backgroundImage:
-                    "linear-gradient(rgba(255,255,255,0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.15) 1px, transparent 1px)",
-                  backgroundSize: "60px 60px",
-                }}
-              />
-
-              <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pt-32 pb-24 md:px-10">
-                <motion.div
-                  initial={{ opacity: 0, y: 40 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8 }}
-                  className="max-w-3xl"
-                >
-                  <div
-                    className="
-                      inline-flex items-center gap-3
-                      rounded-full
-                      border border-white/10
-                      bg-white
-                      px-5 py-2.5
-                      text-sm font-semibold
-                      tracking-wide
-                      text-[#BC1D26]
-                      backdrop-blur-md
-                    "
-                  >
-                    <span className="h-2 w-2 rounded-full bg-[#BC1D26]" />
-                    {slide.eyebrow}
-                  </div>
-
-                  <h1
-                    className="
-                      mt-8
-                      font-heading
-                      text-4xl
-                      font-extrabold
-                      leading-[0.95]
-                      tracking-[-0.03em]
-                      text-white
-                      sm:text-5xl
-                      md:text-6xl
-                      lg:text-7xl
-                    "
-                  >
-                    <HeroTitle {...slide.title} />
-                  </h1>
-
-                  <p
-                    className="
-                      mt-7
-                      max-w-2xl
-                      text-base
-                      leading-8
-                      text-white/90
-                      md:text-lg
-                    "
-                  >
-                    {slide.description}
-                  </p>
-
-                  <div
-                    className="
-                      mt-10
-                      flex flex-col
-                      gap-4
-                      sm:flex-row
-                      sm:items-center
-                    "
-                  >
-                    <Link
-                      to={slide.primaryLink}
-                      className="
-                        inline-flex
-                        w-full sm:w-auto
-                        items-center
-                        justify-center
-                        gap-2
-                        rounded-full
-                        bg-[#BC1D26]
-                        px-6 sm:px-7
-                        py-3.5 sm:py-4
-                        text-sm font-semibold
-                        text-white
-                        shadow-lg shadow-[#BC1D26]/30
-                        transition-all duration-300
-                        hover:scale-[1.03]
-                        hover:bg-[#A11922]
-                      "
-                    >
-                      {slide.primaryBtn}
-                      <ArrowRight size={18} />
-                    </Link>
-
-                    <Link
-                      to={slide.secondaryLink}
-                      className="
-                        inline-flex
-                        w-full sm:w-auto
-                        items-center
-                        justify-center
-                        gap-2
-                        rounded-full
-                        border border-white/15
-                        bg-white
-                        px-6 sm:px-7
-                        py-3.5 sm:py-4
-                        text-sm font-semibold
-                        text-[#BC1D26]
-                        backdrop-blur-md
-                        transition-all duration-300
-                        hover:bg-white/90
-                      "
-                    >
-                      {slide.secondaryBtn}
-                    </Link>
-                  </div>
-                </motion.div>
-              </div>
+      {/* ── Main Content Area ── */}
+      <div className="relative z-20 flex-1 flex flex-col justify-center max-w-7xl mx-auto px-6 sm:px-10 pt-24 pb-12 w-full">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={slide.id}
+            initial={{ opacity: 0, y: 25 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -25 }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="max-w-4xl space-y-6 sm:space-y-8"
+          >
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 bg-white border-2 border-black px-4 py-2 text-[#BC1D26] font-black text-xs sm:text-sm uppercase tracking-[0.2em] shadow-[4px_4px_0px_rgba(0,0,0,1)]">
+              <span className="h-2.5 w-2.5 bg-[#BC1D26] border border-black animate-pulse" />
+              <span>{slide.eyebrow}</span>
             </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+
+            {/* Headline */}
+            <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl font-black tracking-tight leading-[1.1] font-heading">
+              {slide.titleLines.map((line, lineIdx) => (
+                <span key={lineIdx} className="block">
+                  {line.map((part, partIdx) => (
+                    <span
+                      key={partIdx}
+                      className={part.highlight ? "text-[#E55B60]" : "text-white"}
+                    >
+                      {part.text}
+                    </span>
+                  ))}
+                </span>
+              ))}
+            </h1>
+
+            {/* Subtitle / Description */}
+            <p className="text-sm sm:text-base md:text-lg text-white/90 font-semibold leading-relaxed max-w-xl">
+              {slide.description}
+            </p>
+
+            {/* Action Buttons */}
+            <div className="flex flex-wrap items-center gap-4 pt-2">
+              <Link
+                to={slide.primaryLink}
+                className="
+                  group inline-flex items-center gap-2
+                  bg-[#BC1D26] text-white
+                  border-2 border-black
+                  text-xs sm:text-sm font-black uppercase tracking-wider
+                  px-8 py-4
+                  shadow-[5px_5px_0px_rgba(0,0,0,1)]
+                  transition-all duration-200
+                  hover:-translate-y-0.5 hover:shadow-[7px_7px_0px_rgba(0,0,0,1)]
+                "
+              >
+                <span>{slide.primaryBtn}</span>
+                <ArrowRight size={18} className="transition-transform duration-300 group-hover:translate-x-1" />
+              </Link>
+
+              <Link
+                to={slide.secondaryLink}
+                className="
+                  inline-flex items-center gap-2
+                  bg-white text-[#BC1D26]
+                  border-2 border-black
+                  text-xs sm:text-sm font-black uppercase tracking-wider
+                  px-8 py-4
+                  shadow-[5px_5px_0px_rgba(0,0,0,1)]
+                  transition-all duration-200
+                  hover:-translate-y-0.5 hover:shadow-[7px_7px_0px_rgba(0,0,0,1)]
+                "
+              >
+                <span>{slide.secondaryBtn}</span>
+              </Link>
+            </div>
+          </motion.div>
+        </AnimatePresence>
+      </div>
+
+      {/* ── Carousel Indicator ── */}
+      <div className="relative z-20 w-full py-6 px-6 flex justify-center items-center">
+        <div className="flex items-center gap-3">
+          {heroSlides.map((s, idx) => (
+            <button
+              key={s.id}
+              onClick={() => setCurrent(idx)}
+              aria-label={`Go to slide ${idx + 1}`}
+              className={`
+                transition-all duration-300 border-2 border-black
+                ${
+                  current === idx
+                    ? "w-10 h-3 bg-[#BC1D26] shadow-[2px_2px_0px_rgba(0,0,0,1)]"
+                    : "w-3 h-3 bg-white/40 hover:bg-white/70"
+                }
+              `}
+            />
+          ))}
+        </div>
+      </div>
     </section>
   );
 }

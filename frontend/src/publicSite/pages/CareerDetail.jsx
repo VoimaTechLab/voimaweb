@@ -1,5 +1,7 @@
 import { useCareerRole } from "@/publicSite/hooks/useCareerRole";
+import { ArrowLeft, ArrowRight, CheckCircle2 } from "lucide-react";
 import { Link, useParams } from "react-router-dom";
+import { ScrollReveal } from "@/components/animations/ScrollReveal";
 
 export default function CareerDetail() {
   const { slug } = useParams();
@@ -26,7 +28,7 @@ export default function CareerDetail() {
   }
 
   return (
-    <main className="pt-[90px]">
+    <main className="bg-white pt-[90px]">
       <section className="px-6 py-24">
         <div className="mx-auto max-w-5xl">
 
@@ -36,166 +38,189 @@ export default function CareerDetail() {
               inline-flex
               items-center
               gap-2
-              rounded-full
-              border
-              border-black/10
+              border-2
+              border-black
+              bg-white
               px-5
               py-3
-              transition
-              hover:border-[#BC1D26]
-              hover:text-[#BC1D26]
+              text-xs
+              font-black
+              uppercase
+              tracking-wider
+              text-black
+              shadow-[3px_3px_0px_rgba(0,0,0,1)]
+              transition-all
+              duration-200
+              hover:-translate-y-0.5
+              hover:bg-[#BC1D26]
+              hover:text-white
             "
           >
-            ← Back To Careers
+            <ArrowLeft size={16} />
+            Back To Careers
           </Link>
 
-          <div className="mt-12">
-            <span className="rounded-full bg-[#BC1D26]/10 px-4 py-2 text-sm text-[#BC1D26]">
-              {job.type}
-            </span>
-
-            <h1 className="mt-6 text-6xl font-bold text-[#BC1D26]">
-              {job.title}
-            </h1>
-
-            <div className="mt-6 flex flex-wrap gap-3">
-
-              <span className="rounded-full bg-black/5 px-4 py-2">
-                {job.location}
+          <ScrollReveal variant="fade-up">
+            <div className="mt-12">
+              <span className="inline-flex border-2 border-black bg-[#BC1D26] px-4 py-2 text-xs font-black uppercase tracking-wider text-white shadow-[3px_3px_0px_rgba(0,0,0,1)]">
+                {job.type}
               </span>
 
-              <span className="rounded-full bg-black/5 px-4 py-2">
-                {job.department}
-              </span>
+              <h1 className="mt-6 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black uppercase text-[#BC1D26] font-heading tracking-tight">
+                {job.title}
+              </h1>
 
-              <span className="rounded-full bg-black/5 px-4 py-2">
-                {job.experience}
-              </span>
+              <div className="mt-6 flex flex-wrap gap-3">
 
-            </div>
-          </div>
+                <span className="border-2 border-black bg-white px-4 py-2 text-xs font-black uppercase tracking-wider text-black shadow-[2px_2px_0px_rgba(0,0,0,1)]">
+                  {job.location}
+                </span>
 
-          {/* Overview */}
+                <span className="border-2 border-black bg-white px-4 py-2 text-xs font-black uppercase tracking-wider text-black shadow-[2px_2px_0px_rgba(0,0,0,1)]">
+                  {job.department}
+                </span>
 
-          <section className="mt-16">
-            <h2 className="text-3xl font-bold">
-              Overview
-            </h2>
-
-            <p className="mt-6 text-lg leading-9 text-black/70">
-              {job.overview}
-            </p>
-          </section>
-
-          {/* Responsibilities */}
-
-          <section className="mt-16">
-            <h2 className="text-3xl font-bold">
-              Responsibilities
-            </h2>
-
-            <ul className="mt-8 space-y-4">
-              {job.responsibilities?.map((item, index) => (
-                <li
-                  key={index}
-                  className="flex gap-3"
-                >
-                  <span className="mt-1 text-[#BC1D26]">•</span>
-
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </section>
-
-          {/* Requirements */}
-
-          <section className="mt-16">
-            <h2 className="text-3xl font-bold">
-              Requirements
-            </h2>
-
-            <ul className="mt-8 space-y-4">
-              {job.requirements?.map((item, index) => (
-                <li
-                  key={index}
-                  className="flex gap-3"
-                >
-                  <span className="mt-1 text-[#BC1D26]">•</span>
-
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </section>
-
-          {/* Benefits */}
-
-          {job.benefits?.length > 0 && (
-            <section className="mt-16">
-
-              <h2 className="text-3xl font-bold">
-                Benefits
-              </h2>
-
-              <div className="mt-8 grid gap-6 md:grid-cols-2">
-
-                {job.benefits.map((benefit, index) => (
-                  <div
-                    key={index}
-                    className="
-                      rounded-3xl
-                      border
-                      border-black/5
-                      bg-[#BC1D26]/5
-                      p-6
-                      transition
-                      duration-300
-                      hover:-translate-y-1
-                      hover:border-[#BC1D26]/20
-                    "
-                  >
-                    <div className="flex items-start gap-3">
-
-                      <div className="mt-1 h-3 w-3 rounded-full bg-[#BC1D26]" />
-
-                      <p className="leading-8 text-black/70">
-                        {benefit}
-                      </p>
-
-                    </div>
-                  </div>
-                ))}
+                <span className="border-2 border-black bg-white px-4 py-2 text-xs font-black uppercase tracking-wider text-black shadow-[2px_2px_0px_rgba(0,0,0,1)]">
+                  {job.experience}
+                </span>
 
               </div>
+            </div>
+          </ScrollReveal>
 
+          {/* Overview */}
+          <ScrollReveal variant="fade-up" delay={0.1}>
+            <section className="mt-16 border-2 border-black bg-white p-6 shadow-[6px_6px_0px_rgba(0,0,0,1)] sm:p-8">
+              <h2 className="text-2xl sm:text-3xl font-black uppercase text-black font-heading">
+                Overview
+              </h2>
+
+              <p className="mt-6 text-base sm:text-lg font-semibold leading-8 sm:leading-9 text-black/75">
+                {job.overview}
+              </p>
             </section>
+          </ScrollReveal>
+
+          {/* Responsibilities */}
+          <ScrollReveal variant="fade-up" delay={0.1}>
+            <section className="mt-10 border-2 border-black bg-white p-6 shadow-[6px_6px_0px_rgba(0,0,0,1)] sm:p-8">
+              <h2 className="text-2xl sm:text-3xl font-black uppercase text-black font-heading">
+                Responsibilities
+              </h2>
+
+              <ul className="mt-8 grid gap-4">
+                {job.responsibilities?.map((item, index) => (
+                  <li
+                    key={index}
+                    className="flex gap-3 border-2 border-black bg-[#fafafa] p-4 text-sm font-semibold leading-7 text-black/75 shadow-[3px_3px_0px_rgba(0,0,0,1)] sm:text-base"
+                  >
+                    <CheckCircle2 className="mt-1 shrink-0 text-[#BC1D26]" size={18} />
+
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          </ScrollReveal>
+
+          {/* Requirements */}
+          <ScrollReveal variant="fade-up" delay={0.1}>
+            <section className="mt-10 border-2 border-black bg-white p-6 shadow-[6px_6px_0px_rgba(0,0,0,1)] sm:p-8">
+              <h2 className="text-2xl sm:text-3xl font-black uppercase text-black font-heading">
+                Requirements
+              </h2>
+
+              <ul className="mt-8 grid gap-4">
+                {job.requirements?.map((item, index) => (
+                  <li
+                    key={index}
+                    className="flex gap-3 border-2 border-black bg-[#fafafa] p-4 text-sm font-semibold leading-7 text-black/75 shadow-[3px_3px_0px_rgba(0,0,0,1)] sm:text-base"
+                  >
+                    <CheckCircle2 className="mt-1 shrink-0 text-[#BC1D26]" size={18} />
+
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          </ScrollReveal>
+
+          {/* Benefits */}
+          {job.benefits?.length > 0 && (
+            <ScrollReveal variant="fade-up" delay={0.1}>
+              <section className="mt-10 border-2 border-black bg-white p-6 shadow-[6px_6px_0px_rgba(0,0,0,1)] sm:p-8">
+
+                <h2 className="text-2xl sm:text-3xl font-black uppercase text-black font-heading">
+                  Benefits
+                </h2>
+
+                <div className="mt-8 grid gap-6 md:grid-cols-2">
+
+                  {job.benefits.map((benefit, index) => (
+                    <div
+                      key={index}
+                      className="
+                        border-2
+                        border-black
+                        bg-[#fafafa]
+                        p-6
+                        shadow-[4px_4px_0px_rgba(0,0,0,1)]
+                        transition-all
+                        duration-300
+                        hover:-translate-y-1
+                        hover:shadow-[6px_6px_0px_rgba(188,29,38,1)]
+                      "
+                    >
+                      <div className="flex items-start gap-3">
+
+                        <CheckCircle2 className="mt-1 shrink-0 text-[#BC1D26]" size={18} />
+
+                        <p className="font-semibold leading-8 text-black/75">
+                          {benefit}
+                        </p>
+
+                      </div>
+                    </div>
+                  ))}
+
+                </div>
+
+              </section>
+            </ScrollReveal>
           )}
 
-          <a
-            href={job.applicationLink || "#"}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`
-              mt-16
-              inline-flex
-              items-center
-              gap-3
-              rounded-full
-              px-8
-              py-4
-              font-semibold
-              transition-all
-              duration-300
-              ${
-                job.applicationLink
-                  ? "bg-[#BC1D26] text-white hover:scale-[1.02] hover:bg-[#a31821]"
-                  : "cursor-not-allowed bg-gray-200 text-gray-500"
-              }
-            `}
-          >
-            Apply Now
-          </a>
+          <ScrollReveal variant="fade-up" delay={0.1}>
+            <a
+              href={job.applicationLink || "#"}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`
+                mt-16
+                inline-flex
+                items-center
+                gap-3
+                border-2
+                border-black
+                px-8
+                py-4
+                text-sm
+                font-black
+                uppercase
+                tracking-wider
+                shadow-[5px_5px_0px_rgba(0,0,0,1)]
+                transition-all
+                duration-200
+                ${
+                  job.applicationLink
+                    ? "bg-[#BC1D26] text-white hover:-translate-y-0.5 hover:shadow-[7px_7px_0px_rgba(0,0,0,1)]"
+                    : "cursor-not-allowed bg-gray-200 text-gray-500"
+                }
+              `}
+            >
+              Apply Now
+              <ArrowRight size={18} />
+            </a>
+          </ScrollReveal>
 
         </div>
       </section>

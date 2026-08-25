@@ -1,6 +1,7 @@
 import { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 
+import ScrollToTop from "../../components/ScrollToTop";
 import PageLoader from "../../components/PageLoader";
 import MainLayout from "../layout/MainLayout";
 
@@ -35,11 +36,16 @@ const Gallery = lazy(() => import("../pages/Gallery.jsx"));
 
 const Waitlist = lazy(() => import("../pages/Waitlist.jsx"));
 
+const DataPrivacy = lazy(() => import("../pages/DataPrivacy.jsx"));
+const ContactSupport = lazy(() => import("../pages/ContactSupport.jsx"));
+const SCDResources = lazy(() => import("../pages/SCDResources.jsx"));
+
 const NotFound = lazy(() => import("../pages/NotFound"));
 
 export default function AppRoutes() {
   return (
     <Suspense fallback={<PageLoader />}>
+      <ScrollToTop />
       <Routes>
 
         <Route path="/" element={<MainLayout />}>
@@ -100,6 +106,9 @@ export default function AppRoutes() {
           {/* FUTURE */}
           
           <Route path="gallery" element={<Gallery />} />
+          <Route path="data-privacy" element={<DataPrivacy />} />
+          <Route path="contact-support" element={<ContactSupport />} />
+          <Route path="scd-resources" element={<SCDResources />} />
           {/*<Route path="team" element={<Team />} />
           <Route path="impact" element={<Impact />} />
           */}

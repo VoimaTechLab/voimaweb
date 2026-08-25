@@ -6,6 +6,9 @@ import StoryImage from "@/assets/ourStory.jpg";
 import VoimaAppDemo from "@/assets/Voima_App_Demo.mp4";
 import { default as ImpactVideo } from "@/assets/voima_website_prototype (2).mp4";
 import BlogImage from "@/assets/Web_red.jpg";
+import NewsAiImage from "@/assets/news/news_ai.png";
+import NewsCommunityImage from "@/assets/news/news_community.png";
+import NewsYouthImage from "@/assets/news/news_youth.png";
 import {
   BookOpenText,
   Brain,
@@ -17,49 +20,64 @@ import {
 
 export const heroSlides = [
   {
-    id: "preventive-care",
-    eyebrow: "Building Healthier Lives Using AI",
-    title: {
-      before: "Fighting Sickle Cell Together",
-      highlight: "Through Preventive Care.",
-    },
+    id: "ai-powered-care-support",
+    eyebrow: "AI-Powered Care Support",
+    titleLines: [
+      [
+        { text: "Transforming ", highlight: false },
+        { text: "Chronic", highlight: true },
+      ],
+      [
+        { text: "Care Management", highlight: true },
+      ],
+    ],
     description:
-      "Voima is building proactive and personalized support systems for people living with sickle cell disease and chronic conditions.",
-    image: HeroImage,
-    primaryBtn: "Explore Events",
-    primaryLink: "/events",
-    secondaryBtn: "Our Story",
-    secondaryLink: "/our-journey",
-  },
-  {
-    id: "human-experiences",
-    eyebrow: "A Mission Rooted In Real Stories",
-    title: {
-      before: "Technology Inspired By",
-      highlight: "Human Experiences.",
-    },
-    description:
-      "Voima was founded after witnessing firsthand the devastating impact of sickle cell disease on families, patients, and communities.",
-    image: JourneyStoryImage,
-    primaryBtn: "Read Our Journey",
-    primaryLink: "/our-journey",
-    secondaryBtn: "About Voima",
+      "Voima is an AI-powered personalized companion helping people living with chronic conditions, starting with sickle cell disease, understand rising health risks early, take preventive action, and escalate care when needed before crises happen through proactive support, timely insights, and community-driven care.",
+    primaryBtn: "Join Waitlist",
+    primaryLink: "/waitlist",
+    secondaryBtn: "Learn More",
     secondaryLink: "/about",
   },
   {
-    id: "ai-powered-care",
-    eyebrow: "Healthcare Innovation",
-    title: {
-      before: "The Future Of",
-      highlight: "AI-Powered Care.",
-    },
+    id: "why-voima-exists",
+    eyebrow: "Why Voima Exists",
+    titleLines: [
+      [
+        { text: "Health Crises Don't", highlight: false },
+      ],
+      [
+        { text: "Start ", highlight: false },
+        { text: "When the Pain", highlight: true },
+      ],
+      [
+        { text: "Starts", highlight: true },
+      ],
+    ],
     description:
-      "We are creating intelligent healthcare tools that help patients better understand their health and anticipate crises earlier.",
-    image: InnovationImage,
-    primaryBtn: "Explore The App",
-    primaryLink: "/voima-app",
-    secondaryBtn: "Contact Us",
-    secondaryLink: "/contact",
+      "Sickle cell crises rarely happen without warning. Triggers like stress, dehydration, weather, and poor sleep etc build over time. Voima helps detect risks early so action can happen fast before crisis strikes.",
+    primaryBtn: "Our Mission",
+    primaryLink: "/about",
+    secondaryBtn: "See Impact",
+    secondaryLink: "/our-journey",
+  },
+  {
+    id: "beyond-awareness",
+    eyebrow: "Beyond Awareness",
+    titleLines: [
+      [
+        { text: "Patients Aren't", highlight: false },
+      ],
+      [
+        { text: "Failing ", highlight: false },
+        { text: "The System Is", highlight: true },
+      ],
+    ],
+    description:
+      "Millions live with Chronic disease, yet care remains reactive. Voima combines technology, research, advocacy, and community support to build a future of proactive care.",
+    primaryBtn: "Partner With Us",
+    primaryLink: "/get-involved",
+    secondaryBtn: "Get Involved",
+    secondaryLink: "/get-involved",
   },
 ];
 
@@ -253,21 +271,21 @@ export const sdgSection = {
 
 export const ctaSection = {
   title:
-    "Join us in building a future where healthcare support is proactive, accessible, and life-changing.",
+    "Join us in building a future where sickle cell care becomes proactive, accessible, and life-changing.",
   description:
-    "Through technology, advocacy, education, and community action, Voima Initiative is creating innovative healthcare solutions that empower individuals living with sickle cell disease and other chronic conditions.",
+    "Whether you are a patient, caregiver, clinician, researcher, or partner, there is a place for you in building the future of sickle cell care with Voima.",
   primaryCta: {
     text: "Get Involved",
     link: "/get-involved",
   },
   secondaryCta: {
-    text: "Support Our Mission",
-    link: "/donate",
+    text: "Partner With Us",
+    link: "/get-involved",
   },
 };
 
 export const programsPreviewSection = {
-  eyebrow: "Our Programs",
+  eyebrow: "Events/News",
   title:
     "Initiatives designed to improve healthcare access, awareness, and long-term community support.",
   description:
@@ -343,21 +361,21 @@ export const newsPreviewSection = {
     {
       title: "Voima Launches AI-Powered SCD Support Initiative",
       date: "May 18, 2026",
-      image: BlogImage,
+      image: NewsAiImage,
       description:
         "Voima Initiative introduces intelligent healthcare support tools designed to help individuals living with sickle cell disease manage symptoms proactively.",
     },
     {
       title: "Community Outreach Program Reaches Hundreds",
       date: "April 30, 2026",
-      image: BlogImage,
+      image: NewsCommunityImage,
       description:
         "Healthcare education and awareness campaigns continue expanding access to information and support across underserved communities.",
     },
     {
       title: "Youth Leaders Join Healthcare Innovation Summit",
       date: "April 12, 2026",
-      image: BlogImage,
+      image: NewsYouthImage,
       description:
         "Young innovators, advocates, and healthcare professionals gathered to discuss technology-driven healthcare solutions for chronic conditions.",
     },

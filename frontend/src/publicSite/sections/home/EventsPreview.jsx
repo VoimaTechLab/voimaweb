@@ -163,6 +163,7 @@ export default function EventsPreview() {
 
               {/* Link */}
               <Link
+                to="/events"
                 className="
                   mt-8 inline-flex
                   items-center gap-2

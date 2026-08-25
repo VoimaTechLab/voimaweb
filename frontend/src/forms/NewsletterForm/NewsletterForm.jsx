@@ -51,23 +51,23 @@ export function NewsletterForm() {
             }
             {...register("email")}
             className={`
-                rounded-full
-                border
+                border-2 border-black
                 px-5
                 py-4
-                text-sm
+                text-sm font-semibold
                 outline-none
+                shadow-[4px_4px_0px_rgba(0,0,0,1)]
                 transition-all
-                duration-300
-                bg-white/10
-                text-white
-                placeholder:text-white/50
-                backdrop-blur-md
+                bg-white
+                text-black
+                placeholder:text-black/50
+                focus:-translate-y-0.5
+                focus:shadow-[6px_6px_0px_rgba(0,0,0,1)]
 
                 ${
                 errors.email
-                    ? "border-red-400 focus:border-red-500"
-                    : "border-white/20 focus:border-white/50"
+                    ? "border-black focus:border-black"
+                    : "border-black focus:border-black"
                 }
             `}
             />
@@ -79,19 +79,21 @@ export function NewsletterForm() {
                 status === "success"
             }
             className="
-                rounded-full
-                bg-white
+                border-2 border-black
+                bg-black
                 px-6
                 py-4
-                text-sm
-                font-semibold
-                text-[#BC1D26]
+                text-xs
+                font-black uppercase tracking-widest
+                text-white
+                shadow-[4px_4px_0px_rgba(0,0,0,1)]
                 transition-all
-                duration-300
-                hover:scale-105
-                hover:shadow-lg
+                hover:-translate-y-0.5
+                hover:shadow-[6px_6px_0px_rgba(0,0,0,1)]
                 disabled:cursor-not-allowed
                 disabled:opacity-60
+                disabled:hover:translate-y-0
+                disabled:hover:shadow-[4px_4px_0px_rgba(0,0,0,1)]
             "
             >
             {status === "loading"

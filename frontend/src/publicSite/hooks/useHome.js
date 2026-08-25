@@ -35,6 +35,30 @@ const mapImpact = (impact) => ({
 
 let cache = null, inflight = null;
 
+/** Strip production domain from CTA links so they work as relative paths. */
+const toRelativeLink = (url) => {
+  if (!url || typeof url !== "string") return url;
+  try {
+    const parsed = new URL(url);
+    return parsed.pathname + parsed.search + parsed.hash;
+  } catch {
+    return url; // already relative
+  }
+};
+
+const mapCtaSection = (cta) => {
+  if (!cta) return cta;
+  return {
+    ...cta,
+    primaryCta: cta.primaryCta
+      ? { ...cta.primaryCta, link: toRelativeLink(cta.primaryCta.link) }
+      : cta.primaryCta,
+    secondaryCta: cta.secondaryCta
+      ? { ...cta.secondaryCta, link: toRelativeLink(cta.secondaryCta.link) }
+      : cta.secondaryCta,
+  };
+};
+
 export function useHome() {
   const [data, setData] = useState(cache || FALLBACK);
 
@@ -54,7 +78,7 @@ export function useHome() {
             ? d.impactStatsSection
             : FALLBACK.impactStatsSection,
         sdgSection: d.sdgSection?.goals?.length ? d.sdgSection : FALLBACK.sdgSection,
-        ctaSection: d.ctaSection || FALLBACK.ctaSection,
+        ctaSection: d.ctaSection ? mapCtaSection(d.ctaSection) : FALLBACK.ctaSection,
       };
       setData(cache);
     });

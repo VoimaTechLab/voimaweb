@@ -1,7 +1,8 @@
+import { motion } from "framer-motion";
 import { useHome } from "@/publicSite/hooks/useHome";
 import { ArrowRight, Play } from "lucide-react";
 import { Link } from "react-router-dom";
-
+import { ScrollReveal } from "@/components/animations/ScrollReveal";
 
 const AppleIcon = () => (
   <svg
@@ -14,9 +15,23 @@ const AppleIcon = () => (
   </svg>
 );
 
+/* Animated concentric ring */
+function AnimatedRing({ size, duration, delay = 0 }) {
+  return (
+    <motion.div
+      className="absolute rounded-full border border-white/20"
+      style={{ width: size, height: size }}
+      animate={{ rotate: 360, scale: [1, 1.03, 1] }}
+      transition={{
+        rotate: { duration, repeat: Infinity, ease: "linear" },
+        scale: { duration: duration / 2, repeat: Infinity, ease: "easeInOut", delay },
+      }}
+    />
+  );
+}
+
 export default function AppShowcaseSection() {
-  
-const { appShowcaseSection } = useHome();
+  const { appShowcaseSection } = useHome();
   const {
     eyebrow,
     title,
@@ -29,7 +44,14 @@ const { appShowcaseSection } = useHome();
   } = appShowcaseSection;
 
   return (
-    <section className="relative overflow-hidden bg-[#BC1D26] px-6 py-32">
+    <section className="relative overflow-visible bg-[#BC1D26] px-6 py-32">
+      {/* Asymmetrical Reverse-Diagonal Wedge with Crest */}
+      <div className="absolute top-0 left-0 w-full overflow-hidden leading-none z-20 pointer-events-none" style={{ transform: "translateY(-99%)" }}>
+        <svg viewBox="0 -4 1200 84" preserveAspectRatio="none" className="w-full h-10 sm:h-16 block overflow-visible">
+          <polygon points="0,80 420,0 880,65 1200,10 1200,100 0,100" fill="#BC1D26" />
+          <polyline points="0,80 420,0 880,65 1200,10" fill="none" stroke="black" strokeWidth="4" vectorEffect="non-scaling-stroke" strokeLinejoin="miter" />
+        </svg>
+      </div>
       <div
         className="
           relative mx-auto
@@ -38,159 +60,185 @@ const { appShowcaseSection } = useHome();
           lg:grid-cols-2
         "
       >
+        {/* Text Content */}
         <div className="max-w-xl">
-          <span
-            className="
-              text-sm font-semibold uppercase
-              tracking-[0.2em]
-              text-[#fff]
-            "
-          >
-            {eyebrow}
-          </span>
-
-          <h2
-            className="
-              mt-6
-              text-5xl font-bold
-              leading-tight
-              text-white
-              md:text-5xl
-            "
-          >
-            {title}
-          </h2>
-
-          <p className="mt-8 text-lg leading-9 text-white/90">{description}</p>
-
-          <div className="mt-10 flex flex-wrap gap-4">
-            <Link
-              to={primaryCta.link}
+          <ScrollReveal variant="fade-right">
+            <span
               className="
-                inline-flex items-center gap-2
-                rounded-full
-                bg-[#fff]
-                px-7 py-4
-                text-sm font-semibold
-                text-[#BC1D26]
-                shadow-lg shadow-[#BC1D26]/20
-                transition-all duration-300
-                hover:bg-[#fff]/90
+                text-sm font-semibold uppercase
+                tracking-[0.2em]
+                text-[#fff]
               "
             >
-              {primaryCta.text}
-              <ArrowRight size={18} />
-            </Link>
+              {eyebrow}
+            </span>
+          </ScrollReveal>
 
-            <Link
-              to={secondaryCta.link}
+          <ScrollReveal variant="fade-right" delay={0.1}>
+            <h2
               className="
-                inline-flex items-center gap-2
-                rounded-full
-                border border-white/10
-                bg-white/5
-                px-7 py-4
-                text-sm font-semibold
+                mt-6
+                text-3xl sm:text-4xl md:text-5xl font-bold
+                leading-tight
                 text-white
-                backdrop-blur-md
-                transition-all duration-300
-                hover:bg-white/10
+                md:text-3xl sm:text-4xl md:text-5xl
               "
             >
-              {secondaryCta.text}
-            </Link>
-          </div>
+              {title}
+            </h2>
+          </ScrollReveal>
 
-          <div className="mt-8 flex flex-wrap gap-5">
-            {storeLinks.map((store) => (
+          <ScrollReveal variant="fade-right" delay={0.2}>
+            <p className="mt-8 text-lg leading-9 text-white/90">{description}</p>
+          </ScrollReveal>
+
+          <ScrollReveal variant="fade-up" delay={0.3}>
+            <div className="mt-10 flex flex-wrap gap-4">
               <Link
-                key={store.label}
-                to={store.link}
-                className={
-                  store.variant === "light"
-                    ? `
-                      inline-flex items-center gap-3
-                      rounded-5xl
-                      bg-white
-                      px-6 py-4
-                      font-medium text-black
-                      transition-all duration-300
-                      hover:scale-[1.03]
-                    `
-                    : `
-                      inline-flex items-center gap-3
-                      rounded-5xl
-                      border border-white/10
-                      bg-white/5
-                      px-6 py-4
-                      font-medium text-white
-                      backdrop-blur-md
-                      transition-all duration-300
-                      hover:bg-white/10
-                    `
-                }
+                to={primaryCta.link}
+                className="
+                  group
+                  inline-flex items-center gap-2
+                  bg-white text-[#BC1D26]
+                  border-2 border-black
+                  shadow-[5px_5px_0px_rgba(0,0,0,1)]
+                  px-7 py-4
+                  text-sm font-black uppercase tracking-wider
+                  transition-all duration-200
+                  hover:-translate-y-0.5 hover:shadow-[7px_7px_0px_rgba(0,0,0,1)]
+                "
               >
-                {store.variant === "light" ? <AppleIcon /> : <Play size={18} />}
-                {store.label}
+                {primaryCta.text}
+                <ArrowRight
+                  size={18}
+                  className="transition-transform duration-300 group-hover:translate-x-1"
+                />
               </Link>
-            ))}
-          </div>
+
+              <Link
+                to={secondaryCta.link}
+                className="
+                  inline-flex items-center gap-2
+                  bg-transparent text-white
+                  border-2 border-white
+                  shadow-[4px_4px_0px_rgba(255,255,255,0.3)]
+                  px-7 py-4
+                  text-sm font-black uppercase tracking-wider
+                  transition-all duration-200
+                  hover:-translate-y-0.5 hover:bg-white hover:text-[#BC1D26]
+                "
+              >
+                {secondaryCta.text}
+              </Link>
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal variant="fade-up" delay={0.4}>
+            <div className="mt-8 flex flex-wrap gap-5">
+              {storeLinks.map((store) => (
+                <Link
+                  key={store.label}
+                  to={store.link}
+                  className={
+                    store.variant === "light"
+                      ? `
+                        inline-flex items-center gap-3
+                        rounded-5xl
+                        bg-white
+                        px-6 py-4
+                        font-medium text-black
+                        transition-all duration-300
+                        hover:scale-[1.03]
+                      `
+                      : `
+                        inline-flex items-center gap-3
+                        rounded-5xl
+                        border border-white/10
+                        bg-white/5
+                        px-6 py-4
+                        font-medium text-white
+                        backdrop-blur-md
+                        transition-all duration-300
+                        hover:bg-white/10
+                      `
+                  }
+                >
+                  {store.variant === "light" ? <AppleIcon /> : <Play size={18} />}
+                  {store.label}
+                </Link>
+              ))}
+            </div>
+          </ScrollReveal>
         </div>
 
-        <div className="relative flex items-center justify-center">
-          <div className="absolute inset-0 z-0 flex items-center justify-center">
-            <div className="absolute h-[520px] w-[520px] rounded-full border border-white/40" />
-            <div className="absolute h-[420px] w-[420px] rounded-full border border-white/40" />
-            <div className="absolute h-[320px] w-[320px] rounded-full border border-white/40" />
-          </div>
+        {/* Phone Showcase with animated rings */}
+        <ScrollReveal variant="scale-in" delay={0.2}>
+          <div className="relative flex items-center justify-center">
+            {/* Animated Concentric Rings */}
+            <div className="absolute inset-0 z-0 flex items-center justify-center">
+              <AnimatedRing size="520px" duration={50} delay={0} />
+              <AnimatedRing size="420px" duration={40} delay={1} />
+              <AnimatedRing size="320px" duration={30} delay={2} />
+            </div>
 
-          <div
-            className="
-              relative z-10
-              h-[680px] w-[340px]
-              overflow-hidden
-              rounded-[50px]
-              border-[10px]
-              border-black
-              bg-black
-            "
-          >
-            <div
+            {/* Floating Phone Mockup */}
+            <motion.div
+              animate={{ y: [0, -14, 0] }}
+              transition={{
+                duration: 5,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
               className="
-                absolute left-1/2 top-3
-                z-20 h-7 w-32
-                -translate-x-1/2
-                rounded-full bg-black
+                relative z-10
+                h-[680px] w-[340px]
+                overflow-hidden
+                rounded-[50px]
+                border-[10px]
+                border-black
+                bg-black
               "
-            />
+            >
+              <div
+                className="
+                  absolute left-1/2 top-3
+                  z-20 h-7 w-32
+                  -translate-x-1/2
+                  rounded-full bg-black
+                "
+              />
 
-            <video autoPlay muted loop playsInline className="h-full w-full object-cover">
-              <source src={videoSrc} type="video/mp4" />
-            </video>
+              <video autoPlay muted loop playsInline className="h-full w-full object-cover">
+                <source src={videoSrc} type="video/mp4" />
+              </video>
+            </motion.div>
+
+            {/* Floating Feature Card */}
+            <ScrollReveal
+              variant="fade-left"
+              delay={0.5}
+              className="
+                absolute -bottom-6 right-0
+                z-20 hidden
+                rounded-[38px]
+                border border-white/10
+                bg-white
+                p-6
+                backdrop-blur-xl
+                shadow-[0_20px_50px_rgba(0,0,0,0.25)]
+                md:block
+              "
+            >
+              <p className="text-sm font-semibold text-[#BC1D26]">
+                {floatingCard.title}
+              </p>
+
+              <p className="mt-2 text-sm leading-7 text-[#BC1D26]/70">
+                {floatingCard.description}
+              </p>
+            </ScrollReveal>
           </div>
-
-          <div
-            className="
-              absolute -bottom-6 right-0
-              z-20 hidden
-              rounded-[38px]
-              border border-white/10
-              bg-white
-              p-6
-              backdrop-blur-xl
-              shadow-[0_20px_50px_rgba(0,0,0,0.25)]
-              md:block
-            "
-          >
-            <p className="text-sm font-semibold text-[#BC1D26]">
-              {floatingCard.title}
-            </p>
-
-            <p className="mt-2 text-sm leading-7 text-[#BC1D26]/70">
-              {floatingCard.description}
-            </p>
-          </div>
-        </div>
+        </ScrollReveal>
       </div>
     </section>
   );

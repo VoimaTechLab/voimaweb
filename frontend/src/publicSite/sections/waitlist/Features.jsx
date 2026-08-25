@@ -13,11 +13,13 @@ export default function Features() {
             <article
               key={index}
               className="
-                rounded-[32px]
-                border
-                border-black/5
+                border-4
+                border-black
                 bg-white
                 p-8
+                shadow-[12px_12px_0px_rgba(0,0,0,1)]
+                transition-all duration-300
+                hover:-translate-y-2 hover:shadow-[10px_10px_0px_rgba(188,29,38,1)] sm:hover:shadow-[16px_16px_0px_rgba(188,29,38,1)]
               "
             >
               <div
@@ -27,19 +29,20 @@ export default function Features() {
                   w-14
                   items-center
                   justify-center
-                  rounded-2xl
-                  bg-[#BC1D26]/10
-                  text-[#BC1D26]
+                  border-4 border-black
+                  bg-white
+                  shadow-[4px_4px_0px_rgba(0,0,0,1)]
+                  text-black
                 "
               >
                 {item.icon}
               </div>
 
-              <h3 className="mt-6 text-2xl font-bold text-[#BC1D26]">
+              <h3 className="mt-6 text-2xl font-black uppercase text-black font-heading">
                 {item.title}
               </h3>
 
-              <p className="mt-4 leading-8 text-black/60">
+              <p className="mt-4 leading-8 text-black/75 font-semibold">
                 {item.description}
               </p>
             </article>
