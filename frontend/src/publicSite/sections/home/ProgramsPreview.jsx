@@ -6,25 +6,25 @@ import { Link } from "react-router-dom";
 import MobileMarquee from "@/components/animations/MobileMarquee";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { useHome } from "@/publicSite/hooks/useHome";
+
 export default function ProgramsPreview() {
+  const { programsPreviewSection } = useHome();
 
-const { programsPreviewSection } = useHome();
+  const eyebrow =
+    programsPreviewSection?.eyebrow || "EVENTS / PROGRAMS";
 
-const eyebrow =
-  programsPreviewSection?.eyebrow || "EVENTS / PROGRAMS";
+  const title =
+    programsPreviewSection?.title || "Events Making an Impact.";
 
-const title =
-  programsPreviewSection?.title || "Events Making an Impact.";
+  const description =
+    programsPreviewSection?.description ||
+    "Explore the events and initiatives driving better sickle cell care.";
 
-const description =
-  programsPreviewSection?.description ||
-  "Explore the events and initiatives driving better sickle cell care.";
+  const homepagePrograms =
+    programsPreviewSection?.programs || [];
 
-const homepagePrograms =
-  programsPreviewSection?.programs || [];
-
-const total = homepagePrograms.length;
-const hasPrograms = total > 0;
+  const total = homepagePrograms.length;
+  const hasPrograms = total > 0;
 
   const [active, setActive] = useState(0);
   const [hoveredIdx, setHoveredIdx] = useState(null);
@@ -70,13 +70,8 @@ const hasPrograms = total > 0;
     }, 20000);
   };
 
-  const currentActive = hoveredIdx !== null ? hoveredIdx : active;
-
-  useEffect(() => {
-    if (total > 0 && active >= total) {
-      setActive(0);
-    }
-  }, [total, active]);
+  const safeActive = total > 0 ? Math.min(active, total - 1) : 0;
+  const currentActive = hoveredIdx !== null ? hoveredIdx : safeActive;
 
   return (
     <section className="relative overflow-visible bg-[#fafafa] px-6 py-28">

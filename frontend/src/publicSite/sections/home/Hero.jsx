@@ -13,16 +13,9 @@ export default function Hero() {
   } = useHome();
 
   const [current, setCurrent] = useState(0);
-  const [videoSrc, setVideoSrc] = useState(null);
 
   // ── Set video source ──
-  useEffect(() => {
-    if (backgroundVideo) {
-      setVideoSrc(backgroundVideo);
-    } else {
-      setVideoSrc(HeroVid);
-    }
-  }, [backgroundVideo]);
+  const videoSrc = backgroundVideo || HeroVid;
 
   // ── Hero slide rotation ──
   useEffect(() => {

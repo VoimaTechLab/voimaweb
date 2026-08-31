@@ -13,7 +13,6 @@ export default function FAQSection() {
     title = "Got Questions? We Have",
     highlightedTitle = "Answers",
     faqs = [],
-    image,
   } = faqSection || {};
 
   const [openIndex, setOpenIndex] = useState(null);

@@ -147,15 +147,14 @@ const mapGlobalReachSection = (section) =>
 
 /* HOOK */
 export function useHome() {
-  const [data, setData] = useState(cache || FALLBACK);
+  // Initialize state directly from cache or fallback synchronously
+  const [data, setData] = useState(() => cache || FALLBACK);
 
   useEffect(() => {
-    let isMounted = true;
+    // If data is already cached, do not initiate fetching or set state inside effect
+    if (cache) return;
 
-    if (cache) {
-      setData(cache);
-      return;
-    }
+    let isMounted = true;
 
     if (!inflight) {
       inflight = Promise.all([getHomeData(), getEventsData(), getBlogData()]).catch((error) => {

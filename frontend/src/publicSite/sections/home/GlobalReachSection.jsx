@@ -5,47 +5,43 @@ import { useHome } from "@/publicSite/hooks/useHome";
 import { AnimatePresence, motion } from "framer-motion";
 import { useCallback, useEffect, useRef, useState } from "react";
 
-
 export default function GlobalReachSection() {
   const { globalReachSection } = useHome();
 
-  if (!globalReachSection) return null;
-
-  const {
-    eyebrow,
-    title,
-    titleAccent,
-    description,
-    stats = [],
-  } = globalReachSection;
-
-  if (!stats.length) return null;
-
+  // 1. Declare state and refs unconditionally at top level
   const [active, setActive] = useState(0);
   const [hoveredIdx, setHoveredIdx] = useState(null);
   const timerRef = useRef(null);
   const manualTimeoutRef = useRef(null);
 
+  // 2. Safely extract stats array
+  const stats = globalReachSection?.stats || [];
   const total = stats.length;
 
+  // 3. Declare callbacks unconditionally
   const resetTimer = useCallback(() => {
     clearInterval(timerRef.current);
+    if (total === 0) return;
     timerRef.current = setInterval(() => {
       setActive((prev) => (prev + 1) % total);
     }, 5000);
   }, [total]);
 
+  // 4. Declare effects unconditionally
   useEffect(() => {
+    if (total === 0) return;
+
     if (hoveredIdx !== null) {
       clearInterval(timerRef.current);
       return;
     }
     resetTimer();
+
     return () => {
       clearInterval(timerRef.current);
       clearTimeout(manualTimeoutRef.current);
     };
-  }, [hoveredIdx, resetTimer]);
+  }, [hoveredIdx, resetTimer, total]);
 
   const goTo = (idx) => {
     setActive(idx);
@@ -56,6 +52,10 @@ export default function GlobalReachSection() {
     }, 20000);
   };
 
+  // 5. Early return AFTER all hook declarations
+  if (!globalReachSection || !stats.length) return null;
+
+  const { eyebrow, title, titleAccent, description } = globalReachSection;
   const currentActive = hoveredIdx !== null ? hoveredIdx : active;
 
   return (
