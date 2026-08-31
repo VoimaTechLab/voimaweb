@@ -1,8 +1,8 @@
-import { motion } from "framer-motion";
+import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { useHome } from "@/publicSite/hooks/useHome";
+import { motion } from "framer-motion";
 import { ArrowRight, Play } from "lucide-react";
 import { Link } from "react-router-dom";
-import { ScrollReveal } from "@/components/animations/ScrollReveal";
 
 const AppleIcon = () => (
   <svg

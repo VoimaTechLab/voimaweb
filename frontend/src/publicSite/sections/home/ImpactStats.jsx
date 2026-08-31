@@ -1,46 +1,10 @@
-import { motion, AnimatePresence } from "framer-motion";
-import { useEffect, useState, useRef, useCallback } from "react";
-import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import CountUp from "@/components/animations/CountUp";
-import { useHome } from "@/publicSite/hooks/useHome";
 import MobileMarquee from "@/components/animations/MobileMarquee";
+import { ScrollReveal } from "@/components/animations/ScrollReveal";
+import { useHome } from "@/publicSite/hooks/useHome";
+import { AnimatePresence, motion } from "framer-motion";
+import { useCallback, useEffect, useRef, useState } from "react";
 
-import Burden6M from "@/assets/impact/burden_6m.png";
-import Burden500K from "@/assets/impact/burden_500k.png";
-import Burden24M from "@/assets/impact/burden_24m.png";
-import Burden195K from "@/assets/impact/burden_195k.png";
-import Hero09 from "@/assets/Hero/hero09.png";
-
-
-const BURDEN_DATA = [
-  {
-    image: Burden6M,
-    backTitle: "Closing the Care Gap",
-    backStory:
-      "Over 6 million people live with sickle cell disease across Africa, yet many lack access to continuous, personalized healthcare.",
-  },
-  {
-    image: Burden500K,
-    backTitle: "Early Infant Detection",
-    backStory:
-      "About 500,000 babies are born with sickle cell globally each year. Early newborn screening dramatically improves survival.",
-  },
-  {
-    image: Burden24M,
-    backTitle: "Anticipating Pain Crises",
-    backStory:
-      "24M+ painful crises occur annually in Africa. Intelligent symptom monitoring helps anticipate triggers before emergencies.",
-  },
-  {
-    image: Burden195K,
-    backTitle: "Saving Lives via Early Action",
-    backStory:
-      "195,000+ deaths occur yearly due to delayed detection. Training community health workers transforms long-term outcomes.",
-  },
-];
-
-const BURDEN_TITLE =
-  "The burden of sickle cell disease demands earlier intervention.";
 
 function PosterBurdenTitle({ title }) {
   const heading = title || BURDEN_TITLE;
@@ -81,7 +45,13 @@ function PosterBurdenTitle({ title }) {
 
 export default function ImpactStats() {
   const { impactSection } = useHome();
-  const { eyebrow, title, areas, banner } = impactSection;
+
+  const {
+    eyebrow,
+    title,
+    areas = [],
+    banner = {},
+  } = impactSection || {};
 
   const [active, setActive] = useState(0);
   const [hoveredIdx, setHoveredIdx] = useState(null);
@@ -165,7 +135,6 @@ export default function ImpactStats() {
           <MobileMarquee
             items={areas.map((area, index) => ({
               ...area,
-              burdenExtra: BURDEN_DATA[index % BURDEN_DATA.length],
               index,
             }))}
             cardWidth={300}
@@ -176,13 +145,13 @@ export default function ImpactStats() {
               return (
                 <div className="relative overflow-hidden rounded-2xl border-2 border-black bg-black shadow-[6px_6px_0px_rgba(0,0,0,1)] h-[380px]">
                   <img
-                    src={item.burdenExtra.image}
+                    src={item.image}
                     alt={item.title}
                     className="absolute inset-0 w-full h-full object-cover scale-105 brightness-100"
                   />
                   <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/70 via-black/25 to-transparent p-5 flex flex-col justify-end">
                     <div className="inline-block bg-[#BC1D26] text-white border-2 border-black px-3 py-1.5 text-xs font-black uppercase tracking-wider shadow-[3px_3px_0px_rgba(0,0,0,1)] mb-3 self-start">
-                      {item.burdenExtra.backTitle}
+                      {item.backTitle}
                     </div>
                     <div className="text-3xl font-black text-white tracking-tight font-heading leading-none">
                       {numericVal > 0 ? (
@@ -195,7 +164,7 @@ export default function ImpactStats() {
                       {item.description}
                     </p>
                     <p className="mt-2 text-xs text-white/70 font-normal leading-relaxed border-t border-white/20 pt-2">
-                      {item.burdenExtra.backStory}
+                      {item.backStory}
                     </p>
                   </div>
                 </div>
@@ -208,7 +177,6 @@ export default function ImpactStats() {
                   onMouseLeave={() => setHoveredIdx(null)}
                 >
                   {areas.map((area, index) => {
-                    const burdenExtra = BURDEN_DATA[index % BURDEN_DATA.length];
                     const { numericVal, suffix } = parseStat(area.title);
                     const isExpanded = currentActive === index;
 
@@ -237,7 +205,7 @@ export default function ImpactStats() {
                         `}
                       >
                         <img
-                          src={burdenExtra.image}
+                          src={area.image}
                           alt={area.title}
                           className={`
                             absolute inset-0 w-full h-full object-cover
@@ -273,7 +241,7 @@ export default function ImpactStats() {
                                 transition={{ duration: 0.35, ease: "easeOut" }}
                               >
                                 <div className="inline-block bg-[#BC1D26] text-white border-2 border-black px-4 py-1.5 text-xs font-black uppercase tracking-wider shadow-[3px_3px_0px_rgba(0,0,0,1)] mb-3">
-                                  {burdenExtra.backTitle}
+                                  {area.backTitle}
                                 </div>
                                 <div className="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight font-heading leading-none">
                                   {numericVal > 0 ? (
@@ -286,7 +254,7 @@ export default function ImpactStats() {
                                   {area.description}
                                 </p>
                                 <p className="mt-3 text-xs sm:text-sm text-white/70 font-normal leading-relaxed border-t border-white/20 pt-3 max-w-xl">
-                                  {burdenExtra.backStory}
+                                  {area.backStory}
                                 </p>
                               </motion.div>
                             )}
@@ -374,8 +342,8 @@ export default function ImpactStats() {
               className="mt-8 lg:absolute lg:left-[calc(50%-50vw-8rem)] lg:top-0 lg:mt-0 lg:w-[min(100vw,1280px)] lg:max-w-none xl:left-[calc(50%-50vw-10rem)]"
             >
               <img
-                src={Hero09}
-                alt="Why It Matters"
+                src={banner.image}
+                alt={banner.title || "Why It Matters"}
                 className="block w-full max-w-none object-contain"
               />
             </ScrollReveal>

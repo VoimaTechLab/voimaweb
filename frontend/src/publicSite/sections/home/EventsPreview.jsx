@@ -1,5 +1,11 @@
-import { Link } from "react-router-dom";
+/* 
+ =============== 
+  NOT IN USE 
+ ===============
+*/
+
 import { ArrowRight, CalendarDays, MapPin } from "lucide-react";
+import { Link } from "react-router-dom";
 
 import { eventsPreviewSection } from "@/data/homeData";
 

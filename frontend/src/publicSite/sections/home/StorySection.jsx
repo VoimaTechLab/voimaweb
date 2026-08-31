@@ -1,52 +1,36 @@
-import { motion } from "framer-motion";
-import { ArrowRight, Quote, HeartPulse, ShieldCheck, Stethoscope, ChevronLeft, ChevronRight } from "lucide-react";
-import { Link } from "react-router-dom";
-import { Swiper, SwiperSlide } from "swiper/react";
+import {
+  ChevronLeft, ChevronRight, HeartPulse, Quote, ShieldCheck,
+  Stethoscope
+} from "lucide-react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
-import StoryAmina from "@/assets/impact/story_amina.jpg";
-import StoryMensah from "@/assets/impact/story_mensah.jpg";
-import StoryAdvocate from "@/assets/impact/story_advocate.jpg";
+import { useHome } from "@/publicSite/hooks/useHome";
 
-const SHIFTER_STORIES = [
-  {
-    id: 1,
-    quote: "“HAVING VOIMA'S SYMPTOM TRACKER MEANS I CAN ANTICIPATE MY SON'S CRISES BEFORE HE FALLS ILL. IT GAVE OUR FAMILY OUR LIVES BACK.”",
-    author: "Amina & Baby Malik",
-    meta: "Caregiver & Mother, Accra, Ghana",
-    story: "Amina was able to detect early hydration drops and fever spikes in 2-year-old Malik, preventing emergency hospitalization through early clinic outreach.",
-    badge: "Early Diagnosis",
-    icon: HeartPulse,
-    image: StoryAmina,
-  },
-  {
-    id: 2,
-    quote: "“BEFORE VOIMA, WE HAD NO REGIONAL CLINIC DATA ON SICKLE CELL CRISES. NOW WE RECEIVE REAL-TIME ALERTS AND MOBILE TESTING KITS.”",
-    author: "Dr. Kweku Mensah",
-    meta: "Clinical Director, Kumasi, Ghana",
-    story: "Dr. Mensah and his team have conducted over 4,500 infant screenings using Voima's mobile healthcare protocols, reducing infant mortality by 40%.",
-    badge: "Clinical Impact",
-    icon: Stethoscope,
-    image: StoryMensah,
-  },
-  {
-    id: 3,
-    quote: "“LIVING WITH SICKLE CELL USED TO MEAN LIVING IN CONSTANT FEAR OF PAIN. NOW WE HAVE A COMMUNITY THAT SUPPORTS US EVERY STEP.”",
-    author: "Kofi Mensah, 24",
-    meta: "Youth Patient Advocate, Accra, Ghana",
-    story: "Kofi leads local patient workshops and uses the Voima app to log daily wellness metrics, empowering youth with sickle cell to live without limits.",
-    badge: "Community Care",
-    icon: ShieldCheck,
-    image: StoryAdvocate,
-  },
-];
+const STORY_ICONS = {
+  HeartPulse,
+  Stethoscope,
+  ShieldCheck,
+};
 
 export default function StorySection() {
+    const { storyShiftSection } = useHome();
+
+  if (!storyShiftSection) return null;
+
+  const {
+    eyebrow,
+    title,
+    titleAccent,
+    stories = [],
+  } = storyShiftSection;
+
+  if (!stories.length) return null;
   return (
     <section className="bg-[#140506] px-6 py-28 text-white relative overflow-visible">
       {/* Deep Asymmetrical Incline Divider with Notch */}
@@ -71,15 +55,15 @@ export default function StorySection() {
           <div>
             <ScrollReveal variant="fade-down">
               <span className="inline-block bg-white text-[#BC1D26] border-2 border-black px-4 py-2 text-xs sm:text-sm font-black uppercase tracking-[0.22em] shadow-[4px_4px_0px_rgba(188,29,38,1)]">
-                VOIMA IMPACT SHIFTERS
+                {eyebrow}
               </span>
             </ScrollReveal>
 
             <ScrollReveal variant="fade-up" delay={0.15}>
               <h2 className="mt-6 text-4xl font-black uppercase leading-none text-white md:text-5xl lg:text-6xl font-heading tracking-tight">
-                Stories of Change &{" "}
+                {title}{" "}
                 <span className="inline-block -rotate-1 bg-[#BC1D26] text-white px-4 py-2 border-2 border-black shadow-[5px_5px_0px_rgba(0,0,0,1)]">
-                  Resilience
+                  {titleAccent}
                 </span>
               </h2>
             </ScrollReveal>
@@ -109,72 +93,87 @@ export default function StorySection() {
             slidesPerView={1}
             className="overflow-visible"
           >
-            {SHIFTER_STORIES.map((item) => {
-              const BadgeIcon = item.icon;
-              return (
-                <SwiperSlide key={item.id}>
-                  <div className="grid lg:grid-cols-12 gap-10 items-center bg-white border-2 border-black p-6 sm:p-10 shadow-[8px_8px_0px_rgba(188,29,38,1)]">
-                    {/* Photo Column */}
-                    <ScrollReveal
-                      variant="fade-right"
-                      className="lg:col-span-5 relative overflow-hidden border-2 border-black h-[400px] sm:h-[480px]"
-                    >
-                      <img
-                        src={item.image}
-                        alt={item.author}
-                        className="h-full w-full object-cover brightness-[1.22] contrast-[1.06] saturate-[1.18]"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-white/10" />
-                      
-                      {/* Floating Badge */}
-                      <div className="absolute top-5 left-5 inline-flex items-center gap-2 bg-white px-4 py-2 text-xs font-black uppercase tracking-wider text-[#BC1D26] border-2 border-black shadow-[3px_3px_0px_rgba(0,0,0,1)]">
-                        <BadgeIcon size={16} />
-                        {item.badge}
-                      </div>
+          {stories.map((item) => {
+            const BadgeIcon = STORY_ICONS[item.iconName] || HeartPulse;
 
-                      <div className="absolute bottom-6 left-6 right-6">
-                        <h4 className="text-2xl font-bold text-white font-heading">{item.author}</h4>
-                        <p className="text-sm text-white/80 mt-1">{item.meta}</p>
-                      </div>
-                    </ScrollReveal>
+            return (
+              <SwiperSlide key={item.id}>
+                <div className="grid lg:grid-cols-12 gap-10 items-center bg-white border-2 border-black p-6 sm:p-10 shadow-[8px_8px_0px_rgba(188,29,38,1)]">
 
-                    {/* Content Column */}
-                    <ScrollReveal
-                      variant="fade-left"
-                      delay={0.12}
-                      className="lg:col-span-7 space-y-6 text-black"
-                    >
-                      <Quote size={48} className="text-[#BC1D26]" />
+                  {/* Photo Column */}
+                  <ScrollReveal
+                    variant="fade-right"
+                    className="lg:col-span-5 relative overflow-hidden border-2 border-black h-[400px] sm:h-[480px]"
+                  >
+                    <img
+                      src={item.image}
+                      alt={item.author}
+                      className="h-full w-full object-cover brightness-[1.22] contrast-[1.06] saturate-[1.18]"
+                    />
 
-                      <h3 className="text-2xl sm:text-3xl font-black uppercase leading-tight text-black tracking-tight font-heading">
-                        {item.quote}
-                      </h3>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-white/10" />
 
-                      <p className="text-base leading-8 text-black/75 bg-[#fafafa] p-6 border-2 border-black font-semibold shadow-[4px_4px_0px_rgba(188,29,38,1)]">
-                        {item.story}
+                    {/* Floating Badge */}
+                    <div className="absolute top-5 left-5 inline-flex items-center gap-2 bg-white px-4 py-2 text-xs font-black uppercase tracking-wider text-[#BC1D26] border-2 border-black shadow-[3px_3px_0px_rgba(0,0,0,1)]">
+                      <BadgeIcon size={16} />
+                      {item.badge}
+                    </div>
+
+                    <div className="absolute bottom-6 left-6 right-6">
+                      <h4 className="text-2xl font-bold text-white font-heading">
+                        {item.author}
+                      </h4>
+
+                      <p className="text-sm text-white/80 mt-1">
+                        {item.meta}
                       </p>
+                    </div>
+                  </ScrollReveal>
 
-                      <div className="pt-4 flex items-center justify-between">
-                        <Link
-                          to="/about"
-                          className="
-                            group inline-flex items-center gap-2
-                            bg-[#BC1D26] px-7 py-3.5
-                            text-sm font-black uppercase tracking-wider text-white
-                            border-2 border-black
-                            shadow-[4px_4px_0px_rgba(0,0,0,1)] transition-all duration-200
-                            hover:-translate-y-0.5 hover:bg-[#A11922] hover:shadow-[6px_6px_0px_rgba(0,0,0,1)]
-                          "
-                        >
-                          Read Full Story
-                          <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
-                        </Link>
-                      </div>
-                    </ScrollReveal>
-                  </div>
-                </SwiperSlide>
-              );
-            })}
+                  {/* Content Column */}
+                  <ScrollReveal
+                    variant="fade-left"
+                    delay={0.12}
+                    className="lg:col-span-7 space-y-6 text-black"
+                  >
+                    <Quote size={48} className="text-[#BC1D26]" />
+
+                    <h3 className="text-2xl sm:text-3xl font-black uppercase leading-tight text-black tracking-tight font-heading">
+                      {item.quote}
+                    </h3>
+
+                    <p className="text-base leading-8 text-black/75 bg-[#fafafa] p-6 border-2 border-black font-semibold shadow-[4px_4px_0px_rgba(188,29,38,1)]">
+                      {item.story}
+                    </p>
+
+                    {/*<div className="pt-4 flex items-center justify-between">
+                      <Link
+                        to="/about"
+                        className="
+                          group inline-flex items-center gap-2
+                          bg-[#BC1D26] px-7 py-3.5
+                          text-sm font-black uppercase tracking-wider text-white
+                          border-2 border-black
+                          shadow-[4px_4px_0px_rgba(0,0,0,1)]
+                          transition-all duration-200
+                          hover:-translate-y-0.5
+                          hover:bg-[#A11922]
+                          hover:shadow-[6px_6px_0px_rgba(0,0,0,1)]
+                        "
+                      >
+                        Read Full Story
+
+                        <ArrowRight
+                          size={16}
+                          className="transition-transform duration-300 group-hover:translate-x-1"
+                        />
+                      </Link>
+                    </div>*/}
+                  </ScrollReveal>
+                </div>
+              </SwiperSlide>
+            );
+          })}
           </Swiper>
         </ScrollReveal>
       </div>

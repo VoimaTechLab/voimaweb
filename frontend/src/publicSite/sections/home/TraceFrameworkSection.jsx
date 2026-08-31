@@ -1,70 +1,23 @@
-import { useState, useEffect, useRef, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
-import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import MobileMarquee from "@/components/animations/MobileMarquee";
+import { ScrollReveal } from "@/components/animations/ScrollReveal";
+import { AnimatePresence, motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 
-import TechImg from "@/assets/programs/trace_tech.jpg";
-import ResearchImg from "@/assets/programs/trace_research.jpg";
-import AdvocacyImg from "@/assets/programs/trace_advocacy.jpg";
-import CommunityImg from "@/assets/programs/prog_support.jpg";
-import EducationImg from "@/assets/tools/tool_training.jpg";
-
-const TRACE_PILLARS = [
-  {
-    letter: "T",
-    title: "Technology",
-    description: "Building AI-powered tools for personalized and proactive care.",
-    detail: "Intelligent digital platforms, crisis prediction algorithms, and mobile trackers designed for real-world patient needs.",
-    image: TechImg,
-    badge: "AI & Digital Health",
-    link: "/voima-app",
-  },
-  {
-    letter: "R",
-    title: "Research",
-    description: "Generating evidence and insights that improve prevention and health outcomes.",
-    detail: "Collaborating with clinical partners and analyzing real-world patient data to uncover proactive intervention pathways.",
-    image: ResearchImg,
-    badge: "Clinical Evidence",
-    link: "/about",
-  },
-  {
-    letter: "A",
-    title: "Advocacy",
-    description: "Driving awareness and stronger conversations around proactive care and health equity.",
-    detail: "Elevating sickle cell disease priorities across public health agendas, policy forums, and global healthcare dialogues.",
-    image: AdvocacyImg,
-    badge: "Policy & Awareness",
-    link: "/events",
-  },
-  {
-    letter: "C",
-    title: "Community",
-    description: "Creating support systems for patients, caregivers, and families.",
-    detail: "Building safe, empowering spaces where lived experiences are shared and care circles provide continuous support.",
-    image: CommunityImg,
-    badge: "Caregiver Networks",
-    link: "/get-involved",
-  },
-  {
-    letter: "E",
-    title: "Education",
-    description: "Providing accessible health knowledge that empowers better decisions.",
-    detail: "Equipping patients, caregivers, and grassroots health workers with practical medical literacy and prevention guides.",
-    image: EducationImg,
-    badge: "Health Literacy",
-    link: "/blog",
-  },
-];
+import { useHome } from "@/publicSite/hooks/useHome";
 
 export default function TraceFrameworkSection() {
+  const { traceFrameworkSection } = useHome();
+
   const [active, setActive] = useState(0);
   const [hoveredIdx, setHoveredIdx] = useState(null);
   const timerRef = useRef(null);
   const manualTimeoutRef = useRef(null);
-  const total = TRACE_PILLARS.length;
+
+  const pillars = traceFrameworkSection?.pillars || [];
+  const total = pillars.length;
+
 
   const resetTimer = useCallback(() => {
     clearInterval(timerRef.current);
@@ -95,6 +48,8 @@ export default function TraceFrameworkSection() {
   };
 
   const currentActive = hoveredIdx !== null ? hoveredIdx : active;
+
+  if (!traceFrameworkSection || !pillars.length) return null;
 
   return (
     <section className="relative overflow-visible bg-[#fafafa] px-6 py-28">
@@ -131,23 +86,23 @@ export default function TraceFrameworkSection() {
           <ScrollReveal variant="fade-down">
             <div className="inline-block bg-[#BC1D26] border-2 border-black px-5 py-2 shadow-[4px_4px_0px_rgba(0,0,0,1)] mb-6">
               <span className="text-xs sm:text-sm font-black uppercase tracking-[0.22em] text-white">
-                #TRACE FRAMEWORK
+                 {traceFrameworkSection.eyebrow}
               </span>
             </div>
           </ScrollReveal>
 
           <ScrollReveal variant="fade-up" delay={0.15}>
             <h2 className="text-4xl font-black uppercase leading-none text-black md:text-5xl lg:text-6xl font-heading tracking-tight">
-              The Pillars Driving Our{" "}
+                {traceFrameworkSection.title}{" "}
               <span className="inline-block -rotate-1 bg-[#BC1D26] text-white px-4 py-2 border-2 border-black shadow-[5px_5px_0px_rgba(0,0,0,1)] mt-2">
-                Impact.
+                {traceFrameworkSection.titleAccent}
               </span>
             </h2>
           </ScrollReveal>
 
           <ScrollReveal variant="fade-up" delay={0.25}>
             <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-black/75 font-semibold">
-              Our comprehensive methodology connects cutting-edge technology with grassroots community support, clinical research, advocacy, and education.
+              {traceFrameworkSection.description}
             </p>
           </ScrollReveal>
         </div>
@@ -155,7 +110,7 @@ export default function TraceFrameworkSection() {
         {/* Horizontal Flex Accordion for TRACE */}
         <ScrollReveal variant="fade-up" delay={0.2}>
           <MobileMarquee
-            items={TRACE_PILLARS}
+            items={pillars}
             cardWidth={300}
             gap={16}
             speed={45}
@@ -200,7 +155,7 @@ export default function TraceFrameworkSection() {
                   className="mt-20 flex flex-col md:flex-row gap-4 sm:gap-5 w-full h-[620px] md:h-[480px] lg:h-[520px] items-stretch"
                   onMouseLeave={() => setHoveredIdx(null)}
                 >
-                  {TRACE_PILLARS.map((pillar, index) => {
+                  {pillars.map((pillar, index) => {
                     const isExpanded = currentActive === index;
 
                     return (
@@ -328,7 +283,7 @@ export default function TraceFrameworkSection() {
 
                 {/* Progress Indicators */}
                 <div className="flex items-center justify-center gap-3 mt-8">
-                  {TRACE_PILLARS.map((_, idx) => (
+                  {pillars.map((_, idx) => (
                     <button
                       key={idx}
                       onClick={() => goTo(idx)}

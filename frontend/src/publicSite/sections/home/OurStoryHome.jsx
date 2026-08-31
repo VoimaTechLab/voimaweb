@@ -1,10 +1,15 @@
+import LeaderImage from "@/assets/Leaders/Emmanuel.png";
+import { ScrollReveal } from "@/components/animations/ScrollReveal";
+import { useHome } from "@/publicSite/hooks/useHome";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import { ScrollReveal } from "@/components/animations/ScrollReveal";
-import LeaderImage from "@/assets/Leaders/Emmanuel.png";
 
 export default function OurStoryHome() {
+  const { storySection } = useHome();
+
+  if (!storySection) return null;
+
   return (
     <section className="relative overflow-visible bg-white px-6 pt-20 sm:pt-24 pb-0">
       {/* Top Dual-Apex Crown Divider */}
@@ -56,14 +61,14 @@ export default function OurStoryHome() {
                   />
 
                   <p className="text-xs sm:text-[13px] font-bold text-black/85 leading-relaxed">
-                    &ldquo;Health crises do not start when the pain starts. Early action changes outcomes.&rdquo;
+                    &ldquo;{storySection.quote}&rdquo;
                   </p>
                 </motion.div>
 
                 {/* Big Clean Leader Portrait sitting flush on bottom border line */}
                 <div className="relative z-10 w-full flex items-end justify-center">
                   <img
-                    src={LeaderImage}
+                    src={storySection.image || LeaderImage}
                     alt="Voima Leader"
                     style={{
                       filter:
@@ -81,35 +86,31 @@ export default function OurStoryHome() {
             <ScrollReveal variant="fade-down">
               <div className="inline-block bg-[#BC1D26] border-2 border-black px-4 py-1.5 shadow-[3px_3px_0px_rgba(0,0,0,1)] mb-2">
                 <span className="text-xs font-black uppercase tracking-[0.22em] text-white">
-                  Our Story
+                 {storySection.eyebrow}
                 </span>
               </div>
             </ScrollReveal>
 
             <ScrollReveal variant="fade-up" delay={0.1}>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#BC1D26] font-heading tracking-tight leading-tight">
-                A mission born from loss, driven by the need for better care.
+                {storySection.title}
               </h2>
             </ScrollReveal>
 
             <ScrollReveal variant="fade-up" delay={0.2}>
               <div className="space-y-5 text-base sm:text-lg leading-relaxed text-black/75 font-medium">
-                <p>
-                  For millions living with sickle cell disease, pain crises are often treated as sudden and unpredictable. But in reality, these crises frequently build over time through patterns, triggers, and warning signs that go unnoticed until it is too late.
-                </p>
-                <p>
-                  This reality became deeply personal to Voima&apos;s founder through the loss of a close friend, Elijah, who lived with sickle cell disease. Despite his strength and resilience, Elijah endured repeated pain crises and the burden of navigating a healthcare system that often responded only after his condition had worsened.
-                </p>
-                <p>
-                  His story revealed a painful truth: sickle cell care is still largely reactive. Voima was created from the belief that care should begin long before pain becomes a crisis. By combining technology, research, advocacy, and community support, we are building a future where people living with sickle cell disease can detect risks earlier, act sooner, and live healthier lives.
-                </p>
+                {storySection.paragraphs?.map((paragraph, index) => (
+                  <p key={index}>
+                    {paragraph}
+                  </p>
+                ))}
               </div>
             </ScrollReveal>
 
             <ScrollReveal variant="fade-up" delay={0.3}>
               <div className="pt-4">
                 <Link
-                  to="/our-journey"
+                  to={storySection.cta?.link || "/our-journey"}
                   className="
                     group inline-flex items-center gap-3
                     bg-[#BC1D26] text-white
@@ -121,7 +122,7 @@ export default function OurStoryHome() {
                     hover:-translate-y-0.5 hover:bg-black hover:shadow-[7px_7px_0px_rgba(0,0,0,1)]
                   "
                 >
-                  Read our Journey
+                  {storySection.cta?.text || "Read our Journey"}
                   <ArrowRight size={18} className="transition-transform duration-300 group-hover:translate-x-1" />
                 </Link>
               </div>

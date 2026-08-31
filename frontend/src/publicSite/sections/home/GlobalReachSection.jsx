@@ -1,63 +1,32 @@
-import { useState, useEffect, useRef, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import CountUp from "@/components/animations/CountUp";
 import MobileMarquee from "@/components/animations/MobileMarquee";
+import { ScrollReveal } from "@/components/animations/ScrollReveal";
+import { useHome } from "@/publicSite/hooks/useHome";
+import { AnimatePresence, motion } from "framer-motion";
+import { useCallback, useEffect, useRef, useState } from "react";
 
-import Reach15kImg from "@/assets/reach/reach_15k.jpg";
-import Reach80Img from "@/assets/reach/reach_80.jpg";
-import Reach350Img from "@/assets/tools/tool_screening.jpg";
-import Reach500Img from "@/assets/tools/tool_app.jpg";
-
-const IMPACT_STATS = [
-  {
-    value: "15K+",
-    number: 15,
-    suffix: "K+",
-    label: "Reached",
-    description: "Through awareness campaigns, outreach programs, and education.",
-    detail: "Direct patient outreach, community health workshops, and educational screenings spanning multiple regional clusters.",
-    badge: "Public Outreach",
-    image: Reach15kImg,
-  },
-  {
-    value: "80+",
-    number: 80,
-    suffix: "+",
-    label: "Interviews",
-    description: "Deep conversations with patients and caregivers shaping our product.",
-    detail: "Qualitative research gathering real-world clinical stories and daily SCD pain tracking challenges.",
-    badge: "Patient Insights",
-    image: Reach80Img,
-  },
-  {
-    value: "350+",
-    number: 350,
-    suffix: "+",
-    label: "Community Members",
-    description: "Growing community supporting better sickle cell care.",
-    detail: "Active network of patients, advocates, family caregivers, and grassroots healthcare volunteers.",
-    badge: "Advocacy Network",
-    image: Reach350Img,
-  },
-  {
-    value: "500+",
-    number: 500,
-    suffix: "+",
-    label: "Waitlist Signups",
-    description: "Strong demand for proactive sickle cell support.",
-    detail: "Early adoption pipeline from individuals seeking smart digital crisis tracking tools and care alerts.",
-    badge: "Early Access",
-    image: Reach500Img,
-  },
-];
 
 export default function GlobalReachSection() {
+  const { globalReachSection } = useHome();
+
+  if (!globalReachSection) return null;
+
+  const {
+    eyebrow,
+    title,
+    titleAccent,
+    description,
+    stats = [],
+  } = globalReachSection;
+
+  if (!stats.length) return null;
+
   const [active, setActive] = useState(0);
   const [hoveredIdx, setHoveredIdx] = useState(null);
   const timerRef = useRef(null);
   const manualTimeoutRef = useRef(null);
-  const total = IMPACT_STATS.length;
+
+  const total = stats.length;
 
   const resetTimer = useCallback(() => {
     clearInterval(timerRef.current);
@@ -114,23 +83,23 @@ export default function GlobalReachSection() {
           <ScrollReveal variant="fade-down">
             <div className="inline-block bg-[#BC1D26] border-2 border-black px-5 py-2 shadow-[4px_4px_0px_rgba(0,0,0,1)] mb-6">
               <span className="text-xs sm:text-sm font-black uppercase tracking-[0.22em] text-white">
-                REGIONAL REACH & IMPACT
+                {eyebrow}
               </span>
             </div>
           </ScrollReveal>
 
           <ScrollReveal variant="fade-up" delay={0.15}>
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-black uppercase leading-none text-black font-heading tracking-tight mt-6">
-              Mobilizing Care Across{" "}
+              {title}{" "}
               <span className="inline-block -rotate-2 bg-[#BC1D26] text-white px-4 py-2 border-4 border-black shadow-[6px_6px_0px_rgba(0,0,0,1)] mt-2">
-                Sub-Saharan Africa
+                {titleAccent}
               </span>
             </h2>
           </ScrollReveal>
 
           <ScrollReveal variant="fade-up" delay={0.25}>
             <p className="mt-8 text-lg font-semibold leading-8 text-black/75">
-              Voima Initiative works on the ground with regional healthcare networks, rural clinic outreach teams, and community advocates.
+              {description}
             </p>
           </ScrollReveal>
         </div>
@@ -138,7 +107,7 @@ export default function GlobalReachSection() {
         {/* Horizontal Flex Accordion Cards */}
         <ScrollReveal variant="fade-up" delay={0.2}>
           <MobileMarquee
-            items={IMPACT_STATS}
+            items={stats}
             cardWidth={300}
             gap={16}
             speed={45}
@@ -180,7 +149,7 @@ export default function GlobalReachSection() {
                   className="mt-20 flex flex-col md:flex-row gap-4 sm:gap-5 w-full h-[600px] md:h-[460px] lg:h-[480px] items-stretch"
                   onMouseLeave={() => setHoveredIdx(null)}
                 >
-                  {IMPACT_STATS.map((stat, index) => {
+                  {stats.map((stat, index) => {
                     const isExpanded = currentActive === index;
 
                     return (
@@ -306,7 +275,7 @@ export default function GlobalReachSection() {
 
                 {/* Progress Indicators / Jump buttons */}
                 <div className="flex items-center justify-center gap-3 mt-8">
-                  {IMPACT_STATS.map((_, idx) => (
+                  {stats.map((_, idx) => (
                     <button
                       key={idx}
                       onClick={() => goTo(idx)}

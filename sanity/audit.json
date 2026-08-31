@@ -1,0 +1,450 @@
+{
+  "auditReportVersion": 2,
+  "vulnerabilities": {
+    "@sanity/cli": {
+      "name": "@sanity/cli",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@sanity/cli-build",
+        "@vercel/frameworks",
+        "typeid-js"
+      ],
+      "effects": [
+        "sanity"
+      ],
+      "range": "<=0.0.0-20260612111702 || 3.8.4-next.27 - 3.16.0 || >=6.0.0-alpha.3",
+      "nodes": [
+        "node_modules/@sanity/cli"
+      ],
+      "fixAvailable": {
+        "name": "sanity",
+        "version": "5.14.1",
+        "isSemVerMajor": true
+      }
+    },
+    "@sanity/cli-build": {
+      "name": "@sanity/cli-build",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "sanity"
+      ],
+      "effects": [
+        "@sanity/cli"
+      ],
+      "range": ">=6.0.0",
+      "nodes": [
+        "node_modules/@sanity/cli-build"
+      ],
+      "fixAvailable": {
+        "name": "sanity",
+        "version": "5.14.1",
+        "isSemVerMajor": true
+      }
+    },
+    "@sanity/vision": {
+      "name": "@sanity/vision",
+      "severity": "moderate",
+      "isDirect": true,
+      "via": [
+        "sanity"
+      ],
+      "effects": [],
+      "range": "3.0.0-canary.186 - 3.0.0-v3-v2-pte.56 || >=6.0.0-next.12",
+      "nodes": [
+        "node_modules/@sanity/vision"
+      ],
+      "fixAvailable": {
+        "name": "@sanity/vision",
+        "version": "5.31.2",
+        "isSemVerMajor": true
+      }
+    },
+    "@vercel/frameworks": {
+      "name": "@vercel/frameworks",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "js-yaml",
+        "smol-toml"
+      ],
+      "effects": [
+        "@sanity/cli"
+      ],
+      "range": ">=0.2.1-canary.0",
+      "nodes": [
+        "node_modules/@vercel/frameworks"
+      ],
+      "fixAvailable": {
+        "name": "sanity",
+        "version": "5.14.1",
+        "isSemVerMajor": true
+      }
+    },
+    "brace-expansion": {
+      "name": "brace-expansion",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1123897,
+          "name": "brace-expansion",
+          "dependency": "brace-expansion",
+          "title": "brace-expansion: DoS via exponential-time expansion of consecutive non-expanding {} groups",
+          "url": "https://github.com/advisories/GHSA-3jxr-9vmj-r5cp",
+          "severity": "high",
+          "cwe": [
+            "CWE-400",
+            "CWE-407"
+          ],
+          "cvss": {
+            "score": 5.3,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L"
+          },
+          "range": "<1.1.16"
+        },
+        {
+          "source": 1123898,
+          "name": "brace-expansion",
+          "dependency": "brace-expansion",
+          "title": "brace-expansion: DoS via exponential-time expansion of consecutive non-expanding {} groups",
+          "url": "https://github.com/advisories/GHSA-3jxr-9vmj-r5cp",
+          "severity": "high",
+          "cwe": [
+            "CWE-400",
+            "CWE-407"
+          ],
+          "cvss": {
+            "score": 5.3,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L"
+          },
+          "range": ">=3.0.0 <5.0.7"
+        },
+        {
+          "source": 1130588,
+          "name": "brace-expansion",
+          "dependency": "brace-expansion",
+          "title": "brace-expansion: DoS via unbounded expansion length causing an out-of-memory process crash",
+          "url": "https://github.com/advisories/GHSA-mh99-v99m-4gvg",
+          "severity": "high",
+          "cwe": [
+            "CWE-400",
+            "CWE-770"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": "<1.1.17"
+        },
+        {
+          "source": 1130591,
+          "name": "brace-expansion",
+          "dependency": "brace-expansion",
+          "title": "brace-expansion: DoS via unbounded expansion length causing an out-of-memory process crash",
+          "url": "https://github.com/advisories/GHSA-mh99-v99m-4gvg",
+          "severity": "high",
+          "cwe": [
+            "CWE-400",
+            "CWE-770"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": ">=4.0.0 <5.0.8"
+        },
+        {
+          "source": 1130734,
+          "name": "brace-expansion",
+          "dependency": "brace-expansion",
+          "title": "brace-expansion: DoS via unbounded intermediate arrays, bypassing the CVE-2026-14257 mitigation",
+          "url": "https://github.com/advisories/GHSA-rgw5-rvv9-x895",
+          "severity": "high",
+          "cwe": [
+            "CWE-400",
+            "CWE-770"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": ">=4.0.0 <5.0.9"
+        },
+        {
+          "source": 1130737,
+          "name": "brace-expansion",
+          "dependency": "brace-expansion",
+          "title": "brace-expansion: DoS via unbounded intermediate arrays, bypassing the CVE-2026-14257 mitigation",
+          "url": "https://github.com/advisories/GHSA-rgw5-rvv9-x895",
+          "severity": "high",
+          "cwe": [
+            "CWE-400",
+            "CWE-770"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": "<1.1.18"
+        }
+      ],
+      "effects": [],
+      "range": "<=1.1.17 || 3.0.0 - 5.0.8",
+      "nodes": [
+        "node_modules/@typescript-eslint/typescript-estree/node_modules/brace-expansion",
+        "node_modules/brace-expansion"
+      ],
+      "fixAvailable": true
+    },
+    "js-yaml": {
+      "name": "js-yaml",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1112714,
+          "name": "js-yaml",
+          "dependency": "js-yaml",
+          "title": "js-yaml has prototype pollution in merge (<<)",
+          "url": "https://github.com/advisories/GHSA-mh29-5h37-fv8m",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-1321"
+          ],
+          "cvss": {
+            "score": 5.3,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N"
+          },
+          "range": "<3.14.2"
+        },
+        {
+          "source": 1121859,
+          "name": "js-yaml",
+          "dependency": "js-yaml",
+          "title": "JS-YAML: Quadratic-complexity DoS in merge key handling via repeated aliases",
+          "url": "https://github.com/advisories/GHSA-h67p-54hq-rp68",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-407"
+          ],
+          "cvss": {
+            "score": 5.3,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L"
+          },
+          "range": "<3.15.0"
+        },
+        {
+          "source": 1123911,
+          "name": "js-yaml",
+          "dependency": "js-yaml",
+          "title": "js-yaml: YAML merge-key chains can force quadratic CPU consumption",
+          "url": "https://github.com/advisories/GHSA-52cp-r559-cp3m",
+          "severity": "high",
+          "cwe": [
+            "CWE-400",
+            "CWE-407"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": ">=4.0.0 <4.3.0"
+        },
+        {
+          "source": 1123912,
+          "name": "js-yaml",
+          "dependency": "js-yaml",
+          "title": "js-yaml: YAML merge-key chains can force quadratic CPU consumption",
+          "url": "https://github.com/advisories/GHSA-52cp-r559-cp3m",
+          "severity": "high",
+          "cwe": [
+            "CWE-400",
+            "CWE-407"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": ">=3.0.0 <3.15.0"
+        },
+        {
+          "source": 1138114,
+          "name": "js-yaml",
+          "dependency": "js-yaml",
+          "title": "JS-YAML: Quadratic CPU consumption in !!omap resolution (3.x and 4.x) — CVE-2026-59870 fix not backported",
+          "url": "https://github.com/advisories/GHSA-5p4m-2wfm-xmqj",
+          "severity": "high",
+          "cwe": [
+            "CWE-407"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": ">=3.0.0 <3.15.1"
+        },
+        {
+          "source": 1138115,
+          "name": "js-yaml",
+          "dependency": "js-yaml",
+          "title": "JS-YAML: Quadratic CPU consumption in !!omap resolution (3.x and 4.x) — CVE-2026-59870 fix not backported",
+          "url": "https://github.com/advisories/GHSA-5p4m-2wfm-xmqj",
+          "severity": "high",
+          "cwe": [
+            "CWE-407"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": ">=4.0.0 <4.3.1"
+        }
+      ],
+      "effects": [
+        "@vercel/frameworks"
+      ],
+      "range": "<=3.15.0 || 4.0.0 - 4.3.0",
+      "nodes": [
+        "node_modules/@vercel/frameworks/node_modules/js-yaml",
+        "node_modules/js-yaml"
+      ],
+      "fixAvailable": {
+        "name": "sanity",
+        "version": "5.14.1",
+        "isSemVerMajor": true
+      }
+    },
+    "sanity": {
+      "name": "sanity",
+      "severity": "moderate",
+      "isDirect": true,
+      "via": [
+        "@sanity/cli"
+      ],
+      "effects": [
+        "@sanity/cli-build",
+        "@sanity/vision"
+      ],
+      "range": "3.94.1-next.0.6739e10a32 - 3.94.1 || >=5.14.2-alpha.14",
+      "nodes": [
+        "node_modules/sanity"
+      ],
+      "fixAvailable": {
+        "name": "sanity",
+        "version": "5.14.1",
+        "isSemVerMajor": true
+      }
+    },
+    "smol-toml": {
+      "name": "smol-toml",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1115393,
+          "name": "smol-toml",
+          "dependency": "smol-toml",
+          "title": "smol-toml: Denial of Service via TOML documents containing thousands of consecutive commented lines",
+          "url": "https://github.com/advisories/GHSA-v3rj-xjv7-4jmq",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-674"
+          ],
+          "cvss": {
+            "score": 5.3,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L"
+          },
+          "range": "<1.6.1"
+        }
+      ],
+      "effects": [
+        "@vercel/frameworks"
+      ],
+      "range": "<1.6.1",
+      "nodes": [
+        "node_modules/@vercel/frameworks/node_modules/smol-toml"
+      ],
+      "fixAvailable": {
+        "name": "sanity",
+        "version": "5.14.1",
+        "isSemVerMajor": true
+      }
+    },
+    "typeid-js": {
+      "name": "typeid-js",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "uuid"
+      ],
+      "effects": [
+        "@sanity/cli"
+      ],
+      "range": ">=1.1.0",
+      "nodes": [
+        "node_modules/typeid-js"
+      ],
+      "fixAvailable": {
+        "name": "sanity",
+        "version": "5.14.1",
+        "isSemVerMajor": true
+      }
+    },
+    "uuid": {
+      "name": "uuid",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1119441,
+          "name": "uuid",
+          "dependency": "uuid",
+          "title": "uuid: Missing buffer bounds check in v3/v5/v6 when buf is provided",
+          "url": "https://github.com/advisories/GHSA-w5hq-g745-h8pq",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-787",
+            "CWE-1285"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N"
+          },
+          "range": "<11.1.1"
+        }
+      ],
+      "effects": [
+        "typeid-js"
+      ],
+      "range": "<11.1.1",
+      "nodes": [
+        "node_modules/typeid-js/node_modules/uuid"
+      ],
+      "fixAvailable": {
+        "name": "sanity",
+        "version": "5.14.1",
+        "isSemVerMajor": true
+      }
+    }
+  },
+  "metadata": {
+    "vulnerabilities": {
+      "info": 0,
+      "low": 0,
+      "moderate": 8,
+      "high": 2,
+      "critical": 0,
+      "total": 10
+    },
+    "dependencies": {
+      "prod": 1010,
+      "dev": 186,
+      "optional": 54,
+      "peer": 0,
+      "peerOptional": 0,
+      "total": 1249
+    }
+  }
+}
