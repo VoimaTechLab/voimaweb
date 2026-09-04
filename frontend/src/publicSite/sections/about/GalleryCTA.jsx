@@ -28,7 +28,7 @@ export default function GalleryCTA() {
               w-full
               object-cover
             "
-          />
+           loading="lazy" decoding="async"/>
 
           {/* Dark Overlay */}
           <div

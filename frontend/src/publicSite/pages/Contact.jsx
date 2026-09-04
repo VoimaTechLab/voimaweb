@@ -2,7 +2,7 @@ import ContactForm from "@/forms/ContactForm/ContactForm";
 import { useContact } from "@/publicSite/hooks/useContact";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import FadeStagger from "@/components/animations/FadeStagger";
-import Hero33 from "@/assets/Hero/Hero33.png";
+import Hero33 from "@/assets/Hero/Hero33.webp";
 
 export default function Contact() {
   const { contactHero, officeInfo, socialLinks } = useContact();
@@ -43,7 +43,7 @@ export default function Contact() {
                   src={Hero33}
                   alt="Connect With Us"
                   className="w-full max-w-[360px] lg:max-w-full h-auto max-h-[460px] lg:max-h-[520px] object-contain object-bottom block align-bottom drop-shadow-2xl -mb-0"
-                />
+                 loading="lazy" decoding="async"/>
               </ScrollReveal>
             </div>
           </div>

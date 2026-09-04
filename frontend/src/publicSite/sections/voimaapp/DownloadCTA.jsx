@@ -28,7 +28,7 @@ export default function DownloadCTA() {
               w-full
               object-cover
             "
-          />
+           loading="lazy" decoding="async"/>
 
           {/* Overlay */}
           <div

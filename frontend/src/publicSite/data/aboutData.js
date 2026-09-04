@@ -1,12 +1,12 @@
-import CommunityImage from "@/assets/PC_Red.png";
-import { default as StoryImage } from "../../assets/ourStory.jpg";
+import CommunityImage from "@/assets/PC_Red.webp";
+import { default as StoryImage } from "../../assets/ourStory.webp";
 import AppDemo from "../../assets/voima_website_prototype_01.mp4";
 
 
-import emmanuelImg from "@/assets/Leaders/Emmanuel.png";
-import cherrynImg from "@/assets/Leaders/Cherryn.png";
-import spendiloveImg from "@/assets/Leaders/Spendilove.png";
-import mildredImg from "@/assets/Leaders/Mildred.png";
+import emmanuelImg from "@/assets/Leaders/Emmanuel.webp";
+import cherrynImg from "@/assets/Leaders/Cherryn.webp";
+import spendiloveImg from "@/assets/Leaders/Spendilove.webp";
+import mildredImg from "@/assets/Leaders/Mildred.webp";
 
 /*
 ABOUT HERO

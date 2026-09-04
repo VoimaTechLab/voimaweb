@@ -122,7 +122,7 @@ export default function Testimonials() {
                             object-cover
                             shadow-[6px_6px_0px_rgba(0,0,0,1)]
                           "
-                        />
+                         loading="lazy" decoding="async"/>
 
                         <h3 className="mt-5 text-2xl font-black uppercase text-[#BC1D26] font-heading">
                           {item.name}

@@ -117,7 +117,7 @@ export default function GlobalReachSection() {
                   src={stat.image}
                   alt={stat.label}
                   className="absolute inset-0 w-full h-full object-cover scale-105 brightness-100"
-                />
+                 loading="lazy" decoding="async"/>
                 <div className="absolute inset-0 z-10 p-5 flex flex-col justify-end bg-gradient-to-t from-black/70 via-black/25 to-transparent">
                   <div className="flex items-center justify-between mb-3">
                     <span className="inline-block bg-[#BC1D26] text-white border-2 border-black px-3 py-1 text-xs font-black uppercase tracking-wider shadow-[2px_2px_0px_rgba(0,0,0,1)]">
@@ -185,7 +185,7 @@ export default function GlobalReachSection() {
                             transition-transform duration-700
                             ${isExpanded ? "scale-105 brightness-100" : "scale-100 brightness-50 hover:brightness-70"}
                           `}
-                        />
+                         loading="lazy" decoding="async"/>
 
                         {/* Collapsed State View */}
                         <div

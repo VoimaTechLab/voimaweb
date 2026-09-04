@@ -4,10 +4,10 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
-import cherrynImg from "@/assets/Leaders/Cherryn.png";
-import emmanuelImg from "@/assets/Leaders/Emmanuel.png";
-import mildredImg from "@/assets/Leaders/Mildred.png";
-import spendiloveImg from "@/assets/Leaders/Spendilove.png";
+import cherrynImg from "@/assets/Leaders/Cherryn.webp";
+import emmanuelImg from "@/assets/Leaders/Emmanuel.webp";
+import mildredImg from "@/assets/Leaders/Mildred.webp";
+import spendiloveImg from "@/assets/Leaders/Spendilove.webp";
 
 /*  exact border/outline colors extracted from leader images  */
 const MEMBER_THEMES = {
@@ -239,7 +239,7 @@ export default function TeamSection() {
                       object-contain object-bottom
                       drop-shadow-2xl
                     "
-                  />
+                   loading="lazy" decoding="async"/>
                 </div>
               </motion.div>
             </AnimatePresence>

@@ -1,4 +1,4 @@
-import AppImage from "@/assets/app/How_it_works.png";
+import AppImage from "@/assets/app/How_it_works.webp";
 import {
   waitlistAvatars as fbAvatars,
   waitlistData as fbData,

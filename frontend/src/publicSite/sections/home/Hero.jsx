@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import HeroVid from "@/assets/Hero/herovid.mp4";
+import HeroPoster from "@/assets/Hero/herovid-poster.webp";
 import { useHome } from "@/publicSite/hooks/useHome";
 
 export default function Hero() {
@@ -43,6 +44,7 @@ export default function Hero() {
           muted
           playsInline
           preload="auto"
+          poster={HeroPoster}
           onError={() => {
             if (videoSrc !== HeroVid) {
               setVideoSrc(HeroVid);
@@ -50,7 +52,7 @@ export default function Hero() {
           }}
           className="absolute inset-0 z-0 h-full w-full object-cover object-center"
         >
-          <source src={videoSrc} />
+          <source src={videoSrc} type="video/mp4" />
         </video>
       )}
 

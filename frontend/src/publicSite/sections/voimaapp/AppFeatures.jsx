@@ -12,12 +12,12 @@ import {
 } from "lucide-react";
 
 // Real, authentic photography images used across the Home cards
-import TechImg from "@/assets/programs/trace_tech.jpg";
-import ScreeningImg from "@/assets/tools/tool_screening.jpg";
-import ResearchImg from "@/assets/programs/trace_research.jpg";
-import ToolAppImg from "@/assets/tools/tool_app.jpg";
-import CaregiverImg from "@/assets/impact/story_amina.jpg";
-import CommunityImg from "@/assets/news/news_community.png";
+import TechImg from "@/assets/programs/trace_tech.webp";
+import ScreeningImg from "@/assets/tools/tool_screening.webp";
+import ResearchImg from "@/assets/programs/trace_research.webp";
+import ToolAppImg from "@/assets/tools/tool_app.webp";
+import CaregiverImg from "@/assets/impact/story_amina.webp";
+import CommunityImg from "@/assets/news/news_community.webp";
 
 const FEATURE_BACKGROUNDS = [
   TechImg,        // Feature 01: Crisis Risk Alerts (Tech & Data Monitoring)
@@ -136,7 +136,7 @@ export default function AppFeatures() {
               src={currentBg}
               alt={currentFeature.title}
               className="absolute inset-0 w-full h-full object-cover object-center transition-all duration-700 scale-100"
-            />
+             loading="lazy" decoding="async"/>
 
             {/* High-Contrast Directional Overlay — keeps photographic background clearly visible */}
             <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/30" />

@@ -72,7 +72,7 @@ export default function Hero() {
                   style={{
                     marginLeft: index === 0 ? 0 : "-12px",
                   }}
-                />
+                 loading="lazy" decoding="async"/>
               ))}
 
               <div

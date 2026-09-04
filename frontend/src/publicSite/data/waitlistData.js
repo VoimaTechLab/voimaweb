@@ -1,4 +1,4 @@
-import Avatar4 from "@/assets/avatars/5929411444480872309_121.jpg";
+import Avatar4 from "@/assets/avatars/5929411444480872309_121.webp";
 import Avatar1 from "@/assets/avatars/avatar_1.jfif";
 import Avatar2 from "@/assets/avatars/avatar_2.jfif";
 import Avatar3 from "@/assets/avatars/avatar_3.jfif";

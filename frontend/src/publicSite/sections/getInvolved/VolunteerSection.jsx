@@ -86,7 +86,7 @@ export default function VolunteerSection() {
                   duration-700
                   hover:scale-105
                 "
-              />
+               loading="lazy" decoding="async"/>
             </div>
 
             <div

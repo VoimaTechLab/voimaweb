@@ -35,7 +35,7 @@ export default function FeaturedEvent({ event = fallback }) {
                   src={event.coverMedia?.src}
                   alt={event.title}
                   className="h-full w-full object-cover min-h-[240px] sm:min-h-[350px] transition-transform duration-700 group-hover:scale-105"
-                />
+                 loading="lazy" decoding="async"/>
               )}
             </div>
 

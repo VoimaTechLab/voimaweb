@@ -1,6 +1,6 @@
 import { getVolunteerPage } from "@/sanity/sanityService";
 import { useEffect, useState } from "react";
-import VolunteerImage from "../../assets/Web_red.jpg";
+import VolunteerImage from "../../assets/Web_red.webp";
 const fallback = {
   eyebrow: "Volunteer",
   title: "Volunteer With Voima",

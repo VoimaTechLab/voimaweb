@@ -230,7 +230,7 @@ export default function AppMockup() {
                 src= {image} 
                 alt= {title}
                 className="h-full w-full rounded-[50px] object-cover"
-              />
+               loading="lazy" decoding="async"/>
 
 
 

@@ -1,13 +1,15 @@
 import { useMilestone } from "@/publicSite/hooks/useJourney";
 import { Link, useParams } from "react-router-dom";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
+import DetailSkeleton from "@/components/ui/DetailSkeleton";
 
 export default function OurJourneyStory() {
   const { slug } = useParams();
   const { milestone: story, loading } = useMilestone(slug); // keeps `story` var name
 
-  if (loading && !story)
-    return <div className="py-40 text-center text-black/50">Loading…</div>;
+  if (loading && !story) {
+    return <DetailSkeleton type="article" />;
+  }
 
   if (!story) {
     return <div className="py-40 text-center">Story not found.</div>;
@@ -60,7 +62,7 @@ export default function OurJourneyStory() {
             shadow-[8px_8px_0px_rgba(0,0,0,1)] sm:shadow-[12px_12px_0px_rgba(0,0,0,1)] md:shadow-[16px_16px_0px_rgba(0,0,0,1)]
             object-cover
             "
-        />
+         loading="lazy" decoding="async"/>
         ) : (
         <video
             controls
@@ -150,7 +152,7 @@ export default function OurJourneyStory() {
                         duration-500
                         group-hover:scale-110
                       "
-                    />
+                     loading="lazy" decoding="async"/>
 
                     <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/60 opacity-100 transition-opacity duration-500"></div>
 
@@ -208,7 +210,7 @@ export default function OurJourneyStory() {
                         duration-500
                         hover:scale-110
                       "
-                    />
+                     loading="lazy" decoding="async"/>
                   </div>
                 ))}
               </div>

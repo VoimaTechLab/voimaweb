@@ -39,7 +39,7 @@ export default function VoimaAppFeature() {
               src={feature.heroImage}
               alt={feature.title}
               className="mt-8 sm:mt-12 h-[240px] sm:h-[380px] md:h-[500px] w-full border-4 border-black shadow-[8px_8px_0px_rgba(0,0,0,1)] sm:shadow-[12px_12px_0px_rgba(0,0,0,1)] md:shadow-[16px_16px_0px_rgba(0,0,0,1)] object-cover"
-            />
+             loading="lazy" decoding="async"/>
           )}
 
           <ScrollReveal variant="fade-up" delay={0.15}>

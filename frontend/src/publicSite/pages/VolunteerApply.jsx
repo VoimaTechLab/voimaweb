@@ -189,7 +189,7 @@ export default function VolunteerApply() {
                 src={image}
                 alt="Volunteer with Voima"
                 className="h-full w-full object-cover"
-              />
+               loading="lazy" decoding="async"/>
 
               <div
                 className="

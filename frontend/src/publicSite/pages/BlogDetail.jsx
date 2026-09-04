@@ -1,15 +1,14 @@
 import { useBlogPost } from "@/publicSite/hooks/useBlog";
 import { Link, useParams } from "react-router-dom";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
+import DetailSkeleton from "@/components/ui/DetailSkeleton";
 
 export default function BlogDetail() {
   const { slug } = useParams();
   const { post, loading } = useBlogPost(slug);
 
   if (loading && !post) {
-    return (
-      <div className="py-40 text-center text-black/50">Loading…</div>
-    );
+    return <DetailSkeleton type="article" />;
   }
 
   if (!post) {
@@ -73,7 +72,7 @@ export default function BlogDetail() {
                 src={mediaSrc}
                 alt={post.title}
                 className="mt-8 sm:mt-12 h-[260px] sm:h-[400px] md:h-[550px] w-full border-4 border-black object-cover shadow-[8px_8px_0px_rgba(0,0,0,1)] sm:shadow-[12px_12px_0px_rgba(0,0,0,1)] md:shadow-[16px_16px_0px_rgba(0,0,0,1)]"
-              />
+               loading="lazy" decoding="async"/>
             )}
           </ScrollReveal>
 

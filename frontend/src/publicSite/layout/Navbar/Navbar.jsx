@@ -13,6 +13,22 @@ const NAV_LINKS = [
   { label: "Contact", href: "/contact" },
 ];
 
+const ROUTE_PRELOADERS = {
+  "/about": () => import("@/publicSite/pages/About"),
+  "/our-journey": () => import("@/publicSite/pages/OurJourney"),
+  "/voima-app": () => import("@/publicSite/pages/VoimaApp"),
+  "/events": () => import("@/publicSite/pages/Events"),
+  "/blog": () => import("@/publicSite/pages/Blog"),
+  "/contact": () => import("@/publicSite/pages/Contact"),
+  "/get-involved": () => import("@/publicSite/pages/GetInvolved"),
+};
+
+const prefetchRoute = (href) => {
+  if (ROUTE_PRELOADERS[href]) {
+    ROUTE_PRELOADERS[href]();
+  }
+};
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -78,6 +94,8 @@ export default function Navbar() {
                 key={link.href}
                 to={link.href}
                 end={link.href === "/"}
+                onMouseEnter={() => prefetchRoute(link.href)}
+                onTouchStart={() => prefetchRoute(link.href)}
                 className={({ isActive }) =>
                   `
                     relative px-4 py-2 text-sm font-black uppercase tracking-wide
@@ -98,6 +116,8 @@ export default function Navbar() {
           {/* CTA Button */}
           <Link
             to="/get-involved"
+            onMouseEnter={() => prefetchRoute("/get-involved")}
+            onTouchStart={() => prefetchRoute("/get-involved")}
             className="
               group
               ml-6 hidden items-center gap-2

@@ -1,13 +1,15 @@
 import { Link, useParams } from "react-router-dom";
 import { useEvent } from "../hooks/useEvents";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
+import DetailSkeleton from "@/components/ui/DetailSkeleton";
 
 export default function EventDetail() {
   const { slug } = useParams();
   const { event, loading } = useEvent(slug);
 
-  if (loading && !event)
-    return <div className="pt-32 text-center text-black/50">Loading…</div>;
+  if (loading && !event) {
+    return <DetailSkeleton type="event" />;
+  }
 
   if (!event) {
     return (
@@ -39,7 +41,7 @@ export default function EventDetail() {
             <source src={event.coverMedia?.src} type="video/mp4" />
           </video>
         ) : (
-          <img src={event.coverMedia?.src} alt={event.title} className="h-full w-full object-cover" />
+          <img src={event.coverMedia?.src} alt={event.title} className="h-full w-full object-cover"  loading="lazy" decoding="async"/>
         )}
 
         <div className="absolute inset-0 bg-black/60" />
@@ -116,7 +118,7 @@ export default function EventDetail() {
                         <source src={item.src} type="video/mp4" />
                       </video>
                     ) : (
-                      <img src={item.src} alt="" className="h-[320px] w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                      <img src={item.src} alt="" className="h-[320px] w-full object-cover transition-transform duration-700 group-hover:scale-105"  loading="lazy" decoding="async"/>
                     )}
                   </div>
                 </ScrollReveal>
