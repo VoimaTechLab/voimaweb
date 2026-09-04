@@ -135,9 +135,9 @@ export default function AppShowcaseSection() {
 
           <ScrollReveal variant="fade-up" delay={0.4}>
             <div className="mt-8 flex flex-wrap gap-5">
-              {storeLinks.map((store) => (
+              {storeLinks?.map((store, index) => (
                 <Link
-                  key={store.label}
+                  key={store._key || store.label || index}
                   to={store.link}
                   className={
                     store.variant === "light"
