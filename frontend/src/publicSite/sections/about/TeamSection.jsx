@@ -1,13 +1,13 @@
-import { useAbout } from "@/publicSite/hooks/useAbout";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
+import { useAbout } from "@/publicSite/hooks/useAbout";
 import { AnimatePresence, motion } from "framer-motion";
-import { ChevronLeft, ChevronRight, ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
-import emmanuelImg from "@/assets/Leaders/Emmanuel.png";
 import cherrynImg from "@/assets/Leaders/Cherryn.png";
-import spendiloveImg from "@/assets/Leaders/Spendilove.png";
+import emmanuelImg from "@/assets/Leaders/Emmanuel.png";
 import mildredImg from "@/assets/Leaders/Mildred.png";
+import spendiloveImg from "@/assets/Leaders/Spendilove.png";
 
 /* ── exact border/outline colors extracted from leader images ── */
 const MEMBER_THEMES = {
