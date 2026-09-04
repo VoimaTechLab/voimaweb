@@ -9,7 +9,7 @@ import emmanuelImg from "@/assets/Leaders/Emmanuel.png";
 import mildredImg from "@/assets/Leaders/Mildred.png";
 import spendiloveImg from "@/assets/Leaders/Spendilove.png";
 
-/* ── exact border/outline colors extracted from leader images ── */
+/*  exact border/outline colors extracted from leader images  */
 const MEMBER_THEMES = {
   emmanuel: {
     bg: "#FAF6EE",      // White and Cream
@@ -71,7 +71,7 @@ export default function TeamSection() {
   const timerRef = useRef(null);
   const [direction, setDirection] = useState(1); // 1 = next, -1 = prev
 
-  /* ── auto-rotate ── */
+  /*  auto-rotate  */
   const resetTimer = useCallback(() => {
     clearInterval(timerRef.current);
     timerRef.current = setInterval(() => {
@@ -118,7 +118,7 @@ export default function TeamSection() {
     <section className="px-6 py-20 sm:py-32 bg-white border-b-4 border-black overflow-hidden">
       <div className="mx-auto max-w-7xl">
 
-        {/* ── Header ── */}
+        {/*  Header  */}
         <div className="max-w-3xl mb-16">
           <ScrollReveal variant="fade-down">
             <div className="inline-block bg-[#BC1D26] border-2 border-black px-5 py-2 shadow-[4px_4px_0px_rgba(0,0,0,1)] mb-6">
@@ -141,7 +141,7 @@ export default function TeamSection() {
           </ScrollReveal>
         </div>
 
-        {/* ── Carousel Card ── */}
+        {/*  Carousel Card  */}
         <ScrollReveal variant="fade-up" delay={0.3}>
           <div
             className="relative w-full overflow-hidden rounded-3xl border-4 border-black shadow-[8px_8px_0px_rgba(0,0,0,1)] sm:shadow-[12px_12px_0px_rgba(0,0,0,1)] md:shadow-[16px_16px_0px_rgba(0,0,0,1)] transition-colors duration-500"
@@ -158,7 +158,7 @@ export default function TeamSection() {
                 transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
                 className="grid grid-cols-1 lg:grid-cols-2 min-h-[420px] sm:min-h-[480px]"
               >
-                {/* ── Left: Text Content ── */}
+                {/*  Left: Text Content  */}
                 <div className="relative z-10 flex flex-col justify-center p-8 sm:p-10 lg:p-14 order-2 lg:order-1">
                   {/* Role badge with matching image outline color */}
                   <span
@@ -226,7 +226,7 @@ export default function TeamSection() {
                   )}
                 </div>
 
-                {/* ── Right: Photo ── */}
+                {/*  Right: Photo  */}
                 <div className="relative flex items-end justify-center overflow-hidden order-1 lg:order-2 pt-8 lg:pt-0">
                   {/* Person image */}
                   <img
@@ -244,7 +244,7 @@ export default function TeamSection() {
               </motion.div>
             </AnimatePresence>
 
-            {/* ── Navigation Arrows ── */}
+            {/*  Navigation Arrows  */}
             {members.length > 1 && (
               <div className="absolute bottom-6 right-6 sm:bottom-8 sm:right-8 z-20 flex gap-3">
                 <button
@@ -287,7 +287,7 @@ export default function TeamSection() {
               </div>
             )}
 
-            {/* ── Dots ── */}
+            {/*  Dots  */}
             {members.length > 1 && (
               <div className="absolute bottom-6 left-8 sm:bottom-8 sm:left-14 z-20 flex gap-2">
                 {members.map((_, idx) => (
