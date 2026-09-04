@@ -5,7 +5,7 @@ let cache = null;
 let inflight = null;
 
 export function usePartners() {
-  const [data, setData] = useState({
+  const [data, setData] = useState(() => cache || {
     eyebrow: "",
     title: "",
     description: "",
@@ -13,10 +13,7 @@ export function usePartners() {
   });
 
   useEffect(() => {
-    if (cache) {
-      setData(cache);
-      return;
-    }
+    if (cache) return;
 
     if (!inflight) {
       inflight = getPartnersData();
@@ -24,7 +21,6 @@ export function usePartners() {
 
     inflight.then((d) => {
       if (!d) return;
-
       cache = d;
       setData(d);
     });

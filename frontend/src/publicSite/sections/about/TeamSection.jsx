@@ -24,15 +24,15 @@ const MEMBER_THEMES = {
     isLight: false,
   },
   spendilove: {
-    bg: "#00875A",      // Green (#00875A)
-    accent: "#FF8A65",  // Coral (#FF8A65)
-    textColor: "#000000",
+    bg: "#0B5D56",      // Deep Teal (#0B5D56)
+    accent: "#FFFFFF",  // White (#FFFFFF)
+    textColor: "#000000", // Black for readable text on white badge/nav buttons
     isLight: false,
   },
   mildred: {
-    bg: "#9F1239",      // Deep Rose / Crimson
-    accent: "#FCAD0C",  // Warm Golden Yellow outline
-    textColor: "#000000",
+    bg: "#54245F",      // Deep Plum (#54245F)
+    accent: "#00AEEF",  // Cyan (#00AEEF)
+    textColor: "#FFFFFF", // White (#FFFFFF)
     isLight: false,
   },
 };

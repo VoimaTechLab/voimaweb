@@ -113,9 +113,7 @@ export default function AppMockup() {
     const { appMockup } = useWaitlist();
 
   const {
-    eyebrow,
     title,
-    description,
     image,
   } = appMockup;
   return (

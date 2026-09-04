@@ -66,7 +66,7 @@ export default function Newsletter() {
         setCompose(false);
         setResult("");
       }, 1500);
-    } catch (err) {
+    } catch {
       setResult("Failed to send newsletter.");
     } finally {
       setSending(false);

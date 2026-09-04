@@ -132,7 +132,6 @@ export default function ToolsForChange() {
             gap={16}
             speed={45}
             renderCard={(tool) => {
-              const Icon = tool.icon;
               return (
                 <div className="relative overflow-hidden rounded-2xl border-2 border-black bg-black shadow-[6px_6px_0px_rgba(0,0,0,1)] h-[380px]">
                   <img

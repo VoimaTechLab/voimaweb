@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 
 export default function Blog() {
-  const { featuredPost, posts, communityStories } = useBlog();
+  const { featuredPost, posts } = useBlog();
   return (
     <main className="overflow-hidden bg-[#fafafa] pt-[90px]">
       {/* HERO */}

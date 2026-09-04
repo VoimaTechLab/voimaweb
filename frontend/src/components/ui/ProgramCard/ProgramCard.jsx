@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
  
-export function ProgramCard({ icon: Icon, title, description, href, color }) {
+export function ProgramCard({ icon: Icon, title, description, href }) {
   return (
     <motion.article
       className="program-card"

@@ -1,5 +1,5 @@
 import { motion, useReducedMotion } from 'framer-motion';
-import { stagger, fadeUp } from '../../publicSite/motion/variants';
+import { fadeUp } from '../../publicSite/motion/variants';
 
 /**
  * Container that staggers children into view on scroll.

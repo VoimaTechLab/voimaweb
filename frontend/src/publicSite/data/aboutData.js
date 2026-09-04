@@ -1,7 +1,7 @@
 import CommunityImage from "@/assets/PC_Red.png";
 import { default as StoryImage } from "../../assets/ourStory.jpg";
 import AppDemo from "../../assets/voima_website_prototype_01.mp4";
-import team1 from "../../assets/Webb_white.jpg";
+
 
 import emmanuelImg from "@/assets/Leaders/Emmanuel.png";
 import cherrynImg from "@/assets/Leaders/Cherryn.png";

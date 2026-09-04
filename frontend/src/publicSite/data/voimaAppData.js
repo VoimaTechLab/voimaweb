@@ -8,9 +8,8 @@ import TraceTechImg from "@/assets/programs/trace_tech.jpg";
 import TraceResearchImg from "@/assets/programs/trace_research.jpg";
 import StoryAminaImg from "@/assets/impact/story_amina.jpg";
 import NewsCommunityImg from "@/assets/news/news_community.png";
-import ReminderImage from "@/assets/app/Webb_white.jpg";
 
-import { Activity, Bell, Bot, Brain, HeartPulse, Shield, Users } from "lucide-react";
+import { Bell, Bot, Brain, HeartPulse, Shield, Users } from "lucide-react";
 
 // VoimaHero 
 export const heroData = {

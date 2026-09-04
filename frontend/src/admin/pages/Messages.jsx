@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Mail } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 
 import Badge from "../components/ui/Badge";
 import Button from "../components/ui/Button";
@@ -40,11 +40,10 @@ export default function Messages() {
 
   const search = useDebounce(query);
 
-  useEffect(() => {
-    if (!selected && messages?.length) {
-      setSelected(messages[0]);
-    }
-  }, [messages, selected]);
+  // Select first message once data arrives (avoids setState-in-effect lint)
+  if (!selected && messages?.length) {
+    setSelected(messages[0]);
+  }
 
   const filtered = useMemo(() => {
     const list = Array.isArray(messages) ? messages : [];

@@ -214,29 +214,32 @@ export default function AppShowcaseSection() {
             </motion.div>
 
             {/* Floating Feature Card */}
-            <ScrollReveal
-              variant="fade-left"
-              delay={0.5}
-              className="
-                absolute -bottom-6 right-0
-                z-20 hidden
-                rounded-[38px]
-                border border-white/10
-                bg-white
-                p-6
-                backdrop-blur-xl
-                shadow-[0_20px_50px_rgba(0,0,0,0.25)]
-                md:block
-              "
-            >
-              <p className="text-sm font-semibold text-[#BC1D26]">
-                {floatingCard.title}
-              </p>
+            {floatingCard && (floatingCard.title || floatingCard.description) && (
+              <ScrollReveal
+                variant="fade-left"
+                delay={0.5}
+                className="
+                  absolute -bottom-6 right-0
+                  z-20 hidden md:block
+                  max-w-md
+                  bg-white
+                  border-2 border-black
+                  p-6
+                  shadow-[8px_8px_0px_rgba(0,0,0,1)]
+                "
+              >
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="h-2.5 w-2.5 bg-[#BC1D26] border border-black shadow-[1px_1px_0px_rgba(0,0,0,1)]" />
+                  <h3 className="text-sm sm:text-base font-black uppercase tracking-tight text-black font-heading">
+                    {floatingCard.title}
+                  </h3>
+                </div>
 
-              <p className="mt-2 text-sm leading-7 text-[#BC1D26]/70">
-                {floatingCard.description}
-              </p>
-            </ScrollReveal>
+                <p className="text-sm font-semibold leading-relaxed text-black/75">
+                  {floatingCard.description}
+                </p>
+              </ScrollReveal>
+            )}
           </div>
         </ScrollReveal>
       </div>

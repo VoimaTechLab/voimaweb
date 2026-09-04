@@ -6,6 +6,9 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 
+const BURDEN_TITLE =
+  "The burden of sickle cell disease demands earlier intervention.";
+
 function PosterBurdenTitle({ title }) {
   const heading = title || BURDEN_TITLE;
   const normalized = heading.trim().replace(/\.$/, "");
@@ -56,7 +59,7 @@ export default function ImpactStats() {
   const [active, setActive] = useState(0);
   const [hoveredIdx, setHoveredIdx] = useState(null);
   const timerRef = useRef(null);
-  const touchStartX = useRef(0);
+
   const total = areas.length;
 
   const resetTimer = useCallback(() => {

@@ -5,26 +5,24 @@ import {
   ChevronRight,
   Quote,
 } from "lucide-react";
-import { useCallback, useRef } from "react";
+import { useCallback } from "react";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { useTestimonials } from "../../hooks/useJourney";
 
 export default function Testimonials() {
   const testimonials = useTestimonials();
-  const autoplay = useRef(
-    Autoplay({
-      delay: 4000,
-      stopOnInteraction: false,
-      stopOnMouseEnter: true,
-    })
-  );
+  const autoplayPlugin = Autoplay({
+    delay: 4000,
+    stopOnInteraction: false,
+    stopOnMouseEnter: true,
+  });
 
   const [emblaRef, emblaApi] = useEmblaCarousel(
     {
       loop: true,
       align: "center",
     },
-    [autoplay.current]
+    [autoplayPlugin]
   );
 
   const scrollPrev = useCallback(() => {

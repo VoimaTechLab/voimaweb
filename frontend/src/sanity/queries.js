@@ -1,3 +1,5 @@
+import { sanity } from "./client";
+
 export const BLOG_QUERY = `*[_type == "post"] | order(publishedAt desc){
   "slug": slug.current,
   title,
@@ -335,7 +337,7 @@ export const getPrograms = async () => {
     }
   `;
 
-  return client.fetch(query);
+  return sanity.fetch(query);
 };
 
 

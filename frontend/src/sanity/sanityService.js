@@ -43,9 +43,7 @@ export async function getBlogData() {
 
 export async function getBlogPost(slug) {
   try {
-    console.log("[sanity] fetching post slug:", slug); // debug
     const p = await sanity.fetch(POST_BY_SLUG_QUERY, { slug });
-    console.log("[sanity] result:", p); // debug
     return p ? mapPost(p) : null;
   } catch (e) {
     console.warn("[sanity] post fetch failed → static fallback:", e.message);

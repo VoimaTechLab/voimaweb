@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useAbout } from "@/publicSite/hooks/useAbout";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
-import SpendiloveImage from "@/assets/Leaders/spendilove.png";
+import MildredImage from "@/assets/Leaders/Mildred.png";
 
 export default function StorySection() {
   const { storyData } = useAbout();
@@ -62,11 +62,11 @@ export default function StorySection() {
                 {/* Leader Portrait with Coral Outline */}
                 <div className="relative z-10 w-full flex items-end justify-center">
                   <img
-                    src={SpendiloveImage}
-                    alt="Voima Leader - Spendilove"
+                    src={MildredImage}
+                    alt="Voima Leader - Mildred"
                     style={{
                       filter:
-                        "drop-shadow(3px 0 0 #FF8A65) drop-shadow(-3px 0 0 #FF8A65) drop-shadow(0 3px 0 #FF8A65) drop-shadow(0 -3px 0 #FF8A65) drop-shadow(4px 4px 0 #FF8A65) drop-shadow(-4px -4px 0 #FF8A65) drop-shadow(4px -4px 0 #FF8A65) drop-shadow(-4px 4px 0 #FF8A65) drop-shadow(0 0 14px rgba(255, 138, 101, 0.7)) drop-shadow(0 15px 25px rgba(0,0,0,0.18))",
+                        "drop-shadow(3px 0 0 #008BD8) drop-shadow(-3px 0 0 #008BD8) drop-shadow(0 3px 0 #008BD8) drop-shadow(0 -3px 0 #008BD8) drop-shadow(4px 4px 0 #008BD8) drop-shadow(-4px -4px 0 #008BD8) drop-shadow(4px -4px 0 #008BD8) drop-shadow(-4px 4px 0 #008BD8) drop-shadow(0 0 14px rgba(0, 139, 216, 0.7)) drop-shadow(0 15px 25px rgba(0,0,0,0.18))",
                     }}
                     className="h-[460px] sm:h-[560px] lg:h-[640px] w-auto max-w-full object-contain object-bottom block align-bottom"
                   />

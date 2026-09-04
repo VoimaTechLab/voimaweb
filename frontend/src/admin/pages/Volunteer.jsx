@@ -35,15 +35,8 @@ export default function Volunteers() {
   const search = useDebounce(query);
 
   useEffect(() => {
-    load();
+    volunteerService.list().then(setRows);
   }, []);
-
-  const load = async () => {
-    const data =
-      await volunteerService.list();
-
-    setRows(data);
-  };
 
   const statuses = useMemo(
     () => [
