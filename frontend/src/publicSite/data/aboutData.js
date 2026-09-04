@@ -1,7 +1,12 @@
 import CommunityImage from "@/assets/PC_Red.png";
 import { default as StoryImage } from "../../assets/ourStory.jpg";
 import AppDemo from "../../assets/voima_website_prototype_01.mp4";
-import team1 from "../../assets/Webb_white.jpg";
+
+
+import emmanuelImg from "@/assets/Leaders/Emmanuel.png";
+import cherrynImg from "@/assets/Leaders/Cherryn.png";
+import spendiloveImg from "@/assets/Leaders/Spendilove.png";
+import mildredImg from "@/assets/Leaders/Mildred.png";
 
 /*
 ABOUT HERO
@@ -129,28 +134,35 @@ export const teamData = {
   eyebrow: "Leadership",
   title: "Meet the people building Voima.",
   description:
-    "A multidisciplinary team committed to improving healthcare access, advocacy, education, and community support.",
+    "A mission-driven team combining technology, healthcare, and community to transform SCD care.",
 
   members: [
     {
-      name: "Jane Doe",
-      role: "Founder & Executive Director",
-      image: team1,
-      bio: "Leading strategy, partnerships, and innovation across the organization.",
+      name: "Emmanuel Dey",
+      role: "Founder & CTO",
+      image: emmanuelImg,
+      bio: "Dartmouth College (CS & Design). Product Manager at DALI Lab. AI + Product Experience. Passionate about building technology that makes healthcare more predictive, personal, and accessible for SCD patients.",
+      linkedin: "https://www.linkedin.com/in/emmanuel1010",
+    },
+    {
+      name: "Cherrlyn Ahiamble",
+      role: "Programs Director",
+      image: cherrynImg,
+      bio: "Physician Associate. 5+ years of experience in health programs. Project design & management. Drives partnerships, community engagement, and program execution to ensure real-world impact.",
       linkedin: "#",
     },
     {
-      name: "Jane Doe",
-      role: "Founder & Executive Director",
-      image: team1,
-      bio: "Leading strategy, partnerships, and innovation across the organization.",
+      name: "Spendilove Asamoah",
+      role: "Research Director",
+      image: spendiloveImg,
+      bio: "Primary Health Clinician. Special interest in SCD care & outcomes. Research & data driven. Leads our research strategy to understand patient needs, track outcomes, and inform product decisions.",
       linkedin: "#",
     },
     {
-      name: "Jane Doe",
-      role: "Founder & Executive Director",
-      image: team1,
-      bio: "Leading strategy, partnerships, and innovation across the organization.",
+      name: "Mildred Adjei",
+      role: "Partnership and Strategy",
+      image: mildredImg,
+      bio: "Leads our partnerships, strategic growth, and engagement initiatives to expand Voima's footprint and impact.",
       linkedin: "#",
     },
   ],

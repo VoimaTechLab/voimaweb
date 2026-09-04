@@ -2,6 +2,7 @@ import { volunteerService } from "@/services/volunteerService";
 import { ArrowRight, HeartHandshake, ShieldCheck } from "lucide-react";
 import { useState } from "react";
 import { useVolunteerPage } from "../hooks/useVolunteerPage";
+import { ScrollReveal } from "@/components/animations/ScrollReveal";
 
 export default function VolunteerApply() {
   const volunteer = useVolunteerPage();
@@ -74,54 +75,43 @@ export default function VolunteerApply() {
           <div
             className="
               overflow-hidden
-              rounded-[48px]
-              border border-black/5
+              border-4 border-black
               bg-white
-              shadow-[0_20px_80px_rgba(0,0,0,0.06)]
+              shadow-[8px_8px_0px_rgba(0,0,0,1)] sm:shadow-[12px_12px_0px_rgba(0,0,0,1)] md:shadow-[16px_16px_0px_rgba(0,0,0,1)]
               lg:grid
               lg:grid-cols-[1fr_0.9fr]
             "
           >
             {/* FORM SIDE */}
-            <div className="p-8 lg:p-14">
-              <span
-                className="
-                  inline-flex
-                  rounded-full
-                  bg-[#BC1D26]/10
-                  px-4 py-2
-                  text-xs
-                  font-semibold
-                  uppercase
-                  tracking-[0.2em]
-                  text-[#BC1D26]
-                "
-              >
-                {eyebrow}
-              </span>
+            <ScrollReveal variant="fade-right">
+            <div className="p-6 sm:p-10 lg:p-14">
+              <div className="inline-block bg-[#BC1D26] border-2 border-black px-4 py-1.5 shadow-[3px_3px_0px_rgba(0,0,0,1)] mb-4">
+                <span className="text-xs font-black uppercase tracking-[0.2em] text-white">
+                  {eyebrow}
+                </span>
+              </div>
 
-              <h1 className="mt-6 text-4xl font-bold text-[#BC1D26] md:text-5xl">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black uppercase text-[#BC1D26] font-heading tracking-tight">
                 {title}
               </h1>
 
-              <p className="mt-6 max-w-xl leading-8 text-black/60">
+              <p className="mt-4 sm:mt-6 max-w-xl text-base sm:text-lg leading-7 sm:leading-8 text-black/75 font-semibold">
                 {description}
               </p>
 
               {status === "success" ? (
-                <div className="flex h-full flex-col items-center justify-center text-center">
-                  <div className="flex h-20 w-20 items-center justify-center rounded-full bg-[#BC1D26]/10">
+                <div className="flex h-full flex-col items-center justify-center text-center py-10">
+                  <div className="flex h-16 w-16 items-center justify-center border-2 border-black bg-[#BC1D26] text-white shadow-[4px_4px_0px_rgba(0,0,0,1)]">
                     <ShieldCheck
-                      size={32}
-                      className="text-[#BC1D26]"
+                      size={28}
                     />
                   </div>
 
-                  <h3 className="mt-8 text-3xl font-bold text-black">
+                  <h3 className="mt-6 text-2xl sm:text-3xl font-black uppercase text-black font-heading">
                     Application Submitted 🎉
                   </h3>
 
-                  <p className="mt-4 max-w-sm leading-8 text-black/60">
+                  <p className="mt-4 max-w-sm text-base leading-7 font-semibold text-black/75">
                     Thank you for applying to volunteer with
                     Voima. We'll review your application and
                     contact you soon.
@@ -130,7 +120,7 @@ export default function VolunteerApply() {
               ) : (
                 <form
                   onSubmit={handleSubmit}
-                  className="mt-12 space-y-6"
+                  className="mt-8 sm:mt-12 space-y-6"
                 >
                   <input
                     name="fullName"
@@ -138,7 +128,7 @@ export default function VolunteerApply() {
                     onChange={handleChange}
                     type="text"
                     placeholder="Full Name"
-                    className="h-14 w-full rounded-2xl border border-black/10 px-5 outline-none transition focus:border-[#BC1D26]"
+                    className="h-14 w-full border-2 border-black px-5 font-semibold outline-none transition focus:shadow-[4px_4px_0px_rgba(188,29,38,1)]"
                   />
 
                   <input
@@ -147,20 +137,20 @@ export default function VolunteerApply() {
                     onChange={handleChange}
                     type="email"
                     placeholder="Email Address"
-                    className="h-14 w-full rounded-2xl border border-black/10 px-5 outline-none transition focus:border-[#BC1D26]"
+                    className="h-14 w-full border-2 border-black px-5 font-semibold outline-none transition focus:shadow-[4px_4px_0px_rgba(188,29,38,1)]"
                   />
 
                   <textarea
                     name="motivation"
                     value={formData.motivation}
                     onChange={handleChange}
-                    rows={6}
+                    rows={5}
                     placeholder="Why do you want to volunteer?"
-                    className="w-full rounded-2xl border border-black/10 p-5 outline-none transition focus:border-[#BC1D26]"
+                    className="w-full border-2 border-black p-5 font-semibold outline-none transition focus:shadow-[4px_4px_0px_rgba(188,29,38,1)]"
                   />
 
                   {error && (
-                    <p className="rounded-xl bg-[#BC1D26]/10 px-4 py-3 text-sm font-medium text-[#BC1D26]">
+                    <p className="border-2 border-black bg-[#BC1D26]/10 px-4 py-3 text-sm font-black text-[#BC1D26]">
                       {error}
                     </p>
                   )}
@@ -168,7 +158,7 @@ export default function VolunteerApply() {
                   <button
                     type="submit"
                     disabled={status === "loading"}
-                    className="flex w-full items-center justify-center gap-2 rounded-2xl bg-[#BC1D26] py-4 font-semibold text-white transition hover:scale-[1.01] disabled:opacity-60"
+                    className="flex w-full items-center justify-center gap-2 border-2 border-black bg-[#BC1D26] py-4 text-sm font-black uppercase tracking-wider text-white shadow-[4px_4px_0px_rgba(0,0,0,1)] transition hover:-translate-y-0.5 hover:shadow-[6px_6px_0px_rgba(0,0,0,1)] disabled:opacity-60"
                   >
                     {status === "loading"
                       ? "Submitting..."
@@ -182,8 +172,10 @@ export default function VolunteerApply() {
                 </form>
               )}
             </div>
+            </ScrollReveal>
 
             {/* IMAGE SIDE */}
+            <ScrollReveal variant="fade-left" delay={0.2}>
             <div
               className="
                 relative
@@ -236,6 +228,7 @@ export default function VolunteerApply() {
                 </p>
               </div>
             </div>
+            </ScrollReveal>
           </div>
         </div>
       </section>

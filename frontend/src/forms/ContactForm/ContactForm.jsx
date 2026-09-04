@@ -39,32 +39,32 @@ export default function ContactForm() {
       <div
         className="
           flex h-full flex-col items-center justify-center
-          rounded-[40px]
-          border border-black/5
+          border-4 border-black
           bg-white
           p-14
           text-center
-          shadow-[0_20px_80px_rgba(0,0,0,0.05)]
+          shadow-[16px_16px_0px_rgba(0,0,0,1)]
         "
       >
         <div
           className="
             flex h-20 w-20 items-center justify-center
-            rounded-full
+            border-2 border-black
             bg-[#BC1D26]/10
+            shadow-[6px_6px_0px_rgba(0,0,0,1)]
           "
         >
           <Send
             size={32}
-            className="text-[#BC1D26]"
+            className="text-black"
           />
         </div>
 
-        <h3 className="mt-8 text-4xl font-bold text-black">
+        <h3 className="mt-8 text-4xl font-black uppercase text-black font-heading tracking-tight">
           Message Sent
         </h3>
 
-        <p className="mt-5 max-w-md leading-8 text-black/60">
+        <p className="mt-5 max-w-md leading-8 text-black/75 font-semibold">
           Thank you for reaching out.
           A member of the Voima team will get back
           to you within 24–48 hours.
@@ -77,11 +77,10 @@ export default function ContactForm() {
     <form
       onSubmit={handleSubmit(onSubmit)}
       className="
-        rounded-[40px]
-        border border-black/5
+        border-4 border-black
         bg-white
         p-10
-        shadow-[0_20px_80px_rgba(0,0,0,0.05)]
+        shadow-[16px_16px_0px_rgba(0,0,0,1)]
       "
       noValidate
     >
@@ -89,7 +88,7 @@ export default function ContactForm() {
       <div className="grid gap-6 md:grid-cols-2">
 
         <div>
-          <label className="mb-3 block text-sm font-semibold text-black">
+          <label className="mb-3 block text-xs font-black uppercase tracking-widest text-black">
             Full Name
           </label>
 
@@ -98,14 +97,15 @@ export default function ContactForm() {
             placeholder="Your name"
             {...register("name")}
             className="
-              h-14 w-full rounded-2xl
-              border border-black/10
+              h-14 w-full
+              border-2 border-black
               bg-[#fafafa]
               px-5
-              text-sm
+              text-sm font-semibold
               outline-none
-              transition
-              focus:border-[#BC1D26]
+              shadow-[4px_4px_0px_rgba(0,0,0,1)]
+              transition-all
+              focus:border-[#BC1D26] focus:shadow-[6px_6px_0px_rgba(188,29,38,1)] focus:-translate-y-0.5
             "
           />
 
@@ -117,7 +117,7 @@ export default function ContactForm() {
         </div>
 
         <div>
-          <label className="mb-3 block text-sm font-semibold text-black">
+          <label className="mb-3 block text-xs font-black uppercase tracking-widest text-black">
             Email Address
           </label>
 
@@ -126,14 +126,15 @@ export default function ContactForm() {
             placeholder="your@email.com"
             {...register("email")}
             className="
-              h-14 w-full rounded-2xl
-              border border-black/10
+              h-14 w-full
+              border-2 border-black
               bg-[#fafafa]
               px-5
-              text-sm
+              text-sm font-semibold
               outline-none
-              transition
-              focus:border-[#BC1D26]
+              shadow-[4px_4px_0px_rgba(0,0,0,1)]
+              transition-all
+              focus:border-[#BC1D26] focus:shadow-[6px_6px_0px_rgba(188,29,38,1)] focus:-translate-y-0.5
             "
           />
 
@@ -149,7 +150,7 @@ export default function ContactForm() {
       {/* Subject */}
       <div className="mt-6">
 
-        <label className="mb-3 block text-sm font-semibold text-black">
+        <label className="mb-3 block text-xs font-black uppercase tracking-widest text-black">
           Subject
         </label>
 
@@ -158,14 +159,15 @@ export default function ContactForm() {
           placeholder="How can we help?"
           {...register("subject")}
           className="
-            h-14 w-full rounded-2xl
-            border border-black/10
+            h-14 w-full
+            border-2 border-black
             bg-[#fafafa]
             px-5
-            text-sm
+            text-sm font-semibold
             outline-none
-            transition
-            focus:border-[#BC1D26]
+            shadow-[4px_4px_0px_rgba(0,0,0,1)]
+            transition-all
+            focus:border-[#BC1D26] focus:shadow-[6px_6px_0px_rgba(188,29,38,1)] focus:-translate-y-0.5
           "
         />
 
@@ -180,7 +182,7 @@ export default function ContactForm() {
       {/* Message */}
       <div className="mt-6">
 
-        <label className="mb-3 block text-sm font-semibold text-black">
+        <label className="mb-3 block text-xs font-black uppercase tracking-widest text-black">
           Message
         </label>
 
@@ -189,14 +191,15 @@ export default function ContactForm() {
           placeholder="Tell us more..."
           {...register("message")}
           className="
-            w-full rounded-[28px]
-            border border-black/10
+            w-full
+            border-2 border-black
             bg-[#fafafa]
             p-5
-            text-sm
+            text-sm font-semibold
             outline-none
-            transition
-            focus:border-[#BC1D26]
+            shadow-[4px_4px_0px_rgba(0,0,0,1)]
+            transition-all
+            focus:border-[#BC1D26] focus:shadow-[6px_6px_0px_rgba(188,29,38,1)] focus:-translate-y-0.5
           "
         />
 
@@ -222,15 +225,17 @@ export default function ContactForm() {
         className="
           mt-8
           flex w-full items-center justify-center gap-3
-          rounded-2xl
-          bg-[#BC1D26]
+          bg-[#BC1D26] border-2 border-black
           px-7 py-5
-          text-sm font-semibold
+          text-sm font-black uppercase tracking-wider
           text-white
-          transition-all duration-300
-          hover:bg-[#A11922]
+          shadow-[6px_6px_0px_rgba(0,0,0,1)]
+          transition-all duration-200
+          hover:-translate-y-0.5 hover:shadow-[8px_8px_0px_rgba(0,0,0,1)]
           disabled:cursor-not-allowed
           disabled:opacity-70
+          disabled:hover:translate-y-0
+          disabled:hover:shadow-[6px_6px_0px_rgba(0,0,0,1)]
         "
       >
         {status === "loading" ? (

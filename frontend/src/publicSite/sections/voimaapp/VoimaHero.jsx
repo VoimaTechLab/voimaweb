@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import { useVoimaApp } from "../../hooks/useVoimaApp";
+import { ScrollReveal } from "@/components/animations/ScrollReveal";
+import FadeStagger from "@/components/animations/FadeStagger";
 
 export default function VoimaHero() {
   const { heroData } = useVoimaApp();
@@ -31,91 +34,103 @@ export default function VoimaHero() {
 
   return (
     <>
-      <section className="relative overflow-hidden px-6 py-28">
+      <section className="relative overflow-visible bg-[#fafafa] px-6 py-28 border-b-4 border-black">
         <div className="absolute right-0 top-0 h-[500px] w-[500px] rounded-full bg-[#BC1D26]/10 blur-3xl" />
 
         <div className="mx-auto grid max-w-7xl items-center gap-20 lg:grid-cols-2">
           {/* Content */}
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#BC1D26]">
-              {heroData.eyebrow}
-            </p>
+          <ScrollReveal variant="fade-right">
+            <FadeStagger staggerSpeed="normal">
+              <div className="inline-block bg-[#BC1D26] border-2 border-black px-5 py-2 shadow-[4px_4px_0px_rgba(0,0,0,1)] mb-6">
+                <span className="text-xs sm:text-sm font-black uppercase tracking-[0.22em] text-white">
+                  {heroData.eyebrow}
+                </span>
+              </div>
 
-            <h1 className="mt-6 text-6xl font-bold leading-tight text-[#BC1D26]">
-              {heroData.title}
-            </h1>
+              <h1 className="text-5xl font-black uppercase leading-none text-black md:text-6xl lg:text-7xl font-heading tracking-tight">
+                {heroData.title}
+              </h1>
 
-            <p className="mt-8 max-w-xl text-lg leading-9 text-black/65">
-              {heroData.description}
-            </p>
+              <p className="mt-8 max-w-xl text-lg leading-9 text-black/75 font-semibold">
+                {heroData.description}
+              </p>
 
-            <div className="mt-10 flex flex-wrap gap-4">
-              <Link
-                to={heroData.primaryCTA.link}
-                className="rounded-full bg-[#BC1D26] px-7 py-4 font-semibold text-white transition-all duration-300 hover:scale-[1.02]"
-              >
-                {heroData.primaryCTA.text}
-              </Link>
-
-              {hasVideo && (
-                <button
-                  onClick={() => setOpen(true)}
-                  className="rounded-full border border-black/10 px-7 py-4 font-semibold text-[#BC1D26] transition-all duration-300 hover:border-[#BC1D26] hover:bg-[#BC1D26]/5"
+              <div className="mt-10 flex flex-wrap gap-4">
+                <Link
+                  to={heroData.primaryCTA.link}
+                  className="bg-[#BC1D26] border-2 border-black px-8 py-4 text-sm font-black uppercase tracking-wider text-white shadow-[6px_6px_0px_rgba(0,0,0,1)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[8px_8px_0px_rgba(0,0,0,1)]"
                 >
-                  {heroData.secondaryCTA.text}
-                </button>
-              )}
-            </div>
-          </div>
+                  {heroData.primaryCTA.text}
+                </Link>
+
+                {hasVideo && (
+                  <button
+                    onClick={() => setOpen(true)}
+                    className="bg-white border-2 border-black px-8 py-4 text-sm font-black uppercase tracking-wider text-black shadow-[6px_6px_0px_rgba(0,0,0,1)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-black hover:text-white hover:shadow-[8px_8px_0px_rgba(0,0,0,1)]"
+                  >
+                    {heroData.secondaryCTA.text}
+                  </button>
+                )}
+              </div>
+            </FadeStagger>
+          </ScrollReveal>
 
           {/* Phones */}
-          <div className="relative flex justify-center">
-            <div className="absolute h-[500px] w-[500px] rounded-full bg-[#BC1D26]/10 blur-3xl" />
+          <ScrollReveal variant="fade-left">
+            <div className="relative flex justify-center">
+              <div className="absolute h-[500px] w-[500px] rounded-full bg-[#BC1D26]/10 blur-3xl" />
 
-            <div
-              className="
-                absolute
-                right-10
-                top-10
-                h-[600px]
-                w-[300px]
-                rotate-[12deg]
-                overflow-hidden
-                rounded-[50px]
-                border-[10px]
-                border-black
-                bg-black
-                shadow-2xl
-              "
-            >
-              <img
-                src={heroData.showcase.backScreen}
-                alt="Voima Community"
-                className="h-full w-full object-cover"
-              />
-            </div>
+              {/* Floating Back Screen */}
+              <motion.div
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                className="
+                  absolute
+                  right-10
+                  top-10
+                  h-[600px]
+                  w-[300px]
+                  rotate-[12deg]
+                  overflow-hidden
+                  rounded-[50px]
+                  border-4
+                  border-black
+                  bg-black
+                  shadow-[8px_8px_0px_rgba(0,0,0,1)] sm:shadow-[12px_12px_0px_rgba(0,0,0,1)] md:shadow-[16px_16px_0px_rgba(0,0,0,1)]
+                "
+              >
+                <img
+                  src={heroData.showcase.backScreen}
+                  alt="Voima Community"
+                  className="h-full w-full object-cover"
+                />
+              </motion.div>
 
-            <div
-              className="
-                relative
-                z-10
-                h-[650px]
-                w-[320px]
-                overflow-hidden
-                rounded-[50px]
-                border-[10px]
-                border-black
-                bg-black
-                shadow-[0_40px_120px_rgba(0,0,0,0.15)]
-              "
-            >
-              <img
-                src={heroData.showcase.frontScreen}
-                alt="Voima Dashboard"
-                className="h-full w-full object-cover"
-              />
+              {/* Floating Front Screen */}
+              <motion.div
+                animate={{ y: [0, -16, 0] }}
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                className="
+                  relative
+                  z-10
+                  h-[650px]
+                  w-[320px]
+                  overflow-hidden
+                  rounded-[50px]
+                  border-4
+                  border-black
+                  bg-black
+                  shadow-[8px_8px_0px_rgba(0,0,0,1)] sm:shadow-[12px_12px_0px_rgba(0,0,0,1)] md:shadow-[16px_16px_0px_rgba(0,0,0,1)]
+                "
+              >
+                <img
+                  src={heroData.showcase.frontScreen}
+                  alt="Voima Dashboard"
+                  className="h-full w-full object-cover"
+                />
+              </motion.div>
             </div>
-          </div>
+          </ScrollReveal>
         </div>
       </section>
 

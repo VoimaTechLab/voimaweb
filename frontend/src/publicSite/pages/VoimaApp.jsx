@@ -1,6 +1,3 @@
-import { pageTransition } from "@/publicSite/motion/variants";
-import { motion } from "framer-motion";
-
 import AppBenefits from "@/publicSite/sections/voimaapp/AppBenefits";
 import AppFeatures from "@/publicSite/sections/voimaapp/AppFeatures";
 import AppScreens from "@/publicSite/sections/voimaapp/AppScreens";
@@ -11,10 +8,7 @@ import VoimaHero from "@/publicSite/sections/voimaapp/VoimaHero";
 
 export default function VoimaApp() {
   return (
-    <motion.main
-      {...pageTransition}
-      className="overflow-hidden pt-[90px]"
-    >
+    <main className="overflow-hidden pt-[90px]">
       <VoimaHero />
       <AppFeatures />
       <HowItWorks />
@@ -22,6 +16,6 @@ export default function VoimaApp() {
       <AppBenefits />
       <FAQSection />
       <DownloadCTA />
-    </motion.main>
+    </main>
   );
 }

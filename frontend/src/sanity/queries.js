@@ -1,3 +1,5 @@
+import { sanity } from "./client";
+
 export const BLOG_QUERY = `*[_type == "post"] | order(publishedAt desc){
   "slug": slug.current,
   title,
@@ -169,42 +171,175 @@ export const GET_INVOLVED_QUERY = `*[_type == "getInvolvedPage"][0]{
 
 export const HOME_QUERY = `*[_type == "homePage"][0]{
   "heroSlides": heroSlides[]{
-    id, eyebrow, description, primaryBtn, primaryLink, secondaryBtn, secondaryLink,
-    "image": image.asset->url,
-    "title": { "before": titleBefore, "highlight": titleHighlight }
+    id,
+    eyebrow,
+    titleBefore,
+    titleAfter,
+    description,
+    primaryBtn,
+    primaryLink,
+    secondaryBtn,
+    secondaryLink
   },
-  "impactSection": {
-    "eyebrow": impact.eyebrow, "title": impact.title,
-    "areas": impact.areas[]{ iconName, colorTheme, title, description },
-    "banner": {
-      "badge": impact.banner.badge, "title": impact.banner.title,
-      "description": impact.banner.description,
-      "videoSrc": impact.banner.video.asset->url
+
+  "backgroundVideo": backgroundVideo.asset->url,
+
+  "whoIsVoima": {
+    "title": whoIsVoima.title,
+    "titleAccent": whoIsVoima.titleAccent,
+    "heading": whoIsVoima.heading,
+    "description": whoIsVoima.description,
+    "cta": whoIsVoima.cta,
+    "socialChannels": whoIsVoima.socialChannels,
+    "image": whoIsVoima.image.asset->url
+  },
+
+
+  "impactSection": impactSection{
+    eyebrow,
+    title,
+
+    areas[]{
+      title,
+      description,
+      backTitle,
+      backStory,
+      "image": image.asset->url
+    },
+
+    banner{
+      badge,
+      title,
+      description,
+      "image": image.asset->url,
+      "videoSrc": video.asset->url
     }
   },
-  "missionSection": { "eyebrow": mission.eyebrow, "title": mission.title, "steps": mission.steps },
-  "storySection": {
-    "eyebrow": story.eyebrow, "title": story.title, "description": story.description,
-    "quote": story.quote, "image": story.image.asset->url, "cta": story.cta
+
+  "storyShiftSection": storyShiftSection{
+  eyebrow,
+  title,
+  titleAccent,
+
+  stories[]{
+    id,
+    quote,
+    author,
+    meta,
+    story,
+    badge,
+    iconName,
+
+    image{
+      asset->{
+        url
+      }
+    }
   },
+
+  traceFrameworkSection{
+  eyebrow,
+  title,
+  titleAccent,
+  description,
+
+  pillars[]{
+    id,
+    letter,
+    title,
+    description,
+    detail,
+    badge,
+    link,
+    image{
+      asset->{
+        url
+      }
+    }
+  }
+}
+},
+
+  "missionSection": {
+    "eyebrow": mission.eyebrow,
+    "title": mission.title,
+    "steps": mission.steps
+  },
+
+  "storySection": {
+    "eyebrow": story.eyebrow,
+    "title": story.title,
+    "paragraphs": story.paragraphs,
+    "quote": story.quote,
+    "image": story.image.asset->url,
+    "cta": story.cta
+  },
+
   "appShowcaseSection": {
-    "eyebrow": appShowcase.eyebrow, "title": appShowcase.title, "description": appShowcase.description,
-    "primaryCta": appShowcase.primaryCta, "secondaryCta": appShowcase.secondaryCta,
-    "storeLinks": appShowcase.storeLinks, "floatingCard": appShowcase.floatingCard,
+    "eyebrow": appShowcase.eyebrow,
+    "title": appShowcase.title,
+    "description": appShowcase.description,
+    "primaryCta": appShowcase.primaryCta,
+    "secondaryCta": appShowcase.secondaryCta,
+    "storeLinks": appShowcase.storeLinks,
+    "floatingCard": appShowcase.floatingCard,
     "videoSrc": appShowcase.video.asset->url
   },
+
   "impactStatsSection": {
-  "eyebrow": impactStats.eyebrow,
-  "title": impactStats.title,
-  "description": impactStats.description,
-  "stats": impactStats.stats
-},
-  "sdgSection": {
-    "eyebrow": sdg.eyebrow, "title": sdg.title,
-    "goals": sdg.goals[]{ number, color, title, description, "image": image.asset->url }
+    "eyebrow": impactStats.eyebrow,
+    "title": impactStats.title,
+    "description": impactStats.description,
+    "stats": impactStats.stats
   },
+
+  "sdgSection": {
+    "eyebrow": sdg.eyebrow,
+    "title": sdg.title,
+    "goals": sdg.goals[]{
+      number,
+      color,
+      title,
+      description,
+      "image": image.asset->url
+    }
+  },
+
+    faqSection {
+    eyebrow,
+    title,
+    highlightedTitle,
+    faqs[] {
+      question,
+      answer
+    }
+  },
+
   "ctaSection": cta
 }`;
+
+export const getPrograms = async () => {
+  const query = `
+    *[
+      _type == "program"
+      && defined(slug.current)
+    ]
+    | order(featured desc, _createdAt desc)
+    [0...6] {
+      _id,
+      title,
+      "slug": slug.current,
+      featured,
+      category,
+      excerpt,
+      description,
+      "image": coverImage.asset->url
+    }
+  `;
+
+  return sanity.fetch(query);
+};
+
 
 export const FOOTER_QUERY = `*[_type == "footerSettings"][0]{
   tagline,
@@ -303,5 +438,64 @@ export const CAREER_ROLE_QUERY = `
   responsibilities,
   requirements,
   benefits
+}
+`;
+
+export const CONTACT_SUPPORT_QUERY = `
+*[_type == "contactSupportPage"][0]{
+  eyebrow,
+  title,
+  description,
+  supportEmail,
+  supportPhone,
+  supportHours,
+
+  sections[]{
+    title,
+    content,
+    items
+  },
+
+  contactLinks[]{
+    label,
+    url
+  }
+}
+`;
+
+export const DATA_PRIVACY_QUERY = `
+*[_type == "dataPrivacyPage"][0]{
+  eyebrow,
+  title,
+  description,
+  lastUpdated,
+  sections[]{
+    title,
+    content,
+    items
+  },
+  contactEmail
+}
+`;
+
+export const SCD_RESOURCES_QUERY = `
+*[_type == "scdResourcesPage"][0]{
+  eyebrow,
+  title,
+  description,
+
+  categories[]{
+    title,
+    description,
+
+    resources[]{
+      title,
+      description,
+      url,
+      type
+    }
+  },
+
+  disclaimer
 }
 `;

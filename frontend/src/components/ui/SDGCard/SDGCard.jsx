@@ -1,52 +1,59 @@
-export default function SDGCard({ number, image, color, title, description }) {
-  return (
-    <div
-      className="
-        group relative flex min-h-[420px]
-        flex-col justify-end
-        overflow-hidden
-        rounded-[32px]
-        p-8
-        text-white
-        transition-all duration-500
-        hover:-translate-y-2
-        hover:shadow-[0_20px_60px_rgba(0,0,0,0.2)]
-      "
-      style={{ backgroundColor: color }}
-    >
-      <img
-        src={image}
-        alt={title}
-        className="
-          absolute inset-0
-          h-full w-full
-          object-cover
-          opacity-25
-          transition-all duration-500
-          group-hover:scale-110
-          group-hover:opacity-30
-        "
-      />
+import { motion } from "framer-motion";
 
+import Sdg3Img from "@/assets/SDG/Sustainable_Development_Goal_03GoodHealth.svg.png";
+import Sdg4Img from "@/assets/SDG/images.png";
+import Sdg9Img from "@/assets/SDG/Sustainable_Development_Goal_09Industry.svg.png";
+import Sdg10Img from "@/assets/SDG/Sustainable_Development_Goal_10ReducedInequalities.svg.png";
+
+const SDG_IMAGES = {
+  "3": Sdg3Img,
+  "03": Sdg3Img,
+  "4": Sdg4Img,
+  "04": Sdg4Img,
+  "9": Sdg9Img,
+  "09": Sdg9Img,
+  "10": Sdg10Img,
+};
+
+export default function SDGCard({ number, title, description }) {
+  const numKey = String(parseInt(number, 10) || number);
+  const sdgImage = SDG_IMAGES[numKey] || SDG_IMAGES[number] || Sdg3Img;
+
+  return (
+    <motion.div
+      whileHover={{ y: -6, transition: { duration: 0.3, ease: [0.22, 1, 0.36, 1] } }}
+      className="flex flex-col group h-full justify-between"
+    >
+      {/* Official SDG Tile Image */}
       <div
         className="
-          absolute inset-0
-          bg-gradient-to-t
-          from-black/70
-          via-black/30
-          to-black/10
+          relative aspect-square w-full
+          border-4 border-black
+          shadow-[8px_8px_0px_rgba(0,0,0,1)]
+          transition-all duration-300
+          group-hover:shadow-[12px_12px_0px_rgba(0,0,0,1)]
+          overflow-hidden select-none bg-white rounded-xl
         "
-      />
-
-      <div className="relative z-10">
-        <div className="text-6xl font-black text-white/20">{number}</div>
-
-        <h3 className="mt-4 text-2xl font-bold leading-snug text-white">
-          {title}
-        </h3>
-
-        <p className="mt-5 leading-8 text-white/85">{description}</p>
+      >
+        <img
+          src={sdgImage}
+          alt={title || `SDG ${number}`}
+          className="w-full h-full object-cover"
+        />
       </div>
-    </div>
+
+      {/* Narrative description card directly below */}
+      <div
+        className="
+          mt-4 bg-white border-2 border-black p-5
+          shadow-[4px_4px_0px_rgba(0,0,0,1)]
+          flex-1 flex flex-col justify-between rounded-lg
+        "
+      >
+        <p className="text-xs sm:text-sm font-semibold leading-relaxed text-black/80">
+          {description}
+        </p>
+      </div>
+    </motion.div>
   );
 }

@@ -13,9 +13,7 @@ import { api } from "./apiClient";
 
 import { sanity } from "@/sanity/client";
 
-/* ----------------------------- helpers ----------------------------- */
-const genId = () => Math.random().toString(36).slice(2, 10);
-const now = () => new Date().toISOString();
+
 
 // GET that never throws → returns backend data or fallback
 async function getList(url, fallback, params) {

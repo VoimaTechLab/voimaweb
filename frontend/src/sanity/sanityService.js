@@ -4,7 +4,12 @@ import {
   APP_FEATURES_QUERY, APP_FEATURE_BY_SLUG_QUERY, BLOG_QUERY,
   CAREER_PAGE_QUERY,
   CAREER_ROLE_QUERY,
-  CONTACT_QUERY, EVENTS_QUERY, EVENT_BY_SLUG_QUERY, FOOTER_QUERY, GALLERY_QUERY, GET_INVOLVED_QUERY, HOME_QUERY, JOURNEY_STATS_QUERY, MILESTONES_QUERY, MILESTONE_BY_SLUG_QUERY, PARTNERS_QUERY, POST_BY_SLUG_QUERY, TESTIMONIALS_QUERY, VOIMA_APP_QUERY, VOLUNTEER_PAGE_QUERY, WAITLIST_QUERY
+  CONTACT_QUERY,
+  CONTACT_SUPPORT_QUERY,
+  DATA_PRIVACY_QUERY,
+  EVENTS_QUERY, EVENT_BY_SLUG_QUERY, FOOTER_QUERY, GALLERY_QUERY, GET_INVOLVED_QUERY, HOME_QUERY, JOURNEY_STATS_QUERY, MILESTONES_QUERY, MILESTONE_BY_SLUG_QUERY, PARTNERS_QUERY, POST_BY_SLUG_QUERY,
+  SCD_RESOURCES_QUERY,
+  TESTIMONIALS_QUERY, VOIMA_APP_QUERY, VOLUNTEER_PAGE_QUERY, WAITLIST_QUERY
 } from "./queries";
 
 
@@ -38,9 +43,7 @@ export async function getBlogData() {
 
 export async function getBlogPost(slug) {
   try {
-    console.log("[sanity] fetching post slug:", slug); // debug
     const p = await sanity.fetch(POST_BY_SLUG_QUERY, { slug });
-    console.log("[sanity] result:", p); // debug
     return p ? mapPost(p) : null;
   } catch (e) {
     console.warn("[sanity] post fetch failed → static fallback:", e.message);
@@ -273,6 +276,59 @@ export async function getCareerRole(slug) {
     });
   } catch (e) {
     console.warn("[sanity] career role failed:", e.message);
+    return null;
+  }
+}
+
+/* ------ contact support sanity service -------- */
+
+export async function getContactSupportData() {
+  try {
+    const data = await sanity.fetch(CONTACT_SUPPORT_QUERY);
+
+    return data || null;
+  } catch (e) {
+    console.warn(
+      "[sanity] contact support failed → static fallback:",
+      e.message
+    );
+
+    return null;
+  }
+}
+
+
+/* ------ data privacy sanity service -------- */
+
+export async function getDataPrivacyData() {
+  try {
+    const data = await sanity.fetch(DATA_PRIVACY_QUERY);
+
+    return data || null;
+  } catch (e) {
+    console.warn(
+      "[sanity] data privacy failed → static fallback:",
+      e.message
+    );
+
+    return null;
+  }
+}
+
+
+/* ------ SCD resources sanity service -------- */
+
+export async function getSCDResourcesData() {
+  try {
+    const data = await sanity.fetch(SCD_RESOURCES_QUERY);
+
+    return data || null;
+  } catch (e) {
+    console.warn(
+      "[sanity] SCD resources failed → static fallback:",
+      e.message
+    );
+
     return null;
   }
 }

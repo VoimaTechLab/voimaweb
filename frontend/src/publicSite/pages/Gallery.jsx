@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
-
 import { useGallery } from "@/publicSite/hooks/useGallery";
+import { ScrollReveal } from "@/components/animations/ScrollReveal";
 
 export default function Gallery() {
   const {
@@ -35,187 +35,180 @@ export default function Gallery() {
 
   if (loading) {
     return (
-      <section className="px-6 py-24">
-        <div className="mx-auto max-w-7xl">
+      <section className="px-6 py-32 pt-40 bg-[#fafafa]">
+        <div className="mx-auto max-w-7xl text-center font-black uppercase text-xl">
           Loading gallery...
         </div>
       </section>
     );
   }
 
-    return (
-    <section className="bg-[#FAFAFA] px-6 py-24">
-        <div className="mx-auto max-w-7xl">
+  return (
+    <section className="bg-[#fafafa] px-6 pt-36 pb-28 border-b-4 border-black">
+      <div className="mx-auto max-w-7xl">
 
         {/* Hero */}
         <div className="mx-auto max-w-3xl text-center">
-            <span
-            className="
-                inline-flex rounded-full
-                bg-[#BC1D26]/10 px-4 py-2
-                text-sm font-semibold text-[#BC1D26]
-            "
-            >
-            Our Gallery
-            </span>
+          <ScrollReveal variant="fade-down">
+            <div className="inline-block bg-[#BC1D26] border-2 border-black px-5 py-2 shadow-[4px_4px_0px_rgba(0,0,0,1)] mb-6">
+              <span className="text-xs sm:text-sm font-black uppercase tracking-[0.22em] text-white">
+                Our Gallery
+              </span>
+            </div>
+          </ScrollReveal>
 
-            <h1
-            className="
-                mt-6 text-5xl
-                font-bold tracking-tight
-                text-[#BC1D26]
-                md:text-6xl
-            "
-            >
-            Moments That
-            <span className="text-[#BC1D26]">
-                {" "}Matter
-            </span>
+          <ScrollReveal variant="fade-up" delay={0.15}>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black uppercase text-black font-heading tracking-tight">
+              Moments That Matter
             </h1>
+          </ScrollReveal>
 
-            <p className="mx-auto mt-6 max-w-2xl text-lg text-black/60">
-            Explore our outreach programs,
-            community engagements, events,
-            and the people who inspire our
-            mission every day.
+          <ScrollReveal variant="fade-up" delay={0.25}>
+            <p className="mx-auto mt-6 max-w-2xl text-base sm:text-lg leading-8 sm:leading-9 text-black/75 font-semibold">
+              Explore our outreach programs, community engagements, events,
+              and the people who inspire our mission every day.
             </p>
+          </ScrollReveal>
         </div>
 
         {/* Categories */}
-        <div className="mt-16 flex flex-wrap justify-center gap-3">
+        <ScrollReveal variant="fade-up" delay={0.35}>
+          <div className="mt-16 flex flex-wrap justify-center gap-3">
             {categories.map((cat) => (
-            <button
+              <button
                 key={cat}
-                onClick={() =>
-                setActiveCategory(cat)
-                }
+                onClick={() => setActiveCategory(cat)}
                 className={`
-                rounded-full
-                px-5 py-3
-                text-sm font-semibold
-                capitalize
-                transition-all duration-300
-                ${
+                  border-2 border-black
+                  px-6 py-3
+                  text-xs font-black uppercase tracking-wider
+                  transition-all duration-200
+                  ${
                     activeCategory === cat
-                    ? "bg-[#BC1D26] text-white shadow-lg"
-                    : "border border-black/10 bg-white text-black/70 hover:border-[#BC1D26]/30 hover:text-[#BC1D26]"
-                }
+                      ? "bg-[#BC1D26] text-white shadow-[4px_4px_0px_rgba(0,0,0,1)] -translate-y-0.5"
+                      : "bg-white text-black shadow-[2px_2px_0px_rgba(0,0,0,1)] hover:-translate-y-0.5 hover:shadow-[4px_4px_0px_rgba(0,0,0,1)] hover:bg-[#BC1D26] hover:text-white"
+                  }
                 `}
-            >
+              >
                 {cat}
-            </button>
+              </button>
             ))}
-        </div>
+          </div>
+        </ScrollReveal>
 
         {/* Empty State */}
         {!filtered.length && (
-            <div className="mt-24 text-center">
-            <h3 className="text-2xl font-bold">
-                No images available.
+          <div className="mt-24 text-center">
+            <h3 className="text-2xl font-black uppercase text-black font-heading">
+              No images available.
             </h3>
 
-            <p className="mt-3 text-black/60">
-                Images for this category will
-                appear here once added.
+            <p className="mt-3 text-black/75 font-semibold">
+              Images for this category will appear here once added.
             </p>
-            </div>
+          </div>
         )}
 
         {/* Masonry Gallery */}
         <div
-            className="
+          className="
             mt-20
             columns-1
-            gap-6
+            gap-8
             md:columns-2
             lg:columns-3
-            "
+          "
         >
-            {filtered.flatMap((item) =>
+          {filtered.flatMap((item) =>
             item.images?.map(
-                (image, index) => (
-                <div
-                    key={`${item._id}-${index}`}
+              (image, index) => (
+                <ScrollReveal key={`${item._id}-${index}`} variant="fade-up" delay={0.1 * (index % 3)}>
+                  <div
                     className="
-                    group
-                    relative
-                    mb-6
-                    overflow-hidden
-                    rounded-[32px]
-                    bg-white
-                    shadow-sm
+                      group
+                      relative
+                      mb-8
+                      overflow-hidden
+                      border-4 border-black
+                      bg-white
+                      shadow-[10px_10px_0px_rgba(0,0,0,1)]
+                      transition-all duration-300
+                      hover:-translate-y-1 hover:shadow-[14px_14px_0px_rgba(188,29,38,1)]
                     "
-                >
+                  >
                     <img
-                    src={image}
-                    alt={item.title}
-                    className="
+                      src={image}
+                      alt={item.title}
+                      className="
                         w-full
                         object-cover
                         transition
                         duration-700
-                        group-hover:scale-110
-                    "
+                        group-hover:scale-105
+                      "
                     />
 
                     <div
-                    className="
+                      className="
                         absolute inset-0
                         bg-gradient-to-t
-                        from-black/80
-                        via-black/20
+                        from-black/85
+                        via-black/30
                         to-transparent
                         opacity-0
                         transition
                         duration-300
                         group-hover:opacity-100
-                    "
+                      "
                     />
 
                     <div
-                    className="
+                      className="
                         absolute
                         bottom-0
                         left-0
                         right-0
-                        translate-y-8
+                        translate-y-4
                         p-6
                         opacity-0
                         transition
                         duration-300
                         group-hover:translate-y-0
                         group-hover:opacity-100
-                    "
+                      "
                     >
-                    <p
+                      <p
                         className="
-                        text-xs
-                        font-semibold
-                        uppercase
-                        tracking-widest
-                        text-white/70
+                          text-xs
+                          font-black
+                          uppercase
+                          tracking-widest
+                          text-white/80
                         "
-                    >
+                      >
                         {item.category}
-                    </p>
+                      </p>
 
-                    <h3
+                      <h3
                         className="
-                        mt-2
-                        text-xl
-                        font-bold
-                        text-white
+                          mt-2
+                          text-xl
+                          font-black
+                          uppercase
+                          text-white
+                          font-heading
                         "
-                    >
+                      >
                         {item.title}
-                    </h3>
+                      </h3>
                     </div>
-                </div>
-                )
+                  </div>
+                </ScrollReveal>
+              )
             )
-            )}
+          )}
         </div>
-        </div>
+      </div>
     </section>
-    );
+  );
 }

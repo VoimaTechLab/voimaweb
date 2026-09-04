@@ -45,7 +45,7 @@ export async function fetchMe() {
 
 export async function logout() {
   if (USE_MOCK) return mockLogout();
-  try { await api.post("/auth/logout"); } catch {}
+  try { await api.post("/auth/logout"); } catch { /* logout errors are intentionally ignored */ }
   setAccessToken(null);
 }
 

@@ -25,7 +25,6 @@ const nav = [
 
 export default function AdminLayout() {
   const { admin, logout } = useAuth();
-  console.log("AUTH DATA:", useAuth());
   const navigate = useNavigate();
 
   const handleLogout = async () => {

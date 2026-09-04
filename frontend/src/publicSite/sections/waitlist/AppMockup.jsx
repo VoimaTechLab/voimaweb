@@ -54,13 +54,66 @@ const rightFeatures = [
   },
 ];
 
+const allFeatures = [...leftFeatures, ...rightFeatures];
+
+function ExperienceCard({ feature }) {
+  const Icon = feature.icon;
+
+  return (
+    <div
+      className="
+        group
+        h-full
+        w-full
+        border-2
+        border-black
+        bg-white
+        p-5
+        shadow-[6px_6px_0px_rgba(0,0,0,1)]
+        transition-all
+        duration-300
+        hover:-translate-y-1
+        hover:shadow-[8px_8px_0px_rgba(188,29,38,1)]
+        sm:p-6
+        lg:w-[300px]
+      "
+    >
+      <div
+        className="
+          flex
+          h-12
+          w-12
+          items-center
+          justify-center
+          border-2
+          border-black
+          bg-[#BC1D26]
+          text-white
+          shadow-[3px_3px_0px_rgba(0,0,0,1)]
+          transition-transform
+          duration-300
+          group-hover:-translate-y-0.5
+        "
+      >
+        <Icon size={22} strokeWidth={2.2} />
+      </div>
+
+      <h3 className="mt-5 text-lg font-black uppercase text-black font-heading sm:text-xl">
+        {feature.title}
+      </h3>
+
+      <p className="mt-3 text-sm font-semibold leading-7 text-black/70 sm:text-base">
+        {feature.description}
+      </p>
+    </div>
+  );
+}
+
 export default function AppMockup() {
     const { appMockup } = useWaitlist();
 
   const {
-    eyebrow,
     title,
-    description,
     image,
   } = appMockup;
   return (
@@ -74,7 +127,7 @@ export default function AppMockup() {
             The Experience
           </span>
 
-          <h2 className="mt-6 text-5xl font-bold text-[#BC1D26]">
+          <h2 className="mt-6 text-3xl sm:text-4xl md:text-5xl font-bold text-[#BC1D26]">
             Healthcare support built around real life.
           </h2>
 
@@ -84,9 +137,15 @@ export default function AppMockup() {
           </p>
         </div>
 
+        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:hidden">
+          {allFeatures.map((feature, index) => (
+            <ExperienceCard key={index} feature={feature} />
+          ))}
+        </div>
+
         {/* Mockup Area */}
 
-        <div className="relative mt-28 min-h-[850px]">
+        <div className="relative mt-16 min-h-[760px] lg:mt-28 lg:min-h-[850px]">
 
           {/* Glow */}
 
@@ -120,50 +179,8 @@ export default function AppMockup() {
             "
           >
             {leftFeatures.map((feature, index) => {
-              const Icon = feature.icon;
-
               return (
-                <div
-                  key={index}
-                  className="
-                    w-[300px]
-                    rounded-[32px]
-                    border
-                    border-black/5
-                    bg-white/90
-                    p-6
-                    backdrop-blur-xl
-                    shadow-[0_15px_60px_rgba(0,0,0,0.08)]
-                    transition-all
-                    duration-500
-                    hover:-translate-y-2
-                  "
-                >
-                  <div
-                    className="
-                      flex
-                      h-12
-                      w-12
-                      items-center
-                      justify-center
-                      rounded-2xl
-                      bg-[#BC1D26]/10
-                    "
-                  >
-                    <Icon
-                      size={22}
-                      className="text-[#BC1D26]"
-                    />
-                  </div>
-
-                  <h3 className="mt-5 text-xl font-bold text-[#BC1D26]">
-                    {feature.title}
-                  </h3>
-
-                  <p className="mt-3 leading-7 text-black/60">
-                    {feature.description}
-                  </p>
-                </div>
+                <ExperienceCard key={index} feature={feature} />
               );
             })}
           </div>
@@ -235,50 +252,8 @@ export default function AppMockup() {
             "
           >
             {rightFeatures.map((feature, index) => {
-              const Icon = feature.icon;
-
               return (
-                <div
-                  key={index}
-                  className="
-                    w-[300px]
-                    rounded-[32px]
-                    border
-                    border-black/5
-                    bg-white/90
-                    p-6
-                    backdrop-blur-xl
-                    shadow-[0_15px_60px_rgba(0,0,0,0.08)]
-                    transition-all
-                    duration-500
-                    hover:-translate-y-2
-                  "
-                >
-                  <div
-                    className="
-                      flex
-                      h-12
-                      w-12
-                      items-center
-                      justify-center
-                      rounded-2xl
-                      bg-[#BC1D26]/10
-                    "
-                  >
-                    <Icon
-                      size={22}
-                      className="text-[#BC1D26]"
-                    />
-                  </div>
-
-                  <h3 className="mt-5 text-xl font-bold text-[#BC1D26]">
-                    {feature.title}
-                  </h3>
-
-                  <p className="mt-3 leading-7 text-black/60">
-                    {feature.description}
-                  </p>
-                </div>
+                <ExperienceCard key={index} feature={feature} />
               );
             })}
           </div>

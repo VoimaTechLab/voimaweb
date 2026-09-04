@@ -8,6 +8,7 @@ export function useCountUp(target, duration = 2000, start = false) {
   useEffect(() => {
     if (!start) return;
  
+    const safeTarget = isNaN(Number(target)) ? 0 : Number(target);
     const startTime = performance.now();
     const easeOut = (t) => 1 - Math.pow(1 - t, 3); // cubic ease-out
  
@@ -16,7 +17,7 @@ export function useCountUp(target, duration = 2000, start = false) {
       const progress = Math.min(elapsed / duration, 1);
       const easedProgress = easeOut(progress);
  
-      setCount(Math.round(easedProgress * target));
+      setCount(Math.round(easedProgress * safeTarget));
  
       if (progress < 1) {
         frameRef.current = requestAnimationFrame(tick);

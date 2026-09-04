@@ -1,5 +1,11 @@
-import { Link } from "react-router-dom";
+/* 
+ =============== 
+  NOT IN USE 
+ ===============
+*/
+
 import { ArrowRight, CalendarDays, MapPin } from "lucide-react";
+import { Link } from "react-router-dom";
 
 import { eventsPreviewSection } from "@/data/homeData";
 
@@ -163,6 +169,7 @@ export default function EventsPreview() {
 
               {/* Link */}
               <Link
+                to="/events"
                 className="
                   mt-8 inline-flex
                   items-center gap-2
