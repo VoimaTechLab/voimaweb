@@ -7,7 +7,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import cherrynImg from "@/assets/Leaders/Cherryn.png";
 import emmanuelImg from "@/assets/Leaders/Emmanuel.png";
 import mildredImg from "@/assets/Leaders/Mildred.png";
-import spendiloveImg from "@/assets/Leaders/spendilove.png";
+import spendiloveImg from "@/assets/Leaders/Spendilove.png";
 
 /*  exact border/outline colors extracted from leader images  */
 const MEMBER_THEMES = {
