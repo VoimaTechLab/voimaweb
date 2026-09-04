@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-import HeroVid from "@/assets/Hero/herovid.mov";
+import HeroVid from "@/assets/Hero/herovid.mp4";
 import { useHome } from "@/publicSite/hooks/useHome";
 
 export default function Hero() {

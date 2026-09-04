@@ -215,30 +215,31 @@ export default function AppShowcaseSection() {
 
             {/* Floating Feature Card */}
             {floatingCard && (floatingCard.title || floatingCard.description) && (
-              <ScrollReveal
-                variant="fade-left"
-                delay={0.5}
-                className="
-                  absolute -bottom-6 right-0
-                  z-20 hidden md:block
-                  max-w-md
-                  bg-white
-                  border-2 border-black
-                  p-6
-                  shadow-[8px_8px_0px_rgba(0,0,0,1)]
-                "
-              >
-                <div className="flex items-center gap-2 mb-2">
-                  <div className="h-2.5 w-2.5 bg-[#BC1D26] border border-black shadow-[1px_1px_0px_rgba(0,0,0,1)]" />
-                  <h3 className="text-sm sm:text-base font-black uppercase tracking-tight text-black font-heading">
-                    {floatingCard.title}
-                  </h3>
-                </div>
+              <div className="absolute -bottom-20 md:-bottom-24 inset-x-0 z-20 flex justify-center pointer-events-none px-4">
+                <ScrollReveal
+                  variant="fade-up"
+                  delay={0.5}
+                  className="
+                    pointer-events-auto
+                    w-full max-w-md
+                    bg-white
+                    border-2 border-black
+                    p-5 sm:p-6
+                    shadow-[8px_8px_0px_rgba(0,0,0,1)]
+                  "
+                >
+                  <div className="flex items-center gap-2 mb-2">
+                    <div className="h-2.5 w-2.5 bg-[#BC1D26] border border-black shadow-[1px_1px_0px_rgba(0,0,0,1)]" />
+                    <h3 className="text-sm sm:text-base font-black uppercase tracking-tight text-black font-heading">
+                      {floatingCard.title}
+                    </h3>
+                  </div>
 
-                <p className="text-sm font-semibold leading-relaxed text-black/75">
-                  {floatingCard.description}
-                </p>
-              </ScrollReveal>
+                  <p className="text-sm font-semibold leading-relaxed text-black/75">
+                    {floatingCard.description}
+                  </p>
+                </ScrollReveal>
+              </div>
             )}
           </div>
         </ScrollReveal>
