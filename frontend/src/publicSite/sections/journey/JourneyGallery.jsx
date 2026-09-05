@@ -40,7 +40,7 @@ export default function JourneyGallery() {
                   duration-700
                   group-hover:scale-110
                 "
-              />
+               loading="lazy" decoding="async"/>
             </div>
           ))}
         </div>

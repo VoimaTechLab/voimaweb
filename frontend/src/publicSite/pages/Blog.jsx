@@ -65,7 +65,7 @@ export default function Blog() {
                     duration-700
                     group-hover:scale-105
                   "
-                />
+                 loading="lazy" decoding="async"/>
               </div>
 
               <div className="p-8 sm:p-12 lg:p-16 flex flex-col justify-center">
@@ -177,7 +177,7 @@ export default function Blog() {
                         duration-700
                         group-hover:scale-105
                       "
-                    />
+                     loading="lazy" decoding="async"/>
 
                   </div>
 
@@ -306,7 +306,7 @@ export default function Blog() {
                       duration-700
                       group-hover:scale-105
                     "
-                  />
+                   loading="lazy" decoding="async"/>
 
                 </div>
 

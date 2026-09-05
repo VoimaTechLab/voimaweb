@@ -120,7 +120,7 @@ export default function TraceFrameworkSection() {
                   src={pillar.image}
                   alt={pillar.title}
                   className="absolute inset-0 w-full h-full object-cover scale-105 brightness-100"
-                />
+                 loading="lazy" decoding="async"/>
                 <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/70 via-black/25 to-transparent p-5 flex flex-col justify-end">
                   <div className="flex items-center gap-2 mb-3">
                     <div className="flex h-8 w-8 items-center justify-center bg-[#BC1D26] text-white border-2 border-black shadow-[2px_2px_0px_rgba(0,0,0,1)] font-black text-sm font-heading">
@@ -191,7 +191,7 @@ export default function TraceFrameworkSection() {
                             transition-transform duration-700
                             ${isExpanded ? "scale-105 brightness-100" : "scale-100 brightness-50 hover:brightness-70"}
                           `}
-                        />
+                         loading="lazy" decoding="async"/>
 
                         {/* Collapsed State — Letter + Pillar Name */}
                         <div

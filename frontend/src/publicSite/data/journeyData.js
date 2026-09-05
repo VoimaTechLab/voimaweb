@@ -1,6 +1,6 @@
-import { default as Founder1, default as Founder2 } from "@/assets/journey/founder-1.jpg";
-import { default as Journey1, default as Journey2, default as Journey3, default as Journey4 } from "@/assets/journey/journey-1.jpg";
-import Testimonial1 from "@/assets/journey/testimonial-1.jpg";
+import { default as Founder1, default as Founder2 } from "@/assets/journey/founder-1.webp";
+import { default as Journey1, default as Journey2, default as Journey3, default as Journey4 } from "@/assets/journey/journey-1.webp";
+import Testimonial1 from "@/assets/journey/testimonial-1.webp";
 import Journey5 from "@/assets/journey/voima_website_prototype_01.mp4";
 
 export const heroData = {

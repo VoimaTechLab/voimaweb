@@ -1,6 +1,6 @@
 // src/publicSite/data/blogData.js
 
-import { default as Blog1, default as Blog2, default as Blog3, default as Blog4 } from "@/assets/blog/blog-1.jpg";
+import { default as Blog1, default as Blog2, default as Blog3, default as Blog4 } from "@/assets/blog/blog-1.webp";
 
 export const blogHero = {
   eyebrow: "Stories & Insights",

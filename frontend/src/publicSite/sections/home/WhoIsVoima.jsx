@@ -1,4 +1,4 @@
-import Voima2 from "@/assets/Hero/voima2.png";
+import Voima2 from "@/assets/Hero/voima2.webp";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { useHome } from "@/publicSite/hooks/useHome";
 import { ArrowUpRight } from "lucide-react";
@@ -170,7 +170,7 @@ export default function WhoIsVoima() {
             src={whoIsVoima.image || Voima2}
             alt="Voima Initiative Community"
             className="w-full h-auto max-h-[400px] sm:max-h-[500px] md:max-h-[600px] object-contain object-bottom drop-shadow-2xl"
-          />
+           loading="lazy" decoding="async"/>
         </div>
       </ScrollReveal>
     </section>

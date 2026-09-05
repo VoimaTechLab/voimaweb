@@ -20,7 +20,7 @@ function AnimatedRing({ size, duration, delay = 0 }) {
   return (
     <motion.div
       className="absolute rounded-full border border-white/20"
-      style={{ width: size, height: size }}
+      style={{ width: size, height: size, transform: "translateZ(0)", willChange: "transform" }}
       animate={{ rotate: 360, scale: [1, 1.03, 1] }}
       transition={{
         rotate: { duration, repeat: Infinity, ease: "linear" },
@@ -44,7 +44,7 @@ export default function AppShowcaseSection() {
   } = appShowcaseSection;
 
   return (
-    <section className="relative overflow-visible bg-[#BC1D26] px-6 py-32">
+    <section className="relative overflow-visible bg-[#BC1D26] px-6 py-32 [isolation:isolate]">
       {/* Asymmetrical Reverse-Diagonal Wedge with Crest */}
       <div className="absolute top-0 left-0 w-full overflow-hidden leading-none z-20 pointer-events-none" style={{ transform: "translateY(-99%)" }}>
         <svg viewBox="0 -4 1200 84" preserveAspectRatio="none" className="w-full h-10 sm:h-16 block overflow-visible">
@@ -189,6 +189,7 @@ export default function AppShowcaseSection() {
                 repeat: Infinity,
                 ease: "easeInOut",
               }}
+              style={{ transform: "translateZ(0)", willChange: "transform" }}
               className="
                 relative z-10
                 h-[680px] w-[340px]
@@ -208,7 +209,7 @@ export default function AppShowcaseSection() {
                 "
               />
 
-              <video autoPlay muted loop playsInline className="h-full w-full object-cover">
+              <video autoPlay muted loop playsInline preload="metadata" className="h-full w-full object-cover">
                 <source src={videoSrc} type="video/mp4" />
               </video>
             </motion.div>

@@ -1,4 +1,4 @@
-import LeaderImage from "@/assets/Leaders/Emmanuel.png";
+import LeaderImage from "@/assets/Leaders/Emmanuel_sticker.webp";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { useHome } from "@/publicSite/hooks/useHome";
 import { motion } from "framer-motion";
@@ -11,7 +11,7 @@ export default function OurStoryHome() {
   if (!storySection) return null;
 
   return (
-    <section className="relative overflow-visible bg-white px-6 pt-20 sm:pt-24 pb-0">
+    <section className="relative overflow-visible bg-white px-6 pt-20 sm:pt-24 pb-0 [isolation:isolate]">
       {/* Top Dual-Apex Crown Divider */}
       <div
         className="absolute top-0 left-0 w-full overflow-hidden leading-none z-20 pointer-events-none"
@@ -71,11 +71,12 @@ export default function OurStoryHome() {
                     src={storySection.image || LeaderImage}
                     alt="Voima Leader"
                     style={{
-                      filter:
-                        "drop-shadow(3px 0 0 #1DC8A2) drop-shadow(-3px 0 0 #1DC8A2) drop-shadow(0 3px 0 #1DC8A2) drop-shadow(0 -3px 0 #1DC8A2) drop-shadow(4px 4px 0 #1DC8A2) drop-shadow(-4px -4px 0 #1DC8A2) drop-shadow(4px -4px 0 #1DC8A2) drop-shadow(-4px 4px 0 #1DC8A2) drop-shadow(0 0 14px rgba(29, 200, 162, 0.7)) drop-shadow(0 15px 25px rgba(0,0,0,0.18))",
+                      filter: "drop-shadow(0 15px 25px rgba(0,0,0,0.18))",
+                      transform: "translateZ(0)",
+                      willChange: "transform",
                     }}
                     className="h-[460px] sm:h-[560px] lg:h-[640px] w-auto max-w-full object-contain object-bottom block align-bottom -mb-0"
-                  />
+                   loading="lazy" decoding="async"/>
                 </div>
               </div>
             </ScrollReveal>

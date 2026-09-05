@@ -152,7 +152,7 @@ export default function ProgramsPreview() {
                       src={program.image}
                       alt={program.title}
                       className="absolute inset-0 w-full h-full object-cover scale-105"
-                    />
+                     loading="lazy" decoding="async"/>
                   ) : (
                     <div className="absolute inset-0 bg-[#1a1a1a]" />
                   )}
@@ -234,7 +234,7 @@ export default function ProgramsPreview() {
                                 ? "scale-105 brightness-100"
                                 : "scale-100 brightness-50 hover:brightness-70"
                             }`}
-                          />
+                           loading="lazy" decoding="async"/>
                         ) : (
                           <div className="absolute inset-0 bg-[#1a1a1a]" />
                         )}

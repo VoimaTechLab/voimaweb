@@ -151,7 +151,7 @@ export default function ImpactStats() {
                     src={item.image}
                     alt={item.title}
                     className="absolute inset-0 w-full h-full object-cover scale-105 brightness-100"
-                  />
+                   loading="lazy" decoding="async"/>
                   <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/70 via-black/25 to-transparent p-5 flex flex-col justify-end">
                     <div className="inline-block bg-[#BC1D26] text-white border-2 border-black px-3 py-1.5 text-xs font-black uppercase tracking-wider shadow-[3px_3px_0px_rgba(0,0,0,1)] mb-3 self-start">
                       {item.backTitle}
@@ -215,7 +215,7 @@ export default function ImpactStats() {
                             transition-transform duration-700
                             ${isExpanded ? "scale-105 brightness-100" : "scale-100 brightness-75 hover:brightness-90"}
                           `}
-                        />
+                         loading="lazy" decoding="async"/>
                         <div
                           className={`
                             absolute top-4 left-4 z-20 transition-opacity duration-300
@@ -348,7 +348,7 @@ export default function ImpactStats() {
                 src={banner.image}
                 alt={banner.title || "Why It Matters"}
                 className="block w-full max-w-none object-contain"
-              />
+               loading="lazy" decoding="async"/>
             </ScrollReveal>
           </div>
 

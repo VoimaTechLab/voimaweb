@@ -1,20 +1,129 @@
 import { sanity } from "./client";
 import {
   ABOUT_QUERY,
-  APP_FEATURES_QUERY, APP_FEATURE_BY_SLUG_QUERY, BLOG_QUERY,
+  APP_FEATURES_QUERY,
+  APP_FEATURE_BY_SLUG_QUERY,
+  BLOG_QUERY,
   CAREER_PAGE_QUERY,
   CAREER_ROLE_QUERY,
   CONTACT_QUERY,
   CONTACT_SUPPORT_QUERY,
   DATA_PRIVACY_QUERY,
-  EVENTS_QUERY, EVENT_BY_SLUG_QUERY, FOOTER_QUERY, GALLERY_QUERY, GET_INVOLVED_QUERY, HOME_QUERY, JOURNEY_STATS_QUERY, MILESTONES_QUERY, MILESTONE_BY_SLUG_QUERY, PARTNERS_QUERY, POST_BY_SLUG_QUERY,
+  EVENTS_QUERY,
+  EVENT_BY_SLUG_QUERY,
+  FOOTER_QUERY,
+  GALLERY_QUERY,
+  GET_INVOLVED_QUERY,
+  HOME_QUERY,
+  JOURNEY_STATS_QUERY,
+  MILESTONES_QUERY,
+  MILESTONE_BY_SLUG_QUERY,
+  PARTNERS_QUERY,
+  POST_BY_SLUG_QUERY,
   SCD_RESOURCES_QUERY,
-  TESTIMONIALS_QUERY, VOIMA_APP_QUERY, VOLUNTEER_PAGE_QUERY, WAITLIST_QUERY
+  TESTIMONIALS_QUERY,
+  VOIMA_APP_QUERY,
+  VOLUNTEER_PAGE_QUERY,
+  WAITLIST_QUERY,
 } from "./queries";
 
+const SANITY_TIMEOUT_MS = 2500;
+const CACHE_TTL_MS = 60 * 60 * 1000; // 1 hour
+const CACHE_PREFIX = "voima_swr_";
+
+/**
+ * Synchronously retrieves cached Sanity query data from localStorage.
+ * Ideal for initializing React state so pages render at 0ms.
+ */
+export function getCachedSanityData(key) {
+  if (typeof window === "undefined" || !key) return null;
+  try {
+    const raw = localStorage.getItem(CACHE_PREFIX + key);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    if (!parsed || typeof parsed !== "object") return null;
+    // Discard expired cache unless explicitly needed
+    if (Date.now() - parsed.timestamp > CACHE_TTL_MS) {
+      return null;
+    }
+    return parsed.data ?? null;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Persists Sanity query result to localStorage.
+ */
+export function setCachedSanityData(key, data) {
+  if (typeof window === "undefined" || !key || data === undefined || data === null) return;
+  try {
+    localStorage.setItem(
+      CACHE_PREFIX + key,
+      JSON.stringify({ timestamp: Date.now(), data })
+    );
+  } catch {
+    // Fail silently on storage quota or disabled storage
+  }
+}
+
+/**
+ * Resilient fetch wrapper:
+ * 1. Races sanity.fetch against a strict timeout (default 2.5s).
+ * 2. On success, persists result in localStorage.
+ * 3. On timeout/network error, falls back to stale cache or null (triggering static fallback).
+ */
+export async function fetchWithSWR(key, query, params = {}, timeoutMs = SANITY_TIMEOUT_MS) {
+  let timeoutId;
+  const timeoutPromise = new Promise((_, reject) => {
+    timeoutId = setTimeout(() => {
+      reject(new Error(`Sanity timeout exceeded (${timeoutMs}ms)`));
+    }, timeoutMs);
+  });
+
+  try {
+    const result = await Promise.race([
+      sanity.fetch(query, params),
+      timeoutPromise,
+    ]);
+    clearTimeout(timeoutId);
+
+    if (result !== undefined && result !== null) {
+      if (key) setCachedSanityData(key, result);
+      return result;
+    }
+  } catch (err) {
+    clearTimeout(timeoutId);
+    console.warn(`[sanity] fetch "${key || query}" failed/timed out: ${err.message}. Checking fallback cache.`);
+  }
+
+  // Attempt stale cache retrieval on failure
+  if (key && typeof window !== "undefined") {
+    try {
+      const raw = localStorage.getItem(CACHE_PREFIX + key);
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        if (parsed?.data) {
+          console.info(`[sanity] using stale cache for "${key}"`);
+          return parsed.data;
+        }
+      }
+    } catch (e) {
+      void e;
+    }
+  }
+
+  return null;
+}
 
 const initials = (name = "") =>
-  name.split(" ").filter(Boolean).map((w) => w[0]).slice(0, 2).join("").toUpperCase();
+  name
+    .split(" ")
+    .filter(Boolean)
+    .map((w) => w[0])
+    .slice(0, 2)
+    .join("")
+    .toUpperCase();
 
 const mapPost = (p) => ({
   ...p,
@@ -23,11 +132,10 @@ const mapPost = (p) => ({
   media: { type: p.media?.type || "image", src: p.media?.src || p.image || null },
 });
 
-
 /* ------ blog sanity service -------- */
 export async function getBlogData() {
   try {
-    const items = await sanity.fetch(BLOG_QUERY);
+    const items = await fetchWithSWR("blog_data", BLOG_QUERY);
     if (!items?.length) return null;
     const mapped = items.map(mapPost);
     return {
@@ -43,7 +151,7 @@ export async function getBlogData() {
 
 export async function getBlogPost(slug) {
   try {
-    const p = await sanity.fetch(POST_BY_SLUG_QUERY, { slug });
+    const p = await fetchWithSWR(`blog_post_${slug}`, POST_BY_SLUG_QUERY, { slug });
     return p ? mapPost(p) : null;
   } catch (e) {
     console.warn("[sanity] post fetch failed → static fallback:", e.message);
@@ -51,11 +159,10 @@ export async function getBlogPost(slug) {
   }
 }
 
-
 /* ------ events sanity service -------- */
 export async function getEventsData() {
   try {
-    const items = await sanity.fetch(EVENTS_QUERY);
+    const items = await fetchWithSWR("events_data", EVENTS_QUERY);
     if (!items?.length) return null;
     return {
       featuredEvent: items.find((e) => e.featured) || items[0] || null,
@@ -69,7 +176,7 @@ export async function getEventsData() {
 
 export async function getEvent(slug) {
   try {
-    const e = await sanity.fetch(EVENT_BY_SLUG_QUERY, { slug });
+    const e = await fetchWithSWR(`event_${slug}`, EVENT_BY_SLUG_QUERY, { slug });
     return e || null;
   } catch (err) {
     console.warn("[sanity] event fetch failed → static fallback:", err.message);
@@ -77,11 +184,10 @@ export async function getEvent(slug) {
   }
 }
 
-
 /* ------ milestone sanity service -------- */
 export async function getMilestones() {
   try {
-    const items = await sanity.fetch(MILESTONES_QUERY);
+    const items = await fetchWithSWR("milestones", MILESTONES_QUERY);
     return items?.length ? items : null;
   } catch (e) {
     console.warn("[sanity] milestones failed → static fallback:", e.message);
@@ -91,7 +197,7 @@ export async function getMilestones() {
 
 export async function getMilestone(slug) {
   try {
-    const m = await sanity.fetch(MILESTONE_BY_SLUG_QUERY, { slug });
+    const m = await fetchWithSWR(`milestone_${slug}`, MILESTONE_BY_SLUG_QUERY, { slug });
     return m || null;
   } catch (e) {
     console.warn("[sanity] milestone failed → static fallback:", e.message);
@@ -99,11 +205,10 @@ export async function getMilestone(slug) {
   }
 }
 
-
 /* ------ testimonials sanity service -------- */
 export async function getTestimonials() {
   try {
-    const items = await sanity.fetch(TESTIMONIALS_QUERY);
+    const items = await fetchWithSWR("testimonials", TESTIMONIALS_QUERY);
     return items?.length ? items : null;
   } catch (e) {
     console.warn("[sanity] testimonials failed → static fallback:", e.message);
@@ -111,11 +216,10 @@ export async function getTestimonials() {
   }
 }
 
-
 /* ------ about sanity service -------- */
 export async function getAboutData() {
   try {
-    const data = await sanity.fetch(ABOUT_QUERY);
+    const data = await fetchWithSWR("about_data", ABOUT_QUERY);
     return data || null;
   } catch (e) {
     console.warn("[sanity] about failed → static fallback:", e.message);
@@ -126,7 +230,7 @@ export async function getAboutData() {
 /* ------ voima app sanity service -------- */
 export async function getVoimaAppData() {
   try {
-    const data = await sanity.fetch(VOIMA_APP_QUERY);
+    const data = await fetchWithSWR("voima_app_data", VOIMA_APP_QUERY);
     return data || null;
   } catch (e) {
     console.warn("[sanity] voima app failed → static fallback:", e.message);
@@ -136,18 +240,28 @@ export async function getVoimaAppData() {
 
 /* ------ app features sanity service -------- */
 export async function getAppFeatures() {
-  try { const i = await sanity.fetch(APP_FEATURES_QUERY); return i?.length ? i : null; }
-  catch (e) { console.warn("[sanity] app features fallback:", e.message); return null; }
+  try {
+    const i = await fetchWithSWR("app_features", APP_FEATURES_QUERY);
+    return i?.length ? i : null;
+  } catch (e) {
+    console.warn("[sanity] app features fallback:", e.message);
+    return null;
+  }
 }
+
 export async function getAppFeature(slug) {
-  try { return (await sanity.fetch(APP_FEATURE_BY_SLUG_QUERY, { slug })) || null; }
-  catch (e) { console.warn("[sanity] app feature fallback:", e.message); return null; }
+  try {
+    return (await fetchWithSWR(`app_feature_${slug}`, APP_FEATURE_BY_SLUG_QUERY, { slug })) || null;
+  } catch (e) {
+    console.warn("[sanity] app feature fallback:", e.message);
+    return null;
+  }
 }
 
 /* ------ contact sanity service -------- */
 export async function getContactData() {
   try {
-    const data = await sanity.fetch(CONTACT_QUERY);
+    const data = await fetchWithSWR("contact_data", CONTACT_QUERY);
     return data || null;
   } catch (e) {
     console.warn("[sanity] contact failed → static fallback:", e.message);
@@ -155,11 +269,10 @@ export async function getContactData() {
   }
 }
 
-
 /* ------ waitlist sanity service -------- */
 export async function getWaitlistData() {
   try {
-    const data = await sanity.fetch(WAITLIST_QUERY);
+    const data = await fetchWithSWR("waitlist_data", WAITLIST_QUERY);
     return data || null;
   } catch (e) {
     console.warn("[sanity] waitlist failed → static fallback:", e.message);
@@ -167,24 +280,30 @@ export async function getWaitlistData() {
   }
 }
 
-
 /* ------ getinvolved sanity service -------- */
 export async function getGetInvolvedData() {
-  try { return (await sanity.fetch(GET_INVOLVED_QUERY)) || null; }
-  catch (e) { console.warn("[sanity] get-involved fallback:", e.message); return null; }
+  try {
+    return (await fetchWithSWR("get_involved_data", GET_INVOLVED_QUERY)) || null;
+  } catch (e) {
+    console.warn("[sanity] get-involved fallback:", e.message);
+    return null;
+  }
 }
-
 
 /* ------ home sanity service -------- */
 export async function getHomeData() {
-  try { return (await sanity.fetch(HOME_QUERY)) || null; }
-  catch (e) { console.warn("[sanity] home fallback:", e.message); return null; }
+  try {
+    return (await fetchWithSWR("home_data", HOME_QUERY)) || null;
+  } catch (e) {
+    console.warn("[sanity] home fallback:", e.message);
+    return null;
+  }
 }
 
 /* ------- footer sanity service ----- */
 export async function getFooterData() {
   try {
-    const data = await sanity.fetch(FOOTER_QUERY);
+    const data = await fetchWithSWR("footer_data", FOOTER_QUERY);
     return data || null;
   } catch (e) {
     console.warn("[sanity] footer failed → static fallback:", e.message);
@@ -195,73 +314,48 @@ export async function getFooterData() {
 /* ------- journey stats sanity service ----- */
 export async function getJourneyStats() {
   try {
-    const data = await sanity.fetch(
-      JOURNEY_STATS_QUERY
-    );
-
+    const data = await fetchWithSWR("journey_stats", JOURNEY_STATS_QUERY);
     return data?.stats || null;
   } catch (e) {
-    console.warn(
-      "[sanity] journey stats fallback:",
-      e.message
-    );
-
+    console.warn("[sanity] journey stats fallback:", e.message);
     return null;
   }
 }
 
-
 /* ------ gallery sanity service -------- */
 export async function getGalleryData() {
   try {
-    const data = await sanity.fetch(GALLERY_QUERY);
+    const data = await fetchWithSWR("gallery_data", GALLERY_QUERY);
     return data?.length ? data : null;
   } catch (e) {
-    console.warn(
-      "[sanity] gallery failed → static fallback:",
-      e.message
-    );
+    console.warn("[sanity] gallery failed → static fallback:", e.message);
     return null;
   }
 }
 
 export async function getPartnersData() {
   try {
-    return (
-      await sanity.fetch(PARTNERS_QUERY)
-    ) || null;
+    return (await fetchWithSWR("partners_data", PARTNERS_QUERY)) || null;
   } catch (e) {
-    console.warn(
-      "[sanity] partners fallback:",
-      e.message
-    );
-
+    console.warn("[sanity] partners fallback:", e.message);
     return null;
   }
 }
 
 export async function getVolunteerPage() {
   try {
-    const data = await sanity.fetch(
-      VOLUNTEER_PAGE_QUERY
-    );
-
+    const data = await fetchWithSWR("volunteer_page", VOLUNTEER_PAGE_QUERY);
     return data || null;
   } catch (e) {
-    console.warn(
-      "[sanity] volunteer page failed → static fallback:",
-      e.message
-    );
-
+    console.warn("[sanity] volunteer page failed → static fallback:", e.message);
     return null;
   }
 }
 
 /* ------ career sanity service -------- */
-
 export async function getCareerPage() {
   try {
-    const page = await sanity.fetch(CAREER_PAGE_QUERY);
+    const page = await fetchWithSWR("career_page", CAREER_PAGE_QUERY);
     return page || null;
   } catch (e) {
     console.warn("[sanity] career page failed:", e.message);
@@ -271,9 +365,7 @@ export async function getCareerPage() {
 
 export async function getCareerRole(slug) {
   try {
-    return await sanity.fetch(CAREER_ROLE_QUERY, {
-      slug,
-    });
+    return (await fetchWithSWR(`career_role_${slug}`, CAREER_ROLE_QUERY, { slug })) || null;
   } catch (e) {
     console.warn("[sanity] career role failed:", e.message);
     return null;
@@ -281,54 +373,34 @@ export async function getCareerRole(slug) {
 }
 
 /* ------ contact support sanity service -------- */
-
 export async function getContactSupportData() {
   try {
-    const data = await sanity.fetch(CONTACT_SUPPORT_QUERY);
-
+    const data = await fetchWithSWR("contact_support", CONTACT_SUPPORT_QUERY);
     return data || null;
   } catch (e) {
-    console.warn(
-      "[sanity] contact support failed → static fallback:",
-      e.message
-    );
-
+    console.warn("[sanity] contact support failed → static fallback:", e.message);
     return null;
   }
 }
-
 
 /* ------ data privacy sanity service -------- */
-
 export async function getDataPrivacyData() {
   try {
-    const data = await sanity.fetch(DATA_PRIVACY_QUERY);
-
+    const data = await fetchWithSWR("data_privacy", DATA_PRIVACY_QUERY);
     return data || null;
   } catch (e) {
-    console.warn(
-      "[sanity] data privacy failed → static fallback:",
-      e.message
-    );
-
+    console.warn("[sanity] data privacy failed → static fallback:", e.message);
     return null;
   }
 }
 
-
 /* ------ SCD resources sanity service -------- */
-
 export async function getSCDResourcesData() {
   try {
-    const data = await sanity.fetch(SCD_RESOURCES_QUERY);
-
+    const data = await fetchWithSWR("scd_resources", SCD_RESOURCES_QUERY);
     return data || null;
   } catch (e) {
-    console.warn(
-      "[sanity] SCD resources failed → static fallback:",
-      e.message
-    );
-
+    console.warn("[sanity] SCD resources failed → static fallback:", e.message);
     return null;
   }
 }

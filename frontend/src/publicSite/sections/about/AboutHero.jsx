@@ -3,12 +3,12 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { useAbout } from "../../hooks/useAbout";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
-import EmmanuelImage from "@/assets/Leaders/Cherryn.png";
+import EmmanuelImage from "@/assets/Leaders/Cherryn_sticker.webp";
 
 export default function AboutHero() {
   const { heroData } = useAbout();
   return (
-    <section className="relative overflow-visible bg-[#fafafa] px-6 pt-20 sm:pt-24 pb-0">
+    <section className="relative overflow-visible bg-[#fafafa] px-6 pt-20 sm:pt-24 pb-0 [isolation:isolate]">
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-16 items-end">
 
@@ -107,9 +107,13 @@ export default function AboutHero() {
                   <img
                     src={EmmanuelImage}
                     alt="Voima Leader - Emmanuel"
+                    loading="eager"
+                    fetchPriority="high"
+                    decoding="async"
                     style={{
-                      filter:
-                        "drop-shadow(3px 0 0 #AD74FB) drop-shadow(-3px 0 0 #AD74FB) drop-shadow(0 3px 0 #AD74FB) drop-shadow(0 -3px 0 #AD74FB) drop-shadow(4px 4px 0 #AD74FB) drop-shadow(-4px -4px 0 #AD74FB) drop-shadow(4px -4px 0 #AD74FB) drop-shadow(-4px 4px 0 #AD74FB) drop-shadow(0 0 14px rgba(173, 116, 251, 0.7)) drop-shadow(0 15px 25px rgba(0,0,0,0.18))",
+                      filter: "drop-shadow(0 15px 25px rgba(0,0,0,0.18))",
+                      transform: "translateZ(0)",
+                      willChange: "transform",
                     }}
                     className="h-[460px] sm:h-[560px] lg:h-[640px] w-auto max-w-full object-contain object-bottom block align-bottom"
                   />

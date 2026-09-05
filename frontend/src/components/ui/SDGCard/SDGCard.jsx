@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
 
-import Sdg3Img from "@/assets/SDG/Sustainable_Development_Goal_03GoodHealth.svg.png";
-import Sdg4Img from "@/assets/SDG/images.png";
-import Sdg9Img from "@/assets/SDG/Sustainable_Development_Goal_09Industry.svg.png";
-import Sdg10Img from "@/assets/SDG/Sustainable_Development_Goal_10ReducedInequalities.svg.png";
+import Sdg3Img from "@/assets/SDG/Sustainable_Development_Goal_03GoodHealth.svg.webp";
+import Sdg4Img from "@/assets/SDG/images.webp";
+import Sdg9Img from "@/assets/SDG/Sustainable_Development_Goal_09Industry.svg.webp";
+import Sdg10Img from "@/assets/SDG/Sustainable_Development_Goal_10ReducedInequalities.svg.webp";
 
 const SDG_IMAGES = {
   "3": Sdg3Img,

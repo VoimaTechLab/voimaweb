@@ -102,6 +102,8 @@ export default function VoimaHero() {
                 <img
                   src={heroData.showcase.backScreen}
                   alt="Voima Community"
+                  loading="eager"
+                  decoding="async"
                   className="h-full w-full object-cover"
                 />
               </motion.div>
@@ -126,6 +128,9 @@ export default function VoimaHero() {
                 <img
                   src={heroData.showcase.frontScreen}
                   alt="Voima Dashboard"
+                  loading="eager"
+                  fetchPriority="high"
+                  decoding="async"
                   className="h-full w-full object-cover"
                 />
               </motion.div>

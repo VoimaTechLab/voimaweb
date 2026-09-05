@@ -13,14 +13,15 @@ export default function CareerDetail() {
   if (!job) {
     return (
       <section className="py-40 text-center">
-        <h1 className="text-5xl font-bold text-[#BC1D26]">
+        <h1 className="text-4xl sm:text-5xl font-black uppercase text-black font-heading tracking-tight">
           Role Not Found
         </h1>
 
         <Link
           to="/careers"
-          className="mt-8 inline-flex rounded-full bg-[#BC1D26] px-6 py-3 text-white"
+          className="mt-8 inline-flex items-center gap-2 bg-[#BC1D26] border-2 border-black px-6 py-3 font-black uppercase tracking-widest text-white shadow-[6px_6px_0px_rgba(0,0,0,1)] transition-all hover:-translate-y-0.5 hover:shadow-[8px_8px_0px_rgba(0,0,0,1)]"
         >
+          <ArrowLeft size={16} />
           Back To Careers
         </Link>
       </section>

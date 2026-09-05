@@ -8,7 +8,7 @@ import {
     Users,
 } from "lucide-react";
 import { Link } from "react-router-dom";
-import Impact from "../../assets/ourImpact.png";
+import Impact from "../../assets/ourImpact.webp";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 
 const programs = [
@@ -385,7 +385,7 @@ export default function Programs() {
                     src={event.image}
                     alt={event.title}
                     className="h-[320px] w-full object-cover"
-                  />
+                   loading="lazy" decoding="async"/>
 
                   <div className="p-8">
                     <p className="text-sm uppercase tracking-[0.2em] text-[#F47B3A]">

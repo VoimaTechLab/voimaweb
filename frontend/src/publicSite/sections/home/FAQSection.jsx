@@ -1,4 +1,4 @@
-import Hero33 from "@/assets/Hero/Hero33.png";
+import Hero33 from "@/assets/Hero/Hero33.webp";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { useHome } from "@/publicSite/hooks/useHome";
 import { AnimatePresence, motion } from "framer-motion";
@@ -180,7 +180,7 @@ export default function FAQSection() {
                 src={Hero33}
                 alt={eyebrow}
                 className="w-full max-w-[380px] lg:max-w-full h-auto max-h-[580px] object-contain object-bottom block align-bottom drop-shadow-2xl"
-              />
+               loading="lazy" decoding="async"/>
             </ScrollReveal>
           </div>
         </div>

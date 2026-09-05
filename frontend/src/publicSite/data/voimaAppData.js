@@ -1,13 +1,13 @@
-import CTAImage from "@/assets/app/app.png";
+import CTAImage from "@/assets/app/app.webp";
 import AppImage from "@/assets/app/DemoVideo.mp4";
-import DashboardScreen from "@/assets/app/How_it_works.png";
-import BackScreen from "@/assets/app/profile1.png";
-import ToolAppImg from "@/assets/tools/tool_app.jpg";
-import ToolScreeningImg from "@/assets/tools/tool_screening.jpg";
-import TraceTechImg from "@/assets/programs/trace_tech.jpg";
-import TraceResearchImg from "@/assets/programs/trace_research.jpg";
-import StoryAminaImg from "@/assets/impact/story_amina.jpg";
-import NewsCommunityImg from "@/assets/news/news_community.png";
+import DashboardScreen from "@/assets/app/How_it_works.webp";
+import BackScreen from "@/assets/app/profile1.webp";
+import ToolAppImg from "@/assets/tools/tool_app.webp";
+import ToolScreeningImg from "@/assets/tools/tool_screening.webp";
+import TraceTechImg from "@/assets/programs/trace_tech.webp";
+import TraceResearchImg from "@/assets/programs/trace_research.webp";
+import StoryAminaImg from "@/assets/impact/story_amina.webp";
+import NewsCommunityImg from "@/assets/news/news_community.webp";
 
 import { Bell, Bot, Brain, HeartPulse, Shield, Users } from "lucide-react";
 

@@ -1,12 +1,12 @@
 import { motion } from "framer-motion";
 import { useAbout } from "@/publicSite/hooks/useAbout";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
-import MildredImage from "@/assets/Leaders/Mildred.png";
+import MildredImage from "@/assets/Leaders/Mildred_sticker.webp";
 
 export default function StorySection() {
   const { storyData } = useAbout();
   return (
-    <section className="relative overflow-visible bg-white px-6 pt-20 sm:pt-24 pb-0">
+    <section className="relative overflow-visible bg-white px-6 pt-20 sm:pt-24 pb-0 [isolation:isolate]">
       {/* Top Divider */}
       <div
         className="absolute top-0 left-0 w-full overflow-hidden leading-none z-20 pointer-events-none"
@@ -65,11 +65,12 @@ export default function StorySection() {
                     src={MildredImage}
                     alt="Voima Leader - Mildred"
                     style={{
-                      filter:
-                        "drop-shadow(3px 0 0 #008BD8) drop-shadow(-3px 0 0 #008BD8) drop-shadow(0 3px 0 #008BD8) drop-shadow(0 -3px 0 #008BD8) drop-shadow(4px 4px 0 #008BD8) drop-shadow(-4px -4px 0 #008BD8) drop-shadow(4px -4px 0 #008BD8) drop-shadow(-4px 4px 0 #008BD8) drop-shadow(0 0 14px rgba(0, 139, 216, 0.7)) drop-shadow(0 15px 25px rgba(0,0,0,0.18))",
+                      filter: "drop-shadow(0 15px 25px rgba(0,0,0,0.18))",
+                      transform: "translateZ(0)",
+                      willChange: "transform",
                     }}
                     className="h-[460px] sm:h-[560px] lg:h-[640px] w-auto max-w-full object-contain object-bottom block align-bottom"
-                  />
+                   loading="lazy" decoding="async"/>
                 </div>
               </div>
             </ScrollReveal>

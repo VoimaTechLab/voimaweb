@@ -1,6 +1,6 @@
-import Event1 from "@/assets/events/event-1.jpg";
-import Event2 from "@/assets/events/event-2.jpg";
-import Event3 from "@/assets/events/event-3.jpg";
+import Event1 from "@/assets/events/event-1.webp";
+import Event2 from "@/assets/events/event-2.webp";
+import Event3 from "@/assets/events/event-3.webp";
 
 import EventVideo1 from "@/assets/events/event-video.mp4";
 

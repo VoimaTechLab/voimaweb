@@ -109,7 +109,7 @@ export default function StorySection() {
                       src={item.image}
                       alt={item.author}
                       className="h-full w-full object-cover brightness-[1.22] contrast-[1.06] saturate-[1.18]"
-                    />
+                     loading="lazy" decoding="async"/>
 
                     <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-white/10" />
 

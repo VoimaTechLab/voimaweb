@@ -46,7 +46,7 @@ export default function MobileMenu({ onClose, navigation }) {
         aria-label="Mobile navigation"
       >
         <div className="mobile-menu__header">
-          <img src="/assets/voima-logo.svg" alt="Voima" height="32" />
+          <img src="/assets/voima-logo.svg" alt="Voima" height="32"  loading="lazy" decoding="async"/>
           <button onClick={onClose} aria-label="Close menu" className="mobile-menu__close">
             <X size={22} />
           </button>

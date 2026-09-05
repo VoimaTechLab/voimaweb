@@ -104,7 +104,7 @@ function MilestoneCard({ item, index }) {
                   duration-700
                   hover:scale-105
                 "
-              />
+               loading="lazy" decoding="async"/>
             ) : (
               <video
                 ref={videoRef}

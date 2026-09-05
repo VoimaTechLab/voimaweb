@@ -124,7 +124,7 @@ export default function BlogPreview() {
                   src={article.image}
                   alt={article.title}
                   className="absolute inset-0 object-cover w-full h-full scale-105 brightness-100"
-                />
+                 loading="lazy" decoding="async"/>
                 <div className="absolute inset-0 z-10 flex flex-col justify-end p-5 bg-gradient-to-t from-black/70 via-black/25 to-transparent">
                   <div className="inline-flex items-center gap-1.5 bg-white text-[#BC1D26] border-2 border-black px-3 py-1 text-xs font-black uppercase tracking-tight shadow-[2px_2px_0px_rgba(0,0,0,1)] mb-3 self-start">
                     <CalendarDays size={12} />
@@ -182,7 +182,7 @@ export default function BlogPreview() {
                               ? "scale-105 brightness-100"
                               : "scale-100 brightness-75 hover:brightness-90"
                           }`}
-                        />
+                         loading="lazy" decoding="async"/>
 
                         {/* Collapsed State Badge */}
                         <div

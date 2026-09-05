@@ -5,9 +5,9 @@ import { Link } from "react-router-dom";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import MobileMarquee from "@/components/animations/MobileMarquee";
 
-import ToolAppImg from "@/assets/tools/tool_app.jpg";
-import ToolScreeningImg from "@/assets/tools/tool_screening.jpg";
-import ToolTrainingImg from "@/assets/tools/tool_training.jpg";
+import ToolAppImg from "@/assets/tools/tool_app.webp";
+import ToolScreeningImg from "@/assets/tools/tool_screening.webp";
+import ToolTrainingImg from "@/assets/tools/tool_training.webp";
 
 const TOOLS_DATA = [
   {
@@ -138,7 +138,7 @@ export default function ToolsForChange() {
                     src={tool.image}
                     alt={tool.title}
                     className="absolute inset-0 w-full h-full object-cover scale-105 brightness-100"
-                  />
+                   loading="lazy" decoding="async"/>
                   <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/70 via-black/25 to-transparent p-5 flex flex-col justify-end">
                     <div className="inline-flex items-center gap-1.5 bg-[#BC1D26] px-3 py-1 text-xs font-black uppercase tracking-wider text-white border-2 border-black shadow-[2px_2px_0px_rgba(0,0,0,1)] mb-3 self-start">
                       <Sparkles size={12} /> {tool.badge}
@@ -203,7 +203,7 @@ export default function ToolsForChange() {
                             transition-transform duration-700
                             ${isExpanded ? "scale-105 brightness-100" : "scale-100 brightness-60 hover:brightness-75"}
                           `}
-                        />
+                         loading="lazy" decoding="async"/>
 
                         {/* Collapsed State — Icon + Badge */}
                         <div

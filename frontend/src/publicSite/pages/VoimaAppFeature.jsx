@@ -1,3 +1,4 @@
+import { ArrowLeft } from "lucide-react";
 import { Link, useParams } from "react-router-dom";
 import { useAppFeature } from "@/publicSite/hooks/useAppFeatures";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
@@ -10,7 +11,18 @@ export default function VoimaAppFeature() {
     return <div className="py-40 text-center text-black/50">Loading…</div>;
 
   if (!feature)
-    return <div className="py-40 text-center">Feature not found.</div>;
+    return (
+      <div className="py-40 text-center">
+        <h2 className="text-4xl font-black uppercase text-black font-heading tracking-tight">Feature Not Found</h2>
+        <Link
+          to="/voima-app"
+          className="mt-8 inline-flex items-center gap-2 bg-[#BC1D26] border-2 border-black px-6 py-3 font-black uppercase tracking-widest text-white shadow-[6px_6px_0px_rgba(0,0,0,1)] transition-all hover:-translate-y-0.5 hover:shadow-[8px_8px_0px_rgba(0,0,0,1)]"
+        >
+          <ArrowLeft size={16} />
+          Back to Voima App
+        </Link>
+      </div>
+    );
 
   return (
     <main className="pt-[90px]">
@@ -19,9 +31,10 @@ export default function VoimaAppFeature() {
           {/* Back Button */}
           <Link
             to="/voima-app"
-            className="mb-8 inline-flex items-center gap-2 rounded-full border border-black/10 bg-white px-5 py-3 text-sm font-medium text-black transition hover:border-[#BC1D26] hover:text-[#BC1D26]"
+            className="mb-8 inline-flex items-center gap-2 border-2 border-black bg-white px-5 py-3 font-black uppercase tracking-widest text-xs text-black shadow-[4px_4px_0px_rgba(0,0,0,1)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#BC1D26] hover:text-white hover:shadow-[6px_6px_0px_rgba(0,0,0,1)]"
           >
-            ← Back to Voima App
+            <ArrowLeft size={16} />
+            Back to Voima App
           </Link>
 
           <ScrollReveal variant="fade-up">
@@ -39,7 +52,7 @@ export default function VoimaAppFeature() {
               src={feature.heroImage}
               alt={feature.title}
               className="mt-8 sm:mt-12 h-[240px] sm:h-[380px] md:h-[500px] w-full border-4 border-black shadow-[8px_8px_0px_rgba(0,0,0,1)] sm:shadow-[12px_12px_0px_rgba(0,0,0,1)] md:shadow-[16px_16px_0px_rgba(0,0,0,1)] object-cover"
-            />
+             loading="lazy" decoding="async"/>
           )}
 
           <ScrollReveal variant="fade-up" delay={0.15}>

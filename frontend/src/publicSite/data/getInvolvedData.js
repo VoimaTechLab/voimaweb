@@ -1,6 +1,6 @@
 // getInvolvedData.js
 
-import Story from "@/assets/ourStory.jpg";
+import Story from "@/assets/ourStory.webp";
 
 export const heroData = {
   eyebrow: "Join The Movement",
