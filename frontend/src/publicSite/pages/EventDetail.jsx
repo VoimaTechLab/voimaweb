@@ -1,3 +1,4 @@
+import { ArrowLeft } from "lucide-react";
 import { Link, useParams } from "react-router-dom";
 import { useEvent } from "../hooks/useEvents";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
@@ -15,8 +16,12 @@ export default function EventDetail() {
     return (
       <section className="flex min-h-screen items-center justify-center">
         <div className="text-center">
-          <h1 className="text-5xl font-bold text-[#BC1D26]">Event Not Found</h1>
-          <Link to="/events" className="mt-8 inline-flex rounded-full bg-[#BC1D26] px-6 py-3 text-white">
+          <h1 className="text-4xl sm:text-5xl font-black uppercase text-black font-heading tracking-tight">Event Not Found</h1>
+          <Link
+            to="/events"
+            className="mt-8 inline-flex items-center gap-2 bg-[#BC1D26] border-2 border-black px-6 py-3 font-black uppercase tracking-widest text-white shadow-[6px_6px_0px_rgba(0,0,0,1)] transition-all hover:-translate-y-0.5 hover:shadow-[8px_8px_0px_rgba(0,0,0,1)]"
+          >
+            <ArrowLeft size={16} />
             Back To Events
           </Link>
         </div>
@@ -28,8 +33,12 @@ export default function EventDetail() {
     <main className="pt-[90px]">
       <section className="px-6 py-6">
         <div className="mx-auto max-w-7xl">
-          <Link to="/events" className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white px-5 py-3 font-medium transition-all duration-300 hover:border-[#BC1D26] hover:text-[#BC1D26]">
-            ← Back to Events
+          <Link
+            to="/events"
+            className="inline-flex items-center gap-2 border-2 border-black bg-white px-5 py-3 font-black uppercase tracking-widest text-xs text-black shadow-[4px_4px_0px_rgba(0,0,0,1)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#BC1D26] hover:text-white hover:shadow-[6px_6px_0px_rgba(0,0,0,1)]"
+          >
+            <ArrowLeft size={16} />
+            Back to Events
           </Link>
         </div>
       </section>
