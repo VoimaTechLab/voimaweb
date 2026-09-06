@@ -12,6 +12,7 @@ export default function FAQSection() {
     eyebrow = "FREQUENTLY ASKED QUESTIONS",
     title = "Got Questions? We Have",
     highlightedTitle = "Answers",
+    backgroundImage,
     faqs = [],
   } = faqSection || {};
 
@@ -177,7 +178,7 @@ export default function FAQSection() {
               className="w-full flex items-end justify-center"
             >
               <img
-                src={Hero33}
+                src={backgroundImage || Hero33}
                 alt={eyebrow}
                 className="w-full max-w-[380px] lg:max-w-full h-auto max-h-[580px] object-contain object-bottom block align-bottom drop-shadow-2xl"
                loading="lazy" decoding="async"/>

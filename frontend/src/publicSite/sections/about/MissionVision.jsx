@@ -1,5 +1,5 @@
-import { useAbout } from "@/publicSite/hooks/useAbout";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
+import { useAbout } from "@/publicSite/hooks/useAbout";
 
 export default function MissionVision() {
   const { missionVisionData } = useAbout();

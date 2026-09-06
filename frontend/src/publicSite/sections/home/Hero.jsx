@@ -17,6 +17,10 @@ export default function Hero() {
 
   const [videoSrc, setVideoSrc] = useState(backgroundVideo || HeroVid);
 
+  useEffect(() => {
+    setVideoSrc(backgroundVideo || HeroVid);
+  }, [backgroundVideo]);
+
   // ── Hero slide rotation ──
   useEffect(() => {
     if (!heroSlides.length) return;
@@ -43,7 +47,7 @@ export default function Hero() {
           loop
           muted
           playsInline
-          preload="auto"
+          preload="metadata"
           poster={HeroPoster}
           onError={() => {
             if (videoSrc !== HeroVid) {

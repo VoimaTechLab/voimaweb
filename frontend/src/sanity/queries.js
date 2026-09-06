@@ -67,9 +67,29 @@ export const ABOUT_QUERY = `*[_type == "aboutPage"][0]{
   "storyData": {
     "eyebrow": story.eyebrow, "title": story.title,
     "descriptionOne": story.descriptionOne, "descriptionTwo": story.descriptionTwo,
-    "image": story.image.asset->url
+    "image": story.image.asset->url,
+    "imageTitle": story.imageTitle,
+    "imageDescription": story.imageDescription
   },
-  "missionVisionData": missionVision,
+  "missionVisionData": {
+    "eyebrow": missionVision.eyebrow,
+    "title": missionVision.title,
+    "description": missionVision.description,
+    "mission": {
+      "title": missionVision.mission.title,
+      "content": missionVision.mission.content,
+      "image": missionVision.mission.image.asset->url,
+      "imageTitle": missionVision.mission.imageTitle,
+      "imageDescription": missionVision.mission.imageDescription
+    },
+    "vision": {
+      "title": missionVision.vision.title,
+      "content": missionVision.vision.content,
+      "image": missionVision.vision.image.asset->url,
+      "imageTitle": missionVision.vision.imageTitle,
+      "imageDescription": missionVision.vision.imageDescription
+    }
+  },
   "traceFramework": trace,
   "teamData": {
     "eyebrow": team.eyebrow, "title": team.title, "description": team.description,
@@ -123,7 +143,9 @@ export const VOIMA_APP_QUERY = `*[_type == "voimaAppPage"][0]{
 
 const APP_FEATURE_FIELDS = `
   "slug": slug.current, title, description, iconName,
-  "heroImage": heroImage.asset->url, content, highlights
+  "heroImage": heroImage.asset->url,
+  "backgroundImage": backgroundImage.asset->url,
+  content, highlights
 `;
 export const APP_FEATURES_QUERY = `*[_type == "appFeature"] | order(_createdAt asc){ ${APP_FEATURE_FIELDS} }`;
 export const APP_FEATURE_BY_SLUG_QUERY = `*[_type == "appFeature" && slug.current == $slug][0]{ ${APP_FEATURE_FIELDS} }`;
@@ -230,14 +252,11 @@ export const HOME_QUERY = `*[_type == "homePage"][0]{
     badge,
     iconName,
 
-    image{
-      asset->{
-        url
-      }
+    "image": image.asset->url
     }
   },
 
-  traceFrameworkSection{
+  "traceFrameworkSection": traceFrameworkSection{
   eyebrow,
   title,
   titleAccent,
@@ -251,14 +270,20 @@ export const HOME_QUERY = `*[_type == "homePage"][0]{
     detail,
     badge,
     link,
-    image{
-      asset->{
-        url
-      }
+    "image": image.asset->url
     }
-  }
-}
-},
+  },
+
+  "globalReachSection": globalReachSection{
+    eyebrow,
+    title,
+    titleAccent,
+    description,
+    stats[]{
+      id, value, number, suffix, label, description, detail, badge,
+      "image": image.asset->url
+    }
+  },
 
   "missionSection": {
     "eyebrow": mission.eyebrow,
@@ -305,10 +330,11 @@ export const HOME_QUERY = `*[_type == "homePage"][0]{
     }
   },
 
-    faqSection {
+    "faqSection": faqSection {
     eyebrow,
     title,
     highlightedTitle,
+    "backgroundImage": backgroundImage.asset->url,
     faqs[] {
       question,
       answer

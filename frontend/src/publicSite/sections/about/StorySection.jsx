@@ -55,15 +55,15 @@ export default function StorySection() {
                     className="absolute -bottom-2.5 left-10 w-4 h-4 bg-white border-r-2 border-b-2 border-black rotate-45"
                   />
                   <p className="text-xs sm:text-[13px] font-bold text-black/85 leading-relaxed">
-                    &ldquo;What began as a vision for awareness and advocacy has evolved into a growing movement focused on healthcare innovation and digital transformation.&rdquo;
+                    &ldquo;{storyData.imageDescription || "What began as a vision for awareness and advocacy has evolved into a growing movement focused on healthcare innovation and digital transformation."}&rdquo;
                   </p>
                 </motion.div>
 
                 {/* Leader Portrait with Coral Outline */}
                 <div className="relative z-10 w-full flex items-end justify-center">
                   <img
-                    src={MildredImage}
-                    alt="Voima Leader - Mildred"
+                    src={storyData.image || MildredImage}
+                    alt={storyData.imageTitle || "Voima Initiative story"}
                     style={{
                       filter: "drop-shadow(0 15px 25px rgba(0,0,0,0.18))",
                       transform: "translateZ(0)",

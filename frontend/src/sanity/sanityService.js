@@ -28,7 +28,7 @@ import {
 } from "./queries";
 
 const SANITY_TIMEOUT_MS = 2500;
-const CACHE_TTL_MS = 60 * 60 * 1000; // 1 hour
+const CACHE_TTL_MS = 5 * 60 * 1000;
 const CACHE_PREFIX = "voima_swr_";
 
 /**

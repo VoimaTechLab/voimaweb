@@ -103,6 +103,36 @@ export default {
       ],
     },
     {
+      name: "storyShiftSection",
+      title: "Impact Shifter Stories",
+      type: "object",
+      fields: [
+        { name: "eyebrow", title: "Eyebrow", type: "string" },
+        { name: "title", title: "Title", type: "string" },
+        { name: "titleAccent", title: "Highlighted Title", type: "string" },
+        {
+          name: "stories",
+          title: "Stories",
+          type: "array",
+          of: [{
+            type: "object",
+            name: "impactStory",
+            fields: [
+              { name: "id", type: "string" },
+              { name: "quote", type: "text", rows: 3 },
+              { name: "author", type: "string" },
+              { name: "meta", type: "string" },
+              { name: "story", type: "text", rows: 4 },
+              { name: "badge", type: "string" },
+              { name: "iconName", type: "string", options: { list: ["HeartPulse", "Stethoscope", "ShieldCheck"] } },
+              { name: "image", type: "image", options: { hotspot: true } },
+            ],
+            preview: { select: { title: "author", subtitle: "badge", media: "image" } },
+          }],
+        },
+      ],
+    },
+    {
       name: "impactSection",
       title: "Impact / The Burden",
       type: "object",
@@ -262,7 +292,7 @@ export default {
       title: "FAQ Section",
       type: "faqSection",
     },
-   /* {
+    {
       name: "sdg", title: "SDG Section", type: "object",
       fields: [
         { name: "eyebrow", type: "string" }, { name: "title", type: "text" },
@@ -272,7 +302,7 @@ export default {
           { name: "image", type: "image", options: { hotspot: true } },
         ]}]},
       ],
-    },*/
+    },
     {
       name: "cta", title: "CTA Section", type: "object",
       fields: [
