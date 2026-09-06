@@ -29,6 +29,7 @@ export default {
         { name: "descriptionOne", type: "text" },
         { name: "descriptionTwo", type: "text" },
         { name: "image", type: "image", options: { hotspot: true } },
+        { name: "imageDescription", title: "Story Image Description", type: "text" },
       ],
     },
     {
@@ -43,11 +44,11 @@ export default {
           { name: "title", type: "text" }, { name: "content", type: "text" } ]},
       ],
     },
-    {
+    /*{
       name: "trace", title: "TRACE Framework", type: "array",
       of: [{ type: "object", fields: [
         { name: "title", type: "string" }, { name: "description", type: "text" } ]}],
-    },
+    },*/
     {
       name: "team", title: "Team", type: "object",
       fields: [

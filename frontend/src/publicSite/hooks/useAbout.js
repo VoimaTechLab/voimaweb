@@ -18,9 +18,9 @@ export function useAbout() {
   const [data, setData] = useState(cache || FALLBACK);
 
   useEffect(() => {
-    if (cache) return;
     if (!inflight) inflight = getAboutData();
     inflight.then((d) => {
+      inflight = null;
       if (!d) return; // keep full static fallback
       cache = {
         heroData: d.heroData || FALLBACK.heroData,

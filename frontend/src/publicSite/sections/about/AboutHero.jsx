@@ -105,8 +105,8 @@ export default function AboutHero() {
                 {/* Leader Portrait with Mint Green Outline */}
                 <div className="relative z-10 w-full flex items-end justify-center">
                   <img
-                    src={EmmanuelImage}
-                    alt="Voima Leader - Emmanuel"
+                    src={heroData.image || EmmanuelImage}
+                    alt={heroData.title || "Voima Initiative"}
                     loading="eager"
                     fetchPriority="high"
                     decoding="async"

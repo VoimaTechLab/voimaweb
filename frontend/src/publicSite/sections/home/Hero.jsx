@@ -3,8 +3,8 @@ import { ArrowRight } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-import HeroVid from "@/assets/Hero/herovid.mp4";
 import HeroPoster from "@/assets/Hero/herovid-poster.webp";
+import HeroVid from "@/assets/Hero/herovid.mp4";
 import { useHome } from "@/publicSite/hooks/useHome";
 
 export default function Hero() {
@@ -16,6 +16,10 @@ export default function Hero() {
   const [current, setCurrent] = useState(0);
 
   const [videoSrc, setVideoSrc] = useState(backgroundVideo || HeroVid);
+
+  useEffect(() => {
+    setVideoSrc(backgroundVideo || HeroVid);
+  }, [backgroundVideo]);
 
   // ── Hero slide rotation ──
   useEffect(() => {
@@ -43,7 +47,7 @@ export default function Hero() {
           loop
           muted
           playsInline
-          preload="auto"
+          preload="metadata"
           poster={HeroPoster}
           onError={() => {
             if (videoSrc !== HeroVid) {

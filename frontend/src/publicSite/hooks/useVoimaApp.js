@@ -36,9 +36,9 @@ export function useVoimaApp() {
   const [data, setData] = useState(cache || FALLBACK);
 
   useEffect(() => {
-    if (cache) return;
     if (!inflight) inflight = getVoimaAppData();
     inflight.then((d) => {
+      inflight = null;
       if (!d) return;
       cache = {
         heroData: d.heroData || FALLBACK.heroData,

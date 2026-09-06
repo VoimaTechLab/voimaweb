@@ -82,7 +82,7 @@ export default function AppFeatures() {
   if (!features || features.length === 0) return null;
 
   const currentFeature = features[current] || features[0];
-  const currentBg = FEATURE_BACKGROUNDS[current % FEATURE_BACKGROUNDS.length];
+  const currentBg = currentFeature.backgroundImage || FEATURE_BACKGROUNDS[current % FEATURE_BACKGROUNDS.length];
   const CurrentIcon = currentFeature.icon || Activity;
   const theme = FEATURE_ACCENTS[current % FEATURE_ACCENTS.length];
 

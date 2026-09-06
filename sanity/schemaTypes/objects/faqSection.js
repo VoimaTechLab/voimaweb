@@ -24,6 +24,12 @@ export default {
       type: "string",
       initialValue: "Answers",
     },
+    {
+      name: "backgroundImage",
+      title: "FAQ Background Image",
+      type: "image",
+      options: { hotspot: true },
+    },
 
     {
       name: "faqs",

@@ -1,15 +1,15 @@
-import { lazy, Suspense } from "react";
+import GlobalReachSection from "@/publicSite/sections/home/GlobalReachSection";
 import Hero from "@/publicSite/sections/home/Hero";
+import ImpactStats from "@/publicSite/sections/home/ImpactStats";
+import OurStoryHome from "@/publicSite/sections/home/OurStoryHome";
+import StorySection from "@/publicSite/sections/home/StorySection";
+import TraceFrameworkSection from "@/publicSite/sections/home/TraceFrameworkSection";
 import WhoIsVoima from "@/publicSite/sections/home/WhoIsVoima";
 import SEOHead from "@/seo/SEOHead";
+import { lazy, Suspense } from "react";
 
 // Lazy-loaded below-the-fold sections
-const OurStoryHome = lazy(() => import("@/publicSite/sections/home/OurStoryHome"));
-const ImpactStats = lazy(() => import("@/publicSite/sections/home/ImpactStats"));
-const StorySection = lazy(() => import("@/publicSite/sections/home/StorySection"));
-const TraceFrameworkSection = lazy(() => import("@/publicSite/sections/home/TraceFrameworkSection"));
 const AppShowcaseSection = lazy(() => import("@/publicSite/sections/home/AppShowcaseSection"));
-const GlobalReachSection = lazy(() => import("@/publicSite/sections/home/GlobalReachSection"));
 const ProgramsPreview = lazy(() => import("@/publicSite/sections/home/ProgramsPreview"));
 const NewsPreview = lazy(() => import("@/publicSite/sections/home/NewsPreview"));
 const FAQSection = lazy(() => import("@/publicSite/sections/home/FAQSection"));

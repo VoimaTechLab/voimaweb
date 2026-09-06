@@ -151,9 +151,6 @@ export function useHome() {
   const [data, setData] = useState(() => cache || FALLBACK);
 
   useEffect(() => {
-    // If data is already cached, do not initiate fetching or set state inside effect
-    if (cache) return;
-
     let isMounted = true;
 
     if (!inflight) {
@@ -165,6 +162,7 @@ export function useHome() {
 
     inflight
       .then(([homeData, eventsData, blogData]) => {
+        inflight = null;
         const d = homeData || {};
         const events = eventsData?.events || [];
 

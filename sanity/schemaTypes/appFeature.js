@@ -12,6 +12,7 @@ export default {
     },
     { name: "description", type: "text" },
     { name: "heroImage", type: "image", options: { hotspot: true } },
+    { name: "backgroundImage", title: "Core Feature Background", type: "image", options: { hotspot: true } },
     { name: "content", title: "Paragraphs", type: "array", of: [{ type: "text" }] },
     { name: "highlights", type: "array", of: [{ type: "string" }] },
   ],
