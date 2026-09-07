@@ -1,10 +1,9 @@
-import { blogHero } from "@/publicSite/data/blogData";
+import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { useBlog } from "@/publicSite/hooks/useBlog";
 import { Link } from "react-router-dom";
-import { ScrollReveal } from "@/components/animations/ScrollReveal";
 
 export default function Blog() {
-  const { featuredPost, posts } = useBlog();
+  const { featuredPost, posts, hero } = useBlog();
   return (
     <main className="overflow-hidden bg-[#fafafa] pt-[90px]">
       {/* HERO */}
@@ -13,20 +12,20 @@ export default function Blog() {
           <ScrollReveal variant="fade-down">
             <div className="inline-block bg-[#BC1D26] border-2 border-black px-5 py-2 shadow-[4px_4px_0px_rgba(0,0,0,1)] mb-6">
               <span className="text-xs sm:text-sm font-black uppercase tracking-[0.22em] text-white">
-                {blogHero.eyebrow}
+                {hero.eyebrow}
               </span>
             </div>
           </ScrollReveal>
 
           <ScrollReveal variant="fade-up" delay={0.15}>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black uppercase leading-none text-black font-heading tracking-tight">
-              {blogHero.title}
+              {hero.title}
             </h1>
           </ScrollReveal>
 
           <ScrollReveal variant="fade-up" delay={0.25}>
             <p className="mt-8 max-w-3xl text-base sm:text-lg leading-8 sm:leading-9 text-black/75 font-semibold">
-              {blogHero.description}
+              {hero.description}
             </p>
           </ScrollReveal>
         </div>

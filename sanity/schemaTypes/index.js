@@ -1,11 +1,13 @@
 import aboutPage from "./aboutPage";
 import appFeature from "./appFeature";
+import blogPage from "./blogPage";
 import careerPage from "./careerPage";
 import careerRole from "./careerRole";
 import contactPage from "./contactPage";
 import contactSupportPage from "./contactSupportPage";
 import dataPrivacyPage from "./dataPrivacyPage";
 import events from "./events";
+import eventsPage from "./eventsPage";
 import footerSettings from "./footerSettings";
 import gallery from "./gallery";
 import getInvolvedPage from "./getInvolvedPage";
@@ -22,7 +24,7 @@ import voimaAppPage from "./voimaAppPage";
 import volunteerPage from "./volunteerPage";
 import waitlistPage from "./waitlistPage";
 export const schemaTypes = [
-    post, gallery, events, milestones, testimonials,aboutPage, 
+    post, gallery, events, milestones, testimonials,aboutPage, blogPage, eventsPage,
     voimaAppPage, contactPage, waitlistPage, appFeature, getInvolvedPage, homePage,
     footerSettings, journeyStats, partnerSection, volunteerPage, careerPage, careerRole, teamMembers,
     scdResources, dataPrivacyPage, contactSupportPage, faqSection,

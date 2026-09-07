@@ -2,21 +2,21 @@ import { getBlogData, getEventsData, getHomeData } from "@/sanity/sanityService"
 import { BookOpenText, Brain, Globe, HeartPulse, ShieldCheck, Stethoscope } from "lucide-react";
 import { useEffect, useState } from "react";
 import {
-  appShowcaseSection,
-  ctaSection,
-  faqSection,
-  globalReachSection,
-  heroSlides,
-  impactSection,
-  impactStatsSection,
-  missionSection,
-  newsPreviewSection,
-  programsPreviewSection,
-  sdgSection,
-  storySection,
-  storyShiftSection,
-  traceFrameworkSection,
-  whoIsVoima,
+    appShowcaseSection,
+    ctaSection,
+    faqSection,
+    globalReachSection,
+    heroSlides,
+    impactSection,
+    impactStatsSection,
+    missionSection,
+    newsPreviewSection,
+    programsPreviewSection,
+    sdgSection,
+    storySection,
+    storyShiftSection,
+    traceFrameworkSection,
+    whoIsVoima,
 } from "../../data/homeData";
 
 /* FALLBACK HOME DATA */
@@ -168,7 +168,7 @@ export function useHome() {
 
         const mappedPrograms =
           events.length > 0
-            ? events.map((event) => ({
+            ? events.slice(0, 3).map((event) => ({
                 id: event.slug,
                 title: event.title,
                 description: event.excerpt || event.description || "",
@@ -188,7 +188,7 @@ export function useHome() {
               ...(blogData.posts || []),
             ]
               .filter(Boolean)
-              .slice(0, 6)
+              .slice(0, 3)
               .map((post) => ({
                 id: post.slug,
                 slug: post.slug,
