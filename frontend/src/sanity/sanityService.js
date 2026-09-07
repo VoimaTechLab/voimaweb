@@ -3,6 +3,7 @@ import {
   ABOUT_QUERY,
   APP_FEATURES_QUERY,
   APP_FEATURE_BY_SLUG_QUERY,
+  BLOG_PAGE_QUERY,
   BLOG_QUERY,
   CAREER_PAGE_QUERY,
   CAREER_ROLE_QUERY,
@@ -10,6 +11,7 @@ import {
   CONTACT_SUPPORT_QUERY,
   DATA_PRIVACY_QUERY,
   EVENTS_QUERY,
+  EVENTS_PAGE_QUERY,
   EVENT_BY_SLUG_QUERY,
   FOOTER_QUERY,
   GALLERY_QUERY,
@@ -135,13 +137,17 @@ const mapPost = (p) => ({
 /* ------ blog sanity service -------- */
 export async function getBlogData() {
   try {
-    const items = await fetchWithSWR("blog_data", BLOG_QUERY);
+    const [items, page] = await Promise.all([
+      fetchWithSWR("blog_data", BLOG_QUERY),
+      fetchWithSWR("blog_page", BLOG_PAGE_QUERY),
+    ]);
     if (!items?.length) return null;
     const mapped = items.map(mapPost);
     return {
       featuredPost: mapped.find((p) => p.featured) || mapped[0] || null,
       posts: mapped.filter((p) => p.kind !== "community" && !p.featured),
       communityStories: mapped.filter((p) => p.kind === "community"),
+      page,
     };
   } catch (e) {
     console.warn("[sanity] blog list failed → static fallback:", e.message);
@@ -162,11 +168,15 @@ export async function getBlogPost(slug) {
 /* ------ events sanity service -------- */
 export async function getEventsData() {
   try {
-    const items = await fetchWithSWR("events_data", EVENTS_QUERY);
+    const [items, page] = await Promise.all([
+      fetchWithSWR("events_data", EVENTS_QUERY),
+      fetchWithSWR("events_page", EVENTS_PAGE_QUERY),
+    ]);
     if (!items?.length) return null;
     return {
       featuredEvent: items.find((e) => e.featured) || items[0] || null,
       events: items,
+      page,
     };
   } catch (e) {
     console.warn("[sanity] events list failed → static fallback:", e.message);

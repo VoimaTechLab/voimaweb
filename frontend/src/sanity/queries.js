@@ -17,6 +17,8 @@ export const BLOG_QUERY = `*[_type == "post"] | order(publishedAt desc){
   "media": { "type": "image", "src": coverImage.asset->url }
 }`;
 
+export const BLOG_PAGE_QUERY = `*[_type == "blogPage"][0]{ eyebrow, title, description }`;
+
 export const POST_BY_SLUG_QUERY = `*[_type == "post" && slug.current == $slug][0]{
   "slug": slug.current,
   title, category, excerpt, readTime, publishedAt,
@@ -31,6 +33,8 @@ export const EVENTS_QUERY = `*[_type == "event"] | order(_createdAt desc){
   "coverMedia": { "type": "image", "src": coverImage.asset->url },
   "gallery": gallery[]{ "type": "image", "src": asset->url }
 }`;
+
+export const EVENTS_PAGE_QUERY = `*[_type == "eventsPage"][0]{ eyebrow, title, description }`;
 
 export const EVENT_BY_SLUG_QUERY = `*[_type == "event" && slug.current == $slug][0]{
   "slug": slug.current, title, category, date, location, excerpt, description,

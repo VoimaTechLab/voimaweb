@@ -5,11 +5,11 @@ import EventsHero from "@/publicSite/sections/events/EventsHero";
 import FeaturedEvent from "@/publicSite/sections/events/FeaturedEvent";
 
 export default function Events() {
-  const { featuredEvent, events } = useEvents(); 
+  const { featuredEvent, events, hero } = useEvents();
 
   return (
     <main className="overflow-hidden pt-[90px]">
-      <EventsHero />
+      <EventsHero hero={hero} />
       <FeaturedEvent event={featuredEvent} />
       <EventsGrid events={events} />
     </main>

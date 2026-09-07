@@ -1,6 +1,7 @@
 import {
     communityStories as fbCommunity,
     featuredPost as fbFeatured,
+    blogHero as fbHero,
     posts as fbPosts,
 } from "@/publicSite/data/blogData";
 import { getBlogData, getBlogPost } from "@/sanity/sanityService";
@@ -9,6 +10,7 @@ import { useEffect, useState } from "react";
 /*  Blog list (hero/featured/posts/community)  */
 export function useBlog() {
   const [data, setData] = useState({
+    hero: fbHero,
     featuredPost: fbFeatured,
     posts: fbPosts,
     communityStories: fbCommunity,
@@ -18,6 +20,7 @@ export function useBlog() {
     getBlogData().then((d) => {
       if (!d) return; // keep static fallback
       setData({
+        hero: d.page || fbHero,
         featuredPost: d.featuredPost || fbFeatured,
         posts: d.posts.length ? d.posts : fbPosts,
         communityStories: d.communityStories.length ? d.communityStories : fbCommunity,

@@ -1,18 +1,20 @@
 import {
     events as fbEvents,
     featuredEvent as fbFeatured,
+    eventsHero as fbHero,
 } from "@/publicSite/data/eventsData";
 import { getEvent, getEventsData } from "@/sanity/sanityService";
 import { useEffect, useState } from "react";
 
 /* Events list */
 export function useEvents() {
-  const [data, setData] = useState({ featuredEvent: fbFeatured, events: fbEvents });
+  const [data, setData] = useState({ featuredEvent: fbFeatured, events: fbEvents, hero: fbHero });
 
   useEffect(() => {
     getEventsData().then((d) => {
       if (!d) return;
       setData({
+        hero: d.page || fbHero,
         featuredEvent: d.featuredEvent || fbFeatured,
         events: d.events.length ? d.events : fbEvents,
       });
