@@ -1,14 +1,15 @@
 import { useBlogPost } from "@/publicSite/hooks/useBlog";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import DetailSkeleton from "@/components/ui/DetailSkeleton";
 
 export default function BlogDetail() {
+  const location = useLocation();
   const { slug } = useParams();
-  const { post, loading } = useBlogPost(slug);
+  const { post, loading } = useBlogPost(slug, location.state?.post);
 
   if (loading && !post) {
-    return <DetailSkeleton type="article" />;
+    return <DetailSkeleton />;
   }
 
   if (!post) {

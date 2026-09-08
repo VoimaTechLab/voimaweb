@@ -1,15 +1,24 @@
 import { getCareerRole } from "@/sanity/sanityService";
 import { useEffect, useState } from "react";
-export function useCareerRole(slug) {
-  const [job, setJob] = useState(null);
-  const [loading, setLoading] = useState(true);
+export function useCareerRole(slug, initialJob) {
+  const [job, setJob] = useState(() => initialJob || null);
+  const [loading, setLoading] = useState(() => !initialJob);
 
   useEffect(() => {
     if (!slug) return;
+    let mounted = true;
 
     getCareerRole(slug)
-      .then(setJob)
-      .finally(() => setLoading(false));
+      .then((data) => {
+        if (mounted && data) setJob(data);
+      })
+      .finally(() => {
+        if (mounted) setLoading(false);
+      });
+
+    return () => {
+      mounted = false;
+    };
   }, [slug]);
 
   return {

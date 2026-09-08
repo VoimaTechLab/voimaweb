@@ -81,6 +81,7 @@ export default function Careers() {
 
                     <Link
                       to={`/careers/${job.slug.current || job.slug}`}
+                      state={{ job }}
                       className="
                         inline-flex
                         items-center
@@ -162,7 +163,7 @@ export default function Careers() {
                         hover:shadow-[9px_9px_0px_rgba(188,29,38,1)]
                       "
                     >
-                      <div className="relative overflow-hidden border-b-2 border-black bg-black">
+                      <div className="relative overflow-hidden border-b-2 border-black bg-white">
                         <img
                           src={member.image}
                           alt={member.name}

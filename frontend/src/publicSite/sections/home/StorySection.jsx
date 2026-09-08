@@ -103,30 +103,31 @@ export default function StorySection() {
                   {/* Photo Column */}
                   <ScrollReveal
                     variant="fade-right"
-                    className="lg:col-span-5 relative overflow-hidden border-2 border-black h-[400px] sm:h-[480px]"
+                    className="lg:col-span-5 relative overflow-hidden border-2 border-black h-[400px] sm:h-[480px] bg-white"
                   >
                     <img
                       src={item.image}
                       alt={item.author}
-                      className="h-full w-full object-cover brightness-[1.22] contrast-[1.06] saturate-[1.18]"
+                      className="h-full w-full object-cover object-top"
                      loading="lazy" decoding="async"/>
 
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-white/10" />
-
                     {/* Floating Badge */}
-                    <div className="absolute top-5 left-5 inline-flex items-center gap-2 bg-white px-4 py-2 text-xs font-black uppercase tracking-wider text-[#BC1D26] border-2 border-black shadow-[3px_3px_0px_rgba(0,0,0,1)]">
+                    <div className="absolute top-5 left-5 z-10 inline-flex items-center gap-2 bg-white px-4 py-2 text-xs font-black uppercase tracking-wider text-[#BC1D26] border-2 border-black shadow-[3px_3px_0px_rgba(0,0,0,1)]">
                       <BadgeIcon size={16} />
                       {item.badge}
                     </div>
 
-                    <div className="absolute bottom-6 left-6 right-6">
-                      <h4 className="text-2xl font-bold text-white font-heading">
+                    {/* Author & Meta Box */}
+                    <div className="absolute bottom-4 left-4 right-4 sm:bottom-5 sm:left-5 sm:right-5 z-10 bg-white/95 backdrop-blur-sm border-2 border-black p-3.5 sm:p-4 shadow-[4px_4px_0px_rgba(0,0,0,1)]">
+                      <h4 className="text-lg sm:text-xl font-black uppercase text-black font-heading leading-snug">
                         {item.author}
                       </h4>
 
-                      <p className="text-sm text-white/80 mt-1">
-                        {item.meta}
-                      </p>
+                      {item.meta && (
+                        <p className="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#BC1D26] mt-1">
+                          {item.meta}
+                        </p>
+                      )}
                     </div>
                   </ScrollReveal>
 

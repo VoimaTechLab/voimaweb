@@ -11,10 +11,11 @@ export default function FeaturedEvent({ event = fallback }) {
       <ScrollReveal variant="scale-in">
         <Link
           to={`/events/${event.slug}`}
+          state={{ event }}
           className="group mx-auto block max-w-7xl overflow-hidden border-4 border-black bg-white shadow-[8px_8px_0px_rgba(0,0,0,1)] sm:shadow-[12px_12px_0px_rgba(0,0,0,1)] md:shadow-[16px_16px_0px_rgba(0,0,0,1)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[12px_12px_0px_rgba(188,29,38,1)]"
         >
           <div className="grid lg:grid-cols-2">
-            <div className="overflow-hidden bg-black">
+            <div className="overflow-hidden bg-white">
               {event.coverMedia?.type === "video" ? (
                 <video
                   ref={videoRef}

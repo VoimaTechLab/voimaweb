@@ -115,13 +115,13 @@ export default function TraceFrameworkSection() {
             gap={16}
             speed={45}
             renderCard={(pillar) => (
-              <div className="relative overflow-hidden rounded-2xl border-2 border-black bg-black shadow-[6px_6px_0px_rgba(0,0,0,1)] h-[400px]">
+              <div className="relative overflow-hidden rounded-2xl border-2 border-black bg-white shadow-[6px_6px_0px_rgba(0,0,0,1)] h-[400px]">
                 <img
                   src={pillar.image}
                   alt={pillar.title}
                   className="absolute inset-0 w-full h-full object-cover scale-105 brightness-100"
                  loading="lazy" decoding="async"/>
-                <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/70 via-black/25 to-transparent p-5 flex flex-col justify-end">
+                <div className="absolute inset-0 z-10 bg-gradient-to-t from-white via-white/90 to-transparent p-5 flex flex-col justify-end">
                   <div className="flex items-center gap-2 mb-3">
                     <div className="flex h-8 w-8 items-center justify-center bg-[#BC1D26] text-white border-2 border-black shadow-[2px_2px_0px_rgba(0,0,0,1)] font-black text-sm font-heading">
                       {pillar.letter}
@@ -130,13 +130,13 @@ export default function TraceFrameworkSection() {
                       {pillar.badge}
                     </span>
                   </div>
-                  <h3 className="text-2xl font-black uppercase leading-tight text-white font-heading">
+                  <h3 className="text-2xl font-black uppercase leading-tight text-black font-heading">
                     {pillar.title}
                   </h3>
-                  <p className="mt-2 text-sm text-white/90 font-semibold leading-relaxed">
+                  <p className="mt-2 text-sm text-black/85 font-semibold leading-relaxed">
                     {pillar.description}
                   </p>
-                  <p className="mt-2 text-xs text-white/70 font-normal leading-relaxed border-t border-white/20 pt-2 line-clamp-2">
+                  <p className="mt-2 text-xs text-black/60 font-normal leading-relaxed border-t border-black/10 pt-2 line-clamp-2">
                     {pillar.detail}
                   </p>
                   <Link
@@ -172,7 +172,7 @@ export default function TraceFrameworkSection() {
                         }}
                         className={`
                           relative overflow-hidden rounded-2xl cursor-pointer select-none
-                          border-2 border-black bg-black
+                          border-2 border-black bg-white
                           transition-all duration-500 ease-in-out
                           shadow-[6px_6px_0px_rgba(0,0,0,1)]
                           ${
@@ -189,14 +189,14 @@ export default function TraceFrameworkSection() {
                           className={`
                             absolute inset-0 w-full h-full object-cover
                             transition-transform duration-700
-                            ${isExpanded ? "scale-105 brightness-100" : "scale-100 brightness-50 hover:brightness-70"}
+                            ${isExpanded ? "scale-105 brightness-100" : "scale-100 brightness-100"}
                           `}
                          loading="lazy" decoding="async"/>
 
                         {/* Collapsed State — Letter + Pillar Name */}
                         <div
                           className={`
-                            absolute inset-0 z-20 flex flex-col items-center justify-between p-6 bg-black/40
+                            absolute inset-0 z-20 flex flex-col items-center justify-between p-5 sm:p-6
                             transition-opacity duration-300
                             ${isExpanded ? "opacity-0 pointer-events-none" : "opacity-100"}
                           `}
@@ -205,20 +205,22 @@ export default function TraceFrameworkSection() {
                             {pillar.letter}
                           </div>
 
-                          <div className="text-center my-auto">
-                            <h3 className="text-lg font-black uppercase text-white font-heading tracking-wider drop-shadow-md">
-                              {pillar.title}
-                            </h3>
+                          <div className="w-full text-center my-auto px-1">
+                            <div className="inline-block bg-white/95 border-2 border-black px-3 py-2 shadow-[3px_3px_0px_rgba(0,0,0,1)] backdrop-blur-sm w-full">
+                              <h3 className="text-sm sm:text-base font-black uppercase text-black font-heading tracking-wider">
+                                {pillar.title}
+                              </h3>
+                            </div>
                           </div>
 
-                          <div className="w-8 h-1 bg-white/40 rounded-full" />
+                          <div className="w-8 h-1 bg-black/30 rounded-full" />
                         </div>
 
                         {/* Expanded Content Overlay */}
                         <div
                           className={`
                             absolute inset-0 z-10
-                            bg-gradient-to-t from-black/70 via-black/25 to-transparent
+                            bg-gradient-to-t from-white via-white/90 to-transparent
                             p-6 sm:p-9 flex flex-col justify-end
                             transition-opacity duration-500
                             ${isExpanded ? "opacity-100" : "opacity-0 pointer-events-none"}
@@ -243,17 +245,17 @@ export default function TraceFrameworkSection() {
                                 </div>
 
                                 {/* Title */}
-                                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black uppercase leading-tight text-white font-heading">
+                                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black uppercase leading-tight text-black font-heading">
                                   {pillar.title}
                                 </h3>
 
                                 {/* Description */}
-                                <p className="mt-3 text-sm sm:text-base text-white/90 font-semibold leading-relaxed max-w-xl">
+                                <p className="mt-3 text-sm sm:text-base text-black/85 font-semibold leading-relaxed max-w-xl">
                                   {pillar.description}
                                 </p>
 
                                 {/* Detailed Narrative */}
-                                <p className="mt-3 text-xs sm:text-sm text-white/70 font-normal leading-relaxed border-t border-white/20 pt-3 max-w-xl">
+                                <p className="mt-3 text-xs sm:text-sm text-black/60 font-normal leading-relaxed border-t border-black/10 pt-3 max-w-xl">
                                   {pillar.detail}
                                 </p>
 

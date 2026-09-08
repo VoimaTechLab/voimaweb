@@ -1,4 +1,4 @@
-import { getBlogData, getEventsData, getHomeData } from "@/sanity/sanityService";
+import { getBlogData, getCachedSanityData, getEventsData, getHomeData } from "@/sanity/sanityService";
 import { BookOpenText, Brain, Globe, HeartPulse, ShieldCheck, Stethoscope } from "lucide-react";
 import { useEffect, useState } from "react";
 import {
@@ -19,6 +19,63 @@ import {
     whoIsVoima,
 } from "../../data/homeData";
 
+const mapEventToProgram = (event) => ({
+  ...event,
+  id: event.slug || event._id,
+  title: event.title,
+  description: event.excerpt || event.description || "",
+  image: event.coverMedia?.src || null,
+  category: event.category || "Voima Initiative",
+  date: event.date || "",
+  location: event.location || "",
+  featured: event.featured || false,
+  slug: event.slug,
+  link: `/events/${event.slug}`,
+  _rawEvent: event,
+});
+
+const mapPostToArticle = (post) => ({
+  ...post,
+  id: post.slug,
+  slug: post.slug,
+  title: post.title,
+  description: post.excerpt || post.description || "",
+  image: post.media?.src || post.image || null,
+  date: post.publishedAt
+    ? new Date(post.publishedAt).toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+      })
+    : post.date || "",
+  category: post.category || "",
+  readTime: post.readTime || "",
+  _rawPost: post,
+});
+
+const getInitialPrograms = () => {
+  const cached = getCachedSanityData("events_data");
+  const list = cached?.events || (Array.isArray(cached) ? cached : []);
+  if (list.length > 0) {
+    return list.slice(0, 3).map(mapEventToProgram);
+  }
+  return [];
+};
+
+const getInitialArticles = () => {
+  const cached = getCachedSanityData("blog_data");
+  if (cached) {
+    const list = [
+      ...(cached.featuredPost ? [cached.featuredPost] : []),
+      ...(cached.posts || []),
+    ].filter(Boolean);
+    if (list.length > 0) {
+      return list.slice(0, 3).map(mapPostToArticle);
+    }
+  }
+  return [];
+};
+
 /* FALLBACK HOME DATA */
 const FALLBACK = {
   heroSlides,
@@ -34,9 +91,15 @@ const FALLBACK = {
   whoIsVoima,
   traceFrameworkSection,
   globalReachSection,
-  programsPreviewSection,
-  programs: programsPreviewSection?.programs || [],
-  newsPreviewSection,
+  programsPreviewSection: {
+    ...programsPreviewSection,
+    programs: getInitialPrograms(),
+  },
+  programs: getInitialPrograms(),
+  newsPreviewSection: {
+    ...newsPreviewSection,
+    articles: getInitialArticles(),
+  },
   faqSection,
 };
 
@@ -164,23 +227,12 @@ export function useHome() {
       .then(([homeData, eventsData, blogData]) => {
         inflight = null;
         const d = homeData || {};
-        const events = eventsData?.events || [];
+        const events = eventsData?.events || (Array.isArray(eventsData) ? eventsData : []);
 
         const mappedPrograms =
           events.length > 0
-            ? events.slice(0, 3).map((event) => ({
-                id: event.slug,
-                title: event.title,
-                description: event.excerpt || event.description || "",
-                image: event.coverMedia?.src || null,
-                category: event.category || "Voima Initiative",
-                date: event.date || "",
-                location: event.location || "",
-                featured: event.featured || false,
-                slug: event.slug,
-                link: `/events/${event.slug}`,
-              }))
-            : FALLBACK.programs;
+            ? events.slice(0, 3).map(mapEventToProgram)
+            : getInitialPrograms();
 
         const mappedArticles = blogData
           ? [
@@ -189,23 +241,8 @@ export function useHome() {
             ]
               .filter(Boolean)
               .slice(0, 3)
-              .map((post) => ({
-                id: post.slug,
-                slug: post.slug,
-                title: post.title,
-                description: post.excerpt || "",
-                image: post.image || null,
-                date: post.publishedAt
-                  ? new Date(post.publishedAt).toLocaleDateString("en-US", {
-                      month: "short",
-                      day: "numeric",
-                      year: "numeric",
-                    })
-                  : "",
-                category: post.category || "",
-                readTime: post.readTime || "",
-              }))
-          : [];
+              .map(mapPostToArticle)
+          : getInitialArticles();
 
         cache = {
           heroSlides: d.heroSlides?.length > 0 ? d.heroSlides : FALLBACK.heroSlides,
@@ -260,7 +297,7 @@ export function useHome() {
             articles:
               mappedArticles.length > 0
                 ? mappedArticles
-                : FALLBACK.newsPreviewSection?.articles || [],
+                : getInitialArticles(),
           },
 
           faqSection: {

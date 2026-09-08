@@ -1,15 +1,16 @@
 import { ArrowLeft } from "lucide-react";
 import { useMilestone } from "@/publicSite/hooks/useJourney";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import DetailSkeleton from "@/components/ui/DetailSkeleton";
 
 export default function OurJourneyStory() {
+  const location = useLocation();
   const { slug } = useParams();
-  const { milestone: story, loading } = useMilestone(slug); // keeps `story` var name
+  const { milestone: story, loading } = useMilestone(slug, location.state?.story); // keeps `story` var name
 
   if (loading && !story) {
-    return <DetailSkeleton type="article" />;
+    return <DetailSkeleton />;
   }
 
   if (!story) {

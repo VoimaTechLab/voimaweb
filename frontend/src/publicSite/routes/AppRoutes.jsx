@@ -42,6 +42,23 @@ const SCDResources = lazy(() => import("../pages/SCDResources.jsx"));
 
 const NotFound = lazy(() => import("../pages/NotFound"));
 
+// Prefetch frequent detail routes during idle time so navigation is instant
+if (typeof window !== "undefined") {
+  const prefetchDetailPages = () => {
+    import("../pages/BlogDetail");
+    import("../pages/EventDetail");
+    import("../pages/OurJourneyStory");
+    import("../pages/CareerDetail");
+    import("../pages/Blog");
+    import("../pages/Events");
+  };
+  if ("requestIdleCallback" in window) {
+    window.requestIdleCallback(prefetchDetailPages, { timeout: 2000 });
+  } else {
+    setTimeout(prefetchDetailPages, 1000);
+  }
+}
+
 export default function AppRoutes() {
   return (
     <Suspense fallback={<PageLoader />}>

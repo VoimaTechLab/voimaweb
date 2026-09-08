@@ -133,20 +133,20 @@ export default function ToolsForChange() {
             speed={45}
             renderCard={(tool) => {
               return (
-                <div className="relative overflow-hidden rounded-2xl border-2 border-black bg-black shadow-[6px_6px_0px_rgba(0,0,0,1)] h-[380px]">
+                <div className="relative overflow-hidden rounded-2xl border-2 border-black bg-white shadow-[6px_6px_0px_rgba(0,0,0,1)] h-[380px]">
                   <img
                     src={tool.image}
                     alt={tool.title}
                     className="absolute inset-0 w-full h-full object-cover scale-105 brightness-100"
                    loading="lazy" decoding="async"/>
-                  <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/70 via-black/25 to-transparent p-5 flex flex-col justify-end">
+                  <div className="absolute inset-0 z-10 bg-gradient-to-t from-white via-white/90 to-transparent p-5 flex flex-col justify-end">
                     <div className="inline-flex items-center gap-1.5 bg-[#BC1D26] px-3 py-1 text-xs font-black uppercase tracking-wider text-white border-2 border-black shadow-[2px_2px_0px_rgba(0,0,0,1)] mb-3 self-start">
                       <Sparkles size={12} /> {tool.badge}
                     </div>
-                    <h3 className="text-2xl font-black uppercase leading-tight text-white font-heading">
+                    <h3 className="text-2xl font-black uppercase leading-tight text-black font-heading">
                       {tool.title}
                     </h3>
-                    <p className="mt-2 text-sm text-white/90 font-semibold leading-relaxed">
+                    <p className="mt-2 text-sm text-black/85 font-semibold leading-relaxed">
                       {tool.description}
                     </p>
                     <Link
@@ -184,7 +184,7 @@ export default function ToolsForChange() {
                         }}
                         className={`
                           relative overflow-hidden rounded-2xl cursor-pointer select-none
-                          border-2 border-black bg-black
+                          border-2 border-black bg-white
                           transition-all duration-500 ease-in-out
                           shadow-[6px_6px_0px_rgba(0,0,0,1)]
                           ${
@@ -201,14 +201,14 @@ export default function ToolsForChange() {
                           className={`
                             absolute inset-0 w-full h-full object-cover
                             transition-transform duration-700
-                            ${isExpanded ? "scale-105 brightness-100" : "scale-100 brightness-60 hover:brightness-75"}
+                            ${isExpanded ? "scale-105 brightness-100" : "scale-100 brightness-100"}
                           `}
                          loading="lazy" decoding="async"/>
 
                         {/* Collapsed State — Icon + Badge */}
                         <div
                           className={`
-                            absolute inset-0 z-20 flex flex-col items-center justify-center gap-4 bg-black/40
+                            absolute inset-0 z-20 flex flex-col items-center justify-center gap-4
                             transition-opacity duration-300
                             ${isExpanded ? "opacity-0 pointer-events-none" : "opacity-100"}
                           `}
@@ -225,7 +225,7 @@ export default function ToolsForChange() {
                         <div
                           className={`
                             absolute inset-0 z-10
-                            bg-gradient-to-t from-black/70 via-black/25 to-transparent
+                            bg-gradient-to-t from-white via-white/90 to-transparent
                             p-6 sm:p-8 flex flex-col justify-end
                             transition-opacity duration-500
                             ${isExpanded ? "opacity-100" : "opacity-0 pointer-events-none"}
@@ -250,12 +250,12 @@ export default function ToolsForChange() {
                                 </div>
 
                                 {/* Title */}
-                                <h3 className="text-2xl sm:text-3xl font-black uppercase leading-tight text-white font-heading">
+                                <h3 className="text-2xl sm:text-3xl font-black uppercase leading-tight text-black font-heading">
                                   {tool.title}
                                 </h3>
 
                                 {/* Description */}
-                                <p className="mt-3 text-sm sm:text-base text-white/90 font-semibold leading-relaxed max-w-xl">
+                                <p className="mt-3 text-sm sm:text-base text-black/85 font-semibold leading-relaxed max-w-xl">
                                   {tool.description}
                                 </p>
 
@@ -264,8 +264,8 @@ export default function ToolsForChange() {
                                   to={tool.link}
                                   className="
                                     mt-5 group/btn inline-flex items-center gap-2.5
-                                    bg-white px-5 py-3
-                                    text-sm font-black uppercase tracking-wider text-[#BC1D26]
+                                    bg-[#BC1D26] px-5 py-3
+                                    text-sm font-black uppercase tracking-wider text-white
                                     border-2 border-black
                                     shadow-[4px_4px_0px_rgba(0,0,0,1)] transition-all duration-200
                                     hover:-translate-y-0.5 hover:shadow-[6px_6px_0px_rgba(0,0,0,1)]

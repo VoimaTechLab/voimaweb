@@ -147,6 +147,7 @@ function MilestoneCard({ item, index }) {
 
           <Link
             to={`/our-journey/${item.slug}`}
+            state={{ story: item }}
             className="
               group mt-10 inline-flex items-center gap-3
               border-2 border-black
