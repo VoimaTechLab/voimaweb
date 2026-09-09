@@ -56,6 +56,11 @@ export default function BlogPreview() {
 
   const currentActive = hoveredIdx !== null ? hoveredIdx : active;
 
+  useEffect(() => {
+    // Prefetch BlogDetail chunk so clicking navigation is instant
+    import("@/publicSite/pages/BlogDetail");
+  }, []);
+
   if (total === 0) return null;
 
   return (
@@ -119,25 +124,28 @@ export default function BlogPreview() {
             gap={16}
             speed={45}
             renderCard={(article) => (
-              <div className="relative overflow-hidden rounded-2xl border-2 border-black bg-black shadow-[6px_6px_0px_rgba(0,0,0,1)] h-[380px]">
+              <div className="relative overflow-hidden rounded-2xl border-2 border-black bg-white shadow-[6px_6px_0px_rgba(0,0,0,1)] h-[380px]">
                 <img
                   src={article.image}
                   alt={article.title}
                   className="absolute inset-0 object-cover w-full h-full scale-105 brightness-100"
                  loading="lazy" decoding="async"/>
-                <div className="absolute inset-0 z-10 flex flex-col justify-end p-5 bg-gradient-to-t from-black/70 via-black/25 to-transparent">
+                <div className="absolute inset-0 z-10 flex flex-col justify-end p-5 bg-gradient-to-t from-white via-white/90 to-transparent">
                   <div className="inline-flex items-center gap-1.5 bg-white text-[#BC1D26] border-2 border-black px-3 py-1 text-xs font-black uppercase tracking-tight shadow-[2px_2px_0px_rgba(0,0,0,1)] mb-3 self-start">
                     <CalendarDays size={12} />
                     {article.date}
                   </div>
-                  <h3 className="text-xl font-black uppercase leading-tight text-white font-heading line-clamp-2">
+                  <h3 className="text-xl font-black uppercase leading-tight text-black font-heading line-clamp-2">
                     {article.title}
                   </h3>
-                  <p className="mt-2 text-xs font-semibold leading-relaxed text-white/85 sm:text-sm line-clamp-2">
+                  <p className="mt-2 text-xs font-semibold leading-relaxed text-black/80 sm:text-sm line-clamp-2">
                     {article.description}
                   </p>
                   <Link
                     to={`/blog/${article.slug || ""}`}
+                    state={{ post: article._rawPost || article }}
+                    onMouseEnter={() => import("@/publicSite/pages/BlogDetail")}
+                    onFocus={() => import("@/publicSite/pages/BlogDetail")}
                     className="mt-4 inline-flex items-center gap-2 bg-[#BC1D26] px-4 py-2 text-xs font-black uppercase tracking-wider text-white border-2 border-black shadow-[3px_3px_0px_rgba(0,0,0,1)] self-start hover:bg-white hover:text-black"
                   >
                     Read More
@@ -167,7 +175,7 @@ export default function BlogPreview() {
                         style={{
                           flex: isExpanded ? 3.8 : 1,
                         }}
-                        className={`relative overflow-hidden rounded-2xl cursor-pointer select-none border-2 border-black bg-black transition-all duration-500 ease-in-out shadow-[6px_6px_0px_rgba(0,0,0,1)] ${
+                        className={`relative overflow-hidden rounded-2xl cursor-pointer select-none border-2 border-black bg-white transition-all duration-500 ease-in-out shadow-[6px_6px_0px_rgba(0,0,0,1)] ${
                           isExpanded
                             ? "shadow-[10px_10px_0px_rgba(188,29,38,1)] border-[#BC1D26]"
                             : "hover:border-[#BC1D26]/70"
@@ -180,7 +188,7 @@ export default function BlogPreview() {
                           className={`absolute inset-0 w-full h-full object-cover transition-transform duration-700 ${
                             isExpanded
                               ? "scale-105 brightness-100"
-                              : "scale-100 brightness-75 hover:brightness-90"
+                              : "scale-100 brightness-100"
                           }`}
                          loading="lazy" decoding="async"/>
 
@@ -198,9 +206,9 @@ export default function BlogPreview() {
                           </span>
                         </div>
 
-                        {/* Expanded Dark Gradient Content Overlay */}
+                        {/* Expanded Content Overlay */}
                         <div
-                          className={`absolute inset-0 z-10 bg-gradient-to-t from-black/70 via-black/25 to-transparent p-6 sm:p-8 flex flex-col justify-end transition-opacity duration-500 ${
+                          className={`absolute inset-0 z-10 bg-gradient-to-t from-white via-white/90 to-transparent p-6 sm:p-8 flex flex-col justify-end transition-opacity duration-500 ${
                             isExpanded
                               ? "opacity-100"
                               : "opacity-0 pointer-events-none"
@@ -223,18 +231,21 @@ export default function BlogPreview() {
                                 </div>
 
                                 {/* Title */}
-                                <h3 className="text-2xl font-black uppercase leading-tight text-white font-heading sm:text-3xl">
+                                <h3 className="text-2xl font-black uppercase leading-tight text-black font-heading sm:text-3xl">
                                   {article.title}
                                 </h3>
 
                                 {/* Description */}
-                                <p className="max-w-xl mt-3 text-sm font-semibold leading-relaxed text-white/85 sm:text-base">
+                                <p className="max-w-xl mt-3 text-sm font-semibold leading-relaxed text-black/80 sm:text-base">
                                   {article.description}
                                 </p>
 
                                 {/* CTA Button */}
                                 <Link
                                   to={`/blog/${article.slug || ""}`}
+                                  state={{ post: article._rawPost || article }}
+                                  onMouseEnter={() => import("@/publicSite/pages/BlogDetail")}
+                                  onFocus={() => import("@/publicSite/pages/BlogDetail")}
                                   className="mt-5 group/btn inline-flex items-center gap-2 bg-[#BC1D26] px-5 py-3 text-sm font-black uppercase tracking-wider text-white border-2 border-black shadow-[4px_4px_0px_rgba(0,0,0,1)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-white hover:text-black hover:shadow-[6px_6px_0px_rgba(0,0,0,1)]"
                                 >
                                   Read More

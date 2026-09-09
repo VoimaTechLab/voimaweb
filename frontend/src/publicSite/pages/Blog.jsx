@@ -37,6 +37,7 @@ export default function Blog() {
           <ScrollReveal variant="scale-in">
             <Link
               to={`/blog/${featuredPost.slug}`}
+              state={{ post: featuredPost }}
               className="
                 group
                 grid
@@ -148,6 +149,7 @@ export default function Blog() {
               <ScrollReveal key={post.slug} variant="fade-up" delay={0.1 * index}>
                 <Link
                   to={`/blog/${post.slug}`}
+                  state={{ post }}
                   className="
                     group
                     flex flex-col justify-between
@@ -279,6 +281,7 @@ export default function Blog() {
               <Link
                 key={story.slug}
                 to={`/blog/${story.slug}`}
+                state={{ post: story }}
                 className="
                   group
                   overflow-hidden

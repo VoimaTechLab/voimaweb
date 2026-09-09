@@ -112,32 +112,32 @@ export default function GlobalReachSection() {
             gap={16}
             speed={45}
             renderCard={(stat, index) => (
-              <div className="relative overflow-hidden rounded-2xl border-2 border-black bg-black shadow-[6px_6px_0px_rgba(0,0,0,1)] h-[380px]">
+              <div className="relative overflow-hidden rounded-2xl border-2 border-black bg-white shadow-[6px_6px_0px_rgba(0,0,0,1)] h-[380px]">
                 <img
                   src={stat.image}
                   alt={stat.label}
                   className="absolute inset-0 w-full h-full object-cover scale-105 brightness-100"
                  loading="lazy" decoding="async"/>
-                <div className="absolute inset-0 z-10 p-5 flex flex-col justify-end bg-gradient-to-t from-black/70 via-black/25 to-transparent">
+                <div className="absolute inset-0 z-10 p-5 flex flex-col justify-end bg-gradient-to-t from-white via-white/90 to-transparent">
                   <div className="flex items-center justify-between mb-3">
                     <span className="inline-block bg-[#BC1D26] text-white border-2 border-black px-3 py-1 text-xs font-black uppercase tracking-wider shadow-[2px_2px_0px_rgba(0,0,0,1)]">
                       {stat.badge}
                     </span>
-                    <span className="text-[11px] font-black uppercase tracking-widest text-white/70">
+                    <span className="text-[11px] font-black uppercase tracking-widest text-black/60 font-mono">
                       METRIC 0{index + 1}
                     </span>
                   </div>
-                  <div className="text-4xl font-black text-white font-heading leading-none tracking-tight">
+                  <div className="text-4xl font-black text-black font-heading leading-none tracking-tight">
                     <CountUp from={0} to={stat.number} suffix={stat.suffix} duration={2.0} />
                   </div>
-                  <h3 className="text-xl font-black text-[#F47B3A] font-heading leading-tight mt-1">
+                  <h3 className="text-xl font-black text-[#BC1D26] font-heading leading-tight mt-1">
                     {stat.label}
                   </h3>
-                  <div className="w-full h-[1px] bg-white/20 my-2.5" />
-                  <p className="text-sm font-bold text-white/95 leading-snug">
+                  <div className="w-full h-[1px] bg-black/15 my-2.5" />
+                  <p className="text-sm font-bold text-black/85 leading-snug">
                     {stat.description}
                   </p>
-                  <p className="mt-1 text-xs text-white/70 font-semibold leading-relaxed border-t border-white/10 pt-1.5 line-clamp-2">
+                  <p className="mt-1 text-xs text-black/60 font-semibold leading-relaxed border-t border-black/10 pt-1.5 line-clamp-2">
                     {stat.detail}
                   </p>
                 </div>
@@ -167,7 +167,7 @@ export default function GlobalReachSection() {
                         className={`
                           relative overflow-hidden rounded-2xl cursor-pointer select-none
                           border-2 sm:border-3 border-black
-                          bg-black transition-all duration-500 ease-in-out
+                          bg-white transition-all duration-500 ease-in-out
                           shadow-[6px_6px_0px_rgba(0,0,0,1)]
                           ${
                             isExpanded
@@ -183,39 +183,41 @@ export default function GlobalReachSection() {
                           className={`
                             absolute inset-0 w-full h-full object-cover
                             transition-transform duration-700
-                            ${isExpanded ? "scale-105 brightness-100" : "scale-100 brightness-50 hover:brightness-70"}
+                            ${isExpanded ? "scale-105 brightness-100" : "scale-100 brightness-100"}
                           `}
                          loading="lazy" decoding="async"/>
 
                         {/* Collapsed State View */}
                         <div
                           className={`
-                            absolute inset-0 z-20 flex flex-col items-center justify-between p-6 bg-black/40
+                            absolute inset-0 z-20 flex flex-col items-center justify-between p-5 sm:p-6
                             transition-opacity duration-300
                             ${isExpanded ? "opacity-0 pointer-events-none" : "opacity-100"}
                           `}
                         >
-                          <span className="inline-block bg-[#BC1D26] text-white border border-black px-2 py-1 text-[10px] font-black uppercase tracking-wider shadow-[2px_2px_0px_rgba(0,0,0,1)]">
+                          <span className="inline-block bg-[#BC1D26] text-white border-2 border-black px-2.5 py-1 text-[11px] font-black uppercase tracking-wider shadow-[2px_2px_0px_rgba(0,0,0,1)]">
                             0{index + 1}
                           </span>
 
-                          <div className="text-center my-auto">
-                            <div className="text-3xl lg:text-4xl font-black text-white font-heading leading-tight drop-shadow-md">
-                              {stat.value}
-                            </div>
-                            <div className="mt-2 text-xs font-black uppercase tracking-wider text-white/90 line-clamp-2 drop-shadow">
-                              {stat.label}
+                          <div className="w-full text-center my-auto px-1">
+                            <div className="inline-block bg-white/95 border-2 border-black px-3 py-2.5 shadow-[3px_3px_0px_rgba(0,0,0,1)] backdrop-blur-sm w-full">
+                              <div className="text-2xl lg:text-3xl font-black text-black font-heading leading-tight">
+                                {stat.value}
+                              </div>
+                              <div className="mt-1 text-[11px] font-black uppercase tracking-wider text-[#BC1D26] line-clamp-2">
+                                {stat.label}
+                              </div>
                             </div>
                           </div>
 
-                          <div className="w-8 h-1 bg-white/40 rounded-full" />
+                          <div className="w-8 h-1 bg-black/30 rounded-full" />
                         </div>
 
                         {/* Expanded State View */}
                         <div
                           className={`
                             absolute inset-0 z-10 p-7 sm:p-9 flex flex-col justify-end
-                            transition-opacity duration-500 bg-gradient-to-t from-black/70 via-black/25 to-transparent
+                            transition-opacity duration-500 bg-gradient-to-t from-white via-white/90 to-transparent
                             ${isExpanded ? "opacity-100" : "opacity-0 pointer-events-none"}
                           `}
                         >
@@ -233,13 +235,13 @@ export default function GlobalReachSection() {
                                   <span className="inline-block bg-[#BC1D26] text-white border-2 border-black px-3.5 py-1.5 text-xs font-black uppercase tracking-wider shadow-[3px_3px_0px_rgba(0,0,0,1)]">
                                     {stat.badge}
                                   </span>
-                                  <span className="text-xs font-black uppercase tracking-widest text-white/60">
+                                  <span className="text-xs font-black uppercase tracking-widest text-black/60 font-mono">
                                     METRIC 0{index + 1} / 0{total}
                                   </span>
                                 </div>
 
-                                {/* Large Stat Title (White) */}
-                                <div className="text-4xl sm:text-5xl lg:text-6xl font-black text-white font-heading leading-none tracking-tight">
+                                {/* Large Stat Title */}
+                                <div className="text-4xl sm:text-5xl lg:text-6xl font-black text-black font-heading leading-none tracking-tight">
                                   <CountUp
                                     from={0}
                                     to={stat.number}
@@ -248,20 +250,20 @@ export default function GlobalReachSection() {
                                   />
                                 </div>
 
-                                <h3 className="text-2xl sm:text-3xl font-black text-[#F47B3A] font-heading leading-tight mt-1">
+                                <h3 className="text-2xl sm:text-3xl font-black text-[#BC1D26] font-heading leading-tight mt-1">
                                   {stat.label}
                                 </h3>
 
                                 {/* Divider */}
-                                <div className="w-full h-[2px] bg-white/30 my-4" />
+                                <div className="w-full h-[2px] bg-black/15 my-4" />
 
                                 {/* Main Description */}
-                                <p className="text-base sm:text-lg font-bold text-white/95 leading-relaxed max-w-xl">
+                                <p className="text-base sm:text-lg font-bold text-black/85 leading-relaxed max-w-xl">
                                   {stat.description}
                                 </p>
 
                                 {/* Detailed Narrative */}
-                                <p className="mt-2 text-xs sm:text-sm text-white/70 font-semibold leading-relaxed border-t border-white/10 pt-2 max-w-xl">
+                                <p className="mt-2 text-xs sm:text-sm text-black/60 font-semibold leading-relaxed border-t border-black/10 pt-2 max-w-xl">
                                   {stat.detail}
                                 </p>
                               </motion.div>

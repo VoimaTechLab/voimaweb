@@ -13,19 +13,23 @@ export function useMilestones() {
 
 const staticFind = (slug) => fbMilestones.find((m) => m.slug === slug) || null;
 
-export function useMilestone(slug) {
-  const [milestone, setMilestone] = useState(() => staticFind(slug));
-  const [loading, setLoading] = useState(true);
+export function useMilestone(slug, initialStory) {
+  const [milestone, setMilestone] = useState(() => initialStory || staticFind(slug));
+  const [loading, setLoading] = useState(() => !initialStory && !staticFind(slug));
 
   useEffect(() => {
     let mounted = true;
     getMilestone(slug).then((m) => {
       if (!mounted) return;
-      setMilestone(m || staticFind(slug));
+      if (m) {
+        setMilestone(m);
+      } else if (!initialStory) {
+        setMilestone(staticFind(slug));
+      }
       setLoading(false);
     });
     return () => { mounted = false; };
-  }, [slug]);
+  }, [slug, initialStory]);
 
   return { milestone, loading };
 }

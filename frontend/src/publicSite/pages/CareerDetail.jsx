@@ -1,12 +1,13 @@
 import { useCareerRole } from "@/publicSite/hooks/useCareerRole";
 import { ArrowLeft, ArrowRight, CheckCircle2 } from "lucide-react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 
 export default function CareerDetail() {
+  const location = useLocation();
   const { slug } = useParams();
 
-  const { job, loading } = useCareerRole(slug);
+  const { job, loading } = useCareerRole(slug, location.state?.job);
 
   if (loading) return null;
 

@@ -146,27 +146,27 @@ export default function ImpactStats() {
             renderCard={(item) => {
               const { numericVal, suffix } = parseStat(item.title);
               return (
-                <div className="relative overflow-hidden rounded-2xl border-2 border-black bg-black shadow-[6px_6px_0px_rgba(0,0,0,1)] h-[380px]">
+                <div className="relative overflow-hidden rounded-2xl border-2 border-black bg-white shadow-[6px_6px_0px_rgba(0,0,0,1)] h-[380px]">
                   <img
                     src={item.image}
                     alt={item.title}
                     className="absolute inset-0 w-full h-full object-cover scale-105 brightness-100"
                    loading="lazy" decoding="async"/>
-                  <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/70 via-black/25 to-transparent p-5 flex flex-col justify-end">
+                  <div className="absolute inset-0 z-10 bg-gradient-to-t from-white via-white/90 to-transparent p-5 flex flex-col justify-end">
                     <div className="inline-block bg-[#BC1D26] text-white border-2 border-black px-3 py-1.5 text-xs font-black uppercase tracking-wider shadow-[3px_3px_0px_rgba(0,0,0,1)] mb-3 self-start">
                       {item.backTitle}
                     </div>
-                    <div className="text-3xl font-black text-white tracking-tight font-heading leading-none">
+                    <div className="text-3xl font-black text-black tracking-tight font-heading leading-none">
                       {numericVal > 0 ? (
                         <CountUp from={0} to={numericVal} suffix={suffix} duration={2.2} />
                       ) : (
                         item.title
                       )}
                     </div>
-                    <p className="mt-2 text-sm text-white/90 font-semibold leading-relaxed">
+                    <p className="mt-2 text-sm text-black/85 font-semibold leading-relaxed">
                       {item.description}
                     </p>
-                    <p className="mt-2 text-xs text-white/70 font-normal leading-relaxed border-t border-white/20 pt-2">
+                    <p className="mt-2 text-xs text-black/60 font-normal leading-relaxed border-t border-black/10 pt-2">
                       {item.backStory}
                     </p>
                   </div>
@@ -198,7 +198,7 @@ export default function ImpactStats() {
                         className={`
                           relative overflow-hidden rounded-2xl cursor-pointer select-none
                           border-2 border-black
-                          bg-black transition-all duration-500 ease-in-out
+                          bg-white transition-all duration-500 ease-in-out
                           shadow-[6px_6px_0px_rgba(0,0,0,1)]
                           ${
                             isExpanded
@@ -213,7 +213,7 @@ export default function ImpactStats() {
                           className={`
                             absolute inset-0 w-full h-full object-cover
                             transition-transform duration-700
-                            ${isExpanded ? "scale-105 brightness-100" : "scale-100 brightness-75 hover:brightness-90"}
+                            ${isExpanded ? "scale-105 brightness-100" : "scale-100 brightness-100"}
                           `}
                          loading="lazy" decoding="async"/>
                         <div
@@ -229,7 +229,7 @@ export default function ImpactStats() {
                         <div
                           className={`
                             absolute inset-0 z-10
-                            bg-gradient-to-t from-black/70 via-black/25 to-transparent
+                            bg-gradient-to-t from-white via-white/90 to-transparent
                             p-6 sm:p-8 flex flex-col justify-end
                             transition-opacity duration-500
                             ${isExpanded ? "opacity-100" : "opacity-0 pointer-events-none"}
@@ -246,17 +246,17 @@ export default function ImpactStats() {
                                 <div className="inline-block bg-[#BC1D26] text-white border-2 border-black px-4 py-1.5 text-xs font-black uppercase tracking-wider shadow-[3px_3px_0px_rgba(0,0,0,1)] mb-3">
                                   {area.backTitle}
                                 </div>
-                                <div className="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight font-heading leading-none">
+                                <div className="text-4xl sm:text-5xl lg:text-6xl font-black text-black tracking-tight font-heading leading-none">
                                   {numericVal > 0 ? (
                                     <CountUp from={0} to={numericVal} suffix={suffix} duration={2.2} />
                                   ) : (
                                     area.title
                                   )}
                                 </div>
-                                <p className="mt-3 text-sm sm:text-base text-white/90 font-semibold leading-relaxed max-w-xl">
+                                <p className="mt-3 text-sm sm:text-base text-black/85 font-semibold leading-relaxed max-w-xl">
                                   {area.description}
                                 </p>
-                                <p className="mt-3 text-xs sm:text-sm text-white/70 font-normal leading-relaxed border-t border-white/20 pt-3 max-w-xl">
+                                <p className="mt-3 text-xs sm:text-sm text-black/60 font-normal leading-relaxed border-t border-black/10 pt-3 max-w-xl">
                                   {area.backStory}
                                 </p>
                               </motion.div>
@@ -293,14 +293,32 @@ export default function ImpactStats() {
         </ScrollReveal>
 
         {/* Video Banner Section */}
-        <div className="mt-32">
-          <div className="relative mb-24 lg:min-h-[760px] xl:min-h-[820px]">
-            {/* Header above the video card */}
-            <div className="relative z-10 max-w-4xl lg:ml-auto lg:w-[760px] xl:w-[840px]">
+        <div className="mt-24 lg:mt-32">
+          {/* Top Section: Text & Hero Image (text elevated above picture level) */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start mb-10 sm:mb-14 lg:mb-16">
+            {/* Hero Image on the left — positioned lower than the elevated text */}
+            <div className="lg:col-span-6 xl:col-span-6 order-2 lg:order-1 flex justify-center lg:justify-start pt-2 sm:pt-4 lg:pt-12 xl:pt-16">
+              <ScrollReveal
+                variant="fade-right"
+                delay={0.15}
+                className="w-full max-w-[420px] sm:max-w-[480px] lg:max-w-[520px] xl:max-w-[560px]"
+              >
+                <img
+                  src={banner.image}
+                  alt={banner.title || "Why It Matters"}
+                  className="w-full h-auto object-contain select-none"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </ScrollReveal>
+            </div>
+
+            {/* Text Content on the right — elevated higher up */}
+            <div className="lg:col-span-6 xl:col-span-6 order-1 lg:order-2 flex flex-col justify-start -mt-2 lg:-mt-6 xl:-mt-8">
               <ScrollReveal variant="fade-down">
                 <span
                   className="
-                    mb-6 inline-block
+                    mb-4 sm:mb-6 inline-block
                     border-2 border-black
                     bg-[#BC1D26]
                     px-5 py-2
@@ -316,8 +334,8 @@ export default function ImpactStats() {
               <ScrollReveal variant="fade-up" delay={0.1}>
                 <h3
                   className="
-                    text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black uppercase
-                    leading-none tracking-tight text-black
+                    text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-black uppercase
+                    leading-[0.98] tracking-tight text-black
                     font-heading
                   "
                 >
@@ -328,8 +346,8 @@ export default function ImpactStats() {
               <ScrollReveal variant="fade-up" delay={0.2}>
                 <p
                   className="
-                    mt-6 max-w-xl lg:ml-auto
-                    text-base sm:text-lg font-semibold leading-8
+                    mt-4 sm:mt-6 max-w-lg
+                    text-base sm:text-lg font-semibold leading-relaxed sm:leading-8
                     text-black/75
                   "
                 >
@@ -337,28 +355,16 @@ export default function ImpactStats() {
                 </p>
               </ScrollReveal>
             </div>
-
-            {/* Hero Image above the video card */}
-            <ScrollReveal
-              variant="fade-right"
-              delay={0.25}
-              className="mt-8 lg:absolute lg:left-[calc(50%-50vw-8rem)] lg:top-0 lg:mt-0 lg:w-[min(100vw,1280px)] lg:max-w-none xl:left-[calc(50%-50vw-10rem)]"
-            >
-              <img
-                src={banner.image}
-                alt={banner.title || "Why It Matters"}
-                className="block w-full max-w-none object-contain"
-               loading="lazy" decoding="async"/>
-            </ScrollReveal>
           </div>
 
-          {/* Clean Video Card Container */}
-          <ScrollReveal variant="scale-in" delay={0.3} className="mt-16">
+          {/* Clean Video Card Container — sits below the picture and text */}
+          <ScrollReveal variant="scale-in" delay={0.25}>
             <div
               className="
                 relative overflow-hidden rounded-2xl
                 border-4 border-black
                 shadow-[8px_8px_0px_rgba(0,0,0,1)] sm:shadow-[12px_12px_0px_rgba(0,0,0,1)] md:shadow-[16px_16px_0px_rgba(0,0,0,1)]
+                bg-white
               "
             >
               <video
@@ -367,7 +373,7 @@ export default function ImpactStats() {
                 loop
                 playsInline
                 className="
-                  h-[400px] sm:h-[500px] md:h-[600px] lg:h-[680px] w-full
+                  h-[380px] sm:h-[480px] md:h-[560px] lg:h-[640px] w-full
                   object-cover
                 "
               >

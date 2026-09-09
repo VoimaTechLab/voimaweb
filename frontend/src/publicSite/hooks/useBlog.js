@@ -45,19 +45,23 @@ const staticFind = (slug) =>
     })),
   ].find((p) => p.slug === slug) || null;
 
-export function useBlogPost(slug) {
-  const [post, setPost] = useState(() => staticFind(slug));
-  const [loading, setLoading] = useState(true);
+export function useBlogPost(slug, initialPost) {
+  const [post, setPost] = useState(() => initialPost || staticFind(slug));
+  const [loading, setLoading] = useState(() => !initialPost && !staticFind(slug));
 
   useEffect(() => {
     let mounted = true;
     getBlogPost(slug).then((p) => {
       if (!mounted) return;
-      setPost(p || staticFind(slug)); // Sanity first, else static
+      if (p) {
+        setPost(p);
+      } else if (!initialPost) {
+        setPost(staticFind(slug));
+      }
       setLoading(false);
     });
     return () => { mounted = false; };
-  }, [slug]);
+  }, [slug, initialPost]);
 
   return { post, loading };
 }

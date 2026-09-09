@@ -57,7 +57,7 @@ export default function FeatureCard({
       >
         {/* High-Res Photography Header with Scroll Parallax */}
         {image && (
-          <div className="relative h-56 w-full overflow-hidden bg-black border-b-2 border-black">
+          <div className="relative h-56 w-full overflow-hidden bg-white border-b-2 border-black">
             <motion.img
               src={image}
               alt={title}
@@ -205,7 +205,7 @@ export default function FeatureCard({
                       {title}
                     </span>
                     <span className="inline-flex items-center gap-1.5 rounded-full bg-white/20 backdrop-blur-md px-3.5 py-1.5 text-xs font-bold text-white border border-white/20 shadow-md">
-                      <Lightbulb size={15} className="text-[#F47B3A]" /> Key Insight
+                      <Lightbulb size={15} className="text-[#BC1D26]" /> Key Insight
                     </span>
                   </div>
                 </div>

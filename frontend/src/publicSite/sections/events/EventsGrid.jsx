@@ -31,6 +31,7 @@ function EventCard({ event }) {
   return (
     <Link
       to={`/events/${event.slug}`}
+      state={{ event }}
       className="
         group
         overflow-hidden

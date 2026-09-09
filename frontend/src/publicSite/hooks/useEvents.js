@@ -25,21 +25,25 @@ export function useEvents() {
 }
 
 /* Single event */
-const staticFindEvent = (slug) => fbEvents.find((e) => e.slug === slug) || null;
+const staticFindEvent = (slug) => [fbFeatured, ...fbEvents].find((e) => e.slug === slug) || null;
 
-export function useEvent(slug) {
-  const [event, setEvent] = useState(() => staticFindEvent(slug));
-  const [loading, setLoading] = useState(true);
+export function useEvent(slug, initialEvent) {
+  const [event, setEvent] = useState(() => initialEvent || staticFindEvent(slug));
+  const [loading, setLoading] = useState(() => !initialEvent && !staticFindEvent(slug));
 
   useEffect(() => {
     let mounted = true;
     getEvent(slug).then((e) => {
       if (!mounted) return;
-      setEvent(e || staticFindEvent(slug));
+      if (e) {
+        setEvent(e);
+      } else if (!initialEvent) {
+        setEvent(staticFindEvent(slug));
+      }
       setLoading(false);
     });
     return () => { mounted = false; };
-  }, [slug]);
+  }, [slug, initialEvent]);
 
   return { event, loading };
 }

@@ -1,15 +1,16 @@
 import { ArrowLeft } from "lucide-react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { useEvent } from "../hooks/useEvents";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import DetailSkeleton from "@/components/ui/DetailSkeleton";
 
 export default function EventDetail() {
+  const location = useLocation();
   const { slug } = useParams();
-  const { event, loading } = useEvent(slug);
+  const { event, loading } = useEvent(slug, location.state?.event);
 
   if (loading && !event) {
-    return <DetailSkeleton type="event" />;
+    return <DetailSkeleton />;
   }
 
   if (!event) {
