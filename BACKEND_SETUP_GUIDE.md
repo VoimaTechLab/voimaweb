@@ -37,7 +37,7 @@ backend/
 │   ├── services/
 │   │   ├── authService.js         # Auth logic (login, register)
 │   │   ├── tokenService.js        # JWT token generation/refresh
-│   │   ├── emailService.js        # Nodemailer sender
+│   │   ├── emailService.js        # Resend sender
 │   │   ├── cloudinaryService.js   # Image upload handling
 │   │   ├── newsletterService.js   # Newsletter operations
 │   │   ├── dashboardService.js    # Analytics & stats
@@ -88,7 +88,7 @@ backend/
 - **cloudinary** (^2.5.0) - Image hosting & management
 
 ### Email
-- **nodemailer** (^6.9.16) - Email sending (SMTP)
+- **resend** - Email sending through the Resend API
 
 ### Validation
 - **zod** (^3.23.8) - Schema validation
@@ -128,14 +128,10 @@ CLOUDINARY_API_KEY=your_api_key
 CLOUDINARY_API_SECRET=your_api_secret
 CLOUDINARY_FOLDER=voima
 
-# Email (Gmail SMTP for notifications)
-SMTP_HOST=smtp.gmail.com
-SMTP_PORT=587
-SMTP_SECURE=false
-SMTP_USER=your_email@gmail.com
-SMTP_PASS=your_app_password
-EMAIL_FROM="Voima Initiative <no-reply@voima.org>"
-ADMIN_NOTIFY_EMAIL=admin@voima.org
+# Email (Resend API)
+RESEND_API_KEY=re_xxxxxxxxxxxxxxxxxxxxxxxxx
+RESEND_FROM_EMAIL="Voima Initiative <no-reply@your-verified-domain.com>"
+ADMIN_NOTIFY_EMAIL=your_voima_inbox@example.com
 
 # Seed Data
 SEED_ADMIN_NAME=Emmanuel Dey
@@ -212,7 +208,7 @@ cp .env.example .env
 # - DATABASE_URL (PostgreSQL connection)
 # - JWT secrets
 # - Cloudinary credentials
-# - Gmail SMTP for emails
+# - Resend API credentials for emails
 ```
 
 ### 4. Create & Migrate Database
@@ -376,7 +372,7 @@ GET    /api/v1/dashboard/activity  # Activity feed
 - Max file size: configurable in multer
 
 ### Email
-- Sent via Gmail SMTP (requires App Password, not regular password)
+- Sent via Resend (the sender domain must be verified in Resend)
 - Templates in `src/emails/templates.js`
 
 ### Rate Limiting
@@ -465,7 +461,7 @@ The backend currently **LACKS**:
 | **Auth** | JWT + bcrypt |
 | **Validation** | Zod schemas |
 | **File Storage** | Cloudinary |
-| **Email** | Nodemailer (SMTP) |
+| **Email** | Resend API |
 | **Logging** | Morgan |
 | **Security** | Helmet, CORS, Rate Limiting |
 | **Dev Tool** | Nodemon |

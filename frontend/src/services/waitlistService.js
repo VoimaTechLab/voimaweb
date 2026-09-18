@@ -1,6 +1,10 @@
 import axios from "axios";
 
-const API = import.meta.env.VITE_API_BASE || "http://localhost:5000/api/v1";
+const configuredApi = import.meta.env.VITE_API_BASE || import.meta.env.VITE_API_URL;
+const API = (configuredApi || "http://localhost:5000/api/v1").replace(
+  /\/api\/?$/,
+  "/api/v1"
+);
 const client = axios.create({ baseURL: API });
 
 export const waitlistService = {
