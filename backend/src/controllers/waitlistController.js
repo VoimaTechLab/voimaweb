@@ -11,7 +11,11 @@ export const join = asyncHandler(async (req, res) => {
     update: { ...req.body },
     create: { ...req.body },
   });
-  sendEmail({ to: user.email, subject: "Welcome to the Voima waitlist 🚀", html: waitlistWelcomeEmail(user) });
+  await sendEmail({
+    to: user.email,
+    subject: "Welcome to the Voima waitlist 🚀",
+    html: waitlistWelcomeEmail(user),
+  });
   logActivity({ type: "waitlist", text: `${user.email} joined the waitlist` });
   created(res, { id: user.id });
 });

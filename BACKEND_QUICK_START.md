@@ -18,14 +18,19 @@ npm run prisma:generate
 Copy `.env.example` → `.env` and fill in:
 ```
 DATABASE_URL=postgresql://postgres:password@localhost:5432/voima?schema=public
+DIRECT_URL=postgresql://postgres:password@localhost:5432/voima?schema=public
 JWT_ACCESS_SECRET=your_random_secret_1
 JWT_REFRESH_SECRET=your_random_secret_2
 CLOUDINARY_CLOUD_NAME=xxx
 CLOUDINARY_API_KEY=xxx
 CLOUDINARY_API_SECRET=xxx
-SMTP_USER=your_email@gmail.com
-SMTP_PASS=your_app_password
+RESEND_API_KEY=re_xxxxxxxxxxxxxxxxxxxxxxxxx
+RESEND_FROM_EMAIL="Voima Initiative <no-reply@your-verified-domain.com>"
+ADMIN_NOTIFY_EMAIL=your_voima_inbox@example.com
 ```
+
+`DATABASE_URL` is required for Prisma and database-backed routes. Resend and
+Cloudinary can be left empty during local work if those features are not used.
 
 ### Step 4: Set Up Database
 ```bash

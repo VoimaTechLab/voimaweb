@@ -14,12 +14,7 @@ export default function Hero() {
   } = useHome();
 
   const [current, setCurrent] = useState(0);
-
-  const [videoSrc, setVideoSrc] = useState(backgroundVideo || HeroVid);
-
-  useEffect(() => {
-    setVideoSrc(backgroundVideo || HeroVid);
-  }, [backgroundVideo]);
+  const [videoFailed, setVideoFailed] = useState(false);
 
   // ── Hero slide rotation ──
   useEffect(() => {
@@ -36,36 +31,39 @@ export default function Hero() {
 
   const slide = heroSlides[current];
 
+  // Use Sanity video first, then local fallback if it fails
+  const videoSrc =
+    !videoFailed && backgroundVideo
+      ? backgroundVideo
+      : HeroVid;
+
   return (
     <section className="relative flex h-screen min-h-[650px] w-full flex-col justify-between overflow-hidden bg-black text-white">
 
       {/* ── Background Video ── */}
-      {videoSrc && (
-        <video
-          key={videoSrc}
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="metadata"
-          poster={HeroPoster}
-          onError={() => {
-            if (videoSrc !== HeroVid) {
-              setVideoSrc(HeroVid);
-            }
-          }}
-          className="absolute inset-0 z-0 h-full w-full object-cover object-center"
-        >
-          <source src={videoSrc} type="video/mp4" />
-        </video>
-      )}
+      <video
+        key={videoSrc}
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="metadata"
+        poster={HeroPoster}
+        onError={() => {
+          if (backgroundVideo && !videoFailed) {
+            setVideoFailed(true);
+          }
+        }}
+        className="absolute inset-0 z-0 h-full w-full object-cover object-center"
+      >
+        <source src={videoSrc} type="video/mp4" />
+      </video>
 
       {/* ── Dark Overlay ── */}
       <div className="absolute inset-0 z-10 bg-gradient-to-r from-black/85 via-black/65 to-black/35" />
 
       {/* ── Main Content ── */}
       <div className="relative z-20 mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center px-6 pb-12 pt-24 sm:px-10">
-
         <AnimatePresence mode="wait">
           <motion.div
             key={slide.id}
@@ -78,7 +76,6 @@ export default function Hero() {
             }}
             className="max-w-4xl space-y-6 sm:space-y-8"
           >
-
             {/* Badge */}
             <div className="inline-flex items-center gap-2 border-2 border-black bg-white px-4 py-2 text-xs font-black uppercase tracking-[0.2em] text-[#BC1D26] shadow-[4px_4px_0px_rgba(0,0,0,1)] sm:text-sm">
               <span className="h-2.5 w-2.5 animate-pulse border border-black bg-[#BC1D26]" />
@@ -103,7 +100,6 @@ export default function Hero() {
 
             {/* Buttons */}
             <div className="flex flex-wrap items-center gap-4 pt-2">
-
               <Link
                 to={slide.primaryLink}
                 className="group inline-flex items-center gap-2 border-2 border-black bg-[#BC1D26] px-8 py-4 text-xs font-black uppercase tracking-wider text-white shadow-[5px_5px_0px_rgba(0,0,0,1)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[7px_7px_0px_rgba(0,0,0,1)] sm:text-sm"
@@ -122,7 +118,6 @@ export default function Hero() {
               >
                 <span>{slide.secondaryBtn}</span>
               </Link>
-
             </div>
           </motion.div>
         </AnimatePresence>
@@ -145,7 +140,6 @@ export default function Hero() {
           ))}
         </div>
       </div>
-
     </section>
   );
 }

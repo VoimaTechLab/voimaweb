@@ -1,75 +1,35 @@
-import dns from "dns";
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
 import { env } from "../config/env.js";
 
-dns.setDefaultResultOrder("ipv4first");
-
-let transporter;
-
-const getTransporter = async () => {
-  if (transporter) return transporter;
-
-  transporter = nodemailer.createTransport({
-    host: env.email.host,
-    port: env.email.port,
-    secure: env.email.secure,
-    auth:
-      env.email.user && env.email.pass
-        ? {
-            user: env.email.user,
-            pass: env.email.pass,
-          }
-        : undefined,
-    family: 4,
-    connectionTimeout: 15000,
-    greetingTimeout: 15000,
-    socketTimeout: 30000,
-    tls: {
-      rejectUnauthorized: false,
-    },
-  });
-
-  try {
-    await transporter.verify();
-    console.log("✅ SMTP connection established");
-  } catch (error) {
-    console.error("❌ SMTP verification failed");
-    console.error({
-      message: error.message,
-      code: error.code,
-      response: error.response,
-      responseCode: error.responseCode,
-    });
-  }
-
-  return transporter;
-};
+const resend = env.email.resendApiKey
+  ? new Resend(env.email.resendApiKey)
+  : null;
 
 export const sendEmail = async ({ to, subject, html }) => {
   try {
-    if (!env.email.host) {
+    if (!resend) {
       console.warn(
-        `[EMAIL SKIPPED] No SMTP configured -> ${to} :: ${subject}`
+        `[EMAIL SKIPPED] No Resend API key configured -> ${to} :: ${subject}`
       );
       return;
     }
 
     console.log(`📧 Sending email to ${to}`);
 
-    const smtp = await getTransporter();
-
-    const info = await smtp.sendMail({
+    const { data, error } = await resend.emails.send({
       from: env.email.from,
       to,
       subject,
       html,
     });
 
+    if (error) throw error;
+
     console.log(
-      `✅ Email sent to ${to} | Message ID: ${info.messageId}`
+      `✅ Email sent to ${to} | Message ID: ${data.id}`
     );
 
-    return info;
+    return data;
   } catch (error) {
     console.error("❌ EMAIL SEND FAILED");
     console.error({
@@ -92,14 +52,12 @@ export const sendBulk = async ({
   html,
 }) => {
   try {
-    if (!env.email.host) {
+    if (!resend) {
       console.warn(
-        `[BULK EMAIL SKIPPED] No SMTP configured (${recipients.length} recipients)`
+        `[BULK EMAIL SKIPPED] No Resend API key configured (${recipients.length} recipients)`
       );
       return { sent: 0 };
     }
-
-    const smtp = await getTransporter();
 
     const batchSize = 50;
     let sent = 0;
@@ -108,7 +66,7 @@ export const sendBulk = async ({
       const chunk = recipients.slice(i, i + batchSize);
 
       try {
-        const info = await smtp.sendMail({
+        const { data, error } = await resend.emails.send({
           from: env.email.from,
           to: env.email.from,
           bcc: chunk,
@@ -116,10 +74,12 @@ export const sendBulk = async ({
           html,
         });
 
+        if (error) throw error;
+
         sent += chunk.length;
 
         console.log(
-          `✅ Bulk batch sent (${chunk.length}) | Message ID: ${info.messageId}`
+          `✅ Bulk batch sent (${chunk.length}) | Message ID: ${data.id}`
         );
       } catch (error) {
         console.error("❌ BULK EMAIL BATCH FAILED");

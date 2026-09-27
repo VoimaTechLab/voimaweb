@@ -29,12 +29,8 @@ export const env = {
     folder: process.env.CLOUDINARY_FOLDER || "voima",
   },
   email: {
-    host: process.env.SMTP_HOST,
-    port: Number(process.env.SMTP_PORT || 587),
-    secure: process.env.SMTP_SECURE === "true",
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS,
-    from: process.env.EMAIL_FROM || "Voima <no-reply@voima.org>",
+    resendApiKey: process.env.RESEND_API_KEY,
+    from: process.env.RESEND_FROM_EMAIL || "Voima Initiative <no-reply@voima.org>",
     adminNotify: process.env.ADMIN_NOTIFY_EMAIL,
   },
 };
